@@ -32,27 +32,21 @@ public class CreatingACompleteOrder {
         // Переход в саму заявку
         System.out.println("Выполнение действий на странице заявок...");
         zayavkaPage.clickZayavkaBY();
-
-        System.out.println("Выхожу с фрейма");
         zayavkaPage.returnToMainContent();
 
-        System.out.println("Выход отработал");
-
         System.out.println("Переход на страницу ZayavkaBy...");
-        ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
 
+        ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
         zayavkaByPage.clickSomeButtonInFrame();
         zayavkaByPage.returnToMainContent();
 
         System.out.println("Выход отработал из фрейма");
 
         PageOpenTransp pageOpenTransp = new PageOpenTransp(driver);
-
         pageOpenTransp.clickSomeButtonInFrame();
         pageOpenTransp.returnToMainContent();
 
         PageTransp pageTransp = new PageTransp(driver);
-
         pageTransp.fillDateFieldInFrame();
         pageTransp.returnToMainContent();
 
@@ -75,6 +69,10 @@ public class CreatingACompleteOrder {
         VehicleRoute backRoute = new VehicleRoute(driver);
         backRoute.clickSomeButtonInFrame();
         backRoute.returnToMainContent();
+
+        ZayavkaByPage Service = new ZayavkaByPage(driver);
+        Service.clickSomeButtonInService();
+        Service.returnToMainContent();
 
         // Завершение работы
         // driver.quit();
