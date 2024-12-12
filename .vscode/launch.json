@@ -1,0 +1,42 @@
+{
+    // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+    // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+    // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CreatingACompleteOrder",
+            "request": "launch",
+            "mainClass": "tests.CreatingACompleteOrder",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "CreatingOrder",
+            "request": "launch",
+            "mainClass": "tests.CreatingOrder",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "TestRunner",
+            "request": "launch",
+            "mainClass": "tests.TestRunner",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "com.example.Main",
+            "projectName": "demo"
+        }
+    ]
+}
