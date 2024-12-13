@@ -58,23 +58,29 @@ public class ZayavkaPage {
         driver.switchTo().frame(iframe); // Переключаемся в фрейм
 
         // Шаг 2: КНОПКА НОВЫЙ(для создания заказа)
+        WebElement Noviy = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath(
+                        "//*[@id=\'commandBarItemButton99\']/span")));
+
+        Noviy.click();
+
+        // /html/body/div[1]/div[2]/form/div/div[2]/div[2]/div/div/nav/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div/div/button/span
+
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath(
-                        "/html/body/div[1]/div[2]/form/div/div[2]/div[2]/div/div/nav/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div/div/button/span")));
-
-        try {
-            button.click();
-            System.out.println("Клик по кнопке выполнен.");
-        } catch (Exception e) {
-            System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
-        }
-
-        WebElement ButtonNewZayavka = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[2]/form/div/div[2]/div[5]/div/div/div/div/div/div/ul/li/div/div/button/span")));
-
-        ButtonNewZayavka.click();
+                        "//button[@class='ms-Button ms-Button--action ms-Button--command command-bar-button--204nhoRojOXj8kwnk9WtH0 thm-bgcolor-1295552850--hover thm-segoeNormal thm-font-size-small thm-color-1818861216--not_FCM root-135']")));
+        button.click();
 
     }
+
+    // //*[@id="commandBarItemButton484"]/span
+    // WebElement ButtonNewZayavka =
+    // wait.until(ExpectedConditions.elementToBeClickable(
+    // By.xpath(
+    // "//*[@id=\'commandBarItemButton498\']/span")));
+
+    ///html/body/div[1]/div[2]/form/div/div[2]/div[5]/div/div/div/div/div/div/ul/li/div/div/button/span
+        /// //*[@id="commandBarItemButton484"]/span
 
     public void NewOrderCreate() {
 
