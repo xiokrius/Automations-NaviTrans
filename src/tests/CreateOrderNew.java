@@ -30,20 +30,16 @@ public class CreateOrderNew {
         System.out.println("Переход на страницу заявок...");
         ZayavkaPage zayavkaPage = loginTest.goToZayavkaPage();
 
-        // // Переход в саму заявку
-        // System.out.println("Вход на страницу заявок и переход в заявку");
-        // zayavkaPage.clickZayavkaBY();
-        // zayavkaPage.returnToMainContent();
-
-        // // КОПИРОВАНИЕ ЗАЯВКИ, опционально
-        // ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
-        // zayavkaByPage.clickSomeButtonInFrame();
-        // zayavkaByPage.returnToMainContent();
-
         // Создание новой заявки
         ZayavkaPage CreateNewOrder = new ZayavkaPage(driver);
         CreateNewOrder.CreateNewZayavkaCZ();
         CreateNewOrder.returnToMainContent();
+
+        // Заполнение данных перед планированием
+
+        ZayavkaPage OpenDataOrder = new ZayavkaPage(driver);
+        OpenDataOrder.NewOrderCreate();
+        OpenDataOrder.returnToMainContent();
 
         // // Переход в перевозки
         // PageOpenTransp pageOpenTransp = new PageOpenTransp(driver);

@@ -51,6 +51,7 @@ public class ZayavkaByPage {
                 buttonInFrame3.click();
         }
 
+        // ПЕРЕХОЖУ В СЕРВИСЫ
         public void clickSomeButtonInService() {
 
                 System.out.println("Начинаем переход в сервисы.");
