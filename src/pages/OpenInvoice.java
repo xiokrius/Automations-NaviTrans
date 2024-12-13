@@ -12,13 +12,13 @@ public class OpenInvoice {
 
     private WebDriver driver;
 
-    public ZayavkaByPage(WebDriver driver) {
+    public OpenInvoice(WebDriver driver) {
         this.driver = driver;
     }
 
     public void clickSomeButtonInFrame() {
 
-        System.out.println("Начинаем ZayavkaByPage.");
+        System.out.println("Начинае.");
 
         // Переключаемся в нужный фрейм
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

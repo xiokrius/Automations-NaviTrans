@@ -20,7 +20,7 @@ public class ZayavkaPage {
 
     public void clickZayavkaBY() {
 
-        System.out.println("Начинаем ZayavkaPage.");
+        System.out.println("Переход на страницу Заявок и вход в заявку");
 
         // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -28,9 +28,8 @@ public class ZayavkaPage {
                 .presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
 
         driver.switchTo().frame(iframe); // Переключаемся в фрейм
-        System.out.println("Перешли в фрейм.");
 
-        // Шаг 2: Ждем, пока кнопка станет видимой и кликабельной
+        // Шаг 2: КНОПКА ЗАЯВКИ на пейдже страницы заявок
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath(
                         "/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[6]/td[3]/a")));

@@ -30,46 +30,52 @@ public class CreatingACompleteOrder {
         ZayavkaPage zayavkaPage = loginTest.goToZayavkaPage();
 
         // Переход в саму заявку
-        System.out.println("Выполнение действий на странице заявок...");
+        System.out.println("Вход на страницу заявок и переход в заявку");
         zayavkaPage.clickZayavkaBY();
         zayavkaPage.returnToMainContent();
 
-        System.out.println("Переход на страницу ZayavkaBy...");
-
+        // КОПИРОВАНИЕ ЗАЯВКИ, опционально
         ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
         zayavkaByPage.clickSomeButtonInFrame();
         zayavkaByPage.returnToMainContent();
 
-        System.out.println("Выход отработал из фрейма");
-
+        // Переход в перевозки
         PageOpenTransp pageOpenTransp = new PageOpenTransp(driver);
         pageOpenTransp.clickSomeButtonInFrame();
         pageOpenTransp.returnToMainContent();
 
+        // Установка Плановых дат в перевозке и выход обратно на страницу заявок
         PageTransp pageTransp = new PageTransp(driver);
         pageTransp.fillDateFieldInFrame();
         pageTransp.returnToMainContent();
 
+        // После установки план дат. Нажимаю Обработка/выпустить
         PageOpenTransp vageOpenTransp = new PageOpenTransp(driver);
         vageOpenTransp.obrabotkaVypustit();
         vageOpenTransp.returnToMainContent();
 
+        // Обработка/План, планирую рейс
         PageOpenTransp testOpenTransp = new PageOpenTransp(driver);
         testOpenTransp.vehiclePlan();
         testOpenTransp.returnToMainContent();
 
+        // После обработка/План, нужно выбрать в какой поездке будут изменения
         PageOpenTransp opentranspOp = new PageOpenTransp(driver);
         opentranspOp.PlanOpen();
         opentranspOp.returnToMainContent();
 
+        // Вбиваем Тягач и прицеп
         PageOpenTransp OpenVehicle = new PageOpenTransp(driver);
         OpenVehicle.VehiclePlanOpen();
         OpenVehicle.returnToMainContent();
 
+        // На странице рейса выхожу обратно, пока там ничего не нужно, она
+        // инициализирована.
         VehicleRoute backRoute = new VehicleRoute(driver);
         backRoute.clickSomeButtonInFrame();
         backRoute.returnToMainContent();
 
+        // Лезу в сервисы
         ZayavkaByPage Service = new ZayavkaByPage(driver);
         Service.clickSomeButtonInService();
         Service.returnToMainContent();

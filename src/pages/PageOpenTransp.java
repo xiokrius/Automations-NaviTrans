@@ -35,33 +35,35 @@ public class PageOpenTransp {
                 driver.switchTo().frame(iframe);
                 System.out.println("Перешли в фрейм.");
 
-                // Ожидаем появления первой кнопки
+                // Клик для раскрытия списка перевозок
                 WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[4]/div[2]/div/span/span")));
-                System.out.println("Нашли первую кнопку.");
 
                 // Кликаем по первой кнопке
                 buttonInFrame.click();
                 System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
 
-                WebElement buttonInFrame2 = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[4]/div[1]/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/button")));
+                // Перевозки/Управление(кнопка)
+                WebElement buttonInPerevozkiUpravlenie = wait
+                                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[4]/div[1]/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/button")));
 
-                buttonInFrame2.click();
+                buttonInPerevozkiUpravlenie.click();
                 System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
 
-                WebElement buttonInFrame3 = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[4]/div[1]/div/div/div/div/div[2]/div/div/div/div[1]/div/div/div/div/div/div/div[3]/div/button")));
+                // Перевозки/Управление/Правка
+                WebElement buttonInPereozkiUpravleniePravka = wait
+                                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[4]/div[1]/div/div/div/div/div[2]/div/div/div/div[1]/div/div/div/div/div/div/div[3]/div/button")));
 
-                buttonInFrame3.click();
+                buttonInPereozkiUpravleniePravka.click();
                 System.out.println("Клик по второй кнопке 3 внутри фрейма выполнен.");
         }
 
-        // Тут планирую перевозку
-
+        // ФУНКЦИЯ ДЛЯ ВЫПУСКА ЗАКАЗА ПОСЛЕ ТОГО КАК ВБИЛ ПЛАНОВЫЕ ДАТЫ ПО ПЕРЕВОЗКЕ!
         public void obrabotkaVypustit() {
 
-                System.out.println("Начинаем PageOpentTransp2 Обработка/Выпустить.");
+                System.out.println("Начинаем Обработка/Выпустить.");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 WebElement iframe = wait.until(ExpectedConditions
@@ -70,12 +72,14 @@ public class PageOpenTransp {
                 driver.switchTo().frame(iframe);
                 System.out.println("Перешли в фрейм.");
 
+                // НАШЛИ КНОПКУ ОБРАБОТКА
                 WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
                 System.out.println("Нашли первую кнопку Выпустить.");
 
                 obrabotkaButton.click();
 
+                // НАШЛИ КНОПКУ ВЫПУСТИТЬ
                 WebElement VypustitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/button")));
                 System.out.println("Нашли Вторую кнопку, Выпустить .");
@@ -84,15 +88,14 @@ public class PageOpenTransp {
 
         }
 
+        // CОЗДАНИЕ РЕЙСА
         public void vehiclePlan() {
-                System.out.println("Начинаем PageOpentTransp3 Обработка/План.");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 WebElement iframe = wait.until(ExpectedConditions
                                 .presenceOfElementLocated(
                                                 By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
                 driver.switchTo().frame(iframe);
-                System.out.println("Перешли в фрейм.");
 
                 try {
                         // Принудительная задержка
@@ -100,13 +103,14 @@ public class PageOpenTransp {
                 } catch (InterruptedException e) {
                         System.err.println("Ошибка при ожидании: " + e.getMessage());
                 }
-
+                // Кнопка Обработки
                 WebElement obrabotkButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
                 System.out.println("Нашли первую кнопку Обработка.");
 
                 obrabotkButton.click();
 
+                // Кнопка Планирования для перехода в планирование рейса
                 WebElement PlanButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[7]/div[1]/div/button")));
                 System.out.println("Нашли Вторую кнопку План.");
@@ -115,8 +119,9 @@ public class PageOpenTransp {
 
         }
 
+        // После обработка/План, нужно выбрать в какой поездке будут изменения
         public void PlanOpen() {
-                System.out.println("Начинаем PageOpentTransp3 Обработка/План/ОК.");
+                System.out.println("Обработка/План/ОК.");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 WebElement iframe = wait.until(ExpectedConditions
@@ -133,7 +138,7 @@ public class PageOpenTransp {
         }
 
         public void VehiclePlanOpen() {
-                System.out.println("Начинаем PageOpentTransp4: ввод тягача и прицепа по необходимости.");
+                System.out.println("ввод тягача и прицепа по необходимости.");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -163,7 +168,8 @@ public class PageOpenTransp {
 
                 System.out.println("Нажали на кнопку 'Авторизация'.");
 
-                // Проверяем наличие всплывающего окна
+                // Проверяем наличие всплывающего окна в случае если тягач уже задействован в
+                // поездке
                 try {
                         WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                                         "/html/body/div[1]/div[6]/form"))); // XPath окна

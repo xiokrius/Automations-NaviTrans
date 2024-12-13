@@ -11,73 +11,77 @@ import java.time.Duration;
 
 public class ZayavkaByPage {
 
-    private WebDriver driver;
+        private WebDriver driver;
 
-    public ZayavkaByPage(WebDriver driver) {
-        this.driver = driver;
-    }
+        public ZayavkaByPage(WebDriver driver) {
+                this.driver = driver;
+        }
 
-    public void clickSomeButtonInFrame() {
+        // ФУНКЦИЯ ДЛЯ КОПИРОВАНИЯ ЗАКАЗА
+        public void clickSomeButtonInFrame() {
 
-        System.out.println("Начинаем ZayavkaByPage.");
+                System.out.println("Начинаем ZayavkaByPage.");
 
-        // Переключаемся в нужный фрейм
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement iframe = wait.until(ExpectedConditions
-                .presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-        driver.switchTo().frame(iframe);
-        System.out.println("Перешли в фрейм.");
+                // Переключаемся в нужный фрейм
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebElement iframe = wait.until(ExpectedConditions
+                                .presenceOfElementLocated(
+                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+                driver.switchTo().frame(iframe);
 
-        // Ожидаем появления первой кнопки
-        WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
-        System.out.println("Нашли первую кнопку.");
+                // Ожидаем кнопку Обработка
+                WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
+                System.out.println("Нашли кнопку ОБРАБОТКА.");
 
-        // Кликаем по первой кнопке
-        buttonInFrame.click();
-        System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
+                // Кликаем по первой кнопке
+                buttonInFrame.click();
 
-        WebElement buttonInFrame2 = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[3]/div[2]/div/button")));
+                // ДАЛЬШЕ НАШЛИ КНОПКУ "СКОПИРОВАТЬ", ДЛЯ КОПИРОВАНИЯ ЗАКАЗА
 
-        buttonInFrame2.click();
-        System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
+                WebElement buttonInFrame2 = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[3]/div[2]/div/button")));
 
-        WebElement buttonInFrame3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
-        buttonInFrame3.click();
-    }
+                buttonInFrame2.click();
+                System.out.println("Копирование заказа прошло успешно");
 
-    public void clickSomeButtonInService() {
+                // НАЖАТИЕ ОК ДЛЯ КОПИРОВАНИЯ ЗАЯВКИ
+                WebElement buttonInFrame3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
+                buttonInFrame3.click();
+        }
 
-        System.out.println("Начинаем переход в сервисы.");
+        public void clickSomeButtonInService() {
 
-        // Переключаемся в нужный фрейм
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement iframe = wait.until(ExpectedConditions
-                .presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-        driver.switchTo().frame(iframe);
-        System.out.println("Перешли в фрейм.");
+                System.out.println("Начинаем переход в сервисы.");
 
-        // Ожидаем появления первой кнопки
-        WebElement buttonInObrabotka = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
-        System.out.println("Нашли Кнопку Обработка.");
+                // Переключаемся в нужный фрейм
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebElement iframe = wait.until(ExpectedConditions
+                                .presenceOfElementLocated(
+                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+                driver.switchTo().frame(iframe);
+                System.out.println("Перешли в фрейм.");
 
-        buttonInObrabotka.click();
+                // Ожидаем появления первой кнопки
+                WebElement buttonInObrabotka = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
+                System.out.println("Нашли Кнопку Обработка.");
 
-        WebElement buttonInService = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div/button/span")));
-        System.out.println("Нашли Кнопку Сервис");
+                buttonInObrabotka.click();
 
-        buttonInService.click();
-        System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
-    }
+                WebElement buttonInService = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div/button/span")));
+                System.out.println("Нашли Кнопку Сервис");
 
-    public void returnToMainContent() {
-        driver.switchTo().defaultContent();
-        System.out.println("ласт вышел с фрейма, проверка");
-    }
+                buttonInService.click();
+                System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
+        }
+
+        public void returnToMainContent() {
+                driver.switchTo().defaultContent();
+                System.out.println("ласт вышел с фрейма, проверка");
+        }
 }
 
 // "//*[@id='commandBarItemButton923']/span"

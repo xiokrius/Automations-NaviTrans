@@ -99,3 +99,5 @@ public class PageTransp {
         this.unloadDateValue = unloadDateValue;
     }
 }
+
+// Для входа в заявку
