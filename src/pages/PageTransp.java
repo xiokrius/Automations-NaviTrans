@@ -30,7 +30,6 @@ public class PageTransp {
         WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                 "/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
         driver.switchTo().frame(iframe);
-        System.out.println("Перешли в iframe.");
 
         // Ожидаем элемент input для заполнения
         WebElement startingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
