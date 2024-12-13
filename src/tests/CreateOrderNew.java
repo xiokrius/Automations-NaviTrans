@@ -8,6 +8,7 @@ import pages.ZayavkaByPage;
 import pages.ZayavkaPage;
 import pages.PageOpenTransp;
 import pages.OpenInvoice;
+import pages.OrderPage;
 import pages.PageTransp;
 import pages.VehicleRoute;
 
@@ -40,6 +41,10 @@ public class CreateOrderNew {
         ZayavkaPage OpenDataOrder = new ZayavkaPage(driver);
         OpenDataOrder.NewOrderCreate();
         OpenDataOrder.returnToMainContent();
+
+        OrderPage OrderPage = new OrderPage(driver);
+        OrderPage.clickSomeButtonInFrame();
+        OrderPage.returnToMainContent();
 
         // // Переход в перевозки
         // PageOpenTransp pageOpenTransp = new PageOpenTransp(driver);
