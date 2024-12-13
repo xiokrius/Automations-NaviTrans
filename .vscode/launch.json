@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CreateOrderNew",
+            "request": "launch",
+            "mainClass": "tests.CreateOrderNew",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
             "name": "CreatingACompleteOrder",
             "request": "launch",
             "mainClass": "tests.CreatingACompleteOrder",

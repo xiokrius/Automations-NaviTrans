@@ -78,6 +78,3 @@ public class OpenInvoice {
         System.out.println("ласт вышел с фрейма, проверка");
     }
 }
-
-
-    орпаоарпопа

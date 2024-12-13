@@ -40,6 +40,35 @@ public class ZayavkaPage {
         } catch (Exception e) {
             System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
         }
+    }
+
+    public void CreateNewZayavkaCZ() {
+
+        System.out.println("Переход на страницу Заявок и вход в заявку");
+
+        // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement iframe = wait.until(ExpectedConditions
+                .presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+
+        driver.switchTo().frame(iframe); // Переключаемся в фрейм
+
+        // Шаг 2: КНОПКА НОВЫЙ(для создания заказа)
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath(
+                        "/html/body/div[1]/div[2]/form/div/div[2]/div[2]/div/div/nav/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div/div/button/span")));
+
+        try {
+            button.click();
+            System.out.println("Клик по кнопке выполнен.");
+        } catch (Exception e) {
+            System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
+        }
+
+        WebElement ButtonNewZayavka = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "/html/body/div[1]/div[2]/form/div/div[2]/div[5]/div/div/div/div/div/div/ul/li/div/div/button/span")));
+
+        ButtonNewZayavka.click();
 
     }
 
@@ -47,6 +76,7 @@ public class ZayavkaPage {
         driver.switchTo().defaultContent();
         System.out.println("Возвращаемся в основной контент страницы.");
     }
+
 }
 
 // Метод для возвращения в основной контент, если нужно
