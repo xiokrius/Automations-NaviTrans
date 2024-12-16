@@ -130,7 +130,7 @@ public class PageTransp {
 
             // Прокрутка страницы вниз, чтобы элемент стал видимым
             for (int i = 0; i < 10; i++) {
-                js.executeScript("window.scrollBy(0, 200);"); // Скроллим вниз
+                js.executeScript("window.scrollBy(0, 900);"); // Скроллим вниз
                 Thread.sleep(500); // Пауза для стабильности
                 if (Cargo.isDisplayed()) {
                     System.out.println("Элемент 'Груз' стал видимым.");
