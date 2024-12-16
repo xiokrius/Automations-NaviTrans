@@ -10,6 +10,8 @@ import pages.VehicleRoute;
 import pages.ZayavkaByPage;
 import pages.ZayavkaPage;
 
+// Необходим Code review xPath элементов 
+
 public class CreatingACompleteOrder {
     public static void main(String[] args) {
         System.out.println("Запуск теста...");
@@ -47,7 +49,6 @@ public class CreatingACompleteOrder {
         // Установка Плановых дат в перевозке и выход обратно на страницу заявок
         PageTransp pageTransp = new PageTransp(driver);
         pageTransp.fillDateFieldInFrame();
-        pageTransp.returnToMainContent();
 
         // После установки план дат. Нажимаю Обработка/выпустить
         PageOpenTransp vageOpenTransp = new PageOpenTransp(driver);

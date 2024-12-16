@@ -131,7 +131,7 @@ public class PageTransp {
             // Прокрутка страницы вниз, чтобы элемент стал видимым
             for (int i = 0; i < 10; i++) {
                 js.executeScript("window.scrollBy(0, 900);"); // Скроллим вниз
-                Thread.sleep(500); // Пауза для стабильности
+                Thread.sleep(100); // Пауза для стабильности
                 if (Cargo.isDisplayed()) {
                     System.out.println("Элемент 'Груз' стал видимым.");
                     break;
@@ -149,6 +149,17 @@ public class PageTransp {
             System.out.println("Клик по элементу 'Груз' выполнен.");
         } catch (Exception e) {
             System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
+        }
+
+        try {
+            System.out.println("Скроллим дальше вниз после клика.");
+            for (int i = 0; i < 5; i++) { // Прокручиваем несколько раз
+                js.executeScript("window.scrollBy(0, 900);"); // Скроллим вниз на 900 пикселей
+                Thread.sleep(500); // Пауза для стабильности
+            }
+            System.out.println("Скроллинг завершён.");
+        } catch (Exception e) {
+            System.out.println("Ошибка при скроллинге вниз: " + e.getMessage());
         }
 
         // Возвращаемся в основной контекст
