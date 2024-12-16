@@ -2,6 +2,7 @@ package pages;
 
 import java.time.Duration;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -123,45 +124,33 @@ public class PageTransp {
                 "//*[@aria-labelledby='b3vflbl']")));
         System.out.println("Нашли поле ввода Даты разгрузки");
 
-        try {
-            // Закрываем оверлей, если он есть
-            WebElement overlay = driver.findElement(By.cssSelector("div.overlay-transparent[role='button']"));
-            if (overlay.isDisplayed()) {
-                overlay.click();
-                System.out.println("Закрыли оверлей-подсказку.");
-            }
-        } catch (NoSuchElementException | ElementClickInterceptedException e) {
-            System.out.println("Оверлей не найден или не удалось кликнуть. Удаляем через JavaScript.");
-
-            // Удаляем оверлей с помощью JS
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("document.querySelector('div.overlay-transparent').remove();");
-            System.out.println("Оверлей удалён.");
-        }
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        // Проверяем и удаляем оверлей
+        driver.switchTo().defaultContent(); // Возвращаемся в основной контекст
+        WebDriverWait waitOverlay = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement overlay = waitOverlay
+                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.overlay-transparent")));
+        js.executeScript("arguments[0].remove();", overlay);
+        System.out.println("Оверлей удалён.");
+        driver.switchTo().frame(iframe); // Возвращаемся обратно в iframe
 
         // Кнопка Груз
         WebElement Cargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                 "//*[@class='ms-nav-group-caption thm-color-1818861216--not_FCM thm-font-size-medium thm-segoeSemibold ms-nav-collapsible-part-caption icon-RightCaret-after']")));
         System.out.println("Нашли кнопку Груз");
 
-        // Прокрутка и клик
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", Cargo);
-        System.out.println("Прокрутили к элементу 'Груз'");
-
+        // Скролл и клик
         try {
-            Cargo.click();
-            System.out.println("Клик по элементу 'Груз' выполнен.");
-        } catch (ElementClickInterceptedException e) {
-            System.out.println("Не удалось кликнуть напрямую. Используем JavaScript.");
+            for (int i = 0; i < 10; i++) {
+                js.executeScript("window.scrollBy(0, 200);");
+                Thread.sleep(500);
+            }
+            js.executeScript("arguments[0].scrollIntoView(true);", Cargo);
             js.executeScript("arguments[0].click();", Cargo);
-            System.out.println("Клик выполнен через JavaScript.");
+            System.out.println("Клик по элементу 'Груз' выполнен.");
+        } catch (Exception e) {
+            System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
         }
-    }
-
-    public void returnToMainContent() {
-        driver.switchTo().defaultContent();
-        System.out.println("Вышли из iframe.");
     }
 }
 
