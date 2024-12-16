@@ -1,15 +1,11 @@
 package pages;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -125,32 +121,40 @@ public class PageTransp {
         System.out.println("Нашли поле ввода Даты разгрузки");
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        // Проверяем и удаляем оверлей
-        driver.switchTo().defaultContent(); // Возвращаемся в основной контекст
-        WebDriverWait waitOverlay = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement overlay = waitOverlay
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.overlay-transparent")));
-        js.executeScript("arguments[0].remove();", overlay);
-        System.out.println("Оверлей удалён.");
-        driver.switchTo().frame(iframe); // Возвращаемся обратно в iframe
-
-        // Кнопка Груз
-        WebElement Cargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@class='ms-nav-group-caption thm-color-1818861216--not_FCM thm-font-size-medium thm-segoeSemibold ms-nav-collapsible-part-caption icon-RightCaret-after']")));
-        System.out.println("Нашли кнопку Груз");
-
-        // Скролл и клик
+        // Проверяем наличие оверлея в главном документе
         try {
+            // Поиск кнопки "Груз"
+            WebElement Cargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                    "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/span")));
+            System.out.println("Нашли кнопку Груз.");
+
+            // Прокрутка страницы вниз, чтобы элемент стал видимым
             for (int i = 0; i < 10; i++) {
-                js.executeScript("window.scrollBy(0, 200);");
-                Thread.sleep(500);
+                js.executeScript("window.scrollBy(0, 200);"); // Скроллим вниз
+                Thread.sleep(500); // Пауза для стабильности
+                if (Cargo.isDisplayed()) {
+                    System.out.println("Элемент 'Груз' стал видимым.");
+                    break;
+                }
             }
-            js.executeScript("arguments[0].scrollIntoView(true);", Cargo);
+
+            // Прокрутка к элементу с использованием scrollIntoView для точного
+            // позиционирования
+            js.executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });", Cargo);
+            System.out.println("Прокрутили к элементу 'Груз'.");
+
+            // Клик по элементу
+            wait.until(ExpectedConditions.elementToBeClickable(Cargo));
             js.executeScript("arguments[0].click();", Cargo);
             System.out.println("Клик по элементу 'Груз' выполнен.");
         } catch (Exception e) {
             System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
         }
+
+        // Возвращаемся в основной контекст
+        driver.switchTo().defaultContent();
+        System.out.println("Вышли из iframe.");
+
     }
 }
 
