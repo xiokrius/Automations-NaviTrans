@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 // ЗАПОЛНЕНИЕ ПЕРЕМЕЩЕНИЯ (ПОКА ТОЛЬКО ПЛАНОВЫЕ ДАТЫ)
 public class PageTransp {
 
+    private String CodeTovaraValue = "ITEM-00002";
+
     private WebDriver driver;
 
     private String startingDateValue = "09.12.2024";
@@ -151,17 +153,28 @@ public class PageTransp {
             System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
         }
 
+        // надо перенеймить переменную ТУТ ЗАКОНЧИЛ 16.12.
+
+        WebElement CodeTovara = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "//*[@labelledby='column_header_b3t9']")));
+        System.out.println("Нашли поле ввода Кода товара");
+
+        js.executeScript("arguments[0].value = arguments[1];", CodeTovara, CodeTovaraValue);
+        System.out.println("Заполнили стартовую дату через JavaScript: " + CodeTovaraValue);
+
+        System.out.println("Заполнили поле");
+
         try {
             System.out.println("Скроллим дальше вниз после клика.");
             for (int i = 0; i < 5; i++) { // Прокручиваем несколько раз
                 js.executeScript("window.scrollBy(0, 900);"); // Скроллим вниз на 900 пикселей
-                Thread.sleep(500); // Пауза для стабильности
+                Thread.sleep(3000); // Пауза для стабильности
             }
             System.out.println("Скроллинг завершён.");
         } catch (Exception e) {
             System.out.println("Ошибка при скроллинге вниз: " + e.getMessage());
         }
-
+        // column_header_b3t9
         // Возвращаемся в основной контекст
         driver.switchTo().defaultContent();
         System.out.println("Вышли из iframe.");
