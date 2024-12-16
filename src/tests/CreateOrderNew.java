@@ -37,7 +37,6 @@ public class CreateOrderNew {
         CreateNewOrder.returnToMainContent();
 
         // Заполнение данных перед планированием
-
         ZayavkaPage OpenDataOrder = new ZayavkaPage(driver);
         OpenDataOrder.NewOrderCreate();
         OpenDataOrder.returnToMainContent();
@@ -45,6 +44,18 @@ public class CreateOrderNew {
         OrderPage OrderPage = new OrderPage(driver);
         OrderPage.clickSomeButtonInFrame();
         OrderPage.returnToMainContent();
+
+        // всё новое
+
+        // Переход в перевозки
+        OrderPage Perevozki = new OrderPage(driver);
+        Perevozki.PerevozkaInFrame();
+        Perevozki.returnToMainContent();
+
+        // Установка Плановых дат в перевозке и выход обратно на страницу заявок
+        PageTransp pageTransp = new PageTransp(driver);
+        pageTransp.fillDateFieldInFrame();
+        pageTransp.returnToMainContent();
 
         // // Переход в перевозки
         // PageOpenTransp pageOpenTransp = new PageOpenTransp(driver);

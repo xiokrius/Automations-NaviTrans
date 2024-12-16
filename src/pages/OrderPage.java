@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 public class OrderPage {
 
     private String TransportrequirementValue = "TENT";
-    private String CustomersCodeValue = "CUST-00383";
+    private String CustomersCodeValue = "CUST-02035";
     private String CarrierValue = "1";
 
     private WebDriver driver;
@@ -30,9 +30,8 @@ public class OrderPage {
         driver.switchTo().frame(iframe);
         System.out.println("Перешли в фрейм.");
 
-        WebElement Transportrequirement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[4]/div/input")));
-        System.out.println("Нашли элемент input для ввода.");
+        WebElement Transportrequirement = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.id("b3m1ee")));
 
         ///html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[4]/div/input
 
@@ -67,6 +66,45 @@ public class OrderPage {
 
         Transportrequirement.click();
 
+    }
+
+    // ТУТ ПЕРЕХОЖУ НА СТРАНИЦУ РЕДАКТИРОВАНИЯ ПЕРЕВОЗКИ (NVT Shipment (2002947)) и
+    // инициализирую кнопки Перевозки по заказу/Управление/Правка
+
+    public void PerevozkaInFrame() {
+
+        System.out.println("Начинаем PageOpentTransp.");
+
+        // Переключаемся в нужный фрейм
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement iframe = wait.until(ExpectedConditions
+                .presenceOfElementLocated(
+                        By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+        driver.switchTo().frame(iframe);
+        System.out.println("Перешли в фрейм.");
+
+        // Клик для раскрытия списка перевозок
+        WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                "//*[@id=\'b3fe\']/div[2]/div/span")));
+
+        // Кликаем по первой кнопке
+        buttonInFrame.click();
+        System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
+
+        // Перевозки/Управление(кнопка)
+        WebElement buttonInPerevozkiUpravlenie = wait
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-control-id='b3ff']")));
+        // class= "horizontal-flex-container-item-layout--12GT-cw9JZce3aOSI2yA5"
+        buttonInPerevozkiUpravlenie.click();
+        System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
+
+        // Перевозки/Управление/Создать
+        WebElement buttonInPereozkiUpravlenieSozdat = wait
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//*[@data-control-id=\'b3fh\']")));
+
+        buttonInPereozkiUpravlenieSozdat.click();
+        System.out.println("Клик по второй кнопке 3 внутри фрейма выполнен.");
     }
 
     public void returnToMainContent() {

@@ -15,7 +15,7 @@ public class ZayavkaPage {
 
     private WebDriver driver;
 
-    private String TSGroupCodeValue = "CZ_TS";
+    private String TSGroupCodeValue = "BY_TS";
     private String ButtonNewZayavkaValue = "FOOD";
 
     public ZayavkaPage(WebDriver driver) {
@@ -60,12 +60,11 @@ public class ZayavkaPage {
         // Шаг 2: КНОПКА НОВЫЙ(для создания заказа)
         WebElement Noviy = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath(
-                        "//*[@id=\'commandBarItemButton99\']/span")));
+                        "//button[@class='ms-Button ms-Button--action ms-Button--command ms-Button--hasMenu command-bar-button--204nhoRojOXj8kwnk9WtH0 thm-bgcolor-1726194350 thm-bgcolor-1295552850--hover thm-font-size-small thm-segoeNormal thm-color-1818861216--not_FCM root-135']")));
 
         Noviy.click();
 
-        // /html/body/div[1]/div[2]/form/div/div[2]/div[2]/div/div/nav/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div/div/button/span
-
+        // Кнопка Создать(потом надо дать нормальный нейм)
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath(
                         "//button[@class='ms-Button ms-Button--action ms-Button--command command-bar-button--204nhoRojOXj8kwnk9WtH0 thm-bgcolor-1295552850--hover thm-segoeNormal thm-font-size-small thm-color-1818861216--not_FCM root-135']")));
