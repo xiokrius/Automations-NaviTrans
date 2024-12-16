@@ -94,7 +94,6 @@ public class OrderPage {
         // Перевозки/Управление(кнопка)
         WebElement buttonInPerevozkiUpravlenie = wait
                 .until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-control-id='b3ff']")));
-        // class= "horizontal-flex-container-item-layout--12GT-cw9JZce3aOSI2yA5"
         buttonInPerevozkiUpravlenie.click();
         System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
 

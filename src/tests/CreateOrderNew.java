@@ -45,17 +45,15 @@ public class CreateOrderNew {
         OrderPage.clickSomeButtonInFrame();
         OrderPage.returnToMainContent();
 
-        // всё новое
-
-        // Переход в перевозки
+        // Переход в перевозки(Заменены xPath с прямых по классам)
         OrderPage Perevozki = new OrderPage(driver);
         Perevozki.PerevozkaInFrame();
         Perevozki.returnToMainContent();
 
         // Установка Плановых дат в перевозке и выход обратно на страницу заявок
-        PageTransp pageTransp = new PageTransp(driver);
-        pageTransp.fillDateFieldInFrame();
-        pageTransp.returnToMainContent();
+        PageTransp OpenDate = new PageTransp(driver);
+        OpenDate.OpenOrLoadingLocation();
+        OpenDate.returnToMainContent();
 
         // // Переход в перевозки
         // PageOpenTransp pageOpenTransp = new PageOpenTransp(driver);

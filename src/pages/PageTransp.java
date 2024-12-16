@@ -80,16 +80,8 @@ public class PageTransp {
             System.out.println("Ошибка: дата выгрузки не установлена корректно.");
         }
 
-        // Выход из iframe
-        returnToMainContent();
     }
 
-    public void returnToMainContent() {
-        driver.switchTo().defaultContent();
-        System.out.println("Вышли из iframe.");
-    }
-
-    // Методы для изменения дат
     public void setStartingDateValue(String startingDateValue) {
         this.startingDateValue = startingDateValue;
     }
@@ -97,6 +89,71 @@ public class PageTransp {
     public void setUnloadDateValue(String unloadDateValue) {
         this.unloadDateValue = unloadDateValue;
     }
+
+    public void OpenOrLoadingLocation() {
+
+        System.out.println("Начинаем PageTransp.");
+        // Инициализация WebDriverWait
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Переключаемся в iframe
+        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+        driver.switchTo().frame(iframe);
+
+        WebElement OpenLoadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "//*[@aria-labelledby='b3v3lbl']")));
+        System.out.println("Нашли поле ввода Код адреса погрузки");
+
+        WebElement OpenUnloadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "//*[@aria-labelledby='b3vblbl']")));
+        System.out.println("Нашли поле ввода Код адреса погрузки");
+
+        // План Дата загрузки
+        WebElement PlanningLoadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "//*[@aria-labelledby='b3v7lbl']")));
+        System.out.println("Нашли поле ввода даты загрузки");
+
+        // План Дата разагрузки
+        WebElement PlanningUnloadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "//*[@aria-labelledby='b3vflbl']")));
+        System.out.println("Нашли поле ввода Даты разгрузки");
+
+        PlanningLoadingDate.click();
+
+        // Кнопка Груз
+        WebElement Cargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "//*[@class='ms-nav-group-caption thm-color-1818861216--not_FCM thm-font-size-medium thm-segoeSemibold ms-nav-collapsible-part-caption icon-RightCaret-after']")));
+        System.out.println("Нашли кнопку Груз");
+
+        // ms-nav-group-caption thm-color-1818861216--not_FCM thm-font-size-medium
+        // thm-segoeSemibold ms-nav-collapsible-part-caption icon-RightCaret-after
+
+        // Прокрутка к элементу вручную
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0, arguments[0].getBoundingClientRect().top - 200);", Cargo);
+
+        try {
+            Thread.sleep(1000); // Небольшая пауза
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Клик через JavaScript
+        js.executeScript("arguments[0].click();", Cargo);
+        System.out.println("Кликнули на кнопку Груз");
+
+    }
+    // aria-labelledby="b3v3lbl"
+
+    public void returnToMainContent() {
+        driver.switchTo().defaultContent();
+        System.out.println("Вышли из iframe.");
+    }
 }
+
+// Погрузка aria-labelledby="b3v3lbl"
+
+// разгрузка
 
 // Для входа в заявку
