@@ -1,10 +1,14 @@
 package pages;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -119,32 +123,41 @@ public class PageTransp {
                 "//*[@aria-labelledby='b3vflbl']")));
         System.out.println("Нашли поле ввода Даты разгрузки");
 
-        PlanningLoadingDate.click();
+        try {
+            // Закрываем оверлей, если он есть
+            WebElement overlay = driver.findElement(By.cssSelector("div.overlay-transparent[role='button']"));
+            if (overlay.isDisplayed()) {
+                overlay.click();
+                System.out.println("Закрыли оверлей-подсказку.");
+            }
+        } catch (NoSuchElementException | ElementClickInterceptedException e) {
+            System.out.println("Оверлей не найден или не удалось кликнуть. Удаляем через JavaScript.");
+
+            // Удаляем оверлей с помощью JS
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("document.querySelector('div.overlay-transparent').remove();");
+            System.out.println("Оверлей удалён.");
+        }
 
         // Кнопка Груз
         WebElement Cargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                 "//*[@class='ms-nav-group-caption thm-color-1818861216--not_FCM thm-font-size-medium thm-segoeSemibold ms-nav-collapsible-part-caption icon-RightCaret-after']")));
         System.out.println("Нашли кнопку Груз");
 
-        // ms-nav-group-caption thm-color-1818861216--not_FCM thm-font-size-medium
-        // thm-segoeSemibold ms-nav-collapsible-part-caption icon-RightCaret-after
-
-        // Прокрутка к элементу вручную
+        // Прокрутка и клик
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0, arguments[0].getBoundingClientRect().top - 200);", Cargo);
+        js.executeScript("arguments[0].scrollIntoView(true);", Cargo);
+        System.out.println("Прокрутили к элементу 'Груз'");
 
         try {
-            Thread.sleep(1000); // Небольшая пауза
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Cargo.click();
+            System.out.println("Клик по элементу 'Груз' выполнен.");
+        } catch (ElementClickInterceptedException e) {
+            System.out.println("Не удалось кликнуть напрямую. Используем JavaScript.");
+            js.executeScript("arguments[0].click();", Cargo);
+            System.out.println("Клик выполнен через JavaScript.");
         }
-
-        // Клик через JavaScript
-        js.executeScript("arguments[0].click();", Cargo);
-        System.out.println("Кликнули на кнопку Груз");
-
     }
-    // aria-labelledby="b3v3lbl"
 
     public void returnToMainContent() {
         driver.switchTo().defaultContent();
