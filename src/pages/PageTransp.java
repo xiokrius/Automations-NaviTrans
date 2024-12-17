@@ -13,6 +13,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class PageTransp {
 
     private String CodeTovaraValue = "ITEM-00002";
+    private String PlanningLoadingDateValue = "01.12.2024";
+    private String PlanningUnloadingDateValue = "25.12.2024";
+    private String OpenLoadingLocationValue = "220112";
+    private String OpenUnloadingLocationValue = "CP 06180 DE CACERES,";
+
+    private String NumberOfShipmentValue = "1";
+    private String TheWholeCargoValue = "1";
+    private String CargoVolumeValue = "1";
+    private String TheTemperatureOfTheCargoFROMValue = "-";
+    private String TheTemperatureOfTheCargoIsUpToValue = "-";
 
     private WebDriver driver;
 
@@ -123,7 +133,7 @@ public class PageTransp {
         System.out.println("Нашли поле ввода Даты разгрузки");
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        // Проверяем наличие оверлея в главном документе
+        // НУЖНО ЗАМЕНИТЬ прямые xpath!!!
         try {
             // Поиск кнопки "Груз"
             WebElement Cargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
@@ -154,26 +164,77 @@ public class PageTransp {
         }
 
         // надо перенеймить переменную ТУТ ЗАКОНЧИЛ 16.12.
-
-        WebElement CodeTovara = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@labelledby='column_header_b3t9']")));
-        System.out.println("Нашли поле ввода Кода товара");
-
-        js.executeScript("arguments[0].value = arguments[1];", CodeTovara, CodeTovaraValue);
-        System.out.println("Заполнили стартовую дату через JavaScript: " + CodeTovaraValue);
-
-        System.out.println("Заполнили поле");
-
         try {
-            System.out.println("Скроллим дальше вниз после клика.");
-            for (int i = 0; i < 5; i++) { // Прокручиваем несколько раз
-                js.executeScript("window.scrollBy(0, 900);"); // Скроллим вниз на 900 пикселей
-                Thread.sleep(3000); // Пауза для стабильности
+            WebElement CodeTovara = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                    "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[5]/input")));
+            System.out.println("Нашли поле ввода Кода товара");
+
+            for (int i = 0; i < 10; i++) {
+                js.executeScript("window.scrollBy(0, 900);"); // Скроллим вниз
+                Thread.sleep(100); // Пауза для стабильности
+                if (CodeTovara.isDisplayed()) {
+                    System.out.println("Элемент 'Груз' стал видимым.");
+                    break;
+                }
             }
-            System.out.println("Скроллинг завершён.");
+
+            js.executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });", CodeTovara);
+            System.out.println("Прокрутили к элементу 'Код товара'.");
+
+            js.executeScript("arguments[0].value = arguments[1];", CodeTovara, CodeTovaraValue);
+            System.out.println("Заполнили Код Товара: " + CodeTovaraValue);
+
+            js.executeScript("arguments[0].value = arguments[1];", OpenLoadingLocation, OpenLoadingLocationValue);
+            System.out.println("Заполнили плановую локацию загрузки: " + OpenLoadingLocationValue);
+
+            js.executeScript("arguments[0].value = arguments[1];", OpenUnloadingLocation, OpenUnloadingLocationValue);
+            System.out.println("Заполнили плановую локацию выгрузки: " + OpenUnloadingLocationValue);
+
+            js.executeScript("arguments[0].value = arguments[1];", PlanningLoadingDate, PlanningLoadingDateValue);
+            System.out.println("Заполнили плановую стартовую дату: " + PlanningLoadingDateValue);
+
+            js.executeScript("arguments[0].value = arguments[1];", PlanningUnloadingDate, PlanningUnloadingDateValue);
+            System.out.println("Заполнили дату выгрузки: " + PlanningUnloadingDateValue);
+
+            System.out.println("Заполнили поля");
+
         } catch (Exception e) {
-            System.out.println("Ошибка при скроллинге вниз: " + e.getMessage());
+            System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
         }
+
+        // Кол-во груза input поле
+        WebElement NumberOfShipment = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[7]/input")));
+        // Вес груза input поле
+        WebElement TheWholeCargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[9]/input")));
+        // Объём груза input поле
+        WebElement CargoVolume = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[10]/input")));
+        // Температура груза ОТ input поле
+        WebElement TheTemperatureOfTheCargoFROM = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[13]/input")));
+        // Температура груза ДО input поле
+        WebElement TheTemperatureOfTheCargoIsUpTo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[14]/input")));
+
+        js.executeScript("arguments[0].value = arguments[1];", NumberOfShipment, NumberOfShipmentValue);
+        System.out.println("Заполнили Код Товара: " + NumberOfShipmentValue);
+
+        js.executeScript("arguments[0].value = arguments[1];", TheWholeCargo, TheWholeCargoValue);
+        System.out.println("Заполнили плановую локацию загрузки: " + TheWholeCargoValue);
+
+        js.executeScript("arguments[0].value = arguments[1];", CargoVolume, CargoVolumeValue);
+        System.out.println("Заполнили плановую локацию выгрузки: " + CargoVolumeValue);
+
+        js.executeScript("arguments[0].value = arguments[1];", TheTemperatureOfTheCargoFROM,
+                TheTemperatureOfTheCargoFROMValue);
+        System.out.println("Заполнили плановую стартовую дату: " + TheTemperatureOfTheCargoFROMValue);
+
+        js.executeScript("arguments[0].value = arguments[1];", TheTemperatureOfTheCargoIsUpTo,
+                TheTemperatureOfTheCargoIsUpToValue);
+        System.out.println("Заполнили дату выгрузки: " + TheTemperatureOfTheCargoIsUpToValue);
+
         // column_header_b3t9
         // Возвращаемся в основной контекст
         driver.switchTo().defaultContent();
