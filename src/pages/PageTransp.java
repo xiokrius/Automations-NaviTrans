@@ -247,6 +247,8 @@ public class PageTransp {
         OpenUnloadingLocation.click();
         PlanningLoadingDate.click();
         PlanningUnloadingDate.click();
+        OpenLoadingLocation.click();
+        BackPage.click();
 
         // BackPage.click();
 
