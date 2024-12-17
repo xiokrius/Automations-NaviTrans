@@ -206,19 +206,20 @@ public class PageTransp {
 
         // Кол-во груза input поле
         WebElement NumberOfShipment = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[7]/input")));
+                "//*[@aria-labelledby='column_header_b3t8']")));
+        // aria-labelledby="column_header_b3t8"
         // Вес груза input поле
         WebElement TheWholeCargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[9]/input")));
+                "//*[@aria-labelledby='column_header_b3t5']")));
         // Объём груза input поле
         WebElement CargoVolume = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[10]/input")));
+                "//*[@aria-labelledby='column_header_b3t4']")));
         // Температура груза ОТ input поле
         WebElement TheTemperatureOfTheCargoFROM = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[13]/input")));
+                "//*[@aria-labelledby='column_header_b3t1']")));
         // Температура груза ДО input поле
         WebElement TheTemperatureOfTheCargoIsUpTo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[14]/input")));
+                "//*[@aria-labelledby='column_header_b3t0']")));
 
         // Выход на пэйдж заявки
         WebElement BackPage = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
@@ -248,7 +249,7 @@ public class PageTransp {
         PlanningLoadingDate.click();
         PlanningUnloadingDate.click();
         OpenLoadingLocation.click();
-        BackPage.click();
+        // BackPage.click();
 
         // BackPage.click();
 
