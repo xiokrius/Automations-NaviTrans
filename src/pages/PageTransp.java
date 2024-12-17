@@ -115,7 +115,7 @@ public class PageTransp {
         driver.switchTo().frame(iframe);
 
         WebElement OpenLoadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='b3vflbl']")));
+                "//label[text()='Код адреса погрузки']/following-sibling::input")));
         System.out.println("Нашли поле ввода Код адреса погрузки");
 
         WebElement OpenUnloadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
@@ -124,12 +124,12 @@ public class PageTransp {
 
         // План Дата загрузки
         WebElement PlanningLoadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='b3v7lbl']")));
+                "//*[@aria-labelledby='b3vjlbl']")));
         System.out.println("Нашли поле ввода даты загрузки");
 
         // План Дата разагрузки
         WebElement PlanningUnloadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='b3vflbl']")));
+                "//*[@aria-labelledby='b3vrlbl']")));
         System.out.println("Нашли поле ввода Даты разгрузки");
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
