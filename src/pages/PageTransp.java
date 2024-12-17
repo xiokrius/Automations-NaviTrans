@@ -249,7 +249,7 @@ public class PageTransp {
         PlanningLoadingDate.click();
         PlanningUnloadingDate.click();
         OpenLoadingLocation.click();
-        // BackPage.click();
+        BackPage.click();
 
         // BackPage.click();
 

@@ -11,61 +11,67 @@ import org.openqa.selenium.support.ui.Select;
 
 public class OrderPage {
 
-    private String TransportrequirementValue = "TENT";
-    private String CustomersCodeValue = "CUST-02035";
-    private String CarrierValue = "1";
+    private final String transportRequirementValue = "TENT";
+    private final String customersCodeValue = "CUST-02035";
+    private final String carrierValue = "1";
+    private final String typeCarrierValue = "1";
 
-    private WebDriver driver;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
     public OrderPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    public void clickSomeButtonInFrame() {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement iframe = wait.until(ExpectedConditions
-                .presenceOfElementLocated(
-                        By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+    // Метод для переключения в iframe
+    private void switchToIframe(String iframeXpath) {
+        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(iframeXpath)));
         driver.switchTo().frame(iframe);
-        System.out.println("Перешли в фрейм.");
+        System.out.println("Перешли в iframe.");
+    }
 
-        WebElement Transportrequirement = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.id("b3m1ee")));
+    // Метод для получения элемента
+    private WebElement findElement(By locator) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
 
-        ///html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[4]/div/input
-
-        System.out.println("Нашёл кнопку транспорта.");
-
-        WebElement CustomersCode = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[5]/div/input")));
-        System.out.println("Нашли элемент input для ввода.");
-
-        // /html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[5]/div/input
-
-        System.out.println("Нашёл кнопку транспорта2");
-
-        WebElement Carrier = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[17]/div/select")));
-        System.out.println("Нашли элемент input для ввода.");
-
-        System.out.println("Нашёл кнопку транспорта 3");
-
+    // Метод для заполнения значения через JavaScript
+    private void fillInputWithJS(WebElement element, String value) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value = arguments[1];", element, value);
+        System.out.println("Заполнили поле: " + value);
+    }
 
-        js.executeScript("arguments[0].value = arguments[1];", Transportrequirement, TransportrequirementValue);
-        System.out.println("Заполнили стартовую дату через JavaScript: " + TransportrequirementValue);
+    // Метод для выбора значения в select
+    private void selectDropdownByValue(WebElement selectElement, String value) {
+        Select select = new Select(selectElement);
+        select.selectByValue(value);
+        System.out.println("Выбрали значение в select: " + value);
+    }
 
-        js.executeScript("arguments[0].value = arguments[1];", CustomersCode, CustomersCodeValue);
-        System.out.println("Заполнили стартовую дату через JavaScript: " + CustomersCodeValue);
+    public void fillOrderForm() {
+        // Переход в iframe
+        switchToIframe("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe");
 
-        Select select = new Select(Carrier);
+        // Нахождение элементов
+        WebElement transportRequirement = findElement(By.id("b3m1ee"));
+        WebElement customersCode = findElement(By.xpath(
+                "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[5]/div/input"));
+        WebElement carrier = findElement(By.xpath(
+                "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[17]/div/select"));
+        WebElement typeCarrier = findElement(By.xpath(
+                "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[18]/div/select"));
 
-        select.selectByValue(CarrierValue);
-        System.out.println("Заполнили select элемент: " + CarrierValue);
+        // Заполнение данных
+        fillInputWithJS(transportRequirement, transportRequirementValue);
+        fillInputWithJS(customersCode, customersCodeValue);
 
-        Transportrequirement.click();
+        // Выбор значений в select
+        selectDropdownByValue(carrier, carrierValue);
+        selectDropdownByValue(typeCarrier, typeCarrierValue);
 
+        System.out.println("Форма заполнена.");
     }
 
     // ТУТ ПЕРЕХОЖУ НА СТРАНИЦУ РЕДАКТИРОВАНИЯ ПЕРЕВОЗКИ (NVT Shipment (2002947)) и
