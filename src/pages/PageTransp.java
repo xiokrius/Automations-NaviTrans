@@ -115,7 +115,7 @@ public class PageTransp {
         driver.switchTo().frame(iframe);
 
         WebElement OpenLoadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='b3v3lbl']")));
+                "//*[@aria-labelledby='b3vflbl']")));
         System.out.println("Нашли поле ввода Код адреса погрузки");
 
         WebElement OpenUnloadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(

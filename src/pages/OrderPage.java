@@ -72,6 +72,11 @@ public class OrderPage {
         selectDropdownByValue(typeCarrier, typeCarrierValue);
 
         System.out.println("Форма заполнена.");
+
+        // Инициализация строк
+        customersCode.click();
+        transportRequirement.click();
+
     }
 
     // ТУТ ПЕРЕХОЖУ НА СТРАНИЦУ РЕДАКТИРОВАНИЯ ПЕРЕВОЗКИ (NVT Shipment (2002947)) и
