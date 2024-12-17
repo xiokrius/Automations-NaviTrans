@@ -53,6 +53,7 @@ public class CreateOrderNew {
         // Установка Плановых дат в перевозке и выход обратно на страницу заявок
         PageTransp OpenDate = new PageTransp(driver);
         OpenDate.OpenOrLoadingLocation();
+        Perevozki.returnToMainContent();
 
         // // Переход в перевозки
         // PageOpenTransp pageOpenTransp = new PageOpenTransp(driver);

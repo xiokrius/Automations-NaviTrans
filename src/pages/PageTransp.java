@@ -198,6 +198,8 @@ public class PageTransp {
 
             System.out.println("Заполнили поля");
 
+            CodeTovara.click();
+
         } catch (Exception e) {
             System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
         }
@@ -218,6 +220,10 @@ public class PageTransp {
         WebElement TheTemperatureOfTheCargoIsUpTo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                 "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[14]/input")));
 
+        // Выход на пэйдж заявки
+        WebElement BackPage = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[2]/div/div/div[1]/span/button/span/i")));
+
         js.executeScript("arguments[0].value = arguments[1];", NumberOfShipment, NumberOfShipmentValue);
         System.out.println("Заполнили Код Товара: " + NumberOfShipmentValue);
 
@@ -234,6 +240,15 @@ public class PageTransp {
         js.executeScript("arguments[0].value = arguments[1];", TheTemperatureOfTheCargoIsUpTo,
                 TheTemperatureOfTheCargoIsUpToValue);
         System.out.println("Заполнили дату выгрузки: " + TheTemperatureOfTheCargoIsUpToValue);
+
+        TheTemperatureOfTheCargoFROM.click();
+        TheTemperatureOfTheCargoIsUpTo.click();
+        OpenLoadingLocation.click();
+        OpenUnloadingLocation.click();
+        PlanningLoadingDate.click();
+        PlanningUnloadingDate.click();
+
+        // BackPage.click();
 
         // column_header_b3t9
         // Возвращаемся в основной контекст
