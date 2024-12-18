@@ -55,41 +55,31 @@ public class CreateOrderNew {
         OpenDate.OpenOrLoadingLocation();
         Perevozki.returnToMainContent();
 
-        // // Переход в перевозки
-        // PageOpenTransp pageOpenTransp = new PageOpenTransp(driver);
-        // pageOpenTransp.clickSomeButtonInFrame();
-        // pageOpenTransp.returnToMainContent();
-
-        // // Установка Плановых дат в перевозке и выход обратно на страницу заявок
-        // PageTransp pageTransp = new PageTransp(driver);
-        // pageTransp.fillDateFieldInFrame();
-        // pageTransp.returnToMainContent();
-
         // // После установки план дат. Нажимаю Обработка/выпустить
-        // PageOpenTransp vageOpenTransp = new PageOpenTransp(driver);
-        // vageOpenTransp.obrabotkaVypustit();
-        // vageOpenTransp.returnToMainContent();
+        PageOpenTransp vageOpenTransp = new PageOpenTransp(driver);
+        vageOpenTransp.obrabotkaVypustit();
+        vageOpenTransp.returnToMainContent();
 
         // // Обработка/План, планирую рейс
-        // PageOpenTransp testOpenTransp = new PageOpenTransp(driver);
-        // testOpenTransp.vehiclePlan();
-        // testOpenTransp.returnToMainContent();
+        PageOpenTransp testOpenTransp = new PageOpenTransp(driver);
+        testOpenTransp.vehiclePlan();
+        testOpenTransp.returnToMainContent();
 
         // // После обработка/План, нужно выбрать в какой поездке будут изменения
-        // PageOpenTransp opentranspOp = new PageOpenTransp(driver);
-        // opentranspOp.PlanOpen();
-        // opentranspOp.returnToMainContent();
+        PageOpenTransp opentranspOp = new PageOpenTransp(driver);
+        opentranspOp.PlanOpen();
+        opentranspOp.returnToMainContent();
 
         // // Вбиваем Тягач и прицеп
-        // PageOpenTransp OpenVehicle = new PageOpenTransp(driver);
-        // OpenVehicle.VehiclePlanOpen();
-        // OpenVehicle.returnToMainContent();
+        PageOpenTransp OpenVehicle = new PageOpenTransp(driver);
+        OpenVehicle.VehiclePlanOpen();
+        OpenVehicle.returnToMainContent();
 
         // // На странице рейса выхожу обратно, пока там ничего не нужно, она
         // // инициализирована.
-        // VehicleRoute backRoute = new VehicleRoute(driver);
-        // backRoute.clickSomeButtonInFrame();
-        // backRoute.returnToMainContent();
+        VehicleRoute backRoute = new VehicleRoute(driver);
+        backRoute.clickSomeButtonInFrame();
+        backRoute.returnToMainContent();
 
         // // Лезу в сервисы
         // ZayavkaByPage Service = new ZayavkaByPage(driver);

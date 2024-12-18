@@ -115,21 +115,21 @@ public class PageTransp {
         driver.switchTo().frame(iframe);
 
         WebElement OpenLoadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//label[text()='Код адреса погрузки']/following-sibling::input")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div[1]/div/input")));
         System.out.println("Нашли поле ввода Код адреса погрузки");
 
         WebElement OpenUnloadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='b3vblbl']")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div[2]/div[1]/div/input")));
         System.out.println("Нашли поле ввода Код адреса погрузки");
 
         // План Дата загрузки
         WebElement PlanningLoadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='b3vjlbl']")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div[6]/div/input")));
         System.out.println("Нашли поле ввода даты загрузки");
 
         // План Дата разагрузки
         WebElement PlanningUnloadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='b3vrlbl']")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div[2]/div[6]/div/input")));
         System.out.println("Нашли поле ввода Даты разгрузки");
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -206,20 +206,20 @@ public class PageTransp {
 
         // Кол-во груза input поле
         WebElement NumberOfShipment = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='column_header_b3t8']")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[7]/input")));
         // aria-labelledby="column_header_b3t8"
         // Вес груза input поле
         WebElement TheWholeCargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='column_header_b3t5']")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[9]/input")));
         // Объём груза input поле
         WebElement CargoVolume = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='column_header_b3t4']")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[10]/input")));
         // Температура груза ОТ input поле
         WebElement TheTemperatureOfTheCargoFROM = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='column_header_b3t1']")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[13]/input")));
         // Температура груза ДО input поле
         WebElement TheTemperatureOfTheCargoIsUpTo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "//*[@aria-labelledby='column_header_b3t0']")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[14]/input")));
 
         // Выход на пэйдж заявки
         WebElement BackPage = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
@@ -249,8 +249,6 @@ public class PageTransp {
         PlanningLoadingDate.click();
         PlanningUnloadingDate.click();
         OpenLoadingLocation.click();
-        BackPage.click();
-
         // BackPage.click();
 
         // column_header_b3t9

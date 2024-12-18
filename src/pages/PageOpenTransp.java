@@ -73,14 +73,13 @@ public class PageOpenTransp {
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
                 WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
                 System.out.println("Нашли первую кнопку Выпустить.");
-
                 obrabotkaButton.click();
 
                 // НАШЛИ КНОПКУ ВЫПУСТИТЬ
                 WebElement VypustitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/button")));
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/button/span")));
                 System.out.println("Нашли Вторую кнопку, Выпустить .");
 
                 VypustitButton.click();
