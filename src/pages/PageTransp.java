@@ -257,6 +257,10 @@ public class PageTransp {
                 PlanningLoadingDate.click();
                 PlanningUnloadingDate.click();
                 OpenLoadingLocation.click();
+                NumberOfShipment.click();
+                TheWholeCargo.click();
+                CargoVolume.click();
+
                 BackPage.click();
 
                 // column_header_b3t9

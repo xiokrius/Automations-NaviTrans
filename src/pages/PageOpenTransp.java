@@ -94,6 +94,7 @@ public class PageOpenTransp {
                                 .presenceOfElementLocated(
                                                 By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
                 driver.switchTo().frame(iframe);
+                System.out.println("Перешли в фрейм.");
 
                 try {
                         // Принудительная задержка
@@ -103,15 +104,17 @@ public class PageOpenTransp {
                 }
                 // Кнопка Обработки
                 WebElement obrabotkButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
                 System.out.println("Нашли первую кнопку Обработка.");
 
                 obrabotkButton.click();
 
                 // Кнопка Планирования для перехода в планирование рейса
                 WebElement PlanButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[7]/div[1]/div/button")));
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[7]/div[1]/div/button")));
                 System.out.println("Нашли Вторую кнопку План.");
+
+                ///html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[7]/div[1]/div/button
 
                 PlanButton.click();
 
@@ -129,7 +132,7 @@ public class PageOpenTransp {
                 System.out.println("Перешли в фрейм.");
 
                 WebElement OpenDrive = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[5]/form/div/main/div[3]/div/button[1]")));
+                                "/html/body/div[1]/div[4]/form/div/main/div[3]/div/button[1]")));
                 System.out.println("Нашли Третью кнопку Ок");
                 OpenDrive.click();
 
@@ -149,8 +152,10 @@ public class PageOpenTransp {
 
                 // Находим и заполняем поле для ввода тягача
                 WebElement startingVehicle = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[5]/form/main/div/div[3]/div[1]/div/div[4]/div[2]/div[2]/div/div/div[3]/div/input")));
+                                "/html/body/div[1]/div[4]/form/main/div/div[3]/div[1]/div/div[4]/div[2]/div[2]/div/div/div[3]/div/input")));
                 System.out.println("Нашёл поле для ввода номера тягача.");
+
+                ///html/body/div[1]/div[4]/form/main/div/div[3]/div[1]/div/div[4]/div[2]/div[2]/div/div/div[3]/div/input
 
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("arguments[0].value = arguments[1];", startingVehicle, startingVehicleValue);
@@ -158,11 +163,13 @@ public class PageOpenTransp {
 
                 // Нажимаем на элементы
                 WebElement autorisedButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[5]/form/main/div/div[3]/div[1]/div/div[4]/div[2]/div[2]/div/div/div[5]/div/input")));
+                                "/html/body/div[1]/div[4]/form/main/div/div[3]/div[1]/div/div[4]/div[2]/div[2]/div/div/div[5]/div/input")));
 
                 startingVehicle.click();
 
                 autorisedButton.click();
+
+                startingVehicle.click();
 
                 System.out.println("Нажали на кнопку 'Авторизация'.");
 
@@ -170,12 +177,12 @@ public class PageOpenTransp {
                 // поездке
                 try {
                         WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                        "/html/body/div[1]/div[6]/form"))); // XPath окна
+                                        "/html/body/div[1]/div[5]/form"))); // XPath окна
                         System.out.println("Всплывающее окно обнаружено.");
-
+                        ///html/body/div[1]/div[5]/form/main/div/div[1]/div[1]
                         // Выполняем действия внутри окна
                         WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
-                                        "/html/body/div[1]/div[6]/form/main/div/div[4]/button[1]")); // Кнопка
+                                        "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]")); // Кнопка
                                                                                                      // подтверждения
                         popupConfirmButton.click();
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
@@ -185,7 +192,7 @@ public class PageOpenTransp {
 
                 // Нажимаем кнопку "ОК"
                 WebElement vehicleOkButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]")));
+                                "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
                 vehicleOkButton.click();
                 System.out.println("Нажата кнопка 'ОК'.");
         }
