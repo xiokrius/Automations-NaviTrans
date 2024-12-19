@@ -9,25 +9,29 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import resources.ConfigManager;
+
 // ЗАПОЛНЕНИЕ ПЕРЕМЕЩЕНИЯ (ПОКА ТОЛЬКО ПЛАНОВЫЕ ДАТЫ)
 public class PageTransp {
 
-        private String CodeTovaraValue = "ITEM-00002";
-        private String PlanningLoadingDateValue = "01.12.2024";
-        private String PlanningUnloadingDateValue = "25.12.2024";
-        private String OpenLoadingLocationValue = "220112";
-        private String OpenUnloadingLocationValue = "CP 06180 DE CACERES,";
+        private String CodeTovaraValue = ConfigManager.getProperty("CodeTovaraValue");
+        private String PlanningLoadingDateValue = ConfigManager.getProperty("PlanningLoadingDateValue");
+        private String PlanningUnloadingDateValue = ConfigManager.getProperty("PlanningUnloadingDateValue");
+        private String OpenLoadingLocationValue = ConfigManager.getProperty("OpenLoadingLocationValue");
+        private String OpenUnloadingLocationValue = ConfigManager.getProperty("OpenUnloadingLocationValue");
 
-        private String NumberOfShipmentValue = "1";
-        private String TheWholeCargoValue = "1";
-        private String CargoVolumeValue = "1";
-        private String TheTemperatureOfTheCargoFROMValue = "-";
-        private String TheTemperatureOfTheCargoIsUpToValue = "-";
+        private String NumberOfShipmentValue = ConfigManager.getProperty("NumberOfShipmentValue");
+        private String TheWholeCargoValue = ConfigManager.getProperty("TheWholeCargoValue");
+        private String CargoVolumeValue = ConfigManager.getProperty("CargoVolumeValue");
+        private String TheTemperatureOfTheCargoFROMValue = ConfigManager
+                        .getProperty("TheTemperatureOfTheCargoFROMValue");
+        private String TheTemperatureOfTheCargoIsUpToValue = ConfigManager
+                        .getProperty("TheTemperatureOfTheCargoIsUpToValue");
+
+        private String startingDateValue = ConfigManager.getProperty("startingDateValue");
+        private String unloadDateValue = ConfigManager.getProperty("unloadDateValue");
 
         private WebDriver driver;
-
-        private String startingDateValue = "09.12.2024";
-        private String unloadDateValue = "21.12.2024";
 
         public PageTransp(WebDriver driver) {
                 this.driver = driver;

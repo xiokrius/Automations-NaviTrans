@@ -29,7 +29,7 @@ public class VehicleRoute {
 
         // Ожидаем появления первой кнопки
         WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                "/html/body/div[1]/div[5]/form/main/div[2]/div[2]/div/div/div[1]/span/button/span/i")));
+                "/html/body/div[1]/div[4]/form/main/div[2]/div[2]/div/div/div[1]/span/button/span/i")));
         System.out.println("Нашли кнопку назад.");
 
         // Кликаем по первой кнопке
