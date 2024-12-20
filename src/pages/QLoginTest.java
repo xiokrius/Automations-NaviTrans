@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import resources.ConfigManager;
+
 // ВХОД В ТЕСТ
 
 public class QLoginTest {
@@ -38,6 +40,9 @@ public class QLoginTest {
     public void clickLoginButton() {
         loginButton.click();
     }
+
+    private String inputLogin = ConfigManager.getProperty("inputLogin");
+    private String inputPassword = ConfigManager.getProperty("inputPassword");
 
     public ZayavkaPage goToZayavkaPage() {
         driver.get(

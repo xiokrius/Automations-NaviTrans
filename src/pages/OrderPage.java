@@ -7,14 +7,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import resources.ConfigManager;
+
 import org.openqa.selenium.support.ui.Select;
 
 public class OrderPage {
 
-    private final String transportRequirementValue = "TENT";
-    private final String customersCodeValue = "CUST-02035";
-    private final String carrierValue = "1";
-    private final String typeCarrierValue = "1";
+    private String transportRequirementValue = ConfigManager.getProperty("transportRequirementValue");
+    private String customersCodeValue = ConfigManager.getProperty("customersCodeValue");
+    private String carrierValue = ConfigManager.getProperty("carrierValue");
+    private String typeCarrierValue = ConfigManager.getProperty("typeCarrierValue");
 
     private final WebDriver driver;
     private final WebDriverWait wait;

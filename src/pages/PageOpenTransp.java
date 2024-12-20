@@ -9,11 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import resources.ConfigManager;
+
 public class PageOpenTransp {
 
         private WebDriver driver;
 
-        private String startingVehicleValue = "VEHI-02350";
+        private String startingVehicleValue = ConfigManager.getProperty("startingVehicleValue");
 
         public PageOpenTransp(WebDriver driver) {
                 this.driver = driver;

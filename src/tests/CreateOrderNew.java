@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.QLoginTest;
 import pages.ZayavkaByPage;
 import pages.ZayavkaPage;
+import resources.ConfigManager;
 import pages.PageOpenTransp;
 import pages.OpenInvoice;
 import pages.OrderPage;
@@ -21,10 +22,13 @@ public class CreateOrderNew {
         // driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://192.168.1.13:8080/BC210-TEST/SignIn?ReturnUrl=%2FBC210-TEST%2F");
 
-        // Выполнение входа (Логин пароль, нажатие окей)
+        String login = ConfigManager.getProperty("inputLogin");
+        String password = ConfigManager.getProperty("inputPassword");
+
+        // Выполнение входа (логин, пароль, нажатие кнопки)
         QLoginTest loginTest = new QLoginTest(driver);
-        loginTest.inputLogin("FTS1");
-        loginTest.inputPassword("Aa.124578");
+        loginTest.inputLogin(login);
+        loginTest.inputPassword(password);
         loginTest.clickLoginButton();
 
         // Переход на страницу заявок
