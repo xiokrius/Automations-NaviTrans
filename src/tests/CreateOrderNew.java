@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import pages.QLoginTest;
-import pages.ZayavkaByPage;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
 import pages.PageOpenTransp;
@@ -86,9 +85,9 @@ public class CreateOrderNew {
         backRoute.returnToMainContent();
 
         // // Лезу в сервисы
-        // ZayavkaByPage Service = new ZayavkaByPage(driver);
-        // Service.clickSomeButtonInService();
-        // Service.returnToMainContent();
+        OpenInvoice Service = new OpenInvoice(driver);
+        Service.clickSomeButtonInService();
+        Service.returnToMainContent();
 
         // Завершение работы
         // driver.quit();

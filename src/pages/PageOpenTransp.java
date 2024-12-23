@@ -78,6 +78,7 @@ public class PageOpenTransp {
                                 "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
                 System.out.println("Нашли первую кнопку Выпустить.");
                 obrabotkaButton.click();
+                ///html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span
 
                 // НАШЛИ КНОПКУ ВЫПУСТИТЬ
                 WebElement VypustitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(

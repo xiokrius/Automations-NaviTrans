@@ -128,12 +128,12 @@ public class PageTransp {
 
                 // План Дата загрузки
                 WebElement PlanningLoadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div[6]/div/input")));
+                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div[7]/div/input")));
                 System.out.println("Нашли поле ввода даты загрузки");
 
                 // План Дата разагрузки
                 WebElement PlanningUnloadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div[2]/div[6]/div/input")));
+                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div[2]/div[7]/div/input")));
                 System.out.println("Нашли поле ввода Даты разгрузки");
 
                 JavascriptExecutor js = (JavascriptExecutor) driver;
