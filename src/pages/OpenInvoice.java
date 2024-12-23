@@ -62,13 +62,15 @@ public class OpenInvoice {
 
                 // Ожидаем появления первой кнопки
                 WebElement buttonInObrabotka = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
                 System.out.println("Нашли Кнопку Обработка.");
+
+                // /html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button
 
                 buttonInObrabotka.click();
 
                 WebElement buttonInService = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div/button/span")));
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div/button")));
                 System.out.println("Нашли Кнопку Сервис");
 
                 buttonInService.click();

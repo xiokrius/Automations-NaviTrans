@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import resources.ConfigManager;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -15,8 +18,8 @@ public class ZayavkaPage {
 
     private WebDriver driver;
 
-    private String TSGroupCodeValue = "BY_TS";
-    private String ButtonNewZayavkaValue = "FOOD";
+    private String TSGroupCodeValue = ConfigManager.getProperty("TSGroupCodeValue");
+    private String ButtonNewZayavkaValue = ConfigManager.getProperty("ButtonNewZayavkaValue");
 
     public ZayavkaPage(WebDriver driver) {
         this.driver = driver;
