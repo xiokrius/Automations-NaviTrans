@@ -3,12 +3,17 @@ package pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import resources.ConfigManager;
+
 public class OpenInvoice {
+
+        private String InputServiceCodeValue = ConfigManager.getProperty("InputServiceCodeValue");
 
         private WebDriver driver;
 
@@ -16,65 +21,32 @@ public class OpenInvoice {
                 this.driver = driver;
         }
 
-        public void clickSomeButtonInFrame() {
-
+        public void OpenServices() {
                 System.out.println("Начинаем OpenInInvoice.");
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
                 driver.switchTo().frame(iframe);
                 System.out.println("Перешли в фрейм.");
 
-                // Ожидаем появления первой кнопки
-                WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
-                System.out.println("Нашли первую кнопку.");
+                // Ожидаем появления инпут-поля с динамическим ID
+                WebElement InputServiceCode = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, 'b4') and @role='combobox' and @type='text']")));
+                System.out.println("Нашли поле Сервисный код");
 
-                // Кликаем по первой кнопке
-                buttonInFrame.click();
-                System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
+                // Кликаем по полю
+                InputServiceCode.click();
 
-                WebElement buttonInFrame2 = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[3]/div[2]/div/button")));
+                // Заполняем значение через JavaScript
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
+                                InputServiceCode, InputServiceCodeValue);
+                System.out.println("Заполнили значение: " + InputServiceCodeValue);
 
-                buttonInFrame2.click();
-                System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
+                System.out.println("Завершили OpenServices.");
 
-                WebElement buttonInFrame3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
-                buttonInFrame3.click();
-        }
-
-        public void clickSomeButtonInService() {
-
-                System.out.println("Начинаем переход в сервисы.");
-
-                // Переключаемся в нужный фрейм
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
-                System.out.println("Перешли в фрейм.");
-
-                // Ожидаем появления первой кнопки
-                WebElement buttonInObrabotka = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
-                System.out.println("Нашли Кнопку Обработка.");
-
-                // /html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button
-
-                buttonInObrabotka.click();
-
-                WebElement buttonInService = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div/button")));
-                System.out.println("Нашли Кнопку Сервис");
-
-                buttonInService.click();
-                System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
         }
 
         public void returnToMainContent() {

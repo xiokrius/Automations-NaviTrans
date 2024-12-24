@@ -11,6 +11,7 @@ import pages.OpenInvoice;
 import pages.OrderPage;
 import pages.PageTransp;
 import pages.VehicleRoute;
+import pages.ZayavkaByPage;
 
 public class CreateOrderNew {
     public static void main(String[] args) {
@@ -84,9 +85,14 @@ public class CreateOrderNew {
         backRoute.clickSomeButtonInFrame();
         backRoute.returnToMainContent();
 
-        // // Лезу в сервисы
+        // Сам переход в сервисы
+        ZayavkaByPage OpenService = new ZayavkaByPage(driver);
+        OpenService.clickSomeButtonInService();
+        OpenService.returnToMainContent();
+
+        // Действия в сервисах
         OpenInvoice Service = new OpenInvoice(driver);
-        Service.clickSomeButtonInService();
+        Service.OpenServices();
         Service.returnToMainContent();
 
         // Завершение работы
