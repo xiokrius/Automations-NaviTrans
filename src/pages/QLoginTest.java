@@ -52,7 +52,6 @@ public class QLoginTest {
     }
 }
 
-// Тестил гугл, все переходит, всё работает, не то что навик сук(((
 // public Testgoogle goToZayavkapage() {
 // driver.get(
 // "https://www.google.by/search?q=seleselenium+нажать+на+ссылку+в+браузере&sca_esv=711f59ee6954731e&sxsrf=ADLYWIKWiBT8xfA3NhWsPokjdZNJbTufLw%3A1733745649300&ei=8dtWZ9L2EaH1i-gPirWCmAs");
