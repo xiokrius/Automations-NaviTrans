@@ -14,6 +14,7 @@ import resources.ConfigManager;
 public class OpenInvoice {
 
         private String InputServiceCodeValue = ConfigManager.getProperty("InputServiceCodeValue");
+        private String PriceValueValue = ConfigManager.getProperty("PriceValue");
 
         private WebDriver driver;
 
@@ -36,16 +37,45 @@ public class OpenInvoice {
                                 By.xpath("//input[contains(@id, 'b4') and @role='combobox' and @type='text']")));
                 System.out.println("Нашли поле Сервисный код");
 
-                // Кликаем по полю
-                InputServiceCode.click();
-
                 // Заполняем значение через JavaScript
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
                                 InputServiceCode, InputServiceCodeValue);
+
                 System.out.println("Заполнили значение: " + InputServiceCodeValue);
 
-                System.out.println("Завершили OpenServices.");
+                // Находим элемент, к которому нужно проскроллить(ЦЕНА)
+                WebElement price = driver.findElement(By.xpath(
+                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]/input"));
+
+                // Прокручиваем к дочернему элементу внутри прокручиваемого окна
+                js.executeScript("arguments[0].scrollIntoView({inline: 'center'});", price);
+                try {
+                        Thread.sleep(1000); // добавить паузу после прокрутки
+                } catch (InterruptedException e) {
+                        e.printStackTrace();
+                }
+                // Логи для проверки состояния элемента
+                System.out.println("Price field is displayed: " + price.isDisplayed());
+                System.out.println("Price field is enabled: " + price.isEnabled());
+                System.out.println("Price field value before input: " + price.getAttribute("value"));
+
+                // Попытка установить значение через JS
+                js.executeScript(
+                                "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input')); arguments[0].dispatchEvent(new Event('change'));",
+                                price,
+                                PriceValueValue);
+
+                // Проверка результата
+                System.out.println("Price field value after input: " + price.getAttribute("value"));
+
+                WebElement InvoiceInTamojnaButton = driver.findElement(By.xpath(
+                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[44]/div/input"));
+
+                // Прокручиваем к дочернему элементу внутри прокручиваемого окна
+                js.executeScript("arguments[0].scrollIntoView({inline: 'center'});", InvoiceInTamojnaButton);
+
+                InvoiceInTamojnaButton.click();
 
         }
 

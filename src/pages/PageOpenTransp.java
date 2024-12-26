@@ -172,6 +172,8 @@ public class PageOpenTransp {
 
                 autorisedButton.click();
 
+                startingVehicle.click();
+
                 System.out.println("Нажали на кнопку 'Авторизация'.");
 
                 // Проверяем наличие всплывающего окна в случае если тягач уже задействован в

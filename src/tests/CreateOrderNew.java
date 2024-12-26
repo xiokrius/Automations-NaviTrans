@@ -69,12 +69,12 @@ public class CreateOrderNew {
         testOpenTransp.vehiclePlan();
         testOpenTransp.returnToMainContent();
 
-        // // После обработка/План, нужно выбрать в какой поездке будут изменения
+        // // // После обработка/План, нужно выбрать в какой поездке будут изменения
         PageOpenTransp opentranspOp = new PageOpenTransp(driver);
         opentranspOp.PlanOpen();
         opentranspOp.returnToMainContent();
 
-        // // Вбиваем Тягач и прицеп
+        // // // Вбиваем Тягач и прицеп
         PageOpenTransp OpenVehicle = new PageOpenTransp(driver);
         OpenVehicle.VehiclePlanOpen();
         OpenVehicle.returnToMainContent();
