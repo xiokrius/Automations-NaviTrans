@@ -4,9 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import pages.QLoginTest;
+import pages.ReadyInvoic;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
 import pages.PageOpenTransp;
+import pages.Invoice;
 import pages.OpenInvoice;
 import pages.OrderPage;
 import pages.PageTransp;
@@ -101,6 +103,14 @@ public class CreateOrderNew {
 
         PageOpenTransp Schet = new PageOpenTransp(driver);
         Schet.obrabotkaSchet();
+        CreateNewOrder.returnToMainContent();
+
+        ReadyInvoic SchetNRuchnoy = new ReadyInvoic(driver);
+        SchetNRuchnoy.SchetRuchnoy();
+        CreateNewOrder.returnToMainContent();
+
+        Invoice FullInvoice = new Invoice(driver);
+        FullInvoice.fullSchet();
         CreateNewOrder.returnToMainContent();
 
         // Завершение работы
