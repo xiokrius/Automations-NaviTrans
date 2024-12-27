@@ -40,10 +40,34 @@ public class Invoice {
 
         uchetFullButton.click();
 
-        WebElement backButton = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("/html/body/div[1]/div[4]/form/main/div[2]/div[2]/div/div/div[1]/span/button/span/i")));
+        try {
+            WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                    "/html/body/div[1]/div[5]/form/div/main"))); // XPath окна
+            System.out.println("Всплывающее окно обнаружено.");
+            ///html/body/div[1]/div[5]/form/main/div/div[1]/div[1]
+            // Выполняем действия внутри окна
+            WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
+                    "/html/body/div[1]/div[5]/form/div/main/div[3]/div/button[1]")); // Кнопка
+            // подтверждения
+            popupConfirmButton.click();
+            System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
 
-        backButton.click();
+            Thread.sleep(1000);
+
+            WebElement UchetSchetButton = wait.until(ExpectedConditions
+                    .presenceOfElementLocated(By.xpath("/html/body/div[1]/div[5]/form/div/main/div[3]/div/button[1]")));
+
+            UchetSchetButton.click();
+
+            Thread.sleep(2000);
+
+            WebElement PerehodVSchetNet = wait.until(ExpectedConditions
+                    .presenceOfElementLocated(By.xpath("/html/body/div[1]/div[5]/form/div/main/div[3]/div/button[2]")));
+            PerehodVSchetNet.click();
+
+        } catch (Exception e) {
+            System.out.println("Всплывающее окно не появилось, продолжаем выполнение." + e.getMessage());
+        }
 
     }
 
