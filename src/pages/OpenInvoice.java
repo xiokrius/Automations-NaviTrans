@@ -48,11 +48,15 @@ public class OpenInvoice {
                 WebElement price = driver.findElement(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]"));
 
-                ///html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]
-                // Прокручиваем к дочернему элементу внутри прокручиваемого окна
                 js.executeScript("arguments[0].scrollIntoView({inline: 'center'});", price);
                 try {
                         Thread.sleep(7000); // добавить паузу после прокрутки
+                        js.executeScript(
+                                        "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
+                                        price, PriceValueValue);
+
+                        System.out.println("Price field value after input: " + PriceValueValue);
+
                 } catch (InterruptedException e) {
                         e.printStackTrace();
                 }
@@ -60,13 +64,9 @@ public class OpenInvoice {
                 price.click();
 
                 // Попытка установить значение через JS
-                js.executeScript(
-                                "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
-                                price,
-                                PriceValueValue);
 
                 // Проверка результата
-                System.out.println("Price field value after input: " + price.getAttribute("value"));
+                System.out.println("Price field value after input: " + PriceValueValue);
 
                 WebElement InvoiceInTamojnaButton = driver.findElement(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[44]/div/input"));

@@ -57,8 +57,12 @@ public class OrderPage {
         // Переход в iframe
         switchToIframe("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe");
 
-        // Нахождение элементов
-        WebElement transportRequirement = findElement(By.id("b3m1ee"));
+        // Нахождение элементов, явное прогрузки первого элемента
+
+        WebElement transportRequirement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("b3m1ee")));
+
+        System.out.println("Нашли ид");
+
         WebElement customersCode = findElement(By.xpath(
                 "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[5]/div/input"));
         WebElement carrier = findElement(By.xpath(
