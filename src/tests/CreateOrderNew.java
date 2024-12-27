@@ -95,6 +95,14 @@ public class CreateOrderNew {
         Service.OpenServices();
         Service.returnToMainContent();
 
+        PageOpenTransp ReadyInInvoicing = new PageOpenTransp(driver);
+        ReadyInInvoicing.readyInInvoicing();
+        CreateNewOrder.returnToMainContent();
+
+        PageOpenTransp Schet = new PageOpenTransp(driver);
+        Schet.obrabotkaSchet();
+        CreateNewOrder.returnToMainContent();
+
         // Завершение работы
         // driver.quit();
     }

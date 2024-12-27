@@ -57,7 +57,7 @@ public class OrderPage {
         // Переход в iframe
         switchToIframe("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe");
 
-        // Нахождение элементов, явное прогрузки первого элемента
+        // Нахождение элементов, явная прогрузка первого элемента
 
         WebElement transportRequirement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("b3m1ee")));
 

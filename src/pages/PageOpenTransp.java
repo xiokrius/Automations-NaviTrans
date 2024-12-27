@@ -123,6 +123,74 @@ public class PageOpenTransp {
 
         }
 
+        // Нажатие Готов к инвойсированию
+        public void readyInInvoicing() {
+
+                System.out.println("Начинаем Обработка/Готов к инвойсированию.");
+
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebElement iframe = wait.until(ExpectedConditions
+                                .presenceOfElementLocated(
+                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+                driver.switchTo().frame(iframe);
+                System.out.println("Перешли в фрейм.");
+
+                // НАШЛИ КНОПКУ ОБРАБОТКА
+                WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
+                System.out.println("Нашли первую кнопку Выпустить.");
+                obrabotkaButton.click();
+
+                // НАШЛИ КНОПКУ Готово к инвойсированию
+                WebElement readyInInvoic = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[7]/div[2]/div/button")));
+                System.out.println("Нашли Вторую кнопку, Готов к инв .");
+
+                readyInInvoic.click();
+
+                try {
+                        WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                        "/html/body/div[1]/div[4]/form/div/main"))); // XPath окна
+                        System.out.println("Всплывающее окно обнаружено.");
+                        // Выполняем действия внутри окна
+                        WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
+                                        "/html/body/div[1]/div[4]/form/div/main/div[3]/div/button")); // Кнопка
+                                                                                                      // подтверждения
+                        popupConfirmButton.click();
+                        System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
+                } catch (Exception e) {
+                        System.out.println("Всплывающее окно не появилось, продолжаем выполнение." + e.getMessage());
+                }
+
+        }
+
+        // Создание счёта
+        public void obrabotkaSchet() {
+
+                System.out.println("Начинаем Обработка/Выпустить.");
+
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebElement iframe = wait.until(ExpectedConditions
+                                .presenceOfElementLocated(
+                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+                driver.switchTo().frame(iframe);
+                System.out.println("Перешли в фрейм.");
+
+                // НАШЛИ КНОПКУ ОБРАБОТКА
+                WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
+                System.out.println("Нашли первую кнопку Выпустить.");
+                obrabotkaButton.click();
+
+                // НАШЛИ КНОПКУ Счёт
+                WebElement schet = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[3]/div[1]/div/button")));
+                System.out.println("Нашли Вторую кнопку, Выпустить .");
+
+                schet.click();
+
+        }
+
         // После обработка/План, нужно выбрать в какой поездке будут изменения
         public void PlanOpen() {
                 System.out.println("Обработка/План/ОК.");
