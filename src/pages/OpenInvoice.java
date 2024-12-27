@@ -14,7 +14,7 @@ import resources.ConfigManager;
 public class OpenInvoice {
 
         private String InputServiceCodeValue = ConfigManager.getProperty("InputServiceCodeValue");
-        private String PriceValueValue = ConfigManager.getProperty("PriceValue");
+        private String PriceValueValue = ConfigManager.getProperty("PriceValueValue");
 
         private WebDriver driver;
 
@@ -46,23 +46,22 @@ public class OpenInvoice {
 
                 // Находим элемент, к которому нужно проскроллить(ЦЕНА)
                 WebElement price = driver.findElement(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]/input"));
+                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]"));
 
+                ///html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]
                 // Прокручиваем к дочернему элементу внутри прокручиваемого окна
                 js.executeScript("arguments[0].scrollIntoView({inline: 'center'});", price);
                 try {
-                        Thread.sleep(1000); // добавить паузу после прокрутки
+                        Thread.sleep(7000); // добавить паузу после прокрутки
                 } catch (InterruptedException e) {
                         e.printStackTrace();
                 }
-                // Логи для проверки состояния элемента
-                System.out.println("Price field is displayed: " + price.isDisplayed());
-                System.out.println("Price field is enabled: " + price.isEnabled());
-                System.out.println("Price field value before input: " + price.getAttribute("value"));
+
+                price.click();
 
                 // Попытка установить значение через JS
                 js.executeScript(
-                                "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input')); arguments[0].dispatchEvent(new Event('change'));",
+                                "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
                                 price,
                                 PriceValueValue);
 
