@@ -44,26 +44,36 @@ public class OpenInvoice {
 
                 System.out.println("Заполнили значение: " + InputServiceCodeValue);
 
-                // Находим элемент, к которому нужно проскроллить(ЦЕНА)
+                // Находим элемент, к которому нужно проскроллить (ЦЕНА)
                 WebElement price = driver.findElement(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]"));
+                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]/input"));
 
-                js.executeScript("arguments[0].scrollIntoView({inline: 'center'});", price);
+                // Скроллинг к элементу
+                js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", price);
+
+                // Ждем немного, чтобы элемент полностью появился
+                wait.until(ExpectedConditions.elementToBeClickable(price));
+
+                // Добавим фокус и события для ввода
                 try {
-                        Thread.sleep(7000); // добавить паузу после прокрутки
+                        // Добавление фокуса на поле
+                        js.executeScript("arguments[0].focus();", price);
+                        Thread.sleep(1000); // Небольшая задержка после фокуса
+
+                        // Используем JavaScript для ввода значения
                         js.executeScript(
-                                        "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
+                                        "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input')); arguments[0].dispatchEvent(new Event('change')); arguments[0].dispatchEvent(new Event('blur'));",
                                         price, PriceValueValue);
 
-                        System.out.println("Price field value after input: " + PriceValueValue);
+                        System.out.println("Заполнили поле Цена значением: " + PriceValueValue);
+
+                        // Ожидаем изменения значения в поле
+                        wait.until(ExpectedConditions.attributeToBe(price, "value", PriceValueValue));
+                        Thread.sleep(1000); // Даем немного времени для обработки
 
                 } catch (InterruptedException e) {
                         e.printStackTrace();
                 }
-
-                price.click();
-
-                // Попытка установить значение через JS
 
                 // Проверка результата
                 System.out.println("Price field value after input: " + PriceValueValue);
@@ -76,6 +86,9 @@ public class OpenInvoice {
 
                 InvoiceInTamojnaButton.click();
 
+                WebElement backButton = driver.findElement(By.xpath(
+                                "/html/body/div[1]/div[4]/form/main/div[2]/div[2]/div/div/div[1]/span/button/span"));
+                backButton.click();
         }
 
         public void returnToMainContent() {
