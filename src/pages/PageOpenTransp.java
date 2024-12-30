@@ -1,7 +1,6 @@
 package pages;
 
 import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -247,18 +246,20 @@ public class PageOpenTransp {
                 // Проверяем наличие всплывающего окна в случае если тягач уже задействован в
                 // поездке
                 try {
+                        // Проверка на всплывающее окно
                         WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                                         "/html/body/div[1]/div[5]/form"))); // XPath окна
                         System.out.println("Всплывающее окно обнаружено.");
-                        ///html/body/div[1]/div[5]/form/main/div/div[1]/div[1]
+
                         // Выполняем действия внутри окна
                         WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
                                         "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]")); // Кнопка
                                                                                                      // подтверждения
                         popupConfirmButton.click();
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
+
                 } catch (Exception e) {
-                        System.out.println("Всплывающее окно не появилось, продолжаем выполнение." + e.getMessage());
+                        System.out.println("Произошла непредвиденная ошибка: " + e.getMessage());
                 }
 
                 // Нажимаем кнопку "ОК"
