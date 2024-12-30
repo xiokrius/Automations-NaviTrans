@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import resources.ConfigManager;
-
 // ВХОД В ТЕСТ
 
 public class QLoginTest {
@@ -40,9 +38,6 @@ public class QLoginTest {
     public void clickLoginButton() {
         loginButton.click();
     }
-
-    private String inputLogin = ConfigManager.getProperty("inputLogin");
-    private String inputPassword = ConfigManager.getProperty("inputPassword");
 
     public ZayavkaPage goToZayavkaPage() {
         driver.get(
@@ -89,35 +84,4 @@ public class QLoginTest {
 // this.driver = driver;
 // PageFactory.initElements(driver, this);
 // }
-
-// // Метод ввода логина
-// public void inputLogin(String login) {
-// loginField.sendKeys(login);
-// }
-
-// // Метод ввода пароля
-// public void inputPassword(String password) {
-// passwdField.sendKeys(password);
-// }
-
-// // Метод нажатия на кнопку входа
-// public void clickLoginButton() {
-// loginButton.click();
-// }
-
-// public static void main(String[] args) {
-// // Настройка WebDriver
-// WebDriver driver = new ChromeDriver();
-// driver.manage().window().maximize();
-// driver.get("http://192.168.1.13:8080/BC210-TEST/SignIn?ReturnUrl=%2FBC210-TEST%2F");
-// driver.manage().timeouts();// .implicitlyWait(10, TimeUnit.SECONDS);
-
-// // Создание экземпляра QLoginTest
-// QLoginTest loginTest = new QLoginTest(driver);
-
-// // Выполнение теста
-// loginTest.inputLogin("FTS1");
-// loginTest.inputPassword("Aa.124578");
-// loginTest.clickLoginButton();
-// }
-// }
+// Mybad
