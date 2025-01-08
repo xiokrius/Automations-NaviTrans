@@ -52,29 +52,35 @@ public class VehiclePlanning {
 
         autorisedButton.click();
 
-        startingVehicle.click();
-
-        System.out.println("Нажали на кнопку 'Авторизация'.");
-
-        // Проверяем наличие всплывающего окна в случае если тягач уже задействован в
-        // поездке
         try {
-            // Проверка на всплывающее окно
-            WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                    "/html/body/div[1]/div[5]/form"))); // XPath окна
-            System.out.println("Всплывающее окно обнаружено.");
 
-            // Выполняем действия внутри окна
-            WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
-                    "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]")); // Кнопка
-                                                                                 // подтверждения
-            popupConfirmButton.click();
-            System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
+            startingVehicle.click();
 
-        } catch (Exception e) {
-            System.out.println("Произошла непредвиденная ошибка: " + e.getMessage());
+        } catch (Exception i) {
+
+            System.out.println("Окно сработало раньше");
+
+            System.out.println("Нажали на кнопку 'Авторизация'.");
+
+            // Проверяем наличие всплывающего окна в случае если тягач уже задействован в
+            // поездке
+            try {
+                // Проверка на всплывающее окно
+                WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                        "/html/body/div[1]/div[5]/form"))); // XPath окна
+                System.out.println("Всплывающее окно обнаружено.");
+
+                // Выполняем действия внутри окна
+                WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
+                        "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]")); // Кнопка
+                                                                                     // подтверждения
+                popupConfirmButton.click();
+                System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
+
+            } catch (Exception e) {
+                System.out.println("Произошла непредвиденная ошибка: " + e.getMessage());
+            }
         }
-
         // Нажимаем кнопку "ОК"
         WebElement vehicleOkButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                 "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));

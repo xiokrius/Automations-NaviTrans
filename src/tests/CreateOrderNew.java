@@ -114,8 +114,8 @@ public class CreateOrderNew {
         FullInvoice.fullSchet();
         CreateNewOrder.returnToMainContent();
 
-        IntercompanyInvoice OpenInctercompany = new IntercompanyInvoice(driver);
-        OpenInctercompany.fillIntercompanyForm();
+        // IntercompanyInvoice OpenInctercompany = new IntercompanyInvoice(driver);
+        // OpenInctercompany.fillIntercompanyForm();
 
         // Завершение работы
         // driver.quit();

@@ -27,10 +27,10 @@ public class OrderPage {
         }
 
         // Метод для переключения в iframe
-        private void switchToIframe(String iframeXpath) {
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(iframeXpath)));
+        private void switchToIframe() {
+                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
                 driver.switchTo().frame(iframe);
-                System.out.println("Перешли в iframe.");
         }
 
         // Метод для получения элемента
@@ -61,10 +61,7 @@ public class OrderPage {
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+                switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // Клик для раскрытия списка перевозок
@@ -98,10 +95,7 @@ public class OrderPage {
                 System.out.println("Начинаем Обработка/Выпустить.");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+                switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
@@ -124,10 +118,7 @@ public class OrderPage {
         public void vehiclePlan() {
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+                switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 try {
@@ -159,10 +150,8 @@ public class OrderPage {
                 System.out.println("Начинаем Обработка/Готов к инвойсированию.");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+
+                switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
@@ -201,10 +190,7 @@ public class OrderPage {
                 System.out.println("Начинаем Обработка/Выпустить.");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+                switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
@@ -228,10 +214,9 @@ public class OrderPage {
                 System.out.println("Обработка/План/ОК.");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+
+                switchToIframe();
+
                 System.out.println("Перешли в фрейм.");
 
                 WebElement OpenDrive = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -246,10 +231,7 @@ public class OrderPage {
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+                switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // Клик для раскрытия списка перевозок
@@ -279,7 +261,7 @@ public class OrderPage {
         // ИНИЦИАЛИЗИРУЮ ОБРАБОТКУ ДЛЯ ПЕРЕХОДА В РАСХОДЫ И СОЗДАНИЯ ИНТЕРКОМПАНИ
 
         public void fillIntercompanyForm() {
-                switchToIframe("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe");
+                switchToIframe();
                 WebElement obrabotkaButton = wait
                                 .until(ExpectedConditions
                                                 .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
@@ -294,9 +276,12 @@ public class OrderPage {
 
         }
 
+        // Заполнение основной формы в Заявке
+
         public void fillOrderForm() {
+
                 // Переход в iframe
-                switchToIframe("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe");
+                switchToIframe();
 
                 // Нахождение элементов, явная прогрузка первого элемента
 
