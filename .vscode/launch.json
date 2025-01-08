@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TestAllPageFixLocators",
+            "request": "launch",
+            "mainClass": "tests.TestAllPageFixLocators",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
             "name": "CreateOrderNew",
             "request": "launch",
             "mainClass": "tests.CreateOrderNew",
