@@ -54,7 +54,7 @@ public class OpenInvoice {
                 // Ждем немного, чтобы элемент полностью появился
                 wait.until(ExpectedConditions.elementToBeClickable(price));
 
-                // Добавим фокус и события для ввода
+                // фокус и события для ввода
                 try {
                         // Добавление фокуса на поле
                         js.executeScript("arguments[0].focus();", price);

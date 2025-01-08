@@ -8,6 +8,7 @@ import pages.ReadyInvoic;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
 import pages.PageOpenTransp;
+import pages.IntercompanyInvoice;
 import pages.Invoice;
 import pages.OpenInvoice;
 import pages.OrderPage;
@@ -112,6 +113,9 @@ public class CreateOrderNew {
         Invoice FullInvoice = new Invoice(driver);
         FullInvoice.fullSchet();
         CreateNewOrder.returnToMainContent();
+
+        IntercompanyInvoice OpenInctercompany = new IntercompanyInvoice(driver);
+        OpenInctercompany.fillIntercompanyForm();
 
         // Завершение работы
         // driver.quit();
