@@ -73,11 +73,11 @@ public class PageOpenTransp {
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
-                WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
+                WebElement obrabotkaButton = wait
+                                .until(ExpectedConditions
+                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Выпустить.");
                 obrabotkaButton.click();
-                ///html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span
 
                 // НАШЛИ КНОПКУ ВЫПУСТИТЬ
                 WebElement VypustitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -105,8 +105,9 @@ public class PageOpenTransp {
                         System.err.println("Ошибка при ожидании: " + e.getMessage());
                 }
                 // Кнопка Обработки
-                WebElement obrabotkButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
+                WebElement obrabotkButton = wait
+                                .until(ExpectedConditions
+                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Обработка.");
 
                 obrabotkButton.click();
@@ -115,8 +116,6 @@ public class PageOpenTransp {
                 WebElement PlanButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[7]/div[1]/div/button")));
                 System.out.println("Нашли Вторую кнопку План.");
-
-                ///html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[7]/div[1]/div/button
 
                 PlanButton.click();
 
@@ -135,8 +134,9 @@ public class PageOpenTransp {
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
-                WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
+                WebElement obrabotkaButton = wait
+                                .until(ExpectedConditions
+                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Выпустить.");
                 obrabotkaButton.click();
 
@@ -176,8 +176,9 @@ public class PageOpenTransp {
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
-                WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
+                WebElement obrabotkaButton = wait
+                                .until(ExpectedConditions
+                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Выпустить.");
                 obrabotkaButton.click();
 

@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import pages.QLoginTest;
 import pages.ReadyInvoic;
+import pages.VehiclePlanning;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
 import pages.PageOpenTransp;
@@ -78,9 +79,9 @@ public class CreateOrderNew {
         opentranspOp.returnToMainContent();
 
         // // // Вбиваем Тягач и прицеп
-        PageOpenTransp OpenVehicle = new PageOpenTransp(driver);
+        VehiclePlanning OpenVehicle = new VehiclePlanning(driver);
         OpenVehicle.VehiclePlanOpen();
-        OpenVehicle.returnToMainContent();
+        CreateNewOrder.returnToMainContent();
 
         // // На странице рейса выхожу обратно, пока там ничего не нужно, она
         // // инициализирована.

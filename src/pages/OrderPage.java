@@ -88,6 +88,8 @@ public class OrderPage {
 
     // ТУТ ПЕРЕХОЖУ НА СТРАНИЦУ РЕДАКТИРОВАНИЯ ПЕРЕВОЗКИ (NVT Shipment (2002947)) и
     // инициализирую кнопки Перевозки по заказу/Управление/Правка
+    // !!!!!!!!!!!!!!!!!! НУЖНО СОЗДАТЬ ОТДЕЛЬНЫЙ ПЕЙДЖ ДЛЯ ЭТОГО БЛОКА И ПЕРЕНЕСТИ
+    // ЕГО !!!!!!!!!!!!!!!!!!
 
     public void PerevozkaInFrame() {
 
@@ -122,6 +124,22 @@ public class OrderPage {
 
         buttonInPereozkiUpravlenieSozdat.click();
         System.out.println("Клик по второй кнопке 3 внутри фрейма выполнен.");
+    }
+
+    // ИНИЦИАЛИЗИРУЮ ОБРАБОТКУ ДЛЯ ПЕРЕХОДА В РАСХОДЫ И СОЗДАНИЯ ИНТЕРКОМПАНИ
+
+    public void fillIntercompanyForm() {
+        switchToIframe("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe");
+        WebElement obrabotkaButton = wait
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
+
+        obrabotkaButton.click();
+
+        WebElement rashodiButton = wait
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@aria-label='Расходы']")));
+
+        rashodiButton.click();
+
     }
 
     public void returnToMainContent() {

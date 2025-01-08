@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import pages.IntercompanyInvoice;
+import pages.OrderPage;
 import pages.QLoginTest;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
@@ -40,7 +41,7 @@ public class TestAllPageFixLocators {
         OpenDataOrder.NewOrderCreate();
         OpenDataOrder.returnToMainContent();
 
-        IntercompanyInvoice OpenInctercompany = new IntercompanyInvoice(driver);
+        OrderPage OpenInctercompany = new OrderPage(driver);
         OpenInctercompany.fillIntercompanyForm();
 
     }

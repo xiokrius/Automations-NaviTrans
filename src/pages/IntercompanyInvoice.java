@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
 import java.time.Duration;
 
+//              !!!!!!!!!!!!!!!!!!   Page Intercompany   !!!!!!!!!!!!!!!!!!
+
 public class IntercompanyInvoice {
 
     private WebDriver driver;
@@ -14,7 +16,7 @@ public class IntercompanyInvoice {
 
     public IntercompanyInvoice(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Инициализация wait
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     private void switchToIframe(String iframeXpath) {
@@ -27,13 +29,6 @@ public class IntercompanyInvoice {
         switchToIframe("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe");
         WebElement obrabotkaButton = wait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
-
-        obrabotkaButton.click();
-
-        WebElement rashodiButton = wait
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@aria-label='Расходы']")));
-
-        rashodiButton.click();
 
     }
 }

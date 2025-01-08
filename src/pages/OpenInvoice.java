@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import resources.ConfigManager;
 
+// Конфигурация счёта 
+
 public class OpenInvoice {
 
         private String InputServiceCodeValue = ConfigManager.getProperty("InputServiceCodeValue");
