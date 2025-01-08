@@ -75,15 +75,6 @@ public class ZayavkaPage {
 
     }
 
-    // //*[@id="commandBarItemButton484"]/span
-    // WebElement ButtonNewZayavka =
-    // wait.until(ExpectedConditions.elementToBeClickable(
-    // By.xpath(
-    // "//*[@id=\'commandBarItemButton498\']/span")));
-
-    ///html/body/div[1]/div[2]/form/div/div[2]/div[5]/div/div/div/div/div/div/ul/li/div/div/button/span
-        /// //*[@id="commandBarItemButton484"]/span
-
     public void NewOrderCreate() {
 
         System.out.println("Переход на страницу Заявок и вход в заявку");

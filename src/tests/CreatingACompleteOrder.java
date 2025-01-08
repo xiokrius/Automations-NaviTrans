@@ -3,9 +3,10 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import pages.PageOpenTransp;
+import pages.OrderPage;
 import pages.PageTransp;
 import pages.QLoginTest;
+import pages.VehiclePlanning;
 import pages.VehicleRoute;
 import pages.ZayavkaByPage;
 import pages.ZayavkaPage;
@@ -42,39 +43,39 @@ public class CreatingACompleteOrder {
         zayavkaByPage.returnToMainContent();
 
         // Переход в перевозки
-        PageOpenTransp pageOpenTransp = new PageOpenTransp(driver);
+        OrderPage pageOpenTransp = new OrderPage(driver);
         pageOpenTransp.clickSomeButtonInFrame();
-        pageOpenTransp.returnToMainContent();
+        zayavkaPage.returnToMainContent();
 
         // Установка Плановых дат в перевозке и выход обратно на страницу заявок
         PageTransp pageTransp = new PageTransp(driver);
         pageTransp.fillDateFieldInFrame();
 
         // После установки план дат. Нажимаю Обработка/выпустить
-        PageOpenTransp vageOpenTransp = new PageOpenTransp(driver);
+        OrderPage vageOpenTransp = new OrderPage(driver);
         vageOpenTransp.obrabotkaVypustit();
-        vageOpenTransp.returnToMainContent();
+        zayavkaPage.returnToMainContent();
 
         // Обработка/План, планирую рейс
-        PageOpenTransp testOpenTransp = new PageOpenTransp(driver);
+        OrderPage testOpenTransp = new OrderPage(driver);
         testOpenTransp.vehiclePlan();
-        testOpenTransp.returnToMainContent();
+        zayavkaPage.returnToMainContent();
 
         // После обработка/План, нужно выбрать в какой поездке будут изменения
-        PageOpenTransp opentranspOp = new PageOpenTransp(driver);
+        OrderPage opentranspOp = new OrderPage(driver);
         opentranspOp.PlanOpen();
-        opentranspOp.returnToMainContent();
+        zayavkaPage.returnToMainContent();
 
         // Вбиваем Тягач и прицеп
-        PageOpenTransp OpenVehicle = new PageOpenTransp(driver);
+        VehiclePlanning OpenVehicle = new VehiclePlanning(driver);
         OpenVehicle.VehiclePlanOpen();
-        OpenVehicle.returnToMainContent();
+        zayavkaPage.returnToMainContent();
 
         // На странице рейса выхожу обратно, пока там ничего не нужно, она
         // инициализирована.
         VehicleRoute backRoute = new VehicleRoute(driver);
         backRoute.clickSomeButtonInFrame();
-        backRoute.returnToMainContent();
+        zayavkaPage.returnToMainContent();
 
         // Лезу в сервисы
         ZayavkaByPage Service = new ZayavkaByPage(driver);

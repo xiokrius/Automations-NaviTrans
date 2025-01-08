@@ -8,11 +8,10 @@ import pages.ReadyInvoic;
 import pages.VehiclePlanning;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
-import pages.PageOpenTransp;
+import pages.OrderPage;
 import pages.IntercompanyInvoice;
 import pages.Invoice;
 import pages.OpenInvoice;
-import pages.OrderPage;
 import pages.PageTransp;
 import pages.VehicleRoute;
 import pages.ZayavkaByPage;
@@ -64,17 +63,17 @@ public class CreateOrderNew {
         Perevozki.returnToMainContent();
 
         // // После установки план дат. Нажимаю Обработка/выпустить
-        PageOpenTransp vageOpenTransp = new PageOpenTransp(driver);
+        OrderPage vageOpenTransp = new OrderPage(driver);
         vageOpenTransp.obrabotkaVypustit();
         vageOpenTransp.returnToMainContent();
 
         // // Обработка/План, планирую рейс
-        PageOpenTransp testOpenTransp = new PageOpenTransp(driver);
+        OrderPage testOpenTransp = new OrderPage(driver);
         testOpenTransp.vehiclePlan();
         testOpenTransp.returnToMainContent();
 
         // // // После обработка/План, нужно выбрать в какой поездке будут изменения
-        PageOpenTransp opentranspOp = new PageOpenTransp(driver);
+        OrderPage opentranspOp = new OrderPage(driver);
         opentranspOp.PlanOpen();
         opentranspOp.returnToMainContent();
 
@@ -99,11 +98,11 @@ public class CreateOrderNew {
         Service.OpenServices();
         Service.returnToMainContent();
 
-        PageOpenTransp ReadyInInvoicing = new PageOpenTransp(driver);
+        OrderPage ReadyInInvoicing = new OrderPage(driver);
         ReadyInInvoicing.readyInInvoicing();
         CreateNewOrder.returnToMainContent();
 
-        PageOpenTransp Schet = new PageOpenTransp(driver);
+        OrderPage Schet = new OrderPage(driver);
         Schet.obrabotkaSchet();
         CreateNewOrder.returnToMainContent();
 
