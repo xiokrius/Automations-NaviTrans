@@ -28,43 +28,42 @@ public class Invoice {
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ Учёт
-                WebElement uchetButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button")));
+                WebElement uchetButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
+                                "[data-control-id='b54i']")));
                 System.out.println("Нашли первую кнопку Учёт.");
                 uchetButton.click();
 
-                // НАШЛИ КНОПКУ Cчёт номер ручной
-                WebElement uchetFullButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div/div/button")));
-                System.out.println("Нашли Вторую кнопку, Счёт номер ручной .");
+                // НАШЛИ КНОПКУ Учёт
+                WebElement uchetFullButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
+                                "[data-control-id='b54j']")));
+                System.out.println("Нашли Вторую кнопку, Учёт .");
 
                 uchetFullButton.click();
 
                 try {
-                        WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                        "/html/body/div[1]/div[5]/form/div/main"))); // XPath окна
+                        WebElement popupWindow = wait.until(ExpectedConditions.elementToBeClickable(
+                                        By.xpath("//p[contains(@id, 'ee') and contains(@title, 'Отсутствует экспорт!')]"))); // XPath
+                                                                                                                             // окна
                         System.out.println("Всплывающее окно обнаружено.");
-                        ///html/body/div[1]/div[5]/form/main/div/div[1]/div[1]
-                        // Выполняем действия внутри окна
-                        WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
-                                        "/html/body/div[1]/div[5]/form/div/main/div[3]/div/button[1]")); // Кнопка
-                        // подтверждения
+
+                        WebElement popupConfirmButton = popupWindow
+                                        .findElement(By.xpath("//button[contains(@id, 'ip')]/span[text()='Да']")); // Кнопка
+                                                                                                                   // подтверждения
+
                         popupConfirmButton.click();
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
 
                         Thread.sleep(1000);
 
-                        WebElement UchetSchetButton = wait.until(ExpectedConditions
-                                        .presenceOfElementLocated(By.xpath(
-                                                        "/html/body/div[1]/div[5]/form/div/main/div[3]/div/button[1]")));
+                        WebElement UchetSchetButton = wait.until(ExpectedConditions.elementToBeClickable(
+                                        By.xpath("//button[contains(@id, 'iv')]/span[text()='Да']")));
 
                         UchetSchetButton.click();
 
                         Thread.sleep(1000);
 
-                        WebElement PerehodVSchetNet = wait.until(ExpectedConditions
-                                        .presenceOfElementLocated(By.xpath(
-                                                        "/html/body/div[1]/div[5]/form/div/main/div[3]/div/button[2]")));
+                        WebElement PerehodVSchetNet = wait.until(ExpectedConditions.elementToBeClickable(
+                                        By.xpath("//button[contains(@id, 'j2']/span[text()='Нет']")));
                         PerehodVSchetNet.click();
 
                 } catch (Exception e) {
