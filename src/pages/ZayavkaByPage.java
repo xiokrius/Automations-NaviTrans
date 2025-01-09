@@ -81,8 +81,6 @@ public class ZayavkaByPage {
                                 "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div/button")));
                 System.out.println("Нашли Кнопку Сервис");
 
-                ///html/body/div[1]/div[4]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div/button/span
-
                 buttonInService.click();
                 System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
         }

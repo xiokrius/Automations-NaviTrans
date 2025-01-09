@@ -10,10 +10,12 @@ import pages.VehiclePlanning;
 import pages.VehicleRoute;
 import pages.ZayavkaByPage;
 import pages.ZayavkaPage;
+import resources.ConfigManager;
 
 // Необходим Code review xPath элементов 
 
 public class CreatingACompleteOrder {
+
     public static void main(String[] args) {
         System.out.println("Запуск теста...");
         // Настройка WebDriver
@@ -22,10 +24,13 @@ public class CreatingACompleteOrder {
         // driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://192.168.1.13:8080/BC210-TEST/SignIn?ReturnUrl=%2FBC210-TEST%2F");
 
-        // Выполнение входа (Логин пароль, нажатие окей)
+        String login = ConfigManager.getProperty("inputLogin");
+        String password = ConfigManager.getProperty("inputPassword");
+
+        // Выполнение входа (логин, пароль, нажатие кнопки)
         QLoginTest loginTest = new QLoginTest(driver);
-        loginTest.inputLogin("FTS1");
-        loginTest.inputPassword("Aa.124578");
+        loginTest.inputLogin(login);
+        loginTest.inputPassword(password);
         loginTest.clickLoginButton();
 
         // Переход на страницу заявок

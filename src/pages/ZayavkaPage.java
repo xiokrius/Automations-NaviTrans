@@ -35,7 +35,7 @@ public class ZayavkaPage {
 
         public void clickZayavkaBY() {
 
-                System.out.println("Переход на страницу Заявок и вход в заявку");
+                System.out.println("clickzayavkaBy");
 
                 // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -56,7 +56,7 @@ public class ZayavkaPage {
 
         public void CreateNewZayavkaCZ() {
 
-                System.out.println("Переход на страницу Заявок и вход в заявку");
+                System.out.println("CreateNewZayavkaCZ");
 
                 // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -65,14 +65,13 @@ public class ZayavkaPage {
                 // Шаг 2: КНОПКА НОВЫЙ(для создания заказа)
                 WebElement Noviy = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath(
-                                                "//button[@class='ms-Button ms-Button--action ms-Button--command ms-Button--hasMenu command-bar-button--204nhoRojOXj8kwnk9WtH0 thm-bgcolor-1726194350 thm-bgcolor-1295552850--hover thm-font-size-small thm-segoeNormal thm-color-1818861216--not_FCM root-135']")));
+                                                "//button[@aria-label='Новый']//span[contains(@class, '2dIQkzAbHK18inPTYeiPdF')]")));
 
                 Noviy.click();
 
                 // Кнопка Создать(потом надо дать нормальный нейм)
                 WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath(
-                                                "//button[@class='ms-Button ms-Button--action ms-Button--command command-bar-button--204nhoRojOXj8kwnk9WtH0 thm-bgcolor-1295552850--hover thm-segoeNormal thm-font-size-small thm-color-1818861216--not_FCM root-135']")));
+                                By.xpath("//button[@aria-label='Создать' and contains(@class, 'ms-Button')]")));
                 button.click();
 
         }
@@ -87,12 +86,11 @@ public class ZayavkaPage {
 
                 // Поле TSGroupCode
                 WebElement TSGroupCode = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath(
-                                                "/html/body/div[1]/div[3]/form/main/div/div[3]/div[1]/div/div[4]/div/div/div/div/div/div[2]/div[1]/div/input")));
+                                By.xpath("//input[contains(@id, 'xee') and contains(@aria-labelledby, 'xlbl')]")));
 
+                //
                 WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath(
-                                                "/html/body/div[1]/div[3]/form/main/div/div[4]/button[1]")));
+                                By.xpath("//button[contains(@id, 'e0')]/span[text()='ОК']")));
 
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("arguments[0].value = arguments[1];", TSGroupCode, TSGroupCodeValue);
@@ -101,8 +99,8 @@ public class ZayavkaPage {
                 System.out.println("Клик для инициализации.");
 
                 // Шаг 2: Поле Отдел
-                WebElement ButtonNewZayavka = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div/div[3]/div[1]/div/div[4]/div/div/div/div/div/div[2]/div[2]/div/input")));
+                WebElement ButtonNewZayavka = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, 'yee') and contains(@aria-labelledby, 'ylbl')]")));
 
                 js.executeScript("arguments[0].value = arguments[1];", ButtonNewZayavka, ButtonNewZayavkaValue);
                 System.out.println("Заполнили отдел: " + ButtonNewZayavkaValue);
