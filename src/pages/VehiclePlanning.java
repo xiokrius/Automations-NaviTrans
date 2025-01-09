@@ -22,7 +22,7 @@ public class VehiclePlanning {
     }
 
     public void VehiclePlanOpen() {
-        System.out.println("ввод тягача и прицепа по необходимости.");
+        System.out.println("Начинаем VehiclePlanning/VehiclePlanOpen.");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 

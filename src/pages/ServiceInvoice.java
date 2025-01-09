@@ -18,7 +18,7 @@ public class ServiceInvoice {
 
     public void clickSomeButtonInService() {
 
-        System.out.println("Начинаем ServiCeInvoice");
+        System.out.println("Начинаем ServiCeInvoice/clickSomeButtonInService");
 
         // Переключаемся в нужный фрейм
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

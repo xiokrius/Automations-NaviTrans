@@ -28,7 +28,7 @@ public class ZayavkaByPage {
         // ФУНКЦИЯ ДЛЯ КОПИРОВАНИЯ ЗАКАЗА
         public void clickSomeButtonInFrame() {
 
-                System.out.println("Начинаем ZayavkaByPage.");
+                System.out.println("Начинаем ZayavkaByPage/clickSomeButtonInFrame.");
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -60,7 +60,7 @@ public class ZayavkaByPage {
         // ПЕРЕХОЖУ В СЕРВИСЫ
         public void clickSomeButtonInService() {
 
-                System.out.println("Начинаем переход в сервисы.");
+                System.out.println("Начинаем ZayavkaByPage/lickSomeButtonInService.");
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -73,7 +73,6 @@ public class ZayavkaByPage {
                 WebElement buttonInObrabotka = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
                 System.out.println("Нашли Кнопку Обработка.");
-                ///html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span
 
                 buttonInObrabotka.click();
 

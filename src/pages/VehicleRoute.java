@@ -18,7 +18,7 @@ public class VehicleRoute {
 
     public void clickSomeButtonInFrame() {
 
-        System.out.println("Начинаем VehicleRoute.");
+        System.out.println("Начинаем VehicleRoute/clickSomeButtonInFrame.");
 
         // Переключаемся в нужный фрейм
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

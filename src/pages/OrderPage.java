@@ -57,7 +57,7 @@ public class OrderPage {
 
         public void clickSomeButtonInFrame() {
 
-                System.out.println("Начинаем PageOpentTransp.");
+                System.out.println("Начинаем OrderPage/clickSomeButtonInFrame");
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -92,7 +92,7 @@ public class OrderPage {
         // ФУНКЦИЯ ДЛЯ ВЫПУСКА ЗАКАЗА ПОСЛЕ ТОГО КАК ВБИЛ ПЛАНОВЫЕ ДАТЫ ПО ПЕРЕВОЗКЕ!
         public void obrabotkaVypustit() {
 
-                System.out.println("Начинаем Обработка/Выпустить.");
+                System.out.println("Начинаем OrderPage/obrabotkaVypustit");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 switchToIframe();
@@ -116,6 +116,8 @@ public class OrderPage {
 
         // CОЗДАНИЕ РЕЙСА
         public void vehiclePlan() {
+
+                System.out.println("Начинаем OrderPage/vehiclePlan");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 switchToIframe();
@@ -147,7 +149,7 @@ public class OrderPage {
         // Нажатие Готов к инвойсированию
         public void readyInInvoicing() {
 
-                System.out.println("Начинаем Обработка/Готов к инвойсированию.");
+                System.out.println("Начинаем OrderPage/readyInInvoicing");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -187,7 +189,7 @@ public class OrderPage {
         // Создание счёта
         public void obrabotkaSchet() {
 
-                System.out.println("Начинаем Обработка/Выпустить.");
+                System.out.println("Начинаем OrderPage/obrabotkaSchet");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 switchToIframe();
@@ -211,7 +213,7 @@ public class OrderPage {
 
         // После обработка/План, нужно выбрать в какой поездке будут изменения
         public void PlanOpen() {
-                System.out.println("Обработка/План/ОК.");
+                System.out.println("Начинаем OrderPage/PlanOpen");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -227,7 +229,7 @@ public class OrderPage {
 
         public void PerevozkaInFrame() {
 
-                System.out.println("Начинаем PageOpentTransp.");
+                System.out.println("Начинаем OrderPage/PerevozkaInFrame");
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -262,6 +264,9 @@ public class OrderPage {
 
         public void fillIntercompanyForm() {
                 switchToIframe();
+
+                System.out.println("Начинаем OrderPage/fillIntercompanyForm");
+
                 WebElement obrabotkaButton = wait
                                 .until(ExpectedConditions
                                                 .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
@@ -286,6 +291,8 @@ public class OrderPage {
 
                 // Переход в iframe
                 switchToIframe();
+
+                System.out.println("Начинаем OrderPage/fillOrderForm");
 
                 // Нахождение элементов, явная прогрузка первого элемента
 

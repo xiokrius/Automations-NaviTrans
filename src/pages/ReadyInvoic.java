@@ -18,7 +18,7 @@ public class ReadyInvoic {
 
     public void SchetRuchnoy() {
 
-        System.out.println("Cчёт-фактура/.");
+        System.out.println("Начинаем ReadyInvoic/SchetRuchnoy");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

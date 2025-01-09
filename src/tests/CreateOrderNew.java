@@ -3,8 +3,8 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import pages.QLoginTest;
 import pages.ReadyInvoic;
+import pages.QLoginTest;
 import pages.VehiclePlanning;
 import pages.ZayavkaPage;
 import resources.ConfigManager;

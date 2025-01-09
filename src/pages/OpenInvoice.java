@@ -25,7 +25,8 @@ public class OpenInvoice {
         }
 
         public void OpenServices() {
-                System.out.println("Начинаем OpenInInvoice.");
+
+                System.out.println("Начинаем OpenInvoice/OpenServices");
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -18,7 +18,7 @@ public class Invoice {
 
         public void fullSchet() {
 
-                System.out.println("Cчёт.");
+                System.out.println("Начинаем Invoice/fullSchet");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(

@@ -78,7 +78,7 @@ public class ZayavkaPage {
 
         public void NewOrderCreate() {
 
-                System.out.println("Переход на страницу Заявок и вход в заявку");
+                System.out.println("Начинаем ZayavkaPage/NewOrderCreate");
 
                 // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

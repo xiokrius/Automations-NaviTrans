@@ -48,7 +48,7 @@ public class PageTransp {
 
         public void fillDateFieldInFrame() {
 
-                System.out.println("Начинаем PageTransp.");
+                System.out.println("Начинаем PageTransp/fillDateFieldInFrame");
                 // Инициализация WebDriverWait
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -116,7 +116,7 @@ public class PageTransp {
 
         public void OpenOrLoadingLocation() {
 
-                System.out.println("Начинаем PageTransp.");
+                System.out.println("Начинаем PageTransp/OpenOrLoadingLocation");
                 // Инициализация WebDriverWait
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

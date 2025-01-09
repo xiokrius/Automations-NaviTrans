@@ -57,7 +57,8 @@ public class IntercompanyInvoice {
 
         public void InterCompanyInfo() {
                 switchToIframe();
-                System.out.println("Начали заполнение интеркомпаниИнфо.");
+
+                System.out.println("Начинаем IntercompanyInvoice/InterCompanyInfo");
 
                 // Заполняем поле "Код Интеркомпани"
                 WebElement inputIntercompanyCode = wait.until(ExpectedConditions.elementToBeClickable(
