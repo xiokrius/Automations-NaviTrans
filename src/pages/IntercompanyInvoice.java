@@ -35,7 +35,6 @@ public class IntercompanyInvoice {
                                 By.className("designer-client-frame")));
                 driver.switchTo().frame(iframe);
         }
-        // @class designer-client-frame
 
         private void setInputValue(WebElement element, String value) {
                 js.executeScript(
@@ -62,19 +61,19 @@ public class IntercompanyInvoice {
 
                 // Заполняем поле "Код Интеркомпани"
                 WebElement inputIntercompanyCode = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//input[contains(@id, 'fee') and contains(@aria-labelledby, 'pd')]")));
+                                By.xpath("//input[contains(@id, 'qee') and contains(@aria-labelledby, 'lo')]")));
                 System.out.println("Нашли поле код Интеркомпани");
                 setInputValue(inputIntercompanyCode, InputIntercompanyCodeValue);
 
                 // Заполняем поле "Код Поставщика"
                 WebElement supplier = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//input[contains(@id, 'hee') and contains(@aria-labelledby, 'pb')]")));
+                                By.xpath("//input[contains(@id, 'see') and contains(@aria-labelledby, 'lm')]")));
                 System.out.println("Нашли поле код Поставщик");
                 setInputValue(supplier, SupplierValue);
 
                 // Заполняем поле "Цена"
                 WebElement priceIntercompany = driver.findElement(
-                                By.xpath("//input[contains(@id, 'mee') and contains(@aria-labelledby, 'b3p6')]"));
+                                By.xpath("//input[contains(@id, 'xee') and contains(@aria-labelledby, 'b5lh')]"));
                 WebElement scrollContainer = driver.findElement(
                                 By.xpath("//div[contains(@class, 'freeze-pane-scrollbar')]"));
 
@@ -88,6 +87,17 @@ public class IntercompanyInvoice {
                 setInputValue(priceIntercompany, PriceIntercompanyValue);
 
                 System.out.println("Заполнили поле Цена значением: " + PriceIntercompanyValue);
+
+                WebElement ProcessButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath("//*[@aria-label=' процесс']")));
+
+                ProcessButton.click();
+
+                WebElement CreateICfile = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath("//*[@aria-label='Создать файл IC']")));
+
+                CreateICfile.click();
+
         }
 
 }
