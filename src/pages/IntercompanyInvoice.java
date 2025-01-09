@@ -22,79 +22,72 @@ public class IntercompanyInvoice {
 
         private WebDriver driver;
         private WebDriverWait wait;
+        private JavascriptExecutor js;
 
         public IntercompanyInvoice(WebDriver driver) {
                 this.driver = driver;
-                this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Инициализация
+                this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Инициализация WebDriverWait
+                this.js = (JavascriptExecutor) driver; // Инициализация JavascriptExecutor
         }
 
         private void switchToIframe() {
                 WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+                                By.className("designer-client-frame")));
                 driver.switchTo().frame(iframe);
+        }
+        // @class designer-client-frame
+
+        private void setInputValue(WebElement element, String value) {
+                js.executeScript(
+                                "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
+                                element, value);
+                System.out.println("Заполнили значение: " + value);
+        }
+
+        private void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
+                js.executeScript(
+                                "arguments[0].scrollLeft = arguments[0].scrollLeft + arguments[1].getBoundingClientRect().left;",
+                                scrollContainer, targetElement);
+        }
+
+        private boolean isElementVisible(WebElement element) {
+                return (Boolean) js.executeScript(
+                                "return arguments[0].offsetWidth > 0 && arguments[0].offsetHeight > 0;",
+                                element);
         }
 
         public void InterCompanyInfo() {
-
                 switchToIframe();
-                System.out.println("Начали интеркомпаниИнфо.");
+                System.out.println("Начали заполнение интеркомпаниИнфо.");
 
-                // Ожидаем появления инпут-поля с динамическим ID
-                WebElement InputIntercompanyCode = wait.until(ExpectedConditions.elementToBeClickable(
+                // Заполняем поле "Код Интеркомпани"
+                WebElement inputIntercompanyCode = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//input[contains(@id, 'fee') and contains(@aria-labelledby, 'pd')]")));
                 System.out.println("Нашли поле код Интеркомпани");
+                setInputValue(inputIntercompanyCode, InputIntercompanyCodeValue);
 
-                // Заполняем значение через JavaScript
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                js.executeScript("arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
-                                InputIntercompanyCode, InputIntercompanyCodeValue);
-
-                System.out.println("Заполнили значение: " + InputIntercompanyCodeValue);
-
-                WebElement Supplier = wait.until(ExpectedConditions.elementToBeClickable(
+                // Заполняем поле "Код Поставщика"
+                WebElement supplier = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//input[contains(@id, 'hee') and contains(@aria-labelledby, 'pb')]")));
                 System.out.println("Нашли поле код Поставщик");
+                setInputValue(supplier, SupplierValue);
 
-                js.executeScript("arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
-                                Supplier, SupplierValue);
+                // Заполняем поле "Цена"
+                WebElement priceIntercompany = driver.findElement(
+                                By.xpath("//input[contains(@id, 'mee') and contains(@aria-labelledby, 'b3p6')]"));
+                WebElement scrollContainer = driver.findElement(
+                                By.xpath("//div[contains(@class, 'freeze-pane-scrollbar')]"));
 
-                System.out.println("Заполнили значение: " + SupplierValue);
+                scrollToElementHorizontally(scrollContainer, priceIntercompany);
 
-                // Находим элемент, к которому нужно проскроллить (ЦЕНА)
-                WebElement PriceIntercompany = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//input[contains(@id, 'mee') and contains(@aria-labelledby, 'p6')]")));
-
-                // Скроллинг к элементу
-                js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});",
-                                PriceIntercompany);
-
-                // Ждем немного, чтобы элемент полностью появился
-                wait.until(ExpectedConditions.elementToBeClickable(PriceIntercompany));
-
-                // фокус и события для ввода
-                try {
-                        // Добавление фокуса на поле
-                        js.executeScript("arguments[0].focus();", PriceIntercompany);
-                        Thread.sleep(1000); // Небольшая задержка после фокуса
-
-                        // Используем JavaScript для ввода значения
-                        js.executeScript(
-                                        "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input')); arguments[0].dispatchEvent(new Event('change')); arguments[0].dispatchEvent(new Event('blur'));",
-                                        PriceIntercompany, PriceIntercompanyValue);
-
-                        System.out.println("Заполнили поле Цена значением: " + PriceIntercompanyValue);
-
-                        // Ожидаем изменения значения в поле
-                        wait.until(ExpectedConditions.attributeToBe(PriceIntercompany, "value",
-                                        PriceIntercompanyValue));
-                        Thread.sleep(1000); // Даем немного времени для обработки
-
-                } catch (InterruptedException e) {
-                        e.printStackTrace();
+                // Проверяем видимость элемента
+                if (!isElementVisible(priceIntercompany)) {
+                        throw new RuntimeException("Элемент все еще не виден после горизонтальной прокрутки!");
                 }
 
-                // Проверка результата
-                System.out.println("Price field value after input: " + PriceIntercompanyValue);
+                setInputValue(priceIntercompany, PriceIntercompanyValue);
+
+                System.out.println("Заполнили поле Цена значением: " + PriceIntercompanyValue);
         }
 
 }
