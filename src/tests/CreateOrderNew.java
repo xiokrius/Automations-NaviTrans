@@ -54,12 +54,12 @@ public class CreateOrderNew {
 
         // Переход в перевозки(Заменены xPath с прямых по классам)
         OrderPage Perevozki = new OrderPage(driver);
-        Perevozki.PerevozkaInFrame();
+        Perevozki.PerevozkaInFrame(); // ТУТ всё гуд, но xpath мне не очень нравятся
         Perevozki.returnToMainContent();
 
         // Установка Плановых дат в перевозке и выход обратно на страницу заявок
         PageTransp OpenDate = new PageTransp(driver);
-        OpenDate.OpenOrLoadingLocation();
+        OpenDate.OpenOrLoadingLocation(); // Вот тут жопа Требуется полный пересмотр всего пейджа и замена локаторов.
         Perevozki.returnToMainContent();
 
         // // После установки план дат. Нажимаю Обработка/выпустить
