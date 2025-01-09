@@ -29,7 +29,7 @@ public class OrderPage {
         // Метод для переключения в iframe
         private void switchToIframe() {
                 WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+                                By.className("designer-client-frame")));
                 driver.switchTo().frame(iframe);
         }
 

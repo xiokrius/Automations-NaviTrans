@@ -27,9 +27,8 @@ public class VehiclePlanning {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
         // Переход в iframe
-        WebElement iframe = wait.until(ExpectedConditions
-                .presenceOfElementLocated(
-                        By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.className("designer-client-frame")));
         driver.switchTo().frame(iframe);
         System.out.println("Перешли в фрейм.");
 

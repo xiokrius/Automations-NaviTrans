@@ -16,192 +16,107 @@ import org.openqa.selenium.JavascriptExecutor;
 
 public class ZayavkaPage {
 
-    private WebDriver driver;
+        private WebDriver driver;
+        private WebDriverWait wait;
 
-    private String TSGroupCodeValue = ConfigManager.getProperty("TSGroupCodeValue");
-    private String ButtonNewZayavkaValue = ConfigManager.getProperty("ButtonNewZayavkaValue");
-
-    public ZayavkaPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public void clickZayavkaBY() {
-
-        System.out.println("Переход на страницу Заявок и вход в заявку");
-
-        // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement iframe = wait.until(ExpectedConditions
-                .presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-
-        driver.switchTo().frame(iframe); // Переключаемся в фрейм
-
-        // Шаг 2: КНОПКА ЗАЯВКИ на пейдже страницы заявок
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(
-                        "/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[6]/td[3]/a")));
-
-        try {
-            button.click();
-            System.out.println("Клик по кнопке выполнен.");
-        } catch (Exception e) {
-            System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
+        private void switchToIframe() {
+                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.className("designer-client-frame")));
+                driver.switchTo().frame(iframe);
         }
-    }
 
-    public void CreateNewZayavkaCZ() {
+        private String TSGroupCodeValue = ConfigManager.getProperty("TSGroupCodeValue");
+        private String ButtonNewZayavkaValue = ConfigManager.getProperty("ButtonNewZayavkaValue");
 
-        System.out.println("Переход на страницу Заявок и вход в заявку");
+        public ZayavkaPage(WebDriver driver) {
+                this.driver = driver;
+                this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        }
 
-        // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement iframe = wait.until(ExpectedConditions
-                .presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+        public void clickZayavkaBY() {
 
-        driver.switchTo().frame(iframe); // Переключаемся в фрейм
+                System.out.println("Переход на страницу Заявок и вход в заявку");
 
-        // Шаг 2: КНОПКА НОВЫЙ(для создания заказа)
-        WebElement Noviy = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(
-                        "//button[@class='ms-Button ms-Button--action ms-Button--command ms-Button--hasMenu command-bar-button--204nhoRojOXj8kwnk9WtH0 thm-bgcolor-1726194350 thm-bgcolor-1295552850--hover thm-font-size-small thm-segoeNormal thm-color-1818861216--not_FCM root-135']")));
+                // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                switchToIframe(); // Переключаемся в фрейм
 
-        Noviy.click();
+                // Шаг 2: КНОПКА ЗАЯВКИ на пейдже страницы заявок
+                WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath(
+                                                "/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[6]/td[3]/a")));
 
-        // Кнопка Создать(потом надо дать нормальный нейм)
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(
-                        "//button[@class='ms-Button ms-Button--action ms-Button--command command-bar-button--204nhoRojOXj8kwnk9WtH0 thm-bgcolor-1295552850--hover thm-segoeNormal thm-font-size-small thm-color-1818861216--not_FCM root-135']")));
-        button.click();
+                try {
+                        button.click();
+                        System.out.println("Клик по кнопке выполнен.");
+                } catch (Exception e) {
+                        System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
+                }
+        }
 
-    }
+        public void CreateNewZayavkaCZ() {
 
-    public void NewOrderCreate() {
+                System.out.println("Переход на страницу Заявок и вход в заявку");
 
-        System.out.println("Переход на страницу Заявок и вход в заявку");
+                // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                switchToIframe(); // Переключаемся в фрейм
 
-        // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement iframe = wait.until(ExpectedConditions
-                .presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+                // Шаг 2: КНОПКА НОВЫЙ(для создания заказа)
+                WebElement Noviy = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath(
+                                                "//button[@class='ms-Button ms-Button--action ms-Button--command ms-Button--hasMenu command-bar-button--204nhoRojOXj8kwnk9WtH0 thm-bgcolor-1726194350 thm-bgcolor-1295552850--hover thm-font-size-small thm-segoeNormal thm-color-1818861216--not_FCM root-135']")));
 
-        driver.switchTo().frame(iframe); // Переключаемся в фрейм
+                Noviy.click();
 
-        // Поле TSGroupCode
-        WebElement TSGroupCode = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(
-                        "/html/body/div[1]/div[3]/form/main/div/div[3]/div[1]/div/div[4]/div/div/div/div/div/div[2]/div[1]/div/input")));
+                // Кнопка Создать(потом надо дать нормальный нейм)
+                WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath(
+                                                "//button[@class='ms-Button ms-Button--action ms-Button--command command-bar-button--204nhoRojOXj8kwnk9WtH0 thm-bgcolor-1295552850--hover thm-segoeNormal thm-font-size-small thm-color-1818861216--not_FCM root-135']")));
+                button.click();
 
-        WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(
-                        "/html/body/div[1]/div[3]/form/main/div/div[4]/button[1]")));
+        }
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].value = arguments[1];", TSGroupCode, TSGroupCodeValue);
-        System.out.println("Заполнил ТС групп Код: " + TSGroupCodeValue);
+        public void NewOrderCreate() {
 
-        System.out.println("Клик для инициализации.");
+                System.out.println("Переход на страницу Заявок и вход в заявку");
 
-        // Шаг 2: Поле Отдел
-        WebElement ButtonNewZayavka = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[3]/form/main/div/div[3]/div[1]/div/div[4]/div/div/div/div/div/div[2]/div[2]/div/input")));
+                // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                switchToIframe(); // Переключаемся в фрейм;
 
-        js.executeScript("arguments[0].value = arguments[1];", ButtonNewZayavka, ButtonNewZayavkaValue);
-        System.out.println("Заполнили отдел: " + ButtonNewZayavkaValue);
+                // Поле TSGroupCode
+                WebElement TSGroupCode = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath(
+                                                "/html/body/div[1]/div[3]/form/main/div/div[3]/div[1]/div/div[4]/div/div/div/div/div/div[2]/div[1]/div/input")));
 
-        ButtonNewZayavka.click();
-        System.out.println("Клик для инициализации.");
+                WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath(
+                                                "/html/body/div[1]/div[3]/form/main/div/div[4]/button[1]")));
 
-        ButtonInOk.click();
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("arguments[0].value = arguments[1];", TSGroupCode, TSGroupCodeValue);
+                System.out.println("Заполнил ТС групп Код: " + TSGroupCodeValue);
 
-    }
+                System.out.println("Клик для инициализации.");
 
-    public void returnToMainContent() {
-        driver.switchTo().defaultContent();
-        System.out.println("Возвращаемся в основной контент страницы.");
-    }
+                // Шаг 2: Поле Отдел
+                WebElement ButtonNewZayavka = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                "/html/body/div[1]/div[3]/form/main/div/div[3]/div[1]/div/div[4]/div/div/div/div/div/div[2]/div[2]/div/input")));
+
+                js.executeScript("arguments[0].value = arguments[1];", ButtonNewZayavka, ButtonNewZayavkaValue);
+                System.out.println("Заполнили отдел: " + ButtonNewZayavkaValue);
+
+                ButtonNewZayavka.click();
+                System.out.println("Клик для инициализации.");
+
+                ButtonInOk.click();
+
+        }
+
+        public void returnToMainContent() {
+                driver.switchTo().defaultContent();
+                System.out.println("Возвращаемся в основной контент страницы.");
+        }
 
 }
-
-// Метод для возвращения в основной контент, если нужно
-// public void returnToMainContent() {
-// driver.switchTo().defaultContent();
-// System.out.println("Возвращаемся в основной контент страницы.");
-// }
-// }
-
-// Работаент переход но не видит фрейм
-
-// public class ZayavkaPage {
-
-// private WebDriver driver;
-
-// @FindBy(xpath =
-// "/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[6]/td[3]/a")
-// private WebElement ZayavkaBY;
-
-// public ZayavkaPage(WebDriver driver) {
-// this.driver = driver;
-// PageFactory.initElements(driver, this);
-// }
-
-// public void clickZayavkaBY() {
-
-// System.out.println("Ожидание кнопки заявки...");
-
-// // Ожидаем, пока элемент станет кликабельным (внутри основного контента)
-// WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-// wait.until(ExpectedConditions.elementToBeClickable(ZayavkaBY));
-
-// // Переключаемся на фрейм, чтобы найти нужную ссылку внутри него
-// WebElement iframe =
-// driver.findElement(By.xpath("/html/body/div[3]/div[2]/div[1]/div/div[1]/div/iframe"));
-// driver.switchTo().frame(iframe);
-
-// // После переключения в фрейм, находим и кликаем по элементу внутри фрейма
-// WebElement linkInsideFrame = driver.findElement(By.xpath(
-// "/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[6]/td[3]/a"));
-// linkInsideFrame.click();
-
-// System.out.println("Клик по заявке выполнен.");
-
-// // После выполнения действия можно вернуться в основной контент, если это
-// // необходимо
-// driver.switchTo().defaultContent();
-// }
-// }
-
-// public class ZayavkaPage {
-
-// private WebDriver driver;
-
-// @FindBy(xpath =
-// "/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[6]/td[3]/a")
-// private WebElement ZayavkaBY;
-
-// // ПЕРЕБРАЛ ВСЁ ГОВНО, НИЧЕГО НЕ РАБОТАЕТ
-// // "/*[@id='b0_factBoxToggle']/span"
-// // "//*[@id='BusinessGrid_b6r']/tbody/tr[6]/td[3]"
-// "//*[@id='biqee']"
-// *[@id="b0_content"]/div[2]/div/div/nav/div[1]/div/div[2]/div/div/div/div[1]/div/div/div/div/div[1]/div/a/div/div[2]/span/span
-// //
-// /html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[6]/td[3]/a
-
-// public ZayavkaPage(WebDriver driver) {
-// this.driver = driver;
-// PageFactory.initElements(driver, this);
-// }
-
-// public void clickZayavkaBY() {
-
-// System.out.println("Ожидание кнопки заявки...");
-
-// WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-// wait.until(ExpectedConditions.elementToBeClickable(ZayavkaBY));
-
-// System.out.println("Кнопка заявки доступна. Выполняем клик...");
-
-// ZayavkaBY.click();
-
-// System.out.println("Клик по заявке выполнен.");
-// }
-// }

@@ -21,9 +21,9 @@ public class ReadyInvoic {
         System.out.println("Cчёт-фактура/.");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement iframe = wait.until(ExpectedConditions
-                .presenceOfElementLocated(
-                        By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
+
+        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.className("designer-client-frame")));
         driver.switchTo().frame(iframe);
         System.out.println("Перешли в фрейм.");
 

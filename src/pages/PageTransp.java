@@ -32,9 +32,18 @@ public class PageTransp {
         private String unloadDateValue = ConfigManager.getProperty("unloadDateValue");
 
         private WebDriver driver;
+        private WebDriverWait wait;
 
         public PageTransp(WebDriver driver) {
                 this.driver = driver;
+                this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        }
+
+        // Метод для переключения в iframe
+        private void switchToIframe() {
+                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.className("designer-client-frame")));
+                driver.switchTo().frame(iframe);
         }
 
         public void fillDateFieldInFrame() {
@@ -44,9 +53,7 @@ public class PageTransp {
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
                 // Переключаемся в iframe
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+                switchToIframe();
 
                 // Ожидаем элемент input для заполнения
                 WebElement startingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
@@ -114,9 +121,7 @@ public class PageTransp {
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
                 // Переключаемся в iframe
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+                switchToIframe();
 
                 WebElement OpenLoadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div[1]/div/input")));
