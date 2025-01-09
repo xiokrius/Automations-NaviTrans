@@ -53,17 +53,14 @@ public class Invoice {
                         popupConfirmButton.click();
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
 
-                        Thread.sleep(1000);
-
                         WebElement UchetSchetButton = wait.until(ExpectedConditions.elementToBeClickable(
                                         By.xpath("//button[contains(@id, 'iv')]/span[text()='Да']")));
 
                         UchetSchetButton.click();
 
-                        Thread.sleep(1000);
-
                         WebElement PerehodVSchetNet = wait.until(ExpectedConditions.elementToBeClickable(
-                                        By.xpath("//button[contains(@id, 'j2']/span[text()='Нет']")));
+                                        By.xpath("//button[contains(@id, 'j2')]/span[text()='Нет']")));
+
                         PerehodVSchetNet.click();
 
                 } catch (Exception e) {
