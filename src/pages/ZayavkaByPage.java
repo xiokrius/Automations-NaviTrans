@@ -12,9 +12,17 @@ import java.time.Duration;
 public class ZayavkaByPage {
 
         private WebDriver driver;
+        private WebDriverWait wait;
 
         public ZayavkaByPage(WebDriver driver) {
                 this.driver = driver;
+                this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Инициализация WebDriverWait
+        }
+
+        private void switchToIframe() {
+                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.className("designer-client-frame")));
+                driver.switchTo().frame(iframe);
         }
 
         // ФУНКЦИЯ ДЛЯ КОПИРОВАНИЯ ЗАКАЗА
@@ -24,10 +32,8 @@ public class ZayavkaByPage {
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+
+                switchToIframe();
 
                 // Ожидаем кнопку Обработка
                 WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -58,10 +64,9 @@ public class ZayavkaByPage {
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions
-                                .presenceOfElementLocated(
-                                                By.xpath("/html/body/div[2]/div[2]/div[1]/div/div[1]/div/iframe")));
-                driver.switchTo().frame(iframe);
+
+                switchToIframe();
+
                 System.out.println("Перешли в фрейм.");
 
                 // Ожидаем появления первой кнопки
