@@ -301,13 +301,15 @@ public class OrderPage {
 
                 System.out.println("Нашли ид");
 
-                WebElement customersCode = findElement(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[5]/div/input"));
-                WebElement carrier = findElement(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[17]/div/select"));
-                WebElement typeCarrier = findElement(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[18]/div/select"));
-
+                WebElement customersCode = driver.findElement(
+                                By.xpath("//input[contains(@id, 'b3m2ee')]"));
+                //
+                WebElement carrier = driver.findElement(
+                                By.xpath("//select[contains(@id, 'b3mdee')]"));
+                //
+                WebElement typeCarrier = driver.findElement(
+                                By.xpath("//select[contains(@id, 'b3meee')]"));
+                //
                 // Заполнение данных
                 fillInputWithJS(transportRequirement, transportRequirementValue);
                 fillInputWithJS(customersCode, customersCodeValue);
