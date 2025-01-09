@@ -43,6 +43,10 @@ public class TestAllPageFixLocators {
 
         OrderPage OpenInctercompany = new OrderPage(driver);
         OpenInctercompany.fillIntercompanyForm();
+        CreateNewOrder.returnToMainContent();
+
+        IntercompanyInvoice FillingIntercompany = new IntercompanyInvoice(driver);
+        FillingIntercompany.InterCompanyInfo();
 
     }
 }

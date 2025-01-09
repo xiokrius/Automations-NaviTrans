@@ -268,11 +268,15 @@ public class OrderPage {
 
                 obrabotkaButton.click();
 
+                System.out.println("Нашли Обработка");
+
                 WebElement rashodiButton = wait
                                 .until(ExpectedConditions
                                                 .visibilityOfElementLocated(By.xpath("//*[@aria-label='Расходы']")));
 
                 rashodiButton.click();
+
+                System.out.println("Перешли в расходы");
 
         }
 
