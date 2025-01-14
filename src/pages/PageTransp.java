@@ -123,30 +123,31 @@ public class PageTransp {
                 // Переключаемся в iframe
                 switchToIframe();
 
-                WebElement OpenLoadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div[1]/div/input")));
-                System.out.println("Нашли поле ввода Код адреса погрузки");
+                WebElement OpenLoadingLocation = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath(
+                                                "//input[contains(@id, 'fee') and contains(@aria-labelledby, 'flbl') and contains (@role, 'combobox')]")));
+                System.out.println("Нашли поле ввода Код адреса погрузки v111");
 
-                WebElement OpenUnloadingLocation = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div[2]/div[1]/div/input")));
+                WebElement OpenUnloadingLocation = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, 'nee') and contains(@aria-labelledby, 'nlbl')]")));
                 System.out.println("Нашли поле ввода Код адреса погрузки");
 
                 // План Дата загрузки
-                WebElement PlanningLoadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div[7]/div/input")));
+                WebElement PlanningLoadingDate = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, 'jee') and contains(@aria-labelledby, 'jlbl')]")));
                 System.out.println("Нашли поле ввода даты загрузки");
 
                 // План Дата разагрузки
-                WebElement PlanningUnloadingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div[2]/div[7]/div/input")));
+                WebElement PlanningUnloadingDate = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, 'ree') and contains(@aria-labelledby, 'rlbl')]")));
                 System.out.println("Нашли поле ввода Даты разгрузки");
 
                 JavascriptExecutor js = (JavascriptExecutor) driver;
 
                 try {
                         // Поиск кнопки "Груз"
-                        WebElement Cargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                        "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/span")));
+                        WebElement Cargo = wait.until(ExpectedConditions.elementToBeClickable(
+                                        By.xpath("//span[@role='button' and .//span[text()='Груз']]")));
                         System.out.println("Нашли кнопку Груз.");
 
                         // Прокрутка страницы вниз, чтобы элемент стал видимым
@@ -173,10 +174,9 @@ public class PageTransp {
                         System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
                 }
 
-                // надо перенеймить переменную ТУТ ЗАКОНЧИЛ 16.12.
                 try {
-                        WebElement CodeTovara = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                        "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[5]/input")));
+                        WebElement CodeTovara = wait.until(ExpectedConditions.elementToBeClickable(
+                                        By.xpath("//input[contains(@id, 'xee') and contains(@aria-labelledby, 'b3tl')]")));
                         System.out.println("Нашли поле ввода Кода товара");
 
                         for (int i = 0; i < 10; i++) {
@@ -194,6 +194,9 @@ public class PageTransp {
 
                         js.executeScript("arguments[0].value = arguments[1];", CodeTovara, CodeTovaraValue);
                         System.out.println("Заполнили Код Товара: " + CodeTovaraValue);
+
+                        CodeTovara.click();
+                        System.out.println("Авторизация");
 
                         js.executeScript("arguments[0].value = arguments[1];", OpenLoadingLocation,
                                         OpenLoadingLocationValue);
@@ -213,37 +216,37 @@ public class PageTransp {
 
                         System.out.println("Заполнили поля");
 
-                        CodeTovara.click();
-
                 } catch (Exception e) {
                         System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
                 }
 
                 // Кол-во груза input поле
-                WebElement NumberOfShipment = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[7]/input")));
-                // aria-labelledby="column_header_b3t8"
+                WebElement NumberOfShipment = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, 'zee') and contains(@aria-labelledby, 'b3tj')]")));
+                // aria-labelledby="column_header_b3tj"
+                // id = b3szee
+
                 // Вес груза input поле
-                WebElement TheWholeCargo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[9]/input")));
+                WebElement TheWholeCargo = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, '1ee') and contains(@aria-labelledby, 'b3th')]")));
+                // id = b3t1ee/ column_header_b3th
                 // Объём груза input поле
-                WebElement CargoVolume = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[10]/input")));
+                WebElement CargoVolume = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, '2ee') and contains(@aria-labelledby, 'b3tg')]")));
+                // id = b3t2ee/ column_header_b3tg
                 // Температура груза ОТ input поле
-                WebElement TheTemperatureOfTheCargoFROM = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[13]/input")));
+                WebElement TheTemperatureOfTheCargoFROM = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, '5ee') and contains(@aria-labelledby, 'b3td')]")));
                 // Температура груза ДО input поле
-                WebElement TheTemperatureOfTheCargoIsUpTo = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[3]/div[3]/div/div/div/div[2]/table/tbody/tr[1]/td[14]/input")));
+                WebElement TheTemperatureOfTheCargoIsUpTo = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//input[contains(@id, '6ee') and contains(@aria-labelledby, 'b3tc')]")));
 
                 // Выход на пэйдж заявки
-                WebElement BackPage = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[2]/div/div/div[1]/span/button/span/i")));
+                WebElement BackPage = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//button[contains(@data-is-focusable, 'true') and contains(@title, 'Назад')]")));
 
                 js.executeScript("arguments[0].value = arguments[1];", NumberOfShipment, NumberOfShipmentValue);
-                System.out.println("Заполнили Код Товара: " + NumberOfShipmentValue);
+                System.out.println("Количество груза" + NumberOfShipmentValue);
 
                 js.executeScript("arguments[0].value = arguments[1];", TheWholeCargo, TheWholeCargoValue);
                 System.out.println("Заполнили плановую локацию загрузки: " + TheWholeCargoValue);
@@ -260,15 +263,25 @@ public class PageTransp {
                 System.out.println("Заполнили дату выгрузки: " + TheTemperatureOfTheCargoIsUpToValue);
 
                 TheTemperatureOfTheCargoFROM.click();
+                System.out.println("1");
                 TheTemperatureOfTheCargoIsUpTo.click();
+                System.out.println("2");
                 OpenLoadingLocation.click();
+                System.out.println("3");
                 OpenUnloadingLocation.click();
+                System.out.println("4");
                 PlanningLoadingDate.click();
+                System.out.println("5");
                 PlanningUnloadingDate.click();
+                System.out.println("6");
                 OpenLoadingLocation.click();
+                System.out.println("7");
                 NumberOfShipment.click();
+                System.out.println("8");
                 TheWholeCargo.click();
+                System.out.println("9");
                 CargoVolume.click();
+                System.out.println("10");
 
                 BackPage.click();
 

@@ -59,7 +59,7 @@ public class CreateOrderNew {
 
         // Установка Плановых дат в перевозке и выход обратно на страницу заявок
         PageTransp OpenDate = new PageTransp(driver);
-        OpenDate.OpenOrLoadingLocation(); // Вот тут жопа Требуется полный пересмотр всего пейджа и замена локаторов.
+        OpenDate.OpenOrLoadingLocation();
         Perevozki.returnToMainContent();
 
         // // После установки план дат. Нажимаю Обработка/выпустить

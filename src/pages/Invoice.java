@@ -1,7 +1,6 @@
 package pages;
 
 import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,26 +28,30 @@ public class Invoice {
 
                 // НАШЛИ КНОПКУ Учёт
                 WebElement uchetButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
-                                "[data-control-id='b54i']")));
+                                "[data-control-id='b54a']")));
                 System.out.println("Нашли первую кнопку Учёт.");
                 uchetButton.click();
 
                 // НАШЛИ КНОПКУ Учёт
-                WebElement uchetFullButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
-                                "[data-control-id='b54j']")));
+                WebElement uchetFullButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "//button[contains(@role, 'menuitem') and contains(@title, 'F9') and contains(@aria-label, 'Учет')]")));
                 System.out.println("Нашли Вторую кнопку, Учёт .");
 
                 uchetFullButton.click();
 
+                // Проверить ID учтённых кнопок, сейчас учёт+ учёт = b54a + b54b, мейби я
+                // перепутал или же они динамические,
+                // Пока обход этого горячей клавишей
+                // role="menuitem", title=(F9), aria-label "Учет"
+
                 try {
                         WebElement popupWindow = wait.until(ExpectedConditions.elementToBeClickable(
-                                        By.xpath("//p[contains(@id, 'ee') and contains(@title, 'Отсутствует экспорт!')]"))); // XPath
-                                                                                                                             // окна
+                                        By.xpath("//p[contains(@title, 'Отсутствует экспорт!')]"))); // XPath
+
                         System.out.println("Всплывающее окно обнаружено.");
 
                         WebElement popupConfirmButton = popupWindow
-                                        .findElement(By.xpath("//button[contains(@id, 'ip')]/span[text()='Да']")); // Кнопка
-                                                                                                                   // подтверждения
+                                        .findElement(By.xpath("//button[contains(@id, 'ip')]/span[text()='Да']"));
 
                         popupConfirmButton.click();
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
