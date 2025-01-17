@@ -197,26 +197,31 @@ public class PageTransp {
                         System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
                 }
 
-                WebElement scrollContainer = driver.findElement(
-                                By.xpath("//div[contains(@class, 'freeze-pane-scrollbar')]"));
-
                 try {
-                        WebElement CodeTovara = wait.until(ExpectedConditions.elementToBeClickable(
-                                        By.xpath("//a[contains(@aria-label, 'элемента Код товара')]/following::input[contains(@id, 'xee')]")));
-                        System.out.println("Нашли поле ввода Кода товара");
+                        // Находим элемент скроллбара
+                        WebElement scrollContainer = driver
+                                        .findElement(By.xpath("//div[contains(@class, 'freeze-pane-scrollbar')]"));
 
+                        // Прокручиваем вниз до появления скроллбара
                         for (int i = 0; i < 10; i++) {
-                                js.executeScript("window.scrollBy(0, 1400);"); // Скроллим вниз
-                                Thread.sleep(100); // Пауза для стабильности
+                                js.executeScript("window.scrollBy(0, 800);"); // Прокрутка вниз
+                                Thread.sleep(200); // Задержка для подгрузки элементов
+
+                                // Проверяем, стал ли элемент скроллбара видимым
                                 if (scrollContainer.isDisplayed()) {
-                                        System.out.println("Элемент 'Груз' стал видимым.");
+                                        System.out.println("Элемент 'скроллбар' стал видимым.");
                                         break;
                                 }
                         }
 
+                        // Дополнительно скроллим точно к элементу
                         js.executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });",
-                                        CodeTovara);
-                        System.out.println("Прокрутили к элементу 'Код товара'.");
+                                        scrollContainer);
+                        System.out.println("Прокрутили к элементу 'скроллбар'.");
+
+                        WebElement CodeTovara = wait.until(ExpectedConditions.elementToBeClickable(
+                                        By.xpath("//a[contains(@aria-label, 'элемента Код товара')]/following::input[contains(@id, 'xee')]")));
+                        System.out.println("Нашли поле ввода Кода товара");
 
                         js.executeScript("arguments[0].value = arguments[1];", CodeTovara, CodeTovaraValue);
                         System.out.println("Заполнили Код Товара: " + CodeTovaraValue);
@@ -280,8 +285,6 @@ public class PageTransp {
 
                 js.executeScript("arguments[0].value = arguments[1];", CargoVolume, CargoVolumeValue);
                 System.out.println("Заполнили плановую локацию выгрузки: " + CargoVolumeValue);
-
-                scrollToElementHorizontally(scrollContainer, TheTemperatureOfTheCargoFROM);
 
                 // Проверяем видимость элемента
                 if (!isElementVisible(TheTemperatureOfTheCargoIsUpTo)) {
