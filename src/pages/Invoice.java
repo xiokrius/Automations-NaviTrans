@@ -27,8 +27,8 @@ public class Invoice {
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ Учёт
-                WebElement uchetButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
-                                "[data-control-id='b54a']")));
+                WebElement uchetButton = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//button[@aria-label='Учет']")));
                 System.out.println("Нашли первую кнопку Учёт.");
                 uchetButton.click();
 
@@ -39,32 +39,40 @@ public class Invoice {
 
                 uchetFullButton.click();
 
-                // Проверить ID учтённых кнопок, сейчас учёт+ учёт = b54a + b54b, мейби я
-                // перепутал или же они динамические,
-                // Пока обход этого горячей клавишей
-                // role="menuitem", title=(F9), aria-label "Учет"
-
                 try {
                         WebElement popupWindow = wait.until(ExpectedConditions.elementToBeClickable(
                                         By.xpath("//p[contains(@title, 'Отсутствует экспорт!')]"))); // XPath
 
                         System.out.println("Всплывающее окно обнаружено.");
 
-                        WebElement popupConfirmButton = popupWindow
-                                        .findElement(By.xpath("//button[contains(@id, 'ip')]/span[text()='Да']"));
-
+                        // Ожидаем появления кнопки 'Да' и кликаем по ней
+                        WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(
+                                        By.xpath("//button[contains(@class, '1632124310')]/span[text()='Да']")));
                         popupConfirmButton.click();
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
 
+                        // Добавляем небольшую паузу, чтобы дать время на обновление страницы
+                        Thread.sleep(500); // Можно заменить на более сложные ожидания, если нужно
+
+                        // Ожидаем исчезновения старой кнопки
+                        wait.until(ExpectedConditions.stalenessOf(popupConfirmButton));
+
+                        // Ожидаем исчезновения старой кнопки и появления новой
                         WebElement UchetSchetButton = wait.until(ExpectedConditions.elementToBeClickable(
-                                        By.xpath("//button[contains(@id, 'iv')]/span[text()='Да']")));
-
+                                        By.xpath("//button[contains(@class, '1632124310')]/span[text()='Да']")));
                         UchetSchetButton.click();
+                        System.out.println("Нажата кнопка 'Учет'.");
 
+                        wait.until(ExpectedConditions.stalenessOf(UchetSchetButton));
+
+                        // Даем странице немного времени для обновления перед следующим действием
+                        Thread.sleep(500);
+
+                        // Ожидаем появления кнопки 'Нет' и кликаем по ней
                         WebElement PerehodVSchetNet = wait.until(ExpectedConditions.elementToBeClickable(
-                                        By.xpath("//button[contains(@id, 'j2')]/span[text()='Нет']")));
-
+                                        By.xpath("//button[contains(@class, '1632124310')]/span[text()='Нет']")));
                         PerehodVSchetNet.click();
+                        System.out.println("Нажата кнопка 'Нет'.");
 
                 } catch (Exception e) {
                         System.out.println("Всплывающее окно не появилось, продолжаем выполнение." + e.getMessage());
