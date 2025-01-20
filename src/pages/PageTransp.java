@@ -50,12 +50,6 @@ public class PageTransp {
                 driver.switchTo().frame(iframe);
         }
 
-        private boolean isElementVisible(WebElement element) {
-                return (Boolean) js.executeScript(
-                                "return arguments[0].offsetWidth > 0 && arguments[0].offsetHeight > 0;",
-                                element);
-        }
-
         private void setInputValue(WebElement element, String value) {
                 js.executeScript(
                                 "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
@@ -246,21 +240,18 @@ public class PageTransp {
 
                 // Вес груза input поле
                 WebElement TheWholeCargo = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//td[contains(@controlname, 'Order Weight')]/following::input[contains(@id, 'ee')]")));
-                System.out.println("2");
-                // id = b3t1ee/ column_header_b3th
+                                By.xpath("//td[contains(@controlname, 'Order Weight')]//descendant::input[contains(@id, 'ee')]")));
+                System.out.println("НАШЛИ ВЕС ГРУЗА");
+                // Order Weight
                 // Объём груза input поле
                 WebElement CargoVolume = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//td[contains(@controlname, 'Order Volume')]/following::input[contains(@id, 'ee')]")));
+                                By.xpath("//td[contains(@controlname, 'Order Volume')]//descendant::input[contains(@id, 'ee')]")));
                 // id = b3t2ee/ column_header_b3tg
                 System.out.println("3");
                 // Температура груза ОТ input поле
                 WebElement TheTemperatureOfTheCargoFROM = driver.findElement(
                                 By.xpath("//td[contains(@controlname, 'Temperature from')]//descendant::input[contains(@id, 'ee')]"));
                 System.out.println("4");
-
-                // ("//td[contains(@controlname, 'Temperature
-                // from')]//descendant::input[contains(@id, 'ee')]")));
 
                 js.executeScript("arguments[0].value = arguments[1];", NumberOfShipment, NumberOfShipmentValue);
                 System.out.println("Количество груза" + NumberOfShipmentValue);
