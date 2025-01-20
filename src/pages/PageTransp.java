@@ -4,8 +4,10 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -46,12 +48,6 @@ public class PageTransp {
                 WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
                                 By.className("designer-client-frame")));
                 driver.switchTo().frame(iframe);
-        }
-
-        private void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
-                js.executeScript(
-                                "arguments[0].scrollLeft = arguments[0].scrollLeft + arguments[1].getBoundingClientRect().left;",
-                                scrollContainer, targetElement);
         }
 
         private boolean isElementVisible(WebElement element) {
@@ -181,6 +177,7 @@ public class PageTransp {
                                         System.out.println("Элемент 'Груз' стал видимым.");
                                         break;
                                 }
+
                         }
 
                         // Прокрутка к элементу с использованием scrollIntoView для точного
@@ -193,31 +190,19 @@ public class PageTransp {
                         wait.until(ExpectedConditions.elementToBeClickable(Cargo));
                         js.executeScript("arguments[0].click();", Cargo);
                         System.out.println("Клик по элементу 'Груз' выполнен.");
+                        Thread.sleep(400);
                 } catch (Exception e) {
                         System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
                 }
 
                 try {
-                        // Находим элемент скроллбара
-                        WebElement scrollContainer = driver
-                                        .findElement(By.xpath("//div[contains(@class, 'freeze-pane-scrollbar')]"));
 
-                        // Прокручиваем вниз до появления скроллбара
-                        for (int i = 0; i < 10; i++) {
-                                js.executeScript("window.scrollBy(0, 800);"); // Прокрутка вниз
-                                Thread.sleep(200); // Задержка для подгрузки элементов
-
-                                // Проверяем, стал ли элемент скроллбара видимым
-                                if (scrollContainer.isDisplayed()) {
-                                        System.out.println("Элемент 'скроллбар' стал видимым.");
-                                        break;
-                                }
+                        Actions actions = new Actions(driver);
+                        for (int i = 0; i < 2; i++) { // Количество прокруток
+                                actions.sendKeys(Keys.PAGE_DOWN).perform();
+                                Thread.sleep(400); // Ожидание для подгрузки элементов
                         }
-
-                        // Дополнительно скроллим точно к элементу
-                        js.executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });",
-                                        scrollContainer);
-                        System.out.println("Прокрутили к элементу 'скроллбар'.");
+                        System.out.println("Прокрутили страницу вниз с помощью Actions.");
 
                         WebElement CodeTovara = wait.until(ExpectedConditions.elementToBeClickable(
                                         By.xpath("//a[contains(@aria-label, 'элемента Код товара')]/following::input[contains(@id, 'xee')]")));
@@ -254,50 +239,62 @@ public class PageTransp {
                 // Кол-во груза input поле
                 WebElement NumberOfShipment = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//td[contains(@controlname, 'Quantity')]/input[contains(@id, 'ee')]")));
+
+                System.out.println("1");
                 // aria-labelledby="column_header_b3tj"
                 // id = b3szee
 
                 // Вес груза input поле
                 WebElement TheWholeCargo = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//td[contains(@controlname, 'Order Weight')]/following::input[contains(@id, 'ee')]")));
+                System.out.println("2");
                 // id = b3t1ee/ column_header_b3th
                 // Объём груза input поле
                 WebElement CargoVolume = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//td[contains(@controlname, 'Order Volume')]/following::input[contains(@id, 'ee')]")));
                 // id = b3t2ee/ column_header_b3tg
-
+                System.out.println("3");
                 // Температура груза ОТ input поле
                 WebElement TheTemperatureOfTheCargoFROM = driver.findElement(
-                                By.xpath("//input[contains(@id, '5ee')]"));
-                // Температура груза ДО input поле
-                WebElement TheTemperatureOfTheCargoIsUpTo = driver.findElement(
-                                By.xpath("//input[contains(@id, '6ee')]"));
+                                By.xpath("//td[contains(@controlname, 'Temperature from')]//descendant::input[contains(@id, 'ee')]"));
+                System.out.println("4");
 
-                // Выход на пэйдж заявки
-                WebElement BackPage = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//button[contains(@data-is-focusable, 'true') and contains(@title, 'Назад')]")));
+                // ("//td[contains(@controlname, 'Temperature
+                // from')]//descendant::input[contains(@id, 'ee')]")));
 
                 js.executeScript("arguments[0].value = arguments[1];", NumberOfShipment, NumberOfShipmentValue);
                 System.out.println("Количество груза" + NumberOfShipmentValue);
 
                 js.executeScript("arguments[0].value = arguments[1];", TheWholeCargo, TheWholeCargoValue);
-                System.out.println("Заполнили плановую локацию загрузки: " + TheWholeCargoValue);
+                System.out.println("Заполнили вес заказа: " + TheWholeCargoValue);
 
                 js.executeScript("arguments[0].value = arguments[1];", CargoVolume, CargoVolumeValue);
-                System.out.println("Заполнили плановую локацию выгрузки: " + CargoVolumeValue);
+                System.out.println("Заполнили обьём заказа: " + CargoVolumeValue);
 
-                // Проверяем видимость элемента
-                if (!isElementVisible(TheTemperatureOfTheCargoIsUpTo)) {
-                        throw new RuntimeException("Элемент все еще не виден после горизонтальной прокрутки!");
-                }
+                WebElement scrollContainer = driver
+                                .findElement(By.xpath("(//div[contains(@class, 'freeze-pane-scrollbar')])[7]"));
+
+                // Прокрутить контейнер вправо до элемента
+                js.executeScript("arguments[0].scrollLeft = arguments[0].scrollWidth;", scrollContainer);
+                System.out.println("Прокрутили контейнер вправо.");
+
+                // Температура груза ДО input поле
+                WebElement TheTemperatureOfTheCargoIsUpTo = wait.until(
+                                ExpectedConditions.visibilityOfElementLocated(
+                                                By.xpath("//td[contains(@controlname, 'Temperature to')]//descendant::input[contains(@id, 'ee')]")));
+                System.out.println("5");
+                // Выход на пэйдж заявки
+                WebElement BackPage = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//button[contains(@data-is-focusable, 'true') and contains(@title, 'Назад')]")));
+                System.out.println("6");
 
                 setInputValue(TheTemperatureOfTheCargoIsUpTo, TheTemperatureOfTheCargoIsUpToValue);
 
-                System.out.println("Заполнили поле Цена значением: " + TheTemperatureOfTheCargoIsUpToValue);
+                System.out.println("Заполнили температуру ДО: " + TheTemperatureOfTheCargoIsUpToValue);
 
-                js.executeScript("arguments[0].value = arguments[1];", TheTemperatureOfTheCargoFROM,
-                                TheTemperatureOfTheCargoFROMValue);
-                System.out.println("Заполнили плановую стартовую дату: " + TheTemperatureOfTheCargoFROMValue);
+                setInputValue(TheTemperatureOfTheCargoFROM, TheTemperatureOfTheCargoFROMValue);
+
+                System.out.println("Заполнили температуру После: " + TheTemperatureOfTheCargoFROMValue);
 
                 TheTemperatureOfTheCargoFROM.click();
                 TheTemperatureOfTheCargoIsUpTo.click();
