@@ -62,19 +62,20 @@ public class IntercompanyInvoice {
 
                 // Заполняем поле "Код Интеркомпани"
                 WebElement inputIntercompanyCode = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//input[contains(@id, 'qee') and contains(@aria-labelledby, 'lo')]")));
+                                By.xpath("//td[contains(@controlname, 'Cost Code')]//descendant::input[contains(@id, 'ee')]")));
                 System.out.println("Нашли поле код Интеркомпани");
+
                 setInputValue(inputIntercompanyCode, InputIntercompanyCodeValue);
 
                 // Заполняем поле "Код Поставщика"
                 WebElement supplier = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//input[contains(@id, 'see') and contains(@aria-labelledby, 'lm')]")));
+                                By.xpath("//td[contains(@controlname, 'Vendor')]//descendant::input[contains(@id, 'ee')]")));
                 System.out.println("Нашли поле код Поставщик");
                 setInputValue(supplier, SupplierValue);
 
                 // Заполняем поле "Цена"
                 WebElement priceIntercompany = driver.findElement(
-                                By.xpath("//input[contains(@id, 'xee') and contains(@aria-labelledby, 'b5lh')]"));
+                                By.xpath("//td[contains(@controlname, 'Unit price')]//descendant::input[contains(@id, 'ee')]"));
                 WebElement scrollContainer = driver.findElement(
                                 By.xpath("//div[contains(@class, 'freeze-pane-scrollbar')]"));
 
