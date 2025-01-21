@@ -108,14 +108,21 @@ public class VehicleRoute {
         StartingKm.click();
         EndingKm.click();
 
-        // Ожидаем появления первой кнопки
-        WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[2]/div/div/div[1]/span/button/span/i")));
-        System.out.println("Нашли кнопку назад.");
+        try {
 
-        // Кликаем по первой кнопке
-        buttonInFrame.click();
-        System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
+            Thread.sleep(500);
+            // Ожидаем появления первой кнопки
+            WebElement BackPage = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//button[contains(@data-is-focusable, 'true') and contains(@title, 'Назад')]")));
+            System.out.println("Нашли кнопку назад.");
+
+            // Кликаем по первой кнопке
+            BackPage.click();
+            System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
+
+        } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
     }
 
     public void returnToMainContent() {

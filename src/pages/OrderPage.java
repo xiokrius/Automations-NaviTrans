@@ -2,6 +2,7 @@ package pages;
 
 import java.time.Duration;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -179,36 +180,31 @@ public class OrderPage {
                 System.out.println("Нашли Вторую кнопку, Готов к инв .");
 
                 readyInInvoic.click();
-
                 try {
                         WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                        "//p[contains(@title, 'Бухгалтеру будет отправлено уведомление.')]"))); // XPath
-                                                                                                                // окна
+                                        "//p[contains(@title, 'Бухгалтеру будет отправлено уведомление.')]")));
                         System.out.println("Всплывающее окно обнаружено.");
-                        // Выполняем действия внутри окна
-                        Thread.sleep(300);
 
                         WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                        "//button[contains(@class, '1632124310')]/span[text()='ОК']"))); // Кнопка
-                        // подтверждения
-                        popupConfirmButton.click();
-                        System.out.println("Кнопку ОК нашли ");
+                                        "(//div[@class='dialog-action-bar'])[2]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
 
-                        // Добавляем небольшую паузу, чтобы дать время на обновление страницы
-                        Thread.sleep(500); // Можно заменить на более сложные ожидания, если нужно
+                        JavascriptExecutor js = (JavascriptExecutor) driver;
+                        js.executeScript("arguments[0].click();", popupConfirmButton);
 
-                        // Ожидаем исчезновения старой кнопки
-                        wait.until(ExpectedConditions.stalenessOf(popupConfirmButton));
+                        Thread.sleep(500);
 
-                        // Ожидаем исчезновения старой кнопки и появления новой
-                        WebElement ButtonOkSchet = wait.until(ExpectedConditions.elementToBeClickable(
-                                        By.xpath("//button[contains(@class, '1632124310')]/span[text()='ОК']")));
-                        ButtonOkSchet.click();
-                        System.out.println("Нажата кнопка 'ОК 2, бух-ру отправлено ув-ие'.");
+                        WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                        "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
 
-                        System.out.println("Прогон успешен.");
+                        // WebElement ButtonInOk =
+                        // wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        // "(//div[@class='dialog-action-bar'])[2]//button[contains(@class,
+                        // '1632124310')]//span[text()='ОК']")));
+
+                        js.executeScript("arguments[0].click();", ButtonInOk);
+
                 } catch (Exception e) {
-                        System.out.println("Всплывающее окно не появилось, продолжаем выполнение3." + e.getMessage());
+                        System.out.println("Ошибка: " + e.getMessage());
                 }
 
         }
