@@ -339,13 +339,13 @@ public class PageTransp {
 
                 JavascriptExecutor js = (JavascriptExecutor) driver;
 
-                if (iteration == 0) {
-
+                if (iteration == 0) { // Проверяем условие итерации
+                        System.out.println("Начинаем обработку элемента 'Груз' (Итерация: " + iteration + ")");
                         try {
                                 // Поиск кнопки "Груз"
                                 WebElement Cargo = wait.until(ExpectedConditions.elementToBeClickable(
                                                 By.xpath("//span[@role='button' and .//span[text()='Груз']]")));
-                                System.out.println("Нашли кнопку Груз.");
+                                System.out.println("Нашли кнопку 'Груз'.");
 
                                 // Прокрутка страницы вниз, чтобы элемент стал видимым
                                 for (int i = 0; i < 10; i++) {
@@ -355,7 +355,6 @@ public class PageTransp {
                                                 System.out.println("Элемент 'Груз' стал видимым.");
                                                 break;
                                         }
-
                                 }
 
                                 // Прокрутка к элементу с использованием scrollIntoView для точного
@@ -364,17 +363,18 @@ public class PageTransp {
                                                 "arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });",
                                                 Cargo);
                                 System.out.println("Прокрутили к элементу 'Груз'.");
+
                                 // Клик по элементу
                                 wait.until(ExpectedConditions.elementToBeClickable(Cargo));
                                 js.executeScript("arguments[0].click();", Cargo);
                                 System.out.println("Клик по элементу 'Груз' выполнен.");
-
                                 Thread.sleep(400);
                         } catch (Exception e) {
                                 System.out.println("Ошибка при взаимодействии с элементом 'Груз': " + e.getMessage());
                         }
                 } else {
-                        System.out.println("Пропускаем клик по элементу 'Груз' (Итерация: " + iteration + ")");
+                        // Если не нулевая итерация, логируем пропуск обработки
+                        System.out.println("Пропускаем обработку элемента 'Груз' (Итерация: " + iteration + ")");
                 }
 
                 try {
@@ -387,7 +387,7 @@ public class PageTransp {
                         System.out.println("Прокрутили страницу вниз с помощью Actions.");
 
                         WebElement CodeTovara = wait.until(ExpectedConditions.elementToBeClickable(
-                                        By.xpath("//a[contains(@aria-label, 'элемента Код товара')]/following::input[contains(@id, 'xee')]")));
+                                        By.xpath("//a[contains(@aria-label, 'элемента Код товара')]/following::input[contains(@id, 'ee')]")));
                         System.out.println("Нашли поле ввода Кода товара");
 
                         js.executeScript("arguments[0].value = arguments[1];", CodeTovara, CodeTovaraValue);
