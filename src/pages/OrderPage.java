@@ -160,7 +160,7 @@ public class OrderPage {
                 WebElement obrabotkaButton = wait
                                 .until(ExpectedConditions
                                                 .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
-                System.out.println("Нашли первую кнопку Выпустить.");
+                System.out.println("Нашли первую кнопку Обработка.");
                 obrabotkaButton.click();
 
                 // НАШЛИ КНОПКУ Готово к инвойсированию
@@ -172,12 +172,13 @@ public class OrderPage {
 
                 try {
                         WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                        "/html/body/div[1]/div[4]/form/div/main"))); // XPath окна
+                                        "//p[contains(@title, 'Бухгалтеру будет отправлено уведомление.')]"))); // XPath
+                                                                                                                // окна
                         System.out.println("Всплывающее окно обнаружено.");
                         // Выполняем действия внутри окна
                         WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
-                                        "/html/body/div[1]/div[4]/form/div/main/div[3]/div/button")); // Кнопка
-                                                                                                      // подтверждения
+                                        "//div[contains(@class, 'dialog-action-bar')]//button[span[text()='ОК']]")); // Кнопка
+                        // подтверждения
                         popupConfirmButton.click();
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
                 } catch (Exception e) {
@@ -199,7 +200,7 @@ public class OrderPage {
                 WebElement obrabotkaButton = wait
                                 .until(ExpectedConditions
                                                 .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
-                System.out.println("Нашли первую кнопку Выпустить.");
+                System.out.println("Нашли первую кнопку Обработка.");
                 obrabotkaButton.click();
 
                 // НАШЛИ КНОПКУ Счёт
