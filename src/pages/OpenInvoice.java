@@ -19,9 +19,25 @@ public class OpenInvoice {
         private String PriceValueValue = ConfigManager.getProperty("PriceValueValue");
 
         private WebDriver driver;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
         public OpenInvoice(WebDriver driver) {
                 this.driver = driver;
+                this.js = (JavascriptExecutor) driver;
+        }
+
+        private void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
+                js.executeScript(
+                                "const container = arguments[0];" +
+                                                "const target = arguments[1];" +
+                                                "const containerWidth = container.offsetWidth;" +
+                                                "const targetLeft = target.getBoundingClientRect().left;" +
+                                                "const containerLeft = container.getBoundingClientRect().left;" +
+                                                "const targetOffset = targetLeft - containerLeft;" +
+                                                "const scrollAmount = targetOffset - containerWidth / 2 + target.offsetWidth / 2;"
+                                                +
+                                                "container.scrollLeft += scrollAmount;",
+                                scrollContainer, targetElement);
         }
 
         public void OpenServices() {
@@ -51,17 +67,16 @@ public class OpenInvoice {
                 WebElement price = driver.findElement(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]/input"));
 
-                // Скроллинг к элементу
-                js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", price);
+                WebElement scrollContainer = driver.findElement(
+                                By.xpath("(//div[contains(@class, 'ms-nav-scrollable scroll-source thm-bgcolor-1241058378')])[4]"));
 
-                // Ждем немного, чтобы элемент полностью появился
-                wait.until(ExpectedConditions.elementToBeClickable(price));
+                // Скроллинг к элементу
+                scrollToElementHorizontally(scrollContainer, price);
 
                 // фокус и события для ввода
                 try {
                         // Добавление фокуса на поле
                         js.executeScript("arguments[0].focus();", price);
-                        Thread.sleep(1000); // Небольшая задержка после фокуса
 
                         // Используем JavaScript для ввода значения
                         js.executeScript(
@@ -72,7 +87,7 @@ public class OpenInvoice {
 
                         // Ожидаем изменения значения в поле
                         wait.until(ExpectedConditions.attributeToBe(price, "value", PriceValueValue));
-                        Thread.sleep(1000); // Даем немного времени для обработки
+                        Thread.sleep(300); // Даем немного времени для обработки
 
                 } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -85,7 +100,7 @@ public class OpenInvoice {
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[44]/div/input"));
 
                 // Прокручиваем к дочернему элементу внутри прокручиваемого окна
-                js.executeScript("arguments[0].scrollIntoView({inline: 'center'});", InvoiceInTamojnaButton);
+                scrollToElementHorizontally(scrollContainer, InvoiceInTamojnaButton);
 
                 InvoiceInTamojnaButton.click();
 

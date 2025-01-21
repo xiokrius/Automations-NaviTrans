@@ -250,27 +250,33 @@ public class OrderPage {
                 OpenDrive.click();
         }
 
-        public void PerevozkaInFrame() {
+        public void PerevozkaInFrame(int iteration) {
 
-                System.out.println("Начинаем OrderPage/PerevozkaInFrame");
+                System.out.println("Начинаем OrderPage/PerevozkaInFrame (Итерация: " + iteration + ")");
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
-                // Клик для раскрытия списка перевозок
-                WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "//*[@id=\'b3fe\']/div[2]/div/span")));
+                if (iteration == 1) {
+                        // Клик для раскрытия списка перевозок
+                        WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                        "//*[@id=\'b3fe\']/div[2]/div/span")));
 
-                // Кликаем по первой кнопке
-                buttonInFrame.click();
-                System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
+                        // Кликаем по первой кнопке
+                        buttonInFrame.click();
+                        System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
 
+                } else {
+                        System.out.println(
+                                        "Пропускаем клик по первой кнопке внутри фрейма (Итерация: " + iteration + ")");
+                }
                 // Перевозки/Управление(кнопка)
                 WebElement buttonInPerevozkiUpravlenie = wait
                                 .until(ExpectedConditions
-                                                .elementToBeClickable(By.xpath("//*[@data-control-id='b3ff']")));
+                                                .elementToBeClickable(By.xpath(
+                                                                "//div[contains(@data-control-id, 'b3')]//button[@type='button' and .//span[contains(@aria-label, 'Управление')]]")));
                 buttonInPerevozkiUpravlenie.click();
                 System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
 

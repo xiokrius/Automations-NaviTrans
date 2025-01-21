@@ -9,6 +9,7 @@ import pages.VehiclePlanning;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
 import pages.OrderPage;
+import pages.BackPageOrder;
 import pages.IntercompanyInvoice;
 import pages.Invoice;
 import pages.OpenInvoice;
@@ -122,9 +123,16 @@ public class CreateOrderNew {
         // Заполнение самого интеркампани
         IntercompanyInvoice FillingIntercompany = new IntercompanyInvoice(driver);
         FillingIntercompany.InterCompanyInfo();
+        CreateNewOrder.returnToMainContent();
 
-        // IntercompanyInvoice OpenInctercompany = new IntercompanyInvoice(driver);
-        // OpenInctercompany.fillIntercompanyForm();
+        // Выхожу обратно на основную заявку
+        BackPageOrder BackPage = new BackPageOrder(driver);
+        BackPage.BackPage();
+        CreateNewOrder.returnToMainContent();
+
+        // В теории выйду ещё раз, это уже для цикла
+        BackPage.BackPage();
+        CreateNewOrder.returnToMainContent();
 
         // Завершение работы
         // driver.quit();

@@ -52,7 +52,7 @@ public class Invoice {
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
 
                         // Добавляем небольшую паузу, чтобы дать время на обновление страницы
-                        Thread.sleep(500); // Можно заменить на более сложные ожидания, если нужно
+                        Thread.sleep(500);
 
                         // Ожидаем исчезновения старой кнопки
                         wait.until(ExpectedConditions.stalenessOf(popupConfirmButton));

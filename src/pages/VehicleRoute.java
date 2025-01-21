@@ -31,7 +31,14 @@ public class VehicleRoute {
 
     private void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
         js.executeScript(
-                "arguments[0].scrollLeft = arguments[0].scrollLeft + arguments[1].getBoundingClientRect().left;",
+                "const container = arguments[0];" +
+                        "const target = arguments[1];" +
+                        "const containerWidth = container.offsetWidth;" +
+                        "const targetLeft = target.getBoundingClientRect().left;" +
+                        "const containerLeft = container.getBoundingClientRect().left;" +
+                        "const targetOffset = targetLeft - containerLeft;" +
+                        "const scrollAmount = targetOffset - containerWidth / 2 + target.offsetWidth / 2;" +
+                        "container.scrollLeft += scrollAmount;",
                 scrollContainer, targetElement);
     }
 
@@ -96,15 +103,15 @@ public class VehicleRoute {
         WebElement EndingKm = driver.findElement(
                 By.xpath("//td[contains(@controlname, 'Ending Km')]//descendant::input[contains(@id, 'ee')]"));
 
-        scrollToElementHorizontally(scrollContainer, EndingKm);
+        scrollToElementHorizontally(scrollContainer, SupplyKm);
 
         setInputValue(SupplyKm, SupplyKmValue);
 
-        setInputValue(StartingKm, StartingKmValue);
+        SupplyKm.click();
 
+        setInputValue(StartingKm, StartingKmValue);
         setInputValue(EndingKm, EndingKmValue);
 
-        SupplyKm.click();
         StartingKm.click();
         EndingKm.click();
 
@@ -112,12 +119,16 @@ public class VehicleRoute {
 
             Thread.sleep(500);
             // Ожидаем появления первой кнопки
-            WebElement BackPage = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            WebElement BackPage = wait.until(ExpectedConditions.elementToBeClickable(
                     By.xpath("//button[contains(@data-is-focusable, 'true') and contains(@title, 'Назад')]")));
             System.out.println("Нашли кнопку назад.");
 
+            // Отладка +
+            System.out.println("Кнопка видима: " + BackPage.isDisplayed());
+            System.out.println("Кнопка доступна для клика: " + BackPage.isEnabled());
+
             // Кликаем по первой кнопке
-            BackPage.click();
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", BackPage);
             System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
 
         } catch (Exception e) {
