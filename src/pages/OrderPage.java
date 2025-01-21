@@ -52,6 +52,16 @@ public class OrderPage {
                 System.out.println("Выбрали значение в select: " + value);
         }
 
+        // Увеличенный таймаут для повышения отказоустойчивости после ребута, бо сил
+        // моих больше нет!!!!!
+        private void switchToIframeWithWait() {
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45)); // Увеличенный таймаут
+                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.tagName("designer-client-frame")));
+                driver.switchTo().frame(iframe);
+                System.out.println("Переключились в iframe c более длительным ожиданием");
+        }
+
         // ТУТ ПЕРЕХОЖУ НА СТРАНИЦУ РЕДАКТИРОВАНИЯ ПЕРЕВОЗКИ (NVT Shipment (2002947)) и
         // инициализирую кнопки Перевозки по заказу/Управление/Правка
 
@@ -102,7 +112,7 @@ public class OrderPage {
                 WebElement obrabotkaButton = wait
                                 .until(ExpectedConditions
                                                 .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
-                System.out.println("Нашли первую кнопку Выпустить.");
+                System.out.println("Нашли первую кнопку Обработка.");
                 obrabotkaButton.click();
 
                 // НАШЛИ КНОПКУ ВЫПУСТИТЬ
@@ -176,13 +186,29 @@ public class OrderPage {
                                                                                                                 // окна
                         System.out.println("Всплывающее окно обнаружено.");
                         // Выполняем действия внутри окна
-                        WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
-                                        "//div[contains(@class, 'dialog-action-bar')]//button[span[text()='ОК']]")); // Кнопка
+                        Thread.sleep(300);
+
+                        WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                        "//button[contains(@class, '1632124310')]/span[text()='ОК']"))); // Кнопка
                         // подтверждения
                         popupConfirmButton.click();
-                        System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
+                        System.out.println("Кнопку ОК нашли ");
+
+                        // Добавляем небольшую паузу, чтобы дать время на обновление страницы
+                        Thread.sleep(500); // Можно заменить на более сложные ожидания, если нужно
+
+                        // Ожидаем исчезновения старой кнопки
+                        wait.until(ExpectedConditions.stalenessOf(popupConfirmButton));
+
+                        // Ожидаем исчезновения старой кнопки и появления новой
+                        WebElement ButtonOkSchet = wait.until(ExpectedConditions.elementToBeClickable(
+                                        By.xpath("//button[contains(@class, '1632124310')]/span[text()='ОК']")));
+                        ButtonOkSchet.click();
+                        System.out.println("Нажата кнопка 'ОК 2, бух-ру отправлено ув-ие'.");
+
+                        System.out.println("Прогон успешен.");
                 } catch (Exception e) {
-                        System.out.println("Всплывающее окно не появилось, продолжаем выполнение." + e.getMessage());
+                        System.out.println("Всплывающее окно не появилось, продолжаем выполнение3." + e.getMessage());
                 }
 
         }
