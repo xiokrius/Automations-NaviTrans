@@ -57,12 +57,12 @@ public class CreateManyOrders {
 
             // Переход в перевозки(Заменены xPath с прямых по классам)
             OrderPage Perevozki = new OrderPage(driver);
-            Perevozki.PerevozkaInFrame(i); // ТУТ всё гуд, но xpath мне не очень нравятся
+            Perevozki.PerevozkaInFrameIteration(i); // Добавлена итерация для повторения
             Perevozki.returnToMainContent();
 
             // Установка Плановых дат в перевозке и выход обратно на страницу заявок
             PageTransp OpenDate = new PageTransp(driver);
-            OpenDate.OpenOrLoadingLocation();
+            OpenDate.OpenOrLoadingLocationIteration(i);
             Perevozki.returnToMainContent();
 
             // // После установки план дат. Нажимаю Обработка/выпустить

@@ -250,7 +250,7 @@ public class OrderPage {
                 OpenDrive.click();
         }
 
-        public void PerevozkaInFrame(int iteration) {
+        public void PerevozkaInFrameIteration(int iteration) {
 
                 System.out.println("Начинаем OrderPage/PerevozkaInFrame (Итерация: " + iteration + ")");
 
@@ -259,7 +259,7 @@ public class OrderPage {
                 switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
-                if (iteration == 1) {
+                if (iteration == 0) {
                         // Клик для раскрытия списка перевозок
                         WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                         "//*[@id=\'b3fe\']/div[2]/div/span")));
@@ -283,7 +283,41 @@ public class OrderPage {
                 // Перевозки/Управление/Создать
                 WebElement buttonInPereozkiUpravlenieSozdat = wait
                                 .until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                                "//*[@data-control-id=\'b3fh\']")));
+                                                "//div[contains(@data-control-id, 'b3')]//button[@type='button' and .//span[contains(@aria-label, 'Создать')]]")));
+
+                buttonInPereozkiUpravlenieSozdat.click();
+                System.out.println("Клик по второй кнопке 3 внутри фрейма выполнен.");
+        }
+
+        public void PerevozkaInFrame() {
+
+                System.out.println("Начинаем OrderPage/PerevozkaInFrame");
+
+                // Переключаемся в нужный фрейм
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                switchToIframe();
+                System.out.println("Перешли в фрейм.");
+
+                // Клик для раскрытия списка перевозок
+                WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "//*[@id=\'b3fe\']/div[2]/div/span")));
+
+                // Кликаем по первой кнопке
+                buttonInFrame.click();
+                System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
+
+                // Перевозки/Управление(кнопка)
+                WebElement buttonInPerevozkiUpravlenie = wait
+                                .until(ExpectedConditions
+                                                .elementToBeClickable(By.xpath(
+                                                                "//div[contains(@data-control-id, 'b3')]//button[@type='button' and .//span[contains(@aria-label, 'Управление')]]")));
+                buttonInPerevozkiUpravlenie.click();
+                System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
+
+                // Перевозки/Управление/Создать
+                WebElement buttonInPereozkiUpravlenieSozdat = wait
+                                .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                                "//div[contains(@data-control-id, 'b3')]//button[@type='button' and .//span[contains(@aria-label, 'Создать')]]")));
 
                 buttonInPereozkiUpravlenieSozdat.click();
                 System.out.println("Клик по второй кнопке 3 внутри фрейма выполнен.");
