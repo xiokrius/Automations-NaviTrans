@@ -52,33 +52,32 @@ public class VehiclePlanning {
         autorisedButton.click();
 
         try {
+            WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                    "/html/body/div[1]/div[5]/form")));
+            System.out.println("Всплывающее окно обнаружено.");
 
-            startingVehicle.click();
+            // Выполняем действия внутри окна
+            WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
+                    "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]"));
+            popupConfirmButton.click();
+            System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
 
-        } catch (Exception i) {
-
-            System.out.println("Окно сработало раньше");
-
-            System.out.println("Нажали на кнопку 'Авторизация'.");
-
-            // Проверяем наличие всплывающего окна в случае если тягач уже задействован в
-            // поездке
+            // Проверка элемента "Внимание! Просрочено плановое ТО"
             try {
-                // Проверка на всплывающее окно
-                WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                        "/html/body/div[1]/div[5]/form"))); // XPath окна
-                System.out.println("Всплывающее окно обнаружено.");
+                WebElement attentionMessage = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                        "//p[contains(@title, 'Внимание! Просрочено плановое ТО')]")));
+                System.out.println("Обнаружено сообщение: " + attentionMessage.getText());
 
-                // Выполняем действия внутри окна
-                WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
-                        "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]")); // Кнопка
-                                                                                     // подтверждения
-                popupConfirmButton.click();
-                System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
-
-            } catch (Exception e) {
-                System.out.println("Произошла непредвиденная ошибка: " + e.getMessage());
+                // Нажатие кнопки "ОК"
+                WebElement buttonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
+                buttonInOk.click();
+                System.out.println("Нажата кнопка 'ОК'.");
+            } catch (Exception innerException) {
+                System.out.println("Ошибка при поиске элемента 'Внимание': " + innerException.getMessage());
             }
+        } catch (Exception e) {
+            System.out.println("Ошибка при работе со всплывающим окном: " + e.getMessage());
         }
         // Нажимаем кнопку "ОК"
         WebElement vehicleOkButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
@@ -86,5 +85,4 @@ public class VehiclePlanning {
         vehicleOkButton.click();
         System.out.println("Нажата кнопка 'ОК'.");
     }
-
 }

@@ -34,7 +34,7 @@ public class CreateManyOrders {
         loginTest.inputPassword(password);
         loginTest.clickLoginButton();
 
-        for (int i = 0; i < 10; i++) { // Задайте нужное количество повторений
+        for (int i = 0; i < 25; i++) {
             System.out.println("Создание заявки " + (i + 4));
 
             // Переход на страницу заявок
