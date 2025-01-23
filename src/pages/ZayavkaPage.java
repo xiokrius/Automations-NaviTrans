@@ -56,7 +56,7 @@ public class ZayavkaPage {
 
         public void CreateNewZayavkaCZ() {
 
-                System.out.println("CreateNewZayavkaCZ");
+                System.out.println("ZayavkaPage/CreateNewZayavkaCZ");
 
                 // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -37,8 +37,6 @@ public class VehiclePlanning {
                 "/html/body/div[1]/div[4]/form/main/div/div[3]/div[1]/div/div[4]/div[2]/div[2]/div/div/div[3]/div/input")));
         System.out.println("Нашёл поле для ввода номера тягача.");
 
-        ///html/body/div[1]/div[4]/form/main/div/div[3]/div[1]/div/div[4]/div[2]/div[2]/div/div/div[3]/div/input
-
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].value = arguments[1];", startingVehicle, startingVehicleValue);
         System.out.println("Заполнили стартовую дату через JavaScript: " + startingVehicleValue);

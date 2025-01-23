@@ -118,9 +118,9 @@ public class OrderPage {
 
                 // НАШЛИ КНОПКУ ВЫПУСТИТЬ
                 WebElement VypustitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/button/span")));
+                                "//button[@title='Выпустить (Ctrl+F9)']")));
                 System.out.println("Нашли Вторую кнопку, Выпустить .");
-
+                // Выпустить (Ctrl+F9) "//button[@title='Выпустить (Ctrl+F9)']"
                 VypustitButton.click();
 
         }
@@ -150,7 +150,7 @@ public class OrderPage {
 
                 // Кнопка Планирования для перехода в планирование рейса
                 WebElement PlanButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[7]/div[1]/div/button")));
+                                "//button[@aria-label='Plan']")));
                 System.out.println("Нашли Вторую кнопку План.");
 
                 PlanButton.click();
@@ -176,7 +176,7 @@ public class OrderPage {
 
                 // НАШЛИ КНОПКУ Готово к инвойсированию
                 WebElement readyInInvoic = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[7]/div[2]/div/button")));
+                                "//*[@aria-label='Готов к инвойсированию']")));
                 System.out.println("Нашли Вторую кнопку, Готов к инв .");
 
                 readyInInvoic.click();
@@ -226,8 +226,9 @@ public class OrderPage {
                 obrabotkaButton.click();
 
                 // НАШЛИ КНОПКУ Счёт
-                WebElement schet = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[3]/div[1]/div/button")));
+                WebElement schet = wait.until(ExpectedConditions
+                                .visibilityOfElementLocated(By.xpath("//button[@title='Счет (Shift+Ctrl+F11)']")));
+
                 System.out.println("Нашли Вторую кнопку, Выпустить .");
 
                 schet.click();
@@ -245,7 +246,7 @@ public class OrderPage {
                 System.out.println("Перешли в фрейм.");
 
                 WebElement OpenDrive = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/div/main/div[3]/div/button[1]")));
+                                "//button//span[text()='ОК']")));
                 System.out.println("Нашли Третью кнопку Ок");
                 OpenDrive.click();
         }

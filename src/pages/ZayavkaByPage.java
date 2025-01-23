@@ -36,8 +36,9 @@ public class ZayavkaByPage {
                 switchToIframe();
 
                 // Ожидаем кнопку Обработка
-                WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
+                WebElement buttonInFrame = wait
+                                .until(ExpectedConditions
+                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли кнопку ОБРАБОТКА.");
 
                 // Кликаем по первой кнопке
@@ -53,7 +54,7 @@ public class ZayavkaByPage {
 
                 // НАЖАТИЕ ОК ДЛЯ КОПИРОВАНИЯ ЗАЯВКИ
                 WebElement buttonInFrame3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
+                                "//button//span[text()='ОК']")));
                 buttonInFrame3.click();
         }
 
@@ -71,13 +72,13 @@ public class ZayavkaByPage {
 
                 // Ожидаем появления первой кнопки
                 WebElement buttonInObrabotka = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div/div/button/span")));
+                                "//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли Кнопку Обработка.");
-
+                //
                 buttonInObrabotka.click();
 
                 WebElement buttonInService = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div/button")));
+                                "//button[@title='Сервисы (Ctrl+Alt+S)']")));
                 System.out.println("Нашли Кнопку Сервис");
 
                 buttonInService.click();
