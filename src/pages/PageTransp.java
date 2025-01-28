@@ -488,7 +488,7 @@ public class PageTransp {
 
                 BackPage.click();
 
-                // column_header_b3t9
+                // column_header_b3t9PageTransp/OpenOrLoadingLocation
                 // Возвращаемся в основной контекст
                 driver.switchTo().defaultContent();
                 System.out.println("Вышли из iframe.");

@@ -1,18 +1,38 @@
-## Getting Started
+Automations-NaviTrans
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Automations-NaviTrans is a test automation project designed for the NaviTrans system, developed using Java, Selenium, and TestNG.
 
-## Folder Structure
+Project Description
+This project focuses on automating the testing of NaviTrans functionality. It includes a suite of tests that ensure the stability and quality of the application by verifying its key modules and features.
 
-The workspace contains two folders by default, where:
+Project Structure
+src/: Source code for the automated tests.
+lib/: Libraries and dependencies required for the project.
+bin/: Compiled binaries.
+demo/: Demo materials or example files (if applicable).
+Requirements
+To set up and run the project, you’ll need:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Java Development Kit (JDK) 8 or higher.
+Selenium WebDriver.
+TestNG.
+Setup and Execution
+Clone the Repository:
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+bash
+Копировать
+git clone https://github.com/xiokrius/Automations-NaviTrans.git
+cd Automations-NaviTrans
+Set Up Dependencies:
+Make sure all required libraries are included in the lib/ folder. It’s recommended to use a dependency management tool like Maven or Gradle for easier setup.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Run the Tests:
+You can execute the tests using TestNG from your IDE (e.g., IntelliJ IDEA or Eclipse) or directly from the command line.
 
-## Dependency Management
+Contribution
+Contributions are welcome! If you’d like to contribute:
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Fork this repository.
+Create a feature branch.
+Make your changes.
+Submit a pull request.

@@ -49,36 +49,36 @@ public class CreateManyOrders {
             // Заполнение данных перед планированием
             ZayavkaPage OpenDataOrder = new ZayavkaPage(driver);
             OpenDataOrder.NewOrderCreate();
-            OpenDataOrder.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             OrderPage OrderPage = new OrderPage(driver);
             OrderPage.fillOrderForm();
-            OrderPage.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             // Переход в перевозки(Заменены xPath с прямых по классам)
             OrderPage Perevozki = new OrderPage(driver);
             Perevozki.PerevozkaInFrameIteration(i); // Добавлена итерация для повторения
-            Perevozki.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             // Установка Плановых дат в перевозке и выход обратно на страницу заявок
             PageTransp OpenDate = new PageTransp(driver);
             OpenDate.OpenOrLoadingLocationIteration(i);
-            Perevozki.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             // // После установки план дат. Нажимаю Обработка/выпустить
             OrderPage vageOpenTransp = new OrderPage(driver);
             vageOpenTransp.obrabotkaVypustit();
-            vageOpenTransp.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             // // Обработка/План, планирую рейс
             OrderPage testOpenTransp = new OrderPage(driver);
             testOpenTransp.vehiclePlan();
-            testOpenTransp.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             // // // После обработка/План, нужно выбрать в какой поездке будут изменения
             OrderPage opentranspOp = new OrderPage(driver);
             opentranspOp.PlanOpen();
-            opentranspOp.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             // // // Вбиваем Тягач и прицеп
             VehiclePlanning OpenVehicle = new VehiclePlanning(driver);
@@ -89,17 +89,17 @@ public class CreateManyOrders {
             // // инициализирована.
             VehicleRoute backRoute = new VehicleRoute(driver);
             backRoute.clickSomeButtonInFrame();
-            backRoute.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             // Сам переход в сервисы
             ZayavkaByPage OpenService = new ZayavkaByPage(driver);
             OpenService.clickSomeButtonInService();
-            OpenService.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             // Действия в сервисах
             OpenInvoice Service = new OpenInvoice(driver);
             Service.OpenServices();
-            Service.returnToMainContent();
+            CreateNewOrder.returnToMainContent();
 
             OrderPage ReadyInInvoicing = new OrderPage(driver);
             ReadyInInvoicing.readyInInvoicing();
