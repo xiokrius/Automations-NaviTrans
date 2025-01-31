@@ -495,9 +495,3 @@ public class PageTransp {
 
         }
 }
-
-// Погрузка aria-labelledby="b3v3lbl"
-
-// разгрузка
-
-// Для входа в заявку
