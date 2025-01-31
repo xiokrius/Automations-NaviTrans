@@ -45,4 +45,10 @@ public class QLoginTest {
 
         return new ZayavkaPage(driver);
     }
+
+    public ClientPage goToClientPage() {
+        driver.get(
+                "http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=2003133&filter=%27NVT%20File%20Tpt%27.%27File%20date%27%20IS%20%27%3e%3d09.06.24%27&dc=0&bookmark=33%3bApAeAAJ7%2f0IAWQAyADQAMQAyADAANQAwADAAMw%3d%3d");
+
+    }
 }
