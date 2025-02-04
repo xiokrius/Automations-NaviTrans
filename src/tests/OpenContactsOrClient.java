@@ -35,5 +35,9 @@ public class OpenContactsOrClient {
         CreateNewContacts.ContactsOrderOpen();
         CreateNewContacts.returnToMainContent();
 
+        OpenContactsPage OpenContacts = new OpenContactsPage(driver);
+        OpenContacts.OpenContacts();
+        CreateNewContacts.returnToMainContent();
+
     }
 }
