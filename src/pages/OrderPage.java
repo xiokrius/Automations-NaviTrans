@@ -263,7 +263,7 @@ public class OrderPage {
                 if (iteration == 0) {
                         // Клик для раскрытия списка перевозок
                         WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                        "//*[@id=\'b3fe\']/div[2]/div/span")));
+                                        "//span[text()='Перевозки по заказу']")));
 
                         // Кликаем по первой кнопке
                         buttonInFrame.click();
@@ -301,7 +301,7 @@ public class OrderPage {
 
                 // Клик для раскрытия списка перевозок
                 WebElement buttonInFrame = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "//*[@id=\'b3fe\']/div[2]/div/span")));
+                                "//span[text()='Перевозки по заказу']")));
 
                 // Кликаем по первой кнопке
                 buttonInFrame.click();
@@ -361,18 +361,19 @@ public class OrderPage {
                 // Нахождение элементов, явная прогрузка первого элемента
 
                 WebElement transportRequirement = wait
-                                .until(ExpectedConditions.visibilityOfElementLocated(By.id("b3m1ee")));
+                                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                                                "//a[contains(@title, 'элемента Требования к транспорту')]/following-sibling::input")));
 
                 System.out.println("Нашли ид");
 
                 WebElement customersCode = driver.findElement(
-                                By.xpath("//input[contains(@id, 'b3m2ee')]"));
+                                By.xpath("//a[contains(@title, 'элемента Код Заказчика')]/following-sibling::input"));
                 //
                 WebElement carrier = driver.findElement(
-                                By.xpath("//select[contains(@id, 'b3mdee')]"));
-                //
+                                By.xpath("//a[text()='Перевозчик']/following::select[1]"));
+                // select
                 WebElement typeCarrier = driver.findElement(
-                                By.xpath("//select[contains(@id, 'b3meee')]"));
+                                By.xpath("//a[text()='Тип перевозки']/following::select[1]"));
                 //
                 // Заполнение данных
                 fillInputWithJS(transportRequirement, transportRequirementValue);

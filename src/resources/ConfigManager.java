@@ -8,15 +8,21 @@ public class ConfigManager {
     private static Properties properties = new Properties();
 
     static {
-        try (FileInputStream fis = new FileInputStream("src/resources/config.properties")) {
+        loadProperties("src/resources/config.properties");
+        loadProperties("src/resources/config.properties.contacts");
+    }
+
+    private static void loadProperties(String filePath) {
+        try (FileInputStream fis = new FileInputStream(filePath)) {
             properties.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Не удалось загрузить файл config.properties");
+            throw new RuntimeException("Не удалось загрузить файл: " + filePath);
         }
     }
 
     public static String getProperty(String key) {
         return properties.getProperty(key);
     }
+
 }

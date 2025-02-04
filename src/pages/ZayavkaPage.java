@@ -84,13 +84,12 @@ public class ZayavkaPage {
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 switchToIframe(); // Переключаемся в фрейм;
 
-                // Поле TSGroupCode
+                // Поле TSGroupCode ПЕРЕДЕЛАТЬ, НУЖНО УКАЗЫВАТЬ ПО ПУТИ, Т.К. ARIA МЕНЯЕТСЯ
                 WebElement TSGroupCode = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//input[contains(@id, 'xee') and contains(@aria-labelledby, 'xlbl')]")));
+                                By.xpath("//a[contains(@title, 'элемента TS Group code')]/following-sibling::input")));
 
-                //
                 WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//button[contains(@id, 'e0')]/span[text()='ОК']")));
+                                By.xpath("//button[contains(@id, 'gc')]/span[text()='ОК']")));
 
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("arguments[0].value = arguments[1];", TSGroupCode, TSGroupCodeValue);
@@ -98,9 +97,9 @@ public class ZayavkaPage {
 
                 System.out.println("Клик для инициализации.");
 
-                // Шаг 2: Поле Отдел
+                // Шаг 2: Поле Отдел ПЕРЕДЕЛАТЬ, НУЖНО УКАЗЫВАТЬ ПО ПУТИ, Т.К. ARIA МЕНЯЕТСЯ
                 WebElement ButtonNewZayavka = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//input[contains(@id, 'yee') and contains(@aria-labelledby, 'ylbl')]")));
+                                By.xpath("//a[contains(@title, 'элемента Отдел')]/following-sibling::input")));
 
                 js.executeScript("arguments[0].value = arguments[1];", ButtonNewZayavka, ButtonNewZayavkaValue);
                 System.out.println("Заполнили отдел: " + ButtonNewZayavkaValue);
