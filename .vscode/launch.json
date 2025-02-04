@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "OpenContactsOrClient",
+            "request": "launch",
+            "mainClass": "tests.OpenContactsOrClient",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
             "name": "CreateManyOrders",
             "request": "launch",
             "mainClass": "tests.CreateManyOrders",

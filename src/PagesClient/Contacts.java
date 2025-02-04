@@ -24,9 +24,6 @@ public class Contacts {
         driver.switchTo().frame(iframe);
     }
 
-    // ТУТ ПЕРЕХОЖУ НА СТРАНИЦУ РЕДАКТИРОВАНИЯ ПЕРЕВОЗКИ (NVT Shipment (2002947)) и
-    // инициализирую кнопки Перевозки по заказу/Управление/Правка
-
     public void ContactsOrderOpen() {
 
         System.out.println("Начинаем Contacts/ContactsOrderOpen");
@@ -42,7 +39,7 @@ public class Contacts {
 
         // Кликаем по первой кнопке
         CreateContacts.click();
-        System.out.println("Клик по кнопке создания заказа выполнен.");
+        System.out.println("Клик по кнопке создания контакта выполнен.");
 
     }
 
