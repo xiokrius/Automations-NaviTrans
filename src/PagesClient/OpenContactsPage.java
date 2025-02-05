@@ -1,6 +1,8 @@
 package PagesClient;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,14 +15,37 @@ import resources.ConfigManager;
 
 public class OpenContactsPage {
 
+    public class RandomUtils {
+
+        // Метод для генерации случайной строки
+        public static String generateRandomString(int length) {
+            String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //
+            StringBuilder randomString = new StringBuilder();
+            Random random = new Random();
+
+            for (int i = 0; i < length; i++) {
+                int index = random.nextInt(chars.length());
+                randomString.append(chars.charAt(index));
+            }
+
+            return randomString.toString();
+        }
+    }
+
     String selectedClient = ConfigManager.getProperty("SelectedClient");
-    private String NameContactsValue = ConfigManager.getProperty("NameContactsValue");
+    // private String NameContactsValue =
+    // ConfigManager.getProperty("NameContactsValue");
+    private final String NameContactsValue;
 
     private final WebDriver driver;
     private final WebDriverWait wait;
     private JavascriptExecutor js;
 
     public OpenContactsPage(WebDriver driver) {
+
+        this.NameContactsValue = RandomUtils.generateRandomString(10); // Длина 10 символов
+        System.out.println("Генерированное имя клиента: " + NameContactsValue);
+
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.js = (JavascriptExecutor) driver;
@@ -34,22 +59,45 @@ public class OpenContactsPage {
 
     public void selectRecordByText(String recordNumber) {
         try {
+            System.out.println("Ищем запись: '" + recordNumber + "'");
+
+            // Убеждаемся, что пробелы не мешают
+            recordNumber = recordNumber.trim();
+
             WebElement record = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//a[normalize-space()='" + recordNumber + "']")));
+                    By.xpath("//a[contains(text(),'" + recordNumber + "')]")));
 
             System.out.println("Нашли запись: " + recordNumber);
 
-            // Скроллим к элементу, если он не в зоне видимости
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", record);
-
-            // Кликаем по найденной записи
             record.click();
 
             System.out.println("Кликнули по записи: " + recordNumber);
         } catch (Exception e) {
-            System.out.println("Ошибка: Запись '" + recordNumber + "' не найдена!");
+            System.out.println(" Ошибка: Запись '" + recordNumber + "' не найдена!");
+            e.printStackTrace(); // Выведет полную ошибку
         }
     }
+
+    // public void selectRecordByText(String recordNumber) {
+    // try {
+    // WebElement record = wait.until(ExpectedConditions.elementToBeClickable(
+    // By.xpath("//a[normalize-space()='" + recordNumber + "']")));
+
+    // System.out.println("Нашли запись: " + recordNumber);
+
+    // // Скроллим к элементу, если он не в зоне видимости
+    // ((JavascriptExecutor)
+    // driver).executeScript("arguments[0].scrollIntoView(true);", record);
+
+    // // Кликаем по найденной записи
+    // record.click();
+
+    // System.out.println("Кликнули по записи: " + recordNumber);
+    // } catch (Exception e) {
+    // System.out.println("Ошибка: Запись '" + recordNumber + "' не найдена!");
+    // }
+    // }
 
     public void OpenContacts() {
 
@@ -108,6 +156,16 @@ public class OpenContactsPage {
         // Клиент
 
         selectRecordByText(selectedClient);
+
+        WebElement PerehodVSchetNet = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(@class, '1632124310')]/span[text()='Нет']")));
+        PerehodVSchetNet.click();
+        System.out.println("Нажата кнопка 'Нет'.");
+
+        // Нажатие кнопки "ОК"
+        WebElement buttonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
+        buttonInOk.click();
     }
 
 }

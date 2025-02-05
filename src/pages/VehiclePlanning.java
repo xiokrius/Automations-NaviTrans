@@ -13,74 +13,80 @@ import resources.ConfigManager;
 
 public class VehiclePlanning {
 
-    private WebDriver driver;
+        private WebDriver driver;
 
-    private String startingVehicleValue = ConfigManager.getProperty("startingVehicleValue");
+        private String startingVehicleValue = ConfigManager.getProperty("startingVehicleValue");
 
-    public VehiclePlanning(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public void VehiclePlanOpen() {
-        System.out.println("Начинаем VehiclePlanning/VehiclePlanOpen.");
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-
-        // Переход в iframe
-        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.className("designer-client-frame")));
-        driver.switchTo().frame(iframe);
-        System.out.println("Перешли в фрейм.");
-
-        // Находим и заполняем поле для ввода тягача
-        WebElement startingVehicle = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div/div[3]/div[1]/div/div[4]/div[2]/div[2]/div/div/div[3]/div/input")));
-        System.out.println("Нашёл поле для ввода номера тягача.");
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].value = arguments[1];", startingVehicle, startingVehicleValue);
-        System.out.println("Заполнили стартовую дату через JavaScript: " + startingVehicleValue);
-
-        // Нажимаем на элементы
-        WebElement autorisedButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div/div[3]/div[1]/div/div[4]/div[2]/div[2]/div/div/div[5]/div/input")));
-
-        startingVehicle.click();
-
-        autorisedButton.click();
-
-        try {
-            WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                    "/html/body/div[1]/div[5]/form")));
-            System.out.println("Всплывающее окно обнаружено.");
-
-            // Выполняем действия внутри окна
-            WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
-                    "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]"));
-            popupConfirmButton.click();
-            System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
-
-            // Проверка элемента "Внимание! Просрочено плановое ТО"
-            try {
-                WebElement attentionMessage = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                        "//p[contains(@title, 'Внимание! Просрочено плановое ТО')]")));
-                System.out.println("Обнаружено сообщение: " + attentionMessage.getText());
-
-                // Нажатие кнопки "ОК"
-                WebElement buttonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                        "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
-                buttonInOk.click();
-                System.out.println("Нажата кнопка 'ОК'.");
-            } catch (Exception innerException) {
-                System.out.println("Ошибка при поиске элемента 'Внимание': " + innerException.getMessage());
-            }
-        } catch (Exception e) {
-            System.out.println("Ошибка при работе со всплывающим окном: " + e.getMessage());
+        public VehiclePlanning(WebDriver driver) {
+                this.driver = driver;
         }
-        // Нажимаем кнопку "ОК"
-        WebElement vehicleOkButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
-        vehicleOkButton.click();
-        System.out.println("Нажата кнопка 'ОК'.");
-    }
+
+        public void VehiclePlanOpen() {
+                System.out.println("Начинаем VehiclePlanning/VehiclePlanOpen.");
+
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
+                // Переход в iframe
+                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.className("designer-client-frame")));
+                driver.switchTo().frame(iframe);
+                System.out.println("Перешли в фрейм.");
+
+                // Находим и заполняем поле для ввода тягача
+                WebElement startingVehicle = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                "//a[contains(@title, 'значение для элемента Тягач')]/following-sibling::input")));
+                System.out.println("Нашёл поле для ввода номера тягача.");
+
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("arguments[0].value = arguments[1];", startingVehicle, startingVehicleValue);
+                System.out.println("Заполнили стартовую дату через JavaScript: " + startingVehicleValue);
+
+                // Прицеп(пока не нужен, потом можно прокинуть значение)
+                WebElement trailerInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                "//a[contains(@title, 'значение для элемента Прицеп')]/following-sibling::input")));
+
+                // Водитель, для авторизации
+                WebElement driverInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                "//a[contains(@title, 'значение для элемента Водитель')]/following-sibling::input")));
+
+                startingVehicle.click();
+
+                driverInput.click();
+
+                try {
+                        WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                        "/html/body/div[1]/div[5]/form")));
+                        System.out.println("Всплывающее окно обнаружено.");
+
+                        // Выполняем действия внутри окна
+                        WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
+                                        "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]"));
+                        popupConfirmButton.click();
+                        System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
+
+                        // Проверка элемента "Внимание! Просрочено плановое ТО"
+                        try {
+                                WebElement attentionMessage = wait
+                                                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                                                "//p[contains(@title, 'Внимание! Просрочено плановое ТО')]")));
+                                System.out.println("Обнаружено сообщение: " + attentionMessage.getText());
+
+                                // Нажатие кнопки "ОК"
+                                WebElement buttonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                                "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
+                                buttonInOk.click();
+                                System.out.println("Нажата кнопка 'ОК'.");
+                        } catch (Exception innerException) {
+                                System.out.println("Ошибка при поиске элемента 'Внимание': "
+                                                + innerException.getMessage());
+                        }
+                } catch (Exception e) {
+                        System.out.println("Ошибка при работе со всплывающим окном: " + e.getMessage());
+                }
+                // Нажимаем кнопку "ОК"
+                WebElement vehicleOkButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
+                vehicleOkButton.click();
+                System.out.println("Нажата кнопка 'ОК'.");
+        }
 }

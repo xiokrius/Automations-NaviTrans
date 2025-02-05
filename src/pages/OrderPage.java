@@ -112,7 +112,7 @@ public class OrderPage {
                 // НАШЛИ КНОПКУ ОБРАБОТКА
                 WebElement obrabotkaButton = wait
                                 .until(ExpectedConditions
-                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
+                                                .elementToBeClickable(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Обработка.");
                 obrabotkaButton.click();
 
@@ -134,16 +134,10 @@ public class OrderPage {
                 switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
-                try {
-                        // Принудительная задержка
-                        Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                        System.err.println("Ошибка при ожидании: " + e.getMessage());
-                }
                 // Кнопка Обработки
                 WebElement obrabotkButton = wait
                                 .until(ExpectedConditions
-                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
+                                                .elementToBeClickable(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Обработка.");
 
                 obrabotkButton.click();
@@ -170,7 +164,7 @@ public class OrderPage {
                 // НАШЛИ КНОПКУ ОБРАБОТКА
                 WebElement obrabotkaButton = wait
                                 .until(ExpectedConditions
-                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
+                                                .elementToBeClickable(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Обработка.");
                 obrabotkaButton.click();
 

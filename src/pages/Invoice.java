@@ -19,14 +19,14 @@ public class Invoice {
 
                 System.out.println("Начинаем Invoice/fullSchet");
 
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
                 WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
                                 By.className("designer-client-frame")));
                 driver.switchTo().frame(iframe);
 
                 System.out.println("Перешли в фрейм.");
 
-                // НАШЛИ КНОПКУ Учёт
+                // НАШЛИ КНОПКУ Учёт(для первой итерации нужно тут прикрутить ожидание)
                 WebElement uchetButton = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//button[@aria-label='Учет']")));
                 System.out.println("Нашли первую кнопку Учёт.");

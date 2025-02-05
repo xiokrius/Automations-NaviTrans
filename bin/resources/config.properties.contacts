@@ -1,3 +1,12 @@
-
+Clients.url=http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=22&dc=0&bookmark=31%3bEgAAAAJ7%2f0MAVQBTAFQALQAwADAAMAAwADE%3d
 
 NameContactsValue=ChtoNiTak
+
+SelectedClient=000001
+
+Резидент Чехии_есть VAT-номер
+Резидент Чехии_нет VAT-номера
+Резидент ЕС_нет VAT-номера
+Резидент ЕС_ есть VAT-номер
+Нерезидент ЕС
+Резидент Беларуси
