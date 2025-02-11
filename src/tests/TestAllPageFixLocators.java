@@ -3,9 +3,15 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import pages.IntercompanyInvoice;
+import pages.Invoice;
+import pages.OpenInvoice;
 import pages.OrderPage;
+import pages.PageTransp;
 import pages.QLoginTest;
+import pages.ReadyInvoic;
+import pages.VehiclePlanning;
+import pages.VehicleRoute;
+import pages.ZayavkaByPage;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
 
@@ -28,25 +34,59 @@ public class TestAllPageFixLocators {
         loginTest.inputPassword(password);
         loginTest.clickLoginButton();
 
-        // Переход на страницу заявок
-        System.out.println("Переход на страницу заявок...");
-        ZayavkaPage zayavkaPage = loginTest.goToZayavkaPage();
+        for (int i = 0; i < 25; i++) {
+            System.out.println("Создание заявки " + (i + 4));
 
-        // Создание новой заявки
-        ZayavkaPage CreateNewOrder = new ZayavkaPage(driver);
-        CreateNewOrder.CreateNewZayavkaCZ();
-        CreateNewOrder.returnToMainContent();
+            // Переход на страницу заявок
+            System.out.println("Переход на страницу заявок...");
+            ZayavkaPage zayavkaPage = loginTest.goToZayavkaPage();
 
-        ZayavkaPage OpenDataOrder = new ZayavkaPage(driver);
-        OpenDataOrder.NewOrderCreate();
-        OpenDataOrder.returnToMainContent();
+            // Создание новой заявки
+            ZayavkaPage CreateNewOrder = new ZayavkaPage(driver);
+            CreateNewOrder.CreateNewZayavkaCZ();
+            CreateNewOrder.returnToMainContent();
 
-        OrderPage OpenInctercompany = new OrderPage(driver);
-        OpenInctercompany.fillIntercompanyForm();
-        CreateNewOrder.returnToMainContent();
+            // Заполнение данных перед планированием
+            ZayavkaPage OpenDataOrder = new ZayavkaPage(driver);
+            OpenDataOrder.NewOrderCreate();
+            CreateNewOrder.returnToMainContent();
 
-        IntercompanyInvoice FillingIntercompany = new IntercompanyInvoice(driver);
-        FillingIntercompany.InterCompanyInfo();
+            OrderPage OrderPage = new OrderPage(driver);
+            OrderPage.fillOrderForm();
+            CreateNewOrder.returnToMainContent();
 
+            // Переход в перевозки(Заменены xPath с прямых по классам)
+            OrderPage Perevozki = new OrderPage(driver);
+            Perevozki.PerevozkaInFrameIteration(i); // Добавлена итерация для повторения
+            CreateNewOrder.returnToMainContent();
+
+            // Установка Плановых дат в перевозке и выход обратно на страницу заявок
+            PageTransp OpenDate = new PageTransp(driver);
+            OpenDate.OpenOrLoadingLocationIteration(i);
+            CreateNewOrder.returnToMainContent();
+
+            // // После установки план дат. Нажимаю Обработка/выпустить
+            OrderPage vageOpenTransp = new OrderPage(driver);
+            vageOpenTransp.obrabotkaVypustit();
+            CreateNewOrder.returnToMainContent();
+
+            // // Обработка/План, планирую рейс
+            OrderPage testOpenTransp = new OrderPage(driver);
+            testOpenTransp.vehiclePlan();
+            CreateNewOrder.returnToMainContent();
+
+            // // // После обработка/План, нужно выбрать в какой поездке будут изменения
+            OrderPage opentranspOp = new OrderPage(driver);
+            opentranspOp.PlanOpen();
+            CreateNewOrder.returnToMainContent();
+
+            // // // Вбиваем Тягач и прицеп
+            VehiclePlanning OpenVehicle = new VehiclePlanning(driver);
+            OpenVehicle.VehiclePlanOpen();
+            CreateNewOrder.returnToMainContent();
+
+            VehicleRoute vehicleRoute = new VehicleRoute(driver);
+            vehicleRoute.clickSomeButtonInFrame();
+        }
     }
 }

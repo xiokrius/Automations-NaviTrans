@@ -54,6 +54,45 @@ public class ZayavkaPage {
                 }
         }
 
+        // Делаю на коленке, нужно быстро протестить ФХ, тут более 1000 заказов в день
+        // выходит, нет времени нормально писать, потом переделать!
+        public void CopiedOrders() {
+
+                System.out.println("CopiedOrders");
+
+                // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                switchToIframe(); // Переключаемся в фрейм
+
+                // Шаг 2: КНОПКА ЗАЯВКИ на пейдже страницы заявок
+                WebElement DateButton = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//a[contains(@title, 'Дата заявки')]")));
+
+                try {
+                        DateButton.click();
+                        System.out.println("Клик по кнопке выполнен.");
+                        Thread.sleep(300);
+                        DateButton.click();
+                        System.out.println("Клик по кнопке выполнен.");
+
+                } catch (Exception e) {
+                        System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
+                }
+
+                // Указываю full Xpath потому что мне нужно само место,а не элемент, прости
+                // господи :)
+
+                try {
+                        WebElement OrdersPage = wait.until(ExpectedConditions.elementToBeClickable(
+                                        By.xpath("/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td[3]/a")));
+                        Thread.sleep(300);
+                        OrdersPage.click();
+                } catch (Exception e) {
+                        System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
+                }
+
+        }
+
         public void CreateNewZayavkaCZ() {
 
                 System.out.println("ZayavkaPage/CreateNewZayavkaCZ");

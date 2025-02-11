@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CopyinganOrderVehicle",
+            "request": "launch",
+            "mainClass": "tests.CopyinganOrderVehicle",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
             "name": "OpenContactsOrClient",
             "request": "launch",
             "mainClass": "tests.OpenContactsOrClient",
