@@ -2,16 +2,10 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import org.testng.annotations.AfterClass;
 
-import pages.Invoice;
-import pages.OpenInvoice;
 import pages.OrderPage;
 import pages.PageTransp;
 import pages.QLoginTest;
-import pages.ReadyInvoic;
 import pages.VehiclePlanning;
 import pages.VehicleRoute;
 import pages.ZayavkaByPage;
@@ -76,7 +70,7 @@ public class CopyinganOrderVehicle {
 
         // Вбиваем Тягач и прицеп
         VehiclePlanning OpenVehicle = new VehiclePlanning(driver);
-        OpenVehicle.VehiclePlanOpen();
+        OpenVehicle.VehiclePlanOpenCopiedOrder();
         zayavkaPage.returnToMainContent();
 
         // На странице рейса выхожу обратно, пока там ничего не нужно, она

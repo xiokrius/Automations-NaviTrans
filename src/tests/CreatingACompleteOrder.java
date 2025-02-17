@@ -48,8 +48,8 @@ public class CreatingACompleteOrder {
         zayavkaByPage.returnToMainContent();
 
         // Переход в перевозки
-        OrderPage pageOpenTransp = new OrderPage(driver);
-        pageOpenTransp.clickSomeButtonInFrame();
+        // OrderPage pageOpenTransp = new OrderPage(driver);
+        // pageOpenTransp.clickSomeButtonInFrame();
         zayavkaPage.returnToMainContent();
 
         // Установка Плановых дат в перевозке и выход обратно на страницу заявок

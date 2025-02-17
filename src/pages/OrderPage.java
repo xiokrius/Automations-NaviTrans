@@ -153,11 +153,6 @@ public class OrderPage {
                         WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                         "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
 
-                        // WebElement ButtonInOk =
-                        // wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                        // "(//div[@class='dialog-action-bar'])[2]//button[contains(@class,
-                        // '1632124310')]//span[text()='ОК']")));
-
                         js.executeScript("arguments[0].click();", ButtonInOk);
 
                 } catch (Exception e) {

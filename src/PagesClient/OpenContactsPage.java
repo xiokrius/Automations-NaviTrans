@@ -35,7 +35,7 @@ public class OpenContactsPage {
         String selectedClient = ConfigManager.getProperty("SelectedClient");
 
         // test
-        private final String NameContactsValue;
+        public final String NameContactsValue;
 
         private final WebDriver driver;
         private final WebDriverWait wait;
