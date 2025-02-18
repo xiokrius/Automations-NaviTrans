@@ -83,6 +83,8 @@ public class ZayavkaByPage {
 
                 buttonInService.click();
                 System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
+
+                returnToMainContent();
         }
 
         public void returnToMainContent() {

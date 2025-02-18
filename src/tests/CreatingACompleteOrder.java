@@ -40,17 +40,14 @@ public class CreatingACompleteOrder {
         // Переход в саму заявку
         System.out.println("Вход на страницу заявок и переход в заявку");
         zayavkaPage.clickZayavkaBY();
-        zayavkaPage.returnToMainContent();
 
         // КОПИРОВАНИЕ ЗАЯВКИ, опционально
         ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
         zayavkaByPage.clickSomeButtonInFrame();
-        zayavkaByPage.returnToMainContent();
 
         // Переход в перевозки
         // OrderPage pageOpenTransp = new OrderPage(driver);
         // pageOpenTransp.clickSomeButtonInFrame();
-        zayavkaPage.returnToMainContent();
 
         // Установка Плановых дат в перевозке и выход обратно на страницу заявок
         PageTransp pageTransp = new PageTransp(driver);
@@ -59,33 +56,27 @@ public class CreatingACompleteOrder {
         // После установки план дат. Нажимаю Обработка/выпустить
         OrderPage vageOpenTransp = new OrderPage(driver);
         vageOpenTransp.obrabotkaVypustit();
-        zayavkaPage.returnToMainContent();
 
         // Обработка/План, планирую рейс
         OrderPage testOpenTransp = new OrderPage(driver);
         testOpenTransp.vehiclePlan();
-        zayavkaPage.returnToMainContent();
 
         // После обработка/План, нужно выбрать в какой поездке будут изменения
         OrderPage opentranspOp = new OrderPage(driver);
         opentranspOp.PlanOpen();
-        zayavkaPage.returnToMainContent();
 
         // Вбиваем Тягач и прицеп
         VehiclePlanning OpenVehicle = new VehiclePlanning(driver);
         OpenVehicle.VehiclePlanOpen();
-        zayavkaPage.returnToMainContent();
 
         // На странице рейса выхожу обратно, пока там ничего не нужно, она
         // инициализирована.
         VehicleRoute backRoute = new VehicleRoute(driver);
         backRoute.clickSomeButtonInFrame();
-        zayavkaPage.returnToMainContent();
 
         // Лезу в сервисы
         ZayavkaByPage Service = new ZayavkaByPage(driver);
         Service.clickSomeButtonInService();
-        Service.returnToMainContent();
 
         // Завершение работы
         // driver.quit();

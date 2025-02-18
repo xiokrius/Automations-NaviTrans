@@ -38,7 +38,6 @@ public class CopyinganOrderVehicle {
         // Переход в саму заявку
         System.out.println("Вход на страницу заявок и переход в заявку");
         zayavkaPage.CopiedOrders();
-        zayavkaPage.returnToMainContent();
 
         // КОПИРОВАНИЕ ЗАЯВКИ, опционально
         ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
@@ -47,7 +46,6 @@ public class CopyinganOrderVehicle {
 
         OrderPage pageOpenTransp = new OrderPage(driver);
         pageOpenTransp.OpenTranspVehicle();
-        zayavkaPage.returnToMainContent();
 
         // Установка Плановых дат в перевозке и выход обратно на страницу заявок
         PageTransp pageTransp = new PageTransp(driver);
@@ -56,28 +54,23 @@ public class CopyinganOrderVehicle {
         // После установки план дат. Нажимаю Обработка/выпустить
         OrderPage vageOpenTransp = new OrderPage(driver);
         vageOpenTransp.obrabotkaVypustit();
-        zayavkaPage.returnToMainContent();
 
         // Обработка/План, планирую рейс
         OrderPage testOpenTransp = new OrderPage(driver);
         testOpenTransp.vehiclePlan();
-        zayavkaPage.returnToMainContent();
 
         // После обработка/План, нужно выбрать в какой поездке будут изменения
         OrderPage opentranspOp = new OrderPage(driver);
         opentranspOp.PlanOpen();
-        zayavkaPage.returnToMainContent();
 
         // Вбиваем Тягач и прицеп
         VehiclePlanning OpenVehicle = new VehiclePlanning(driver);
         OpenVehicle.VehiclePlanOpenCopiedOrder();
-        zayavkaPage.returnToMainContent();
 
         // На странице рейса выхожу обратно, пока там ничего не нужно, она
         // инициализирована.
         VehicleRoute backRoute = new VehicleRoute(driver);
         backRoute.clickSomeButtonInFrame();
-        zayavkaPage.returnToMainContent();
 
         // Лезу в сервисы
         ZayavkaByPage Service = new ZayavkaByPage(driver);

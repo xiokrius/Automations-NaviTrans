@@ -18,12 +18,7 @@ public class ZayavkaPage {
 
         private WebDriver driver;
         private WebDriverWait wait;
-
-        private void switchToIframe() {
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
-        }
+        private FrameSwitcher frameSwitcher;
 
         private String TSGroupCodeValue = ConfigManager.getProperty("TSGroupCodeValue");
         private String ButtonNewZayavkaValue = ConfigManager.getProperty("ButtonNewZayavkaValue");
@@ -31,6 +26,7 @@ public class ZayavkaPage {
         public ZayavkaPage(WebDriver driver) {
                 this.driver = driver;
                 this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                this.frameSwitcher = new FrameSwitcher(driver);
         }
 
         public void clickZayavkaBY() {
@@ -39,7 +35,7 @@ public class ZayavkaPage {
 
                 // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe(); // Переключаемся в фрейм
+                frameSwitcher.switchToIframe(); // Переключаемся в фрейм
 
                 // Шаг 2: КНОПКА ЗАЯВКИ на пейдже страницы заявок
                 WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
@@ -52,6 +48,9 @@ public class ZayavkaPage {
                 } catch (Exception e) {
                         System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
                 }
+
+                frameSwitcher.returnToMainContent();
+
         }
 
         // Делаю на коленке, нужно быстро протестить ФХ, тут более 1000 заказов в день
@@ -62,7 +61,7 @@ public class ZayavkaPage {
 
                 // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe(); // Переключаемся в фрейм
+                frameSwitcher.switchToIframe(); // Переключаемся в фрейм
 
                 // Шаг 2: КНОПКА ЗАЯВКИ на пейдже страницы заявок
                 WebElement DateButton = wait.until(ExpectedConditions.elementToBeClickable(
@@ -91,6 +90,7 @@ public class ZayavkaPage {
                         System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
                 }
 
+                frameSwitcher.returnToMainContent();
         }
 
         public void CreateNewZayavkaCZ() {
@@ -99,7 +99,8 @@ public class ZayavkaPage {
 
                 // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe(); // Переключаемся в фрейм
+
+                frameSwitcher.switchToIframe();// Переключаемся в фрейм
 
                 // Шаг 2: КНОПКА НОВЫЙ(для создания заказа)
                 WebElement Noviy = wait.until(ExpectedConditions.elementToBeClickable(
@@ -112,6 +113,7 @@ public class ZayavkaPage {
                 WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//button[@aria-label='Создать' and contains(@class, 'ms-Button')]")));
                 button.click();
+                frameSwitcher.returnToMainContent();
 
         }
 
@@ -121,7 +123,7 @@ public class ZayavkaPage {
 
                 // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe(); // Переключаемся в фрейм;
+                frameSwitcher.switchToIframe(); // Переключаемся в фрейм;
 
                 // Поле TSGroupCode ПЕРЕДЕЛАТЬ, НУЖНО УКАЗЫВАТЬ ПО ПУТИ, Т.К. ARIA МЕНЯЕТСЯ
                 WebElement TSGroupCode = wait.until(ExpectedConditions.elementToBeClickable(
@@ -148,11 +150,8 @@ public class ZayavkaPage {
 
                 ButtonInOk.click();
 
-        }
+                frameSwitcher.returnToMainContent();
 
-        public void returnToMainContent() {
-                driver.switchTo().defaultContent();
-                System.out.println("Возвращаемся в основной контент страницы.");
         }
 
 }

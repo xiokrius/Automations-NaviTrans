@@ -1,6 +1,7 @@
 package pages;
 
 import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,9 +11,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Invoice {
 
         private WebDriver driver;
+        private FrameSwitcher frameSwitcher;
 
         public Invoice(WebDriver driver) {
                 this.driver = driver;
+                this.frameSwitcher = new FrameSwitcher(driver);
         }
 
         public void fullSchet() {
@@ -20,9 +23,8 @@ public class Invoice {
                 System.out.println("Начинаем Invoice/fullSchet");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
+
+                frameSwitcher.switchToIframe();
 
                 System.out.println("Перешли в фрейм.");
 
@@ -78,6 +80,7 @@ public class Invoice {
                         System.out.println("Всплывающее окно не появилось, продолжаем выполнение." + e.getMessage());
                 }
 
+                frameSwitcher.returnToMainContent();
         }
 
 }

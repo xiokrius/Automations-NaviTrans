@@ -23,17 +23,13 @@ public class IntercompanyInvoice {
         private WebDriver driver;
         private WebDriverWait wait;
         private JavascriptExecutor js;
+        private FrameSwitcher frameSwitcher;
 
         public IntercompanyInvoice(WebDriver driver) {
                 this.driver = driver;
                 this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Инициализация WebDriverWait
                 this.js = (JavascriptExecutor) driver; // Инициализация JavascriptExecutor
-        }
-
-        private void switchToIframe() {
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
+                this.frameSwitcher = new FrameSwitcher(driver);
         }
 
         private void setInputValue(WebElement element, String value) {
@@ -56,7 +52,8 @@ public class IntercompanyInvoice {
         }
 
         public void InterCompanyInfo() {
-                switchToIframe();
+
+                frameSwitcher.switchToIframe();
 
                 System.out.println("Начинаем IntercompanyInvoice/InterCompanyInfo");
 
@@ -99,6 +96,8 @@ public class IntercompanyInvoice {
                                 By.xpath("//*[@aria-label='Создать файл IC']")));
 
                 CreateICfile.click();
+
+                frameSwitcher.switchToIframe();
 
         }
 

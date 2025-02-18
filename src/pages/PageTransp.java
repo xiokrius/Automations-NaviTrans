@@ -36,18 +36,13 @@ public class PageTransp {
         private WebDriver driver;
         private WebDriverWait wait;
         private JavascriptExecutor js;
+        private FrameSwitcher frameSwitcher;
 
         public PageTransp(WebDriver driver) {
                 this.driver = driver;
                 this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 this.js = (JavascriptExecutor) driver;
-        }
-
-        // Метод для переключения в iframe
-        private void switchToIframe() {
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
+                this.frameSwitcher = new FrameSwitcher(driver);
         }
 
         private void setInputValue(WebElement element, String value) {
@@ -64,7 +59,7 @@ public class PageTransp {
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
                 // Переключаемся в iframe
-                switchToIframe();
+                frameSwitcher.switchToIframe();
 
                 // Ожидаем элемент input для заполнения
                 WebElement startingDate = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
@@ -115,6 +110,7 @@ public class PageTransp {
                         System.out.println("Ошибка: дата выгрузки не установлена корректно.");
                 }
 
+                frameSwitcher.returnToMainContent();
         }
 
         public void setStartingDateValue(String startingDateValue) {
@@ -132,7 +128,7 @@ public class PageTransp {
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
                 // Переключаемся в iframe
-                switchToIframe();
+                frameSwitcher.switchToIframe();
 
                 // План Дата загрузки id и прочее не статично, пришлось по DOM идти
                 WebElement PlanningLoadingDate = wait.until(ExpectedConditions.elementToBeClickable(
@@ -172,7 +168,7 @@ public class PageTransp {
 
                 BackPage.click();
 
-                driver.switchTo().defaultContent();
+                frameSwitcher.returnToMainContent();
                 System.out.println("Вышли из iframe.");
 
         }
@@ -184,7 +180,7 @@ public class PageTransp {
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
                 // Переключаемся в iframe
-                switchToIframe();
+                frameSwitcher.switchToIframe();
 
                 // id и прочее не статично, пришлось по DOM идти
                 WebElement OpenLoadingLocation = wait.until(ExpectedConditions.elementToBeClickable(
@@ -358,9 +354,7 @@ public class PageTransp {
 
                 BackPage.click();
 
-                // column_header_b3t9PageTransp/OpenOrLoadingLocation
-                // Возвращаемся в основной контекст
-                driver.switchTo().defaultContent();
+                frameSwitcher.returnToMainContent();
                 System.out.println("Вышли из iframe.");
 
         }

@@ -19,11 +19,13 @@ public class OpenInvoice {
         private String PriceValueValue = ConfigManager.getProperty("PriceValueValue");
 
         private WebDriver driver;
+        private FrameSwitcher frameSwitcher;
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         public OpenInvoice(WebDriver driver) {
                 this.driver = driver;
                 this.js = (JavascriptExecutor) driver;
+                this.frameSwitcher = new FrameSwitcher(driver);
         }
 
         private void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
@@ -46,9 +48,9 @@ public class OpenInvoice {
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
+
+                frameSwitcher.switchToIframe();
+
                 System.out.println("Перешли в фрейм.");
 
                 // Ожидаем появления инпут-поля с динамическим ID
@@ -107,10 +109,8 @@ public class OpenInvoice {
                 WebElement backButton = driver.findElement(By.xpath(
                                 "/html/body/div[1]/div[4]/form/main/div[2]/div[2]/div/div/div[1]/span/button/span"));
                 backButton.click();
+
+                frameSwitcher.returnToMainContent();
         }
 
-        public void returnToMainContent() {
-                driver.switchTo().defaultContent();
-                System.out.println("ласт вышел с фрейма, проверка");
-        }
 }

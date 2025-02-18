@@ -14,11 +14,13 @@ import resources.ConfigManager;
 public class VehiclePlanning {
 
         private WebDriver driver;
+        private FrameSwitcher frameSwitcher;
 
         private String startingVehicleValue = ConfigManager.getProperty("startingVehicleValue");
 
         public VehiclePlanning(WebDriver driver) {
                 this.driver = driver;
+                this.frameSwitcher = new FrameSwitcher(driver);
         }
 
         public void VehiclePlanOpen() {
@@ -26,10 +28,7 @@ public class VehiclePlanning {
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
-                // Переход в iframe
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
+                frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // Находим и заполняем поле для ввода тягача
@@ -88,6 +87,9 @@ public class VehiclePlanning {
                                 "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
                 vehicleOkButton.click();
                 System.out.println("Нажата кнопка 'ОК'.");
+
+                frameSwitcher.returnToMainContent();
+
         }
 
         public void VehiclePlanOpenCopiedOrder() {
@@ -95,10 +97,7 @@ public class VehiclePlanning {
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
-                // Переход в iframe
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
+                frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // Находим и заполняем поле для ввода тягача
@@ -158,5 +157,8 @@ public class VehiclePlanning {
                                 "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
                 vehicleOkButton.click();
                 System.out.println("Нажата кнопка 'ОК'.");
+
+                frameSwitcher.returnToMainContent();
         }
+
 }

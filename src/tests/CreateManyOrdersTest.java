@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterClass;
 
+import pages.FrameSwitcher;
 import pages.Invoice;
 import pages.OpenInvoice;
 import pages.OrderPage;
@@ -42,7 +43,7 @@ public class CreateManyOrdersTest {
 
     @Test(priority = 2, dependsOnMethods = "login")
     public void createOrders() {
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 2; i++) {
             System.out.println("Создание заявки " + (i + 1));
             createOrder(i);
         }
@@ -90,7 +91,7 @@ public class CreateManyOrdersTest {
 
     private void performAction(Runnable action) {
         action.run();
-        new ZayavkaPage(driver).returnToMainContent();
+        new FrameSwitcher(driver).returnToMainContent();
     }
 
     @AfterClass

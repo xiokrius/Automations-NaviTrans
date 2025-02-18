@@ -21,17 +21,12 @@ public class OrderPage {
 
         private final WebDriver driver;
         private final WebDriverWait wait;
+        private FrameSwitcher frameSwitcher;
 
         public OrderPage(WebDriver driver) {
                 this.driver = driver;
                 this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        }
-
-        // Метод для переключения в iframe
-        private void switchToIframe() {
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
+                this.frameSwitcher = new FrameSwitcher(driver);
         }
 
         // Метод для получения элемента
@@ -69,7 +64,7 @@ public class OrderPage {
                 System.out.println("Начинаем OrderPage/obrabotkaVypustit");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe();
+                frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
@@ -86,6 +81,8 @@ public class OrderPage {
                 // Выпустить (Ctrl+F9) "//button[@title='Выпустить (Ctrl+F9)']"
                 VypustitButton.click();
 
+                frameSwitcher.returnToMainContent();
+
         }
 
         // CОЗДАНИЕ РЕЙСА
@@ -94,7 +91,7 @@ public class OrderPage {
                 System.out.println("Начинаем OrderPage/vehiclePlan");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe();
+                frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // Кнопка Обработки
@@ -112,6 +109,8 @@ public class OrderPage {
 
                 PlanButton.click();
 
+                frameSwitcher.returnToMainContent();
+
         }
 
         // Нажатие Готов к инвойсированию
@@ -121,7 +120,8 @@ public class OrderPage {
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-                switchToIframe();
+                frameSwitcher.switchToIframe();
+
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
@@ -159,6 +159,8 @@ public class OrderPage {
                         System.out.println("Ошибка: " + e.getMessage());
                 }
 
+                frameSwitcher.returnToMainContent();
+
         }
 
         // Создание счёта
@@ -167,7 +169,7 @@ public class OrderPage {
                 System.out.println("Начинаем OrderPage/obrabotkaSchet");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe();
+                frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
@@ -185,6 +187,8 @@ public class OrderPage {
 
                 schet.click();
 
+                frameSwitcher.returnToMainContent();
+
         }
 
         // После обработка/План, нужно выбрать в какой поездке будут изменения
@@ -193,7 +197,7 @@ public class OrderPage {
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-                switchToIframe();
+                frameSwitcher.switchToIframe();
 
                 System.out.println("Перешли в фрейм.");
 
@@ -201,6 +205,8 @@ public class OrderPage {
                                 "//button//span[text()='ОК']")));
                 System.out.println("Нашли Третью кнопку Ок");
                 OpenDrive.click();
+
+                frameSwitcher.returnToMainContent();
         }
 
         public void PerevozkaInFrameIteration(int iteration) {
@@ -209,7 +215,7 @@ public class OrderPage {
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe();
+                frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 if (iteration == 0) {
@@ -240,6 +246,8 @@ public class OrderPage {
 
                 buttonInPereozkiUpravlenieSozdat.click();
                 System.out.println("Клик по второй кнопке 3 внутри фрейма выполнен.");
+
+                frameSwitcher.returnToMainContent();
         }
 
         // Переход в перевозку
@@ -249,7 +257,7 @@ public class OrderPage {
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe();
+                frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // Клик для раскрытия списка перевозок
@@ -275,6 +283,8 @@ public class OrderPage {
 
                 buttonInPereozkiUpravlenieSozdat.click();
                 System.out.println("Клик по второй кнопке 3 внутри фрейма выполнен.");
+
+                frameSwitcher.returnToMainContent();
         }
 
         // Переход в перевозку
@@ -284,7 +294,7 @@ public class OrderPage {
 
                 // Переключаемся в нужный фрейм
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                switchToIframe();
+                frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
                 // Клик для раскрытия списка перевозок
@@ -310,12 +320,14 @@ public class OrderPage {
 
                 buttonInPereozkiUpravlenieSozdat.click();
                 System.out.println("Клик по второй кнопке 3 внутри фрейма выполнен.");
+
+                frameSwitcher.returnToMainContent();
         }
 
         // ИНИЦИАЛИЗИРУЮ ОБРАБОТКУ ДЛЯ ПЕРЕХОДА В РАСХОДЫ И СОЗДАНИЯ ИНТЕРКОМПАНИ
 
         public void fillIntercompanyForm() {
-                switchToIframe();
+                frameSwitcher.switchToIframe();
 
                 System.out.println("Начинаем OrderPage/fillIntercompanyForm");
 
@@ -335,14 +347,15 @@ public class OrderPage {
 
                 System.out.println("Перешли в расходы");
 
+                frameSwitcher.returnToMainContent();
+
         }
 
         // Заполнение основной формы в Заявке
 
         public void fillOrderForm() {
 
-                // Переход в iframe
-                switchToIframe();
+                frameSwitcher.switchToIframe();
 
                 System.out.println("Начинаем OrderPage/fillOrderForm");
 
@@ -377,10 +390,8 @@ public class OrderPage {
                 customersCode.click();
                 transportRequirement.click();
 
+                frameSwitcher.returnToMainContent();
+
         }
 
-        public void returnToMainContent() {
-                driver.switchTo().defaultContent();
-                System.out.println("ласт вышел с фрейма, проверка");
-        }
 }

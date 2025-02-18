@@ -12,17 +12,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BackPageOrder {
 
     private final WebDriver driver;
-    private final WebDriverWait wait;
+    private FrameSwitcher frameSwitcher;
 
     public BackPageOrder(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-    }
-
-    private void switchToIframe() {
-        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.className("designer-client-frame")));
-        driver.switchTo().frame(iframe);
+        this.frameSwitcher = new FrameSwitcher(driver);
     }
 
     public void BackPage() {
@@ -31,7 +25,7 @@ public class BackPageOrder {
 
         // Переключаемся в нужный фрейм
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        switchToIframe();
+        frameSwitcher.switchToIframe();
         System.out.println("Перешли в фрейм.");
 
         WebElement BackPage = wait.until(ExpectedConditions.elementToBeClickable(
@@ -47,5 +41,8 @@ public class BackPageOrder {
         System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
 
         System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
+
+        frameSwitcher.returnToMainContent();
     }
+
 }

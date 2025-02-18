@@ -11,9 +11,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class ReadyInvoic {
 
     private WebDriver driver;
+    private FrameSwitcher frameSwitcher;
 
     public ReadyInvoic(WebDriver driver) {
         this.driver = driver;
+        this.frameSwitcher = new FrameSwitcher(driver);
     }
 
     public void SchetRuchnoy() {
@@ -22,9 +24,7 @@ public class ReadyInvoic {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.className("designer-client-frame")));
-        driver.switchTo().frame(iframe);
+        frameSwitcher.switchToIframe();
         System.out.println("Перешли в фрейм.");
 
         // НАШЛИ КНОПКУ ОБРАБОТКА
@@ -53,6 +53,8 @@ public class ReadyInvoic {
         } catch (Exception e) {
             System.out.println("Всплывающее окно не появилось, продолжаем выполнение." + e.getMessage());
         }
+
+        frameSwitcher.returnToMainContent();
 
     }
 
