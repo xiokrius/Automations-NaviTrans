@@ -1,7 +1,6 @@
 package PagesClient;
 
 import java.time.Duration;
-import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -78,26 +77,6 @@ public class OpenContactsPage {
                         e.printStackTrace(); // Выведет полную ошибку
                 }
         }
-
-        // public void selectRecordByText(String recordNumber) {
-        // try {
-        // WebElement record = wait.until(ExpectedConditions.elementToBeClickable(
-        // By.xpath("//a[normalize-space()='" + recordNumber + "']")));
-
-        // System.out.println("Нашли запись: " + recordNumber);
-
-        // // Скроллим к элементу, если он не в зоне видимости
-        // ((JavascriptExecutor)
-        // driver).executeScript("arguments[0].scrollIntoView(true);", record);
-
-        // // Кликаем по найденной записи
-        // record.click();
-
-        // System.out.println("Кликнули по записи: " + recordNumber);
-        // } catch (Exception e) {
-        // System.out.println("Ошибка: Запись '" + recordNumber + "' не найдена!");
-        // }
-        // }
 
         public void OpenContacts() {
 

@@ -2,9 +2,6 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import org.testng.annotations.AfterClass;
 
 import pages.FrameSwitcher;
 import pages.Invoice;
@@ -18,6 +15,16 @@ import pages.VehicleRoute;
 import pages.ZayavkaByPage;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 
 public class CreateManyOrdersTest {
 
@@ -94,11 +101,31 @@ public class CreateManyOrdersTest {
         new FrameSwitcher(driver).returnToMainContent();
     }
 
+    @AfterMethod
+    public void takeScreenshotOnFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            takeScreenshot(result.getName());
+        }
+    }
+
+    private void takeScreenshot(String testName) {
+        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String screenshotName = "screenshots/" + testName + "_" + timestamp + ".png";
+
+        try {
+            new File("screenshots").mkdirs(); // Создаст папку, если её нет
+            FileUtils.copyFile(srcFile, new File(screenshotName));
+            System.out.println("Скриншот сохранен: " + screenshotName);
+        } catch (IOException e) {
+            System.err.println("Ошибка при сохранении скриншота: " + e.getMessage());
+        }
+    }
+
     @AfterClass
     public void teardown() {
         if (driver != null) {
             driver.quit();
         }
     }
-
 }

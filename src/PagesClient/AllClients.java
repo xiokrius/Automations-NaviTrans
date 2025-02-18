@@ -1,7 +1,6 @@
 package PagesClient;
 
 import java.time.Duration;
-import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
