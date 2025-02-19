@@ -1,5 +1,15 @@
 package tests;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.commons.io.FileUtils;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -15,21 +25,14 @@ import pages.VehicleRoute;
 import pages.ZayavkaByPage;
 import pages.ZayavkaPage;
 import resources.ConfigManager;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.testng.ITestResult;
-import org.testng.annotations.*;
 
 public class CreateManyOrdersTest {
 
     private WebDriver driver;
     private QLoginTest loginTest;
+    private static final Logger logger = LogManager.getLogger(CreateManyOrdersTest.class);
 
     @BeforeClass
     public void setup() {
@@ -46,6 +49,7 @@ public class CreateManyOrdersTest {
         loginTest.inputLogin(login);
         loginTest.inputPassword(password);
         loginTest.clickLoginButton();
+        logger.info("Логин и пароль введены");
     }
 
     @Test(priority = 2, dependsOnMethods = "login")
@@ -53,6 +57,7 @@ public class CreateManyOrdersTest {
         for (int i = 0; i < 2; i++) {
             System.out.println("Создание заявки " + (i + 1));
             createOrder(i);
+            logger.info("Переход на страницу транспортных заявок");
         }
     }
 
@@ -116,16 +121,16 @@ public class CreateManyOrdersTest {
         try {
             new File("screenshots").mkdirs(); // Создаст папку, если её нет
             FileUtils.copyFile(srcFile, new File(screenshotName));
-            System.out.println("Скриншот сохранен: " + screenshotName);
+            logger.error("Скриншот сохранен: " + screenshotName);
         } catch (IOException e) {
-            System.err.println("Ошибка при сохранении скриншота: " + e.getMessage());
+            logger.error("Ошибка при сохранении скриншота: " + e.getMessage());
         }
     }
 
-    @AfterClass
-    public void teardown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+    // @AfterClass
+    // public void tearDown() {
+    // if (driver != null) {
+    // driver.quit();
+    // }
+    // }
 }
