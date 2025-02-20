@@ -1,0 +1,19 @@
+2025-02-19 16:07:37 [main] INFO  tests.CreateManyOrdersTest - Логин и пароль введены
+2025-02-19 16:08:06 [main] ERROR tests.CreateManyOrdersTest - Скриншот сохранен: screenshots/createOrders_20250219_160806.png
+2025-02-19 16:34:11 [main] INFO  tests.CreateManyOrdersTest - Логин и пароль введены
+2025-02-19 16:34:56 [main] INFO  tests.CreateManyOrdersTest - Переход на страницу транспортных заявок
+2025-02-19 16:35:37 [main] INFO  tests.CreateManyOrdersTest - Переход на страницу транспортных заявок
+2025-02-19 16:36:26 [main] INFO  tests.CreateManyOrdersTest - Логин и пароль введены
+2025-02-19 16:37:39 [main] INFO  tests.CreateManyOrdersTest - Браузер запущен и открыт URL
+2025-02-19 16:37:40 [main] INFO  tests.CreateManyOrdersTest - Успешный вход в систему
+2025-02-19 16:37:40 [main] INFO  tests.CreateManyOrdersTest - Открыта страница заявок
+2025-02-19 16:37:46 [main] INFO  tests.CreateManyOrdersTest - Создана новая заявка
+2025-02-19 16:37:50 [main] INFO  tests.CreateManyOrdersTest - Заполнена форма заказа
+2025-02-19 16:37:52 [main] INFO  tests.CreateManyOrdersTest - Обработан заказ: переход в перевозки
+2025-02-19 16:37:58 [main] INFO  tests.CreateManyOrdersTest - Установлены плановые даты перевозки
+2025-02-19 16:38:00 [main] INFO  tests.CreateManyOrdersTest - Установлены плановые даты перевозки
+2025-02-19 16:38:05 [main] INFO  tests.CreateManyOrdersTest - Запланирован тягач и прицеп
+2025-02-19 16:38:11 [main] INFO  tests.CreateManyOrdersTest - Открыт раздел сервисов
+2025-02-19 16:38:11 [main] INFO  tests.CreateManyOrdersTest - Открыт раздел сервисов
+2025-02-19 16:38:13 [main] INFO  tests.CreateManyOrdersTest - Обработаны сервисы
+2025-02-19 16:38:23 [main] INFO  tests.CreateManyOrdersTest - Заказ завершен, сформирован счет

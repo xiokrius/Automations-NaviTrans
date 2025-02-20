@@ -49,7 +49,7 @@ public class QLoginTest {
         return new ZayavkaPage(driver);
     }
 
-    public Contacts goToContacts() {
+    public main.java.com.example.PagesClient.Contacts goToContacts() {
         driver.get(
                 "http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=5052&dc=0&bookmark=31%3buhMAAAJ7%2fxoEHgQdBCIELQAwADYANAA0ADU%3d");
 

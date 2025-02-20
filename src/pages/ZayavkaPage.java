@@ -76,13 +76,13 @@ public class ZayavkaPage {
                         System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());
                 }
 
-                // Указываю full Xpath потому что мне нужно само место,а не элемент, прости
-                // господи :)
-
                 try {
                         WebElement OrdersPage = wait.until(ExpectedConditions.elementToBeClickable(
-                                        By.xpath("/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td[3]/a")));
-                        Thread.sleep(300);
+                                        By.xpath("//a[contains(@title, 'Открыть запись ')]")));
+                        Thread.sleep(500);
+
+                        OrdersPage.click();
+                        System.out.println("Клик по заявке выполнен");
                         OrdersPage.click();
                 } catch (Exception e) {
                         System.out.println("Не удалось кликнуть по кнопке: " + e.getMessage());

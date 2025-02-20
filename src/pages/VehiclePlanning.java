@@ -84,7 +84,7 @@ public class VehiclePlanning {
                 }
                 // Нажимаем кнопку "ОК"
                 WebElement vehicleOkButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
+                                "//button[contains(@id, 'b4')]/span[text()='ОК']")));
                 vehicleOkButton.click();
                 System.out.println("Нажата кнопка 'ОК'.");
 
@@ -154,7 +154,7 @@ public class VehiclePlanning {
                 }
                 // Нажимаем кнопку "ОК"
                 WebElement vehicleOkButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div/div[4]/button[1]")));
+                                "//button[contains(@id, 'b4')]/span[text()='ОК']")));
                 vehicleOkButton.click();
                 System.out.println("Нажата кнопка 'ОК'.");
 
