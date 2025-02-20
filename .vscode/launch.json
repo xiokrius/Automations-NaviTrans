@@ -4,10 +4,13 @@
     // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
-
-
-    
+        {
+            "type": "java",
+            "name": "CopyinganOrderVehicle",
+            "request": "launch",
+            "mainClass": "com.example.CopyinganOrderVehicle",
+            "projectName": "PagesClient"
+        },
         {
             "type": "java",
             "name": "CopyinganOrderVehicle",
@@ -76,6 +79,6 @@
             "request": "launch",
             "mainClass": "com.example.Main",
             "projectName": "demo"
-        },
+        }
     ]
 }

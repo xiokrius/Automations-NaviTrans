@@ -23,7 +23,6 @@ import com.example.PagesOrder.VehiclePlanning;
 import com.example.PagesOrder.VehicleRoute;
 import com.example.PagesOrder.ZayavkaByPage;
 import com.example.PagesOrder.ZayavkaPage;
-import com.example.ConfigManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 

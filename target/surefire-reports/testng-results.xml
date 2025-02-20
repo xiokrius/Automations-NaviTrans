@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="14" passed="13" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-02-20T16:28:40 MSK" name="Surefire suite" finished-at="2025-02-20T16:30:29 MSK" duration-ms="109084">
+    <groups>
+    </groups>
+    <test started-at="2025-02-20T16:28:40 MSK" name="Surefire test" finished-at="2025-02-20T16:30:29 MSK" duration-ms="109084">
+      <class name="com.example.CreateOrderNewTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:43 MSK" name="setup" finished-at="2025-02-20T16:29:48 MSK" duration-ms="5041" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="login()[pri:1, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:48 MSK" name="login" finished-at="2025-02-20T16:29:49 MSK" duration-ms="793" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:49 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:29:49 MSK" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=login status=SUCCESS method=CreateOrderNewTest.login()[pri:1, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="openZayavkaPage()[pri:2, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:49 MSK" name="openZayavkaPage" finished-at="2025-02-20T16:29:49 MSK" depends-on-methods="com.example.CreateOrderNewTest.login" duration-ms="50" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openZayavkaPage -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:49 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:29:49 MSK" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=openZayavkaPage status=SUCCESS method=CreateOrderNewTest.openZayavkaPage()[pri:2, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="createNewZayavka()[pri:3, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:49 MSK" name="createNewZayavka" finished-at="2025-02-20T16:29:55 MSK" depends-on-methods="com.example.CreateOrderNewTest.openZayavkaPage" duration-ms="6010" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewZayavka -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:55 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:29:55 MSK" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=createNewZayavka status=SUCCESS method=CreateOrderNewTest.createNewZayavka()[pri:3, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="fillOrderForm()[pri:4, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:55 MSK" name="fillOrderForm" finished-at="2025-02-20T16:29:58 MSK" depends-on-methods="com.example.CreateOrderNewTest.createNewZayavka" duration-ms="3275" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fillOrderForm -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:58 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:29:58 MSK" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=fillOrderForm status=SUCCESS method=CreateOrderNewTest.fillOrderForm()[pri:4, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="processOrder()[pri:5, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:58 MSK" name="processOrder" finished-at="2025-02-20T16:29:59 MSK" depends-on-methods="com.example.CreateOrderNewTest.fillOrderForm" duration-ms="1207" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- processOrder -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:59 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:29:59 MSK" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=processOrder status=SUCCESS method=CreateOrderNewTest.processOrder()[pri:5, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="setPlannedDates()[pri:6, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:29:59 MSK" name="setPlannedDates" finished-at="2025-02-20T16:30:05 MSK" depends-on-methods="com.example.CreateOrderNewTest.processOrder" duration-ms="5785" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setPlannedDates -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:05 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:30:05 MSK" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=setPlannedDates status=SUCCESS method=CreateOrderNewTest.setPlannedDates()[pri:6, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="orderFull()[pri:7, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:05 MSK" name="orderFull" finished-at="2025-02-20T16:30:07 MSK" depends-on-methods="com.example.CreateOrderNewTest.setPlannedDates" duration-ms="2377" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- orderFull -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:07 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:30:07 MSK" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=orderFull status=SUCCESS method=CreateOrderNewTest.orderFull()[pri:7, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="vehiclePlanning()[pri:8, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:07 MSK" name="vehiclePlanning" finished-at="2025-02-20T16:30:12 MSK" depends-on-methods="com.example.CreateOrderNewTest.orderFull" duration-ms="4820" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- vehiclePlanning -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:12 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:30:12 MSK" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=vehiclePlanning status=SUCCESS method=CreateOrderNewTest.vehiclePlanning()[pri:8, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="goToVehile()[pri:9, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:12 MSK" name="goToVehile" finished-at="2025-02-20T16:30:17 MSK" depends-on-methods="com.example.CreateOrderNewTest.vehiclePlanning" duration-ms="5128" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goToVehile -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:17 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:30:17 MSK" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=goToVehile status=SUCCESS method=CreateOrderNewTest.goToVehile()[pri:9, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="goToServices()[pri:10, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:17 MSK" name="goToServices" finished-at="2025-02-20T16:30:18 MSK" depends-on-methods="com.example.CreateOrderNewTest.goToVehile" duration-ms="707" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goToServices -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:18 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:30:18 MSK" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=goToServices status=SUCCESS method=CreateOrderNewTest.goToServices()[pri:10, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="processServices()[pri:11, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:18 MSK" name="processServices" finished-at="2025-02-20T16:30:20 MSK" depends-on-methods="com.example.CreateOrderNewTest.goToServices" duration-ms="1585" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- processServices -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:20 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:30:20 MSK" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=processServices status=SUCCESS method=CreateOrderNewTest.processServices()[pri:11, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="finalizeInvoice()[pri:12, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:20 MSK" name="finalizeInvoice" finished-at="2025-02-20T16:30:29 MSK" depends-on-methods="com.example.CreateOrderNewTest.processServices" duration-ms="9695" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- finalizeInvoice -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateOrderNewTest@1807f5a7]" started-at="2025-02-20T16:30:29 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:30:29 MSK" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=finalizeInvoice status=SUCCESS method=CreateOrderNewTest.finalizeInvoice()[pri:12, instance:com.example.CreateOrderNewTest@1807f5a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+      </class> <!-- com.example.CreateOrderNewTest -->
+      <class name="com.example.CreateManyOrdersTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.example.CreateManyOrdersTest@1500b2f3]" started-at="2025-02-20T16:28:40 MSK" name="setup" finished-at="2025-02-20T16:28:44 MSK" duration-ms="3536" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="login()[pri:1, instance:com.example.CreateManyOrdersTest@1500b2f3]" started-at="2025-02-20T16:28:44 MSK" name="login" finished-at="2025-02-20T16:28:45 MSK" duration-ms="842" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateManyOrdersTest@1500b2f3]" started-at="2025-02-20T16:28:45 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:28:45 MSK" duration-ms="3" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=login status=SUCCESS method=CreateManyOrdersTest.login()[pri:1, instance:com.example.CreateManyOrdersTest@1500b2f3] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+        <test-method signature="createOrders()[pri:2, instance:com.example.CreateManyOrdersTest@1500b2f3]" started-at="2025-02-20T16:28:45 MSK" name="createOrders" finished-at="2025-02-20T16:29:43 MSK" depends-on-methods="com.example.CreateManyOrdersTest.login" duration-ms="57953" status="FAIL">
+          <exception class="org.openqa.selenium.StaleElementReferenceException">
+            <message>
+              <![CDATA[stale element reference: stale element not found in the current frame
+  (Session info: chrome=133.0.6943.99)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a82c87250a26abc446e154adc7337f14, clickElement {id=f.8CE516C36F435ACAD24DDF5B49AAC1FD.d.D2F511E973D9C0A87A2C6BF0F2364B3B.e.1060}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 133.0.6943.99, chrome: {chromedriverVersion: 133.0.6943.126 (cffa127ce7b..., userDataDir: C:\Users\A8712~1.GAL\AppDat...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50453}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50453/devtoo..., se:cdpVersion: 133.0.6943.99, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (a82c87250a26abc446e154adc7337f14)] -> xpath: //*[@aria-label=' Обработка' and @data-is-focusable='true']]
+Session ID: a82c87250a26abc446e154adc7337f14]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.StaleElementReferenceException: stale element reference: stale element not found in the current frame
+  (Session info: chrome=133.0.6943.99)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a82c87250a26abc446e154adc7337f14, clickElement {id=f.8CE516C36F435ACAD24DDF5B49AAC1FD.d.D2F511E973D9C0A87A2C6BF0F2364B3B.e.1060}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 133.0.6943.99, chrome: {chromedriverVersion: 133.0.6943.126 (cffa127ce7b..., userDataDir: C:\Users\A8712~1.GAL\AppDat...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50453}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50453/devtoo..., se:cdpVersion: 133.0.6943.99, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (a82c87250a26abc446e154adc7337f14)] -> xpath: //*[@aria-label=' Обработка' and @data-is-focusable='true']]
+Session ID: a82c87250a26abc446e154adc7337f14
+at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+at com.example.PagesOrder.OrderPage.obrabotkaVypustit(OrderPage.java:74)
+at com.example.CreateManyOrdersTest.lambda$0(CreateManyOrdersTest.java:75)
+at com.example.CreateManyOrdersTest.performAction(CreateManyOrdersTest.java:103)
+at com.example.CreateManyOrdersTest.createOrder(CreateManyOrdersTest.java:63)
+at com.example.CreateManyOrdersTest.createOrders(CreateManyOrdersTest.java:57)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+at org.testng.TestRunner.privateRun(TestRunner.java:819)
+at org.testng.TestRunner.run(TestRunner.java:619)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+at org.testng.TestNG.runSuites(TestNG.java:1134)
+at org.testng.TestNG.run(TestNG.java:1101)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:155)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:169)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:88)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:137)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.StaleElementReferenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createOrders -->
+        <test-method is-config="true" signature="takeScreenshotOnFailure(org.testng.ITestResult)[pri:0, instance:com.example.CreateManyOrdersTest@1500b2f3]" started-at="2025-02-20T16:29:43 MSK" name="takeScreenshotOnFailure" finished-at="2025-02-20T16:29:43 MSK" duration-ms="190" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=createOrders status=FAILURE method=CreateManyOrdersTest.createOrders()[pri:2, instance:com.example.CreateManyOrdersTest@1500b2f3] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenshotOnFailure -->
+      </class> <!-- com.example.CreateManyOrdersTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

@@ -1,28 +1,29 @@
 package com.example;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigManager {
     private static Properties properties = new Properties();
 
     static {
-        loadProperties("src/resources/config.properties");
-        loadProperties("src/resources/config.properties.contacts");
+        loadProperties("config.properties"); // Загружаем config.properties
+        loadProperties("config.properties.contacts"); // Загружаем config.properties.contacts
     }
 
-    private static void loadProperties(String filePath) {
-        try (FileInputStream fis = new FileInputStream(filePath)) {
-            properties.load(fis);
+    private static void loadProperties(String fileName) {
+        try (InputStream input = ConfigManager.class.getClassLoader().getResourceAsStream(fileName)) {
+            if (input == null) {
+                throw new RuntimeException("Файл не найден: " + fileName);
+            }
+            properties.load(input);
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Не удалось загрузить файл: " + filePath);
+            throw new RuntimeException("Ошибка загрузки файла: " + fileName, e);
         }
     }
 
     public static String getProperty(String key) {
         return properties.getProperty(key);
     }
-
 }
