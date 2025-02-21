@@ -114,10 +114,13 @@ public class CreateManyOrdersTest {
     private void takeScreenshot(String testName) {
         File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String screenshotName = "screenshots/" + testName + "_" + timestamp + ".png";
+        String screenshotName = "target/screenshots/" + testName + "_" + timestamp + ".png"; // Путь в target
 
         try {
-            new File("screenshots").mkdirs(); // Создаст папку, если её нет
+            File screenshotDir = new File("target/screenshots");
+            if (!screenshotDir.exists()) {
+                screenshotDir.mkdirs(); // Создает папку, если её нет
+            }
             FileUtils.copyFile(srcFile, new File(screenshotName));
             logger.error("Скриншот сохранен: " + screenshotName);
         } catch (IOException e) {

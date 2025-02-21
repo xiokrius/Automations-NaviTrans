@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "OpenContactsOrClient",
+            "request": "launch",
+            "mainClass": "com.example.OpenContactsOrClient",
+            "projectName": "PagesClient"
+        },
+        {
+            "type": "java",
             "name": "CopyinganOrderVehicle",
             "request": "launch",
             "mainClass": "com.example.CopyinganOrderVehicle",

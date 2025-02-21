@@ -28,8 +28,8 @@ public class OpenContactsOrClient {
         loginTest.inputPassword(password);
         loginTest.clickLoginButton();
 
-        // System.out.println("Переход на страницу заявок...");
-        // Contacts Contacts = loginTest.goToContacts();
+        System.out.println("Переход на страницу заявок...");
+        Contacts Contacts = loginTest.goToContacts();
 
         Contacts CreateNewContacts = new Contacts(driver);
         CreateNewContacts.ContactsOrderOpen();

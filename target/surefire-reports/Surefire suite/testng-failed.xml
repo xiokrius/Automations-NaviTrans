@@ -11,6 +11,24 @@
           <include name="createOrders"/>
         </methods>
       </class> <!-- com.example.CreateManyOrdersTest -->
+      <class name="com.example.CreateOrderNewTest">
+        <methods>
+          <include name="openZayavkaPage"/>
+          <include name="goToServices"/>
+          <include name="vehiclePlanning"/>
+          <include name="takeScreenshotOnFailure"/>
+          <include name="login"/>
+          <include name="goToVehile"/>
+          <include name="createNewZayavka"/>
+          <include name="processServices"/>
+          <include name="orderFull"/>
+          <include name="setup"/>
+          <include name="processOrder"/>
+          <include name="setPlannedDates"/>
+          <include name="fillOrderForm"/>
+          <include name="finalizeInvoice"/>
+        </methods>
+      </class> <!-- com.example.CreateOrderNewTest -->
     </classes>
   </test> <!-- Surefire test(failed) -->
 </suite> <!-- Failed suite [Surefire suite] -->

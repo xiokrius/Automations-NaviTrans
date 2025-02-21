@@ -84,6 +84,8 @@ public class OpenContactsPage {
                 switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
+                System.out.println("Начала OpenContactsPage/OpenContacts");
+
                 WebElement NameContacts = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//div[contains(@controlname, 'NameTRSL')]//descendant::input[contains(@id, 'ee')]")));
                 System.out.println("Нашли поле Название контакта");
