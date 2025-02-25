@@ -1,7 +1,7 @@
-src/resources/config.properties
-src/pages/QLoginTest.java
-src/resources/config.properties.contacts
-screenshots/
-src/java/com/example/PagesOrder/QLoginTest.java
-src/java/com/example/resources
-target/
+/src/resources/config.properties
+/src/pages/QLoginTest.java
+/src/resources/config.properties.contacts
+/screenshots/
+/src/java/com/example/PagesOrder/QLoginTest.java
+/src/java/com/example/resources
+/target/
