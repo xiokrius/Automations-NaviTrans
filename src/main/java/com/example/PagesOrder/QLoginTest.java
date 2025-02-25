@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.example.PagesClient.Contacts;
 import com.example.PagesClient.OpenContactsPage;
 
-// ВХОД В ТЕСТ
+// ВХОД В ТЕСТ sssssssssssssssssssssssssssssssssss
 
 public class QLoginTest {
     private WebDriver driver;
