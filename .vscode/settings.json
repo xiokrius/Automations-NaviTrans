@@ -1,0 +1,20 @@
+{
+    "java.project.sourcePaths": ["src/main/java"],
+    "java.project.outputPath": "target/classes",
+    "java.project.referencedLibraries": [
+        "c:/allure-libs/*.jar",
+        "c:/Project1/TEST1/lib/**/*.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "cSpell.words": [
+        "инпут",
+        "нейм",
+        "пэйдж",
+        "Скроллим",
+        "flbl",
+        "labelledby",
+        "szee",
+        "Tovara"
+    ]
+}

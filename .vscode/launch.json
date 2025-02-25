@@ -1,0 +1,98 @@
+{
+    // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+    // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+    // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CreateManyOrders",
+            "request": "launch",
+            "mainClass": "com.example.CreateManyOrders",
+            "projectName": "PagesClient"
+        },
+        {
+            "type": "java",
+            "name": "OpenContactsOrClient",
+            "request": "launch",
+            "mainClass": "com.example.OpenContactsOrClient",
+            "projectName": "PagesClient"
+        },
+        {
+            "type": "java",
+            "name": "CopyinganOrderVehicle",
+            "request": "launch",
+            "mainClass": "com.example.CopyinganOrderVehicle",
+            "projectName": "PagesClient"
+        },
+        {
+            "type": "java",
+            "name": "CopyinganOrderVehicle",
+            "request": "launch",
+            "mainClass": "tests.CopyinganOrderVehicle",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "OpenContactsOrClient",
+            "request": "launch",
+            "mainClass": "tests.OpenContactsOrClient",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "CreateManyOrders",
+            "request": "launch",
+            "mainClass": "tests.CreateManyOrders",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "TestAllPageFixLocators",
+            "request": "launch",
+            "mainClass": "tests.TestAllPageFixLocators",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "CreateOrderNew",
+            "request": "launch",
+            "mainClass": "tests.CreateOrderNew",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "CreatingACompleteOrder",
+            "request": "launch",
+            "mainClass": "tests.CreatingACompleteOrder",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "CreatingOrder",
+            "request": "launch",
+            "mainClass": "tests.CreatingOrder",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "TestRunner",
+            "request": "launch",
+            "mainClass": "tests.TestRunner",
+            "projectName": "TEST1_bda8d620"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "com.example.Main",
+            "projectName": "demo"
+        }
+    ]
+}
