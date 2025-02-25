@@ -55,7 +55,7 @@ public class OpenInvoice {
 
                 // Ожидаем появления инпут-поля с динамическим ID
                 WebElement InputServiceCode = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//input[contains(@id, 'b4') and @role='combobox' and @type='text']")));
+                                By.xpath("//td[@controlname='Service Code']//input[@role='combobox' and @type='text']")));
                 System.out.println("Нашли поле Сервисный код");
 
                 // Заполняем значение через JavaScript
@@ -67,7 +67,7 @@ public class OpenInvoice {
 
                 // Находим элемент, к которому нужно проскроллить (ЦЕНА)
                 WebElement price = driver.findElement(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[22]/input"));
+                                "//td[@controlname='Unit price']//input[@role='textbox' and @type='text']"));
 
                 WebElement scrollContainer = driver.findElement(
                                 By.xpath("(//div[contains(@class, 'ms-nav-scrollable scroll-source thm-bgcolor-1241058378')])[4]"));
@@ -99,15 +99,16 @@ public class OpenInvoice {
                 System.out.println("Price field value after input: " + PriceValueValue);
 
                 WebElement InvoiceInTamojnaButton = driver.findElement(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[6]/div[2]/div[2]/div[2]/div/div[1]/div/div[2]/table/tbody/tr[1]/td[44]/div/input"));
-
+                                "//td[@controlname='Invoice For Custom']"));
                 // Прокручиваем к дочернему элементу внутри прокручиваемого окна
                 scrollToElementHorizontally(scrollContainer, InvoiceInTamojnaButton);
 
                 InvoiceInTamojnaButton.click();
 
-                WebElement backButton = driver.findElement(By.xpath(
-                                "/html/body/div[1]/div[4]/form/main/div[2]/div[2]/div/div/div[1]/span/button/span"));
+                WebElement backButton = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath(
+                                                "//button[@data-is-focusable='true' and @title='Назад']")));
+
                 backButton.click();
 
                 frameSwitcher.returnToMainContent();

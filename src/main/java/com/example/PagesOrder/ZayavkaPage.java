@@ -128,7 +128,7 @@ public class ZayavkaPage {
                                 By.xpath("//a[contains(@title, 'элемента TS Group code')]/following-sibling::input")));
 
                 WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//button[contains(@id, 'gc')]/span[text()='ОК']")));
+                                By.xpath("//button[contains(@id, 'b1')]/span[text()='ОК']")));
 
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("arguments[0].value = arguments[1];", TSGroupCode, TSGroupCodeValue);

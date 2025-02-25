@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CreateManyOrders",
+            "request": "launch",
+            "mainClass": "com.example.CreateManyOrders",
+            "projectName": "PagesClient"
+        },
+        {
+            "type": "java",
             "name": "OpenContactsOrClient",
             "request": "launch",
             "mainClass": "com.example.OpenContactsOrClient",
