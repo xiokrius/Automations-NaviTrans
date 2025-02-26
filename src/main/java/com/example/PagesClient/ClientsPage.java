@@ -60,6 +60,12 @@ public class ClientsPage {
         // Переключаемся в Фрейм
         switchToIframe();
 
+        // копирую номер клиента для того что бы потом продублировать в плательщика
+        WebElement inputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//a[contains(@title, 'обновить значение для Код')]/following-sibling::input")));
+        String value = inputField.getAttribute("value");
+        System.out.println("Значение поля: " + value);
+
         // Вводим "Тип клиента"
         WebElement typeClient = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//a[text()='Тип клиента']/following::select[1]")));
@@ -108,10 +114,27 @@ public class ClientsPage {
             System.out.println("Окно не обнаружено");
         }
 
+        System.out.println("Раскрытие списка");
         WebElement BolchePoley = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                 "//button[@aria-label='Счет, Показать больше']")));
 
         BolchePoley.click();
+        System.out.println("Список раскрыт");
 
+        WebElement BilltoCustomerNo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                "//a[contains(@title, 'для элемента Плательщик')]/following-sibling::input")));
+
+        setInputValue(BilltoCustomerNo, value);
+
+        WebElement Pochta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//span[text()='Почтовый адрес']")));
+
+        scrollToElement(Pochta);
+
+        WebElement Plateji = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//span[text()='Платежи']")));
+
+        Plateji.click();
     }
+
 }
