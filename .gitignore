@@ -50,28 +50,10 @@ replay_pid*
 
 # Ignore screenshots and media from UI tests
 screenshots/
-media/
-
-# Ignore IntelliJ workspace files
-workspace.xml
-
-# Specific to your project
-logs/
-reports/
-allure-results/
-allure-report/
-
-# Optional: ignore coverage reports
-coverage/
-*.lcov
-
-# Optional: ignore generated docs
-docs/
-*.pdf
-
-# Let me know if что-то ещё добавить или убрать! 🚀
-
-# Ignore specific test files
+src/java/com/example/PagesOrder/QLoginTest.java
+src/java/com/example/resources
+target/
 QLoginTest*
 config.properties*
-config.properties.contacts
+config.properties.contacts*
+lib/commons-io-2.18.0/docs/
