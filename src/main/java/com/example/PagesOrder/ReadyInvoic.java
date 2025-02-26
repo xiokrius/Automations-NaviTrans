@@ -29,24 +29,24 @@ public class ReadyInvoic {
 
         // НАШЛИ КНОПКУ ОБРАБОТКА
         WebElement SchetFakturaButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[5]/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div/div/button/span")));
-        System.out.println("Нашли первую кнопку Выпустить.");
+                "//button[@aria-label='Счет-фактура']")));
+        System.out.println("Нашли первую кнопку Cчёт фактура.");
         SchetFakturaButton.click();
 
         // НАШЛИ КНОПКУ Cчёт номер ручной
         WebElement schetNomerRuchnoyButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                "/html/body/div[1]/div[4]/form/main/div[2]/div[5]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div/div/div/button/span")));
+                "//button[@aria-label='Счет № ручн.']")));
         System.out.println("Нашли Вторую кнопку, Счёт номер ручной .");
 
         schetNomerRuchnoyButton.click();
 
         try {
             WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                    "/html/body/div[1]/div[5]/form/div/main"))); // XPath окна
+                    "//p[contains(@title, 'Вы хотите создать счета?')]"))); // XPath окна
             System.out.println("Всплывающее окно обнаружено.");
             // Выполняем действия внутри окна
             WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
-                    "/html/body/div[1]/div[5]/form/div/main/div[3]/div/button[1]")); // Кнопка
+                    "//button[contains(@class, '1632124310')]/span[text()='Да']")); // Кнопка
             // подтверждения
             popupConfirmButton.click();
             System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");

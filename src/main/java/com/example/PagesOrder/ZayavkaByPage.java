@@ -38,7 +38,7 @@ public class ZayavkaByPage {
                 // Ожидаем кнопку Обработка
                 WebElement buttonInFrame = wait
                                 .until(ExpectedConditions
-                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
+                                                .elementToBeClickable(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли кнопку ОБРАБОТКА.");
 
                 // Кликаем по первой кнопке
@@ -46,8 +46,8 @@ public class ZayavkaByPage {
 
                 // ДАЛЬШЕ НАШЛИ КНОПКУ "СКОПИРОВАТЬ", ДЛЯ КОПИРОВАНИЯ ЗАКАЗА
 
-                WebElement buttonInFrame2 = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                "/html/body/div[1]/div[3]/form/main/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div/div[1]/div/div/div/div/div/div/div[3]/div[2]/div/button")));
+                WebElement buttonInFrame2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "//button[@aria-label='Копировать файл' and @title='Копировать файл (Alt+C)']")));
 
                 buttonInFrame2.click();
                 System.out.println("Копирование заказа прошло успешно");

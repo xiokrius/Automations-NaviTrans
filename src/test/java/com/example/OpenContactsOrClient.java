@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.example.PagesClient.AllClients;
+import com.example.PagesClient.ClientsPage;
 import com.example.PagesClient.Contacts;
 import com.example.PagesClient.OpenContactsPage;
 import com.example.PagesOrder.QLoginTest;
@@ -47,6 +48,10 @@ public class OpenContactsOrClient {
 
         AllClients clientsOpenFull = new AllClients(driver, generatedName);
         clientsOpenFull.ClientsOpen();
+        CreateNewContacts.returnToMainContent();
+
+        ClientsPage OpenClients = new ClientsPage(driver);
+        OpenClients.fillingClientsForm();
 
     }
 }

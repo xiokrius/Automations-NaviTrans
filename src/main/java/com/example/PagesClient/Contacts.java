@@ -29,7 +29,6 @@ public class Contacts {
         System.out.println("Начинаем Contacts/ContactsOrderOpen");
 
         // Переключаемся в нужный фрейм
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         switchToIframe();
         System.out.println("Перешли в фрейм.");
 

@@ -182,7 +182,7 @@ public class OrderPage {
                 WebElement schet = wait.until(ExpectedConditions
                                 .visibilityOfElementLocated(By.xpath("//button[@title='Счет (Shift+Ctrl+F11)']")));
 
-                System.out.println("Нашли Вторую кнопку, Выпустить .");
+                System.out.println("Нашли Вторую кнопку, Cчёт");
 
                 schet.click();
 
