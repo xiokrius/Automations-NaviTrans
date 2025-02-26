@@ -1,8 +1,75 @@
-/src/resources/config.properties
-/src/pages/QLoginTest.java
-/src/resources/config.properties.contacts
-/screenshots/
-/src/java/com/example/PagesOrder/QLoginTest.java
-/src/java/com/example/resources
-/target/
-demo/target/
+# IntelliJ IDEA / Eclipse / VSCode
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+.vscode/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Maven build artifacts
+target/
+*.war
+*.jar
+*.ear
+*.class
+*.exec
+
+# Test reports
+surefire-reports/
+test-output/
+
+# Selenium / WebDriver
+chromedriver.log
+geckodriver.log
+
+# OS and system files
+.DS_Store
+Thumbs.db
+
+# Dependency caches
+.mvn/
+
+# Environment files
+.env
+
+# Java tools
+hs_err_pid*
+replay_pid*
+
+# Postman / API tools
+*.postman_environment.json
+*.postman_collection.json
+
+# Ignore screenshots and media from UI tests
+screenshots/
+media/
+
+# Ignore IntelliJ workspace files
+workspace.xml
+
+# Specific to your project
+logs/
+reports/
+allure-results/
+allure-report/
+
+# Optional: ignore coverage reports
+coverage/
+*.lcov
+
+# Optional: ignore generated docs
+docs/
+*.pdf
+
+# Let me know if что-то ещё добавить или убрать! 🚀
+
+# Ignore specific test files
+QLoginTest*
