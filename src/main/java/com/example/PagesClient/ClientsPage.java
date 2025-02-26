@@ -21,6 +21,7 @@ public class ClientsPage {
 
     private String typeCarrierValue = ConfigManager.getProperty("typeClientValue");
     private String CityValue = ConfigManager.getProperty("CityValue");
+    private String RegNumberValue = ConfigManager.getProperty("RegNumberValue");
 
     public ClientsPage(WebDriver driver) {
 
@@ -87,11 +88,30 @@ public class ClientsPage {
 
         setInputValue(City, CityValue);
 
-        // By.xpath("//a[contains(@aria-label, 'Код адреса разгрузки') and
-        // @role='button']/following-sibling::input[contains(@id, 'ee') and
-        // @role='combobox']")));
+        WebElement RegNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[@controlname='FTS Registration No']//input")));
 
-        System.out.println("Прокрутили до следующего элемента");
+        setInputValue(RegNumber, RegNumberValue);
+
+        try {
+
+            WebElement AutorisedWindow = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[@title='Почтовые индексы' and contains(text(), 'Почтовые индексы')]")));
+            System.out.println("Всплывающее окно обнаружено");
+            WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                    "//button[contains(@class, '1876861216 thm-bgcolor')]//span[text()='ОК']")));
+            System.out.println("Кнопка ОК идентифицирована");
+            ButtonInOk.click();
+            System.out.println("Нажата кнопка ОК");
+        } catch (Exception e) {
+
+            System.out.println("Окно не обнаружено");
+        }
+
+        WebElement BolchePoley = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                "//button[@aria-label='Счет, Показать больше']")));
+
+        BolchePoley.click();
 
     }
 }
