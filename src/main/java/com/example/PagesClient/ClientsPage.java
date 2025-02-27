@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.ConfigManager;
+import com.example.PagesOrder.FrameSwitcher;
 
 public class ClientsPage {
 
@@ -20,6 +21,7 @@ public class ClientsPage {
         private JavascriptExecutor js;
         private WebDriverWait wait;
         private String RegNumberValue;
+        private FrameSwitcher frameSwitcher;
 
         private String typeCarrierValue = ConfigManager.getProperty("typeClientValue");
         private String CityValue = ConfigManager.getProperty("CityValue");
@@ -31,6 +33,7 @@ public class ClientsPage {
                 this.driver = driver;
                 this.js = (JavascriptExecutor) driver;
                 this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                frameSwitcher.switchToIframe();
 
                 this.RegNumberValue = generateRandomINN(9);
                 System.out.println("Сгенерированный ИНН: " + this.RegNumberValue);
@@ -207,6 +210,8 @@ public class ClientsPage {
                                 "//button[@title='Назад']")));
 
                 ButtonBack.click();
+
+                frameSwitcher.returnToMainContent();
 
         }
 
