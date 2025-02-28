@@ -2,8 +2,11 @@ package com.example;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.PagesClient.AllClients;
+import com.example.PagesClient.AutorisedClients;
 import com.example.PagesClient.ClientsPage;
 import com.example.PagesClient.Contacts;
 import com.example.PagesClient.OpenContactsPage;
@@ -18,10 +21,16 @@ public class OpenContactsOrClient {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         // driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://192.168.1.13:8080/BC210-TEST/SignIn?ReturnUrl=%2FBC210-TEST%2F");
+        String BaseURL = ConfigManager.getProperty("BaseURL");
+        driver.get(BaseURL);
+
+        // Cохраняем окно
+        String mainWindowHandle = driver.getWindowHandle();
 
         String login = ConfigManager.getProperty("inputLogin");
         String password = ConfigManager.getProperty("inputPassword");
+        String inputLogin2 = ConfigManager.getProperty("inputLogin2");
+        String inputPassword2 = ConfigManager.getProperty("inputPassword2");
 
         // Выполнение входа (логин, пароль, нажатие кнопки)
         QLoginTest loginTest = new QLoginTest(driver);
@@ -43,8 +52,8 @@ public class OpenContactsOrClient {
 
         CreateNewContacts.returnToMainContent();
 
-        driver.get(
-                "http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=22&dc=0&bookmark=31%3bEgAAAAJ7%2f0MAVQBTAFQALQAwADAAMAAwADE%3d");
+        String URLClients = ConfigManager.getProperty("URLClients");
+        driver.get(URLClients);
 
         AllClients clientsOpenFull = new AllClients(driver, generatedName);
         clientsOpenFull.ClientsOpen();
@@ -55,6 +64,54 @@ public class OpenContactsOrClient {
 
         AllClients OpenClientsWindow = new AllClients(driver, generatedName);
         OpenClientsWindow.Window();
+
+        System.out.println("Открытие второго браузера...");
+        WebDriver driver2 = new ChromeDriver();
+        driver2.manage().window().maximize();
+        driver2.get(BaseURL);
+
+        String secondWindowHandle = driver2.getWindowHandle();
+
+        QLoginTest loginTest2 = new QLoginTest(driver2);
+        loginTest2.inputLogin(inputLogin2);
+        loginTest2.inputPassword(inputPassword2);
+        loginTest2.clickLoginButton();
+
+        // Создание экземпляра AutorisedClientsg
+        AutorisedClients autorisedClients = new AutorisedClients(driver2, generatedName);
+        System.out.println("Дескриптор окна driver2 в тесте: " + driver2.getWindowHandle());
+        // Авторизация по URL из конфига
+        autorisedClients.Autorised();
+
+        driver.switchTo().window(mainWindowHandle);
+        System.out.println("Переключились обратно в первое окно");
+
+        AllClients OpenClientCD = new AllClients(driver, generatedName);
+        OpenClientCD.creditLimit();
+        CreateNewContacts.returnToMainContent();
+
+        ClientsPage OpenCD = new ClientsPage(driver);
+        OpenCD.OpenCD();
+
+        AllClients BackToAllClients = new AllClients(driver, generatedName);
+        BackToAllClients.Window();
+
+        // Переключение обратно на второе окно
+        driver2.switchTo().window(secondWindowHandle);
+        System.out.println("Переключились обратно во второе окно");
+
+        // Обновление страницы
+        driver2.navigate().refresh();
+        System.out.println("Страница во втором окне обновлена");
+
+        // Продолжение работы во втором окне
+        AutorisedClients continueInSecondWindow = new AutorisedClients(driver2, generatedName);
+        continueInSecondWindow.Autorised();
+
+        driver2.quit();
+
+        driver.switchTo().window(mainWindowHandle);
+        System.out.println("Переключились обратно в первое окно");
 
     }
 }

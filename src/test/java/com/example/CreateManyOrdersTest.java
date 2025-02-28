@@ -114,10 +114,7 @@ public class CreateManyOrdersTest {
     private void takeScreenshot(String testName) {
         File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String screenshotName = System.getProperty("user.dir") + "/screenshots/" + testName + "_" + timestamp + ".png"; // Новый
-                                                                                                                        // путь
-                                                                                                                        // для
-                                                                                                                        // скриншотов
+        String screenshotName = System.getProperty("user.dir") + "/screenshots/" + testName + "_" + timestamp + ".png";
 
         try {
             File screenshotDir = new File(System.getProperty("user.dir") + "/screenshots");

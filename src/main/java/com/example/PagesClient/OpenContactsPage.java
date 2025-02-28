@@ -96,7 +96,7 @@ public class OpenContactsPage {
                 // controlname="NameTRSL" and id = ee
 
                 js.executeScript("arguments[0].value = arguments[1];", NameContacts, NameContactsValue);
-                System.out.println("Заполнили стартовую дату через JavaScript: " + NameContactsValue);
+                System.out.println("Заполнили наименование клиента: " + NameContactsValue);
 
                 // в будущем понадобится
                 WebElement CompanyNo = wait.until(ExpectedConditions.elementToBeClickable(

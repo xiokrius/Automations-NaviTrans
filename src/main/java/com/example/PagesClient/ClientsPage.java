@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.ConfigManager;
+import com.example.PagesClient.ClientsPage.TestData;
 
 public class ClientsPage {
 
@@ -25,6 +26,8 @@ public class ClientsPage {
         private String CityValue = ConfigManager.getProperty("CityValue");
         // private String RegNumberValue = ConfigManager.getProperty("RegNumberValue");
         private String BlockCustomerValue = ConfigManager.getProperty("BlockCustomerValue");
+        private String CDElementValue = ConfigManager.getProperty("CDElementValue");
+        // CDElement
 
         public ClientsPage(WebDriver driver) {
 
@@ -81,6 +84,8 @@ public class ClientsPage {
                                 "//a[contains(@title, 'обновить значение для Код')]/following-sibling::input")));
                 String value = inputField.getAttribute("value");
                 System.out.println("Значение поля: " + value);
+
+                TestData.clientValue = value;
 
                 // Вводим "Тип клиента"
                 WebElement typeClient = wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -215,6 +220,31 @@ public class ClientsPage {
         public void returnToMainContent() {
                 driver.switchTo().defaultContent();
                 System.out.println("ласт вышел с фрейма, проверка");
+        }
+
+        public class TestData {
+                public static String clientValue; // Статическая переменная для хранения значения
+        }
+
+        public void OpenCD() {
+
+                System.out.println("Начинаем ClientsPage/fillingClientsForm");
+
+                // Переключаемся в Фрейм
+                switchToIframe();
+
+                WebElement CDElement = wait.until(ExpectedConditions
+                                .elementToBeClickable(By.xpath("//div[@controlname='Credit Limit (LCY)']//input")));
+
+                setInputValue(CDElement, CDElementValue);
+
+                WebElement ButtonBack = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "//button[@title='Назад']")));
+
+                ButtonBack.click();
+
+                returnToMainContent();
+
         }
 
 }

@@ -70,7 +70,6 @@ public class CreateManyOrders {
             // // // После обработка/План, нужно выбрать в какой поездке будут изменения
             OrderPage opentranspOp = new OrderPage(driver);
             opentranspOp.PlanOpen();
-
             // // // Вбиваем Тягач и прицеп
             VehiclePlanning OpenVehicle = new VehiclePlanning(driver);
             OpenVehicle.VehiclePlanOpen();

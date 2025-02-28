@@ -103,6 +103,29 @@ public class AllClients {
 
             System.out.println("Окно не найдено");
         }
+    }
+
+    public void creditLimit() {
+
+        System.out.println("Начинаем AllClients/ClientsOpen");
+
+        // Переключаемся в нужный фрейм
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        switchToIframe();
+        System.out.println("Перешли в фрейм.");
+
+        try {
+            WebElement clientCard = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[contains(@title, 'CUST-02')]")));
+            // Дополнительные действия с карточкой клиента
+
+            System.out.println("Карточка найдена");
+            clientCard.click(); // Например, клик по карточке клиента
+            System.out.println("Клик выполнен");
+
+        } catch (Exception e) {
+            System.out.println("Картинка клиента не была найдена: " + nameContactsValue);
+        }
 
     }
 
