@@ -11,6 +11,19 @@ import com.example.PagesClient.ClientsPage;
 import com.example.PagesClient.Contacts;
 import com.example.PagesClient.OpenContactsPage;
 import com.example.PagesOrder.QLoginTest;
+import com.example.PagesOrder.Invoice;
+import com.example.PagesOrder.OpenInvoice;
+import com.example.PagesOrder.OrderPage;
+import com.example.PagesOrder.PageTransp;
+import com.example.PagesOrder.QLoginTest;
+import com.example.PagesOrder.ReadyInvoic;
+import com.example.PagesOrder.VehiclePlanning;
+import com.example.PagesOrder.VehicleRoute;
+import com.example.PagesOrder.ZayavkaByPage;
+import com.example.PagesOrder.ZayavkaPage;
+import com.example.ConfigManager;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import com.example.ConfigManager;
 
 public class OpenContactsOrClient {
@@ -113,5 +126,18 @@ public class OpenContactsOrClient {
         driver.switchTo().window(mainWindowHandle);
         System.out.println("Переключились обратно в первое окно");
 
+        loginTest.goToZayavkaPage();
+
+        ZayavkaPage zayavkaPage = new ZayavkaPage(driver);
+        zayavkaPage.CreateNewZayavkaCZ();
+        zayavkaPage.NewOrderCreate();
+
+        OrderPage orderPage = new OrderPage(driver);
+        orderPage.fillOrderFormClients();
+
+        OrderPage PageOrder = new OrderPage(driver);
+        PageOrder.PerevozkaInFrame();
+
     }
+
 }

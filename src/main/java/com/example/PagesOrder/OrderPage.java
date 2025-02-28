@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import com.example.PagesClient.ClientsPage.TestData;
 
 import com.example.ConfigManager;
 
@@ -26,6 +27,7 @@ public class OrderPage {
                 this.driver = driver;
                 this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 this.frameSwitcher = new FrameSwitcher(driver);
+
         }
 
         // Метод для получения элемента
@@ -377,7 +379,52 @@ public class OrderPage {
                 //
                 // Заполнение данных
                 fillInputWithJS(transportRequirement, transportRequirementValue);
+
                 fillInputWithJS(customersCode, customersCodeValue);
+
+                // Выбор значений в select
+                selectDropdownByValue(carrier, carrierValue);
+                selectDropdownByValue(typeCarrier, typeCarrierValue);
+
+                System.out.println("Форма заполнена.");
+
+                // Инициализация строк
+                customersCode.click();
+                transportRequirement.click();
+
+                frameSwitcher.returnToMainContent();
+
+        }
+
+        public void fillOrderFormClients() {
+
+                frameSwitcher.switchToIframe();
+
+                System.out.println("Начинаем OrderPage/fillOrderForm");
+
+                // Нахождение элементов, явная прогрузка первого элемента
+
+                WebElement transportRequirement = wait
+                                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                                                "//a[contains(@title, 'элемента Требования к транспорту')]/following-sibling::input")));
+
+                System.out.println("Нашли ид");
+
+                WebElement customersCode = driver.findElement(
+                                By.xpath("//a[contains(@title, 'элемента Код Заказчика')]/following-sibling::input"));
+                //
+                WebElement carrier = driver.findElement(
+                                By.xpath("//a[text()='Перевозчик']/following::select[1]"));
+                // select
+                WebElement typeCarrier = driver.findElement(
+                                By.xpath("//a[text()='Тип перевозки']/following::select[1]"));
+                //
+                // Заполнение данных
+                fillInputWithJS(transportRequirement, transportRequirementValue);
+
+                String clientValue = TestData.clientValue;
+
+                fillInputWithJS(customersCode, clientValue);
 
                 // Выбор значений в select
                 selectDropdownByValue(carrier, carrierValue);
