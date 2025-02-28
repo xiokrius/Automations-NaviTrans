@@ -62,6 +62,11 @@ public class AutorisedClients {
         driver.switchTo().frame(iframe);
     }
 
+    public void returnToMainContent() {
+        driver.switchTo().defaultContent();
+        System.out.println("ласт вышел с фрейма, проверка");
+    }
+
     public void Autorised() {
 
         System.out.println("Начали авторизацию во втором браузере");
@@ -103,7 +108,11 @@ public class AutorisedClients {
         } catch (Exception e) {
             System.out.println("Элемент не найден или не стал кликабельным: " + e.getMessage());
         }
+
+        returnToMainContent();
+
     }
+
 }
 
 // $x("//span[contains(translate(@title, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',

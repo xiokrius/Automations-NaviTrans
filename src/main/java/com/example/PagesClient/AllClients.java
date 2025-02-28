@@ -29,6 +29,11 @@ public class AllClients {
         driver.switchTo().frame(iframe);
     }
 
+    public void returnToMainContent() {
+        driver.switchTo().defaultContent();
+        System.out.println("ласт вышел с фрейма, проверка");
+    }
+
     public void ClientsOpen() {
 
         System.out.println("Начинаем AllClients/ClientsOpen");
@@ -68,11 +73,8 @@ public class AllClients {
             System.out.println("Картинка клиента не была найдена: " + nameContactsValue);
         }
 
-    }
+        returnToMainContent();
 
-    public void returnToMainContent() {
-        driver.switchTo().defaultContent();
-        System.out.println("ласт вышел с фрейма, проверка");
     }
 
     public void Window() {
@@ -103,6 +105,7 @@ public class AllClients {
 
             System.out.println("Окно не найдено");
         }
+        returnToMainContent();
     }
 
     public void creditLimit() {
@@ -126,6 +129,8 @@ public class AllClients {
         } catch (Exception e) {
             System.out.println("Картинка клиента не была найдена: " + nameContactsValue);
         }
+
+        returnToMainContent();
 
     }
 

@@ -56,6 +56,11 @@ public class OpenContactsPage {
                 driver.switchTo().frame(iframe);
         }
 
+        public void returnToMainContent() {
+                driver.switchTo().defaultContent();
+                System.out.println("ласт вышел с фрейма, проверка");
+        }
+
         public void selectRecordByText(String recordNumber) {
                 try {
                         System.out.println("Ищем запись: '" + recordNumber + "'");
@@ -147,6 +152,9 @@ public class OpenContactsPage {
                 WebElement buttonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
                 buttonInOk.click();
+
+                returnToMainContent();
+
         }
 
 }

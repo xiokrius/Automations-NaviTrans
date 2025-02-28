@@ -72,6 +72,11 @@ public class ClientsPage {
                 driver.switchTo().frame(iframe);
         }
 
+        public void returnToMainContent() {
+                driver.switchTo().defaultContent();
+                System.out.println("ласт вышел с фрейма, проверка");
+        }
+
         public void fillingClientsForm() {
 
                 System.out.println("Начинаем ClientsPage/fillingClientsForm");
@@ -215,11 +220,6 @@ public class ClientsPage {
 
                 returnToMainContent();
 
-        }
-
-        public void returnToMainContent() {
-                driver.switchTo().defaultContent();
-                System.out.println("ласт вышел с фрейма, проверка");
         }
 
         public class TestData {
