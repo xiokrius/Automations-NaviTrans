@@ -53,5 +53,8 @@ public class OpenContactsOrClient {
         ClientsPage OpenClients = new ClientsPage(driver);
         OpenClients.fillingClientsForm();
 
+        AllClients OpenClientsWindow = new AllClients(driver, generatedName);
+        OpenClientsWindow.Window();
+
     }
 }

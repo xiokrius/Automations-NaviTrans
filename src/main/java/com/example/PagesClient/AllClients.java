@@ -19,6 +19,7 @@ public class AllClients {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.nameContactsValue = nameContactsValue;
+
     }
 
     // Метод для переключения в iframe
@@ -56,7 +57,7 @@ public class AllClients {
         // Инициализируем карточку клиента
         try {
             WebElement clientCard = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//a[contains(@title, 'CUST-021')]")));
+                    By.xpath("//a[contains(@title, 'CUST-02')]")));
             // Дополнительные действия с карточкой клиента
 
             System.out.println("Карточка найдена");
@@ -72,6 +73,37 @@ public class AllClients {
     public void returnToMainContent() {
         driver.switchTo().defaultContent();
         System.out.println("ласт вышел с фрейма, проверка");
+    }
+
+    public void Window() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        switchToIframe();
+        System.out.println("Перешли в фрейм.");
+
+        try {
+            WebElement WindowsCustomer = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                    "//p[@title='Запрос утверждения отправлен.']")));
+            System.out.println("Окно найдено.");
+
+            WebElement ButtonInOkWindow = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                    "//button[contains(@class, '1632124310') and not(@aria-hidden='true')]//span[text()='ОК']")));
+
+            System.out.println("Видимость кнопки: " + ButtonInOkWindow.isDisplayed());
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ButtonInOkWindow);
+
+            System.out.println("Нажата кнопка ОК.");
+
+            WebElement ButtonInOkWindow2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                    "//button[contains(@class, '1632124310')]//span[text()='ОК']")));
+
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ButtonInOkWindow2);
+
+        } catch (Exception e) {
+
+            System.out.println("Окно не найдено");
+        }
+
     }
 
 }
