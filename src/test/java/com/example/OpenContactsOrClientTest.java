@@ -1,7 +1,13 @@
 package com.example;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.example.PagesClient.AllClients;
 import com.example.PagesClient.AutorisedClients;
@@ -10,11 +16,16 @@ import com.example.PagesClient.Contacts;
 import com.example.PagesClient.OpenContactsPage;
 import com.example.PagesOrder.QLoginTest;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.logging.Logger;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class OpenContactsOrClientTest {
 
@@ -23,7 +34,8 @@ public class OpenContactsOrClientTest {
     private String mainWindowHandle;
     private String secondWindowHandle;
     private String generatedName;
-    private static final Logger logger = Logger.getLogger(OpenContactsOrClientTest.class.getName());
+
+    private static final Logger logger = LogManager.getLogger(OpenContactsOrClientTest.class);
 
     @BeforeClass
     public void setup() {
@@ -32,6 +44,7 @@ public class OpenContactsOrClientTest {
         driver1.manage().window().maximize();
         driver1.get(ConfigManager.getProperty("BaseURL"));
         mainWindowHandle = driver1.getWindowHandle();
+        logger.info("Перешли в окно ввода логина пароля");
     }
 
     @Test(priority = 1)
@@ -41,10 +54,12 @@ public class OpenContactsOrClientTest {
         loginTest.inputLogin(ConfigManager.getProperty("inputLogin"));
         loginTest.inputPassword(ConfigManager.getProperty("inputPassword"));
         loginTest.clickLoginButton();
+        logger.info("Вход выполнен");
 
         Contacts contactsPage = loginTest.goToContacts();
         contactsPage.ContactsOrderOpen();
         contactsPage.returnToMainContent();
+        logger.info("Открылась страница с контактами");
 
         OpenContactsPage openContacts = new OpenContactsPage(driver1);
         openContacts.OpenContacts();
@@ -60,9 +75,13 @@ public class OpenContactsOrClientTest {
 
         AllClients clientsOpenFull = new AllClients(driver1, generatedName);
         clientsOpenFull.ClientsOpen();
+        logger.info("Карточка клиента открыта");
 
         ClientsPage clientPage = new ClientsPage(driver1);
         clientPage.fillingClientsForm();
+        logger.info("Карточка клиента заполнена");
+
+        clientsOpenFull.Window();
     }
 
     @Test(priority = 3)
@@ -77,9 +96,11 @@ public class OpenContactsOrClientTest {
         loginTest2.inputLogin(ConfigManager.getProperty("inputLogin2"));
         loginTest2.inputPassword(ConfigManager.getProperty("inputPassword2"));
         loginTest2.clickLoginButton();
+        logger.info("Вход выполнен от 2 юзера");
 
         AutorisedClients autorisedClients = new AutorisedClients(driver2, generatedName);
         autorisedClients.Autorised();
+        logger.info("Переход в т.Запросы утверждения, утверждение нового клиента");
     }
 
     @Test(priority = 4)
@@ -89,11 +110,69 @@ public class OpenContactsOrClientTest {
 
         AllClients clientCD = new AllClients(driver1, generatedName);
         clientCD.creditLimit();
+        logger.info("Переход в карточку клиента, установка Кредитного Лимита");
+
+        ClientsPage OpenCD = new ClientsPage(driver1);
+        OpenCD.OpenCD();
+
+        AllClients BackToAllClients = new AllClients(driver1, generatedName);
+        BackToAllClients.Window();
+
+        logger.info("Выход из карточки клиента");
+
+    }
+
+    @Test(priority = 5)
+    public void setApproverCd() {
+
+        logger.info("Подтверждение КД");
 
         driver2.switchTo().window(secondWindowHandle);
         driver2.navigate().refresh();
         AutorisedClients continueInSecondWindow = new AutorisedClients(driver2, generatedName);
         continueInSecondWindow.Autorised();
+        logger.info("Подтверждение КД успешно выполнено");
+
+        driver2.quit();
+    }
+
+    @Test(priority = 6)
+    public void OpenWindow() {
+
+        driver1.switchTo().window(mainWindowHandle);
+        logger.info("Проверка нового кд");
+
+    }
+
+    @AfterMethod
+    public void takeScreenshotOnFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            takeScreenshot(result.getName());
+        }
+    }
+
+    private void takeScreenshot(String testName) {
+        File srcFile = ((TakesScreenshot) driver1).getScreenshotAs(OutputType.FILE);
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String screenshotName = System.getProperty("user.dir") + "/screenshots/" + testName + "_" + timestamp + ".png";
+
+        try {
+            File screenshotDir = new File(System.getProperty("user.dir") + "/screenshots");
+            if (!screenshotDir.exists()) {
+                boolean created = screenshotDir.mkdirs();
+                if (created) {
+                    logger.info("Папка для скриншотов успешно создана");
+                } else {
+                    logger.error("Не удалось создать папку для скриншотов");
+                }
+            }
+
+            FileUtils.copyFile(srcFile, new File(screenshotName));
+            logger.info("Тест-ран не пройден " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            logger.info("Скриншот сохранен: " + screenshotName);
+        } catch (IOException e) {
+            logger.error("Ошибка при сохранении скриншота: " + e.getMessage());
+        }
     }
 
     // @AfterClass
