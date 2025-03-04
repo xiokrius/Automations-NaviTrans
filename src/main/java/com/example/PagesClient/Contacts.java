@@ -40,6 +40,8 @@ public class Contacts {
         CreateContacts.click();
         System.out.println("Клик по кнопке создания контакта выполнен.");
 
+        returnToMainContent();
+
     }
 
     public void returnToMainContent() {

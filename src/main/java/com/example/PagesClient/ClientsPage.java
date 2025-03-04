@@ -27,6 +27,7 @@ public class ClientsPage {
         // private String RegNumberValue = ConfigManager.getProperty("RegNumberValue");
         private String BlockCustomerValue = ConfigManager.getProperty("BlockCustomerValue");
         private String CDElementValue = ConfigManager.getProperty("CDElementValue");
+        private String NVTBusinessUnitValue = ConfigManager.getProperty("NVTBusinessUnitValue");
         // CDElement
 
         public ClientsPage(WebDriver driver) {
@@ -98,6 +99,13 @@ public class ClientsPage {
                 System.out.println("Ввели значение поля Тип клиента");
 
                 selectDropdownByValue(typeClient, typeCarrierValue);
+
+                // Вводим "по подразделению"
+
+                WebElement NVTBusinessUnit = wait.until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//a[contains(@title, 'элемента По подразделению')]/following-sibling::input")));
+
+                setInputValue(NVTBusinessUnit, NVTBusinessUnitValue);
 
                 WebElement SpanCountry = wait.until(ExpectedConditions.visibilityOfElementLocated(
                                 By.xpath("//span[text()='Адрес и контакты']")));

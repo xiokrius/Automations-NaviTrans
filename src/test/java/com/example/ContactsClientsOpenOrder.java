@@ -1,9 +1,24 @@
 package com.example;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import com.example.PagesClient.AllClients;
 import com.example.PagesClient.AutorisedClients;
@@ -21,123 +36,283 @@ import com.example.PagesOrder.VehiclePlanning;
 import com.example.PagesOrder.VehicleRoute;
 import com.example.PagesOrder.ZayavkaByPage;
 import com.example.PagesOrder.ZayavkaPage;
-import com.example.ConfigManager;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import com.example.ConfigManager;
 
 public class ContactsClientsOpenOrder {
 
-    public static void main(String[] args) {
-        System.out.println("Запуск теста...");
-        // Настройка WebDriver
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        // driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        String BaseURL = ConfigManager.getProperty("BaseURL");
-        driver.get(BaseURL);
+    private WebDriver driver1;
+    private WebDriver driver2;
+    private String mainWindowHandle;
+    private String secondWindowHandle;
+    private String generatedName;
 
-        // Cохраняем окно
-        String mainWindowHandle = driver.getWindowHandle();
+    private static final Logger logger = LogManager.getLogger(ContactsClientsOpenOrder.class);
 
-        String login = ConfigManager.getProperty("inputLogin");
-        String password = ConfigManager.getProperty("inputPassword");
-        String inputLogin2 = ConfigManager.getProperty("inputLogin2");
-        String inputPassword2 = ConfigManager.getProperty("inputPassword2");
+    @BeforeClass
+    public void setup() {
+        logger.info("Инициализация драйвера и открытие браузера");
+        driver1 = new ChromeDriver();
+        driver1.manage().window().maximize();
+        driver1.get(ConfigManager.getProperty("BaseURL"));
+        mainWindowHandle = driver1.getWindowHandle();
+        logger.info("Перешли в окно ввода логина пароля");
+    }
 
-        // Выполнение входа (логин, пароль, нажатие кнопки)
-        QLoginTest loginTest = new QLoginTest(driver);
-        loginTest.inputLogin(login);
-        loginTest.inputPassword(password);
+    @Test(priority = 1)
+    public void createContactAndClient() {
+        logger.info("Создание нового контакта и клиента");
+        QLoginTest loginTest = new QLoginTest(driver1);
+        loginTest.inputLogin(ConfigManager.getProperty("inputLogin"));
+        loginTest.inputPassword(ConfigManager.getProperty("inputPassword"));
         loginTest.clickLoginButton();
+        logger.info("Вход выполнен");
 
-        System.out.println("Переход на страницу заявок...");
-        Contacts Contacts = loginTest.goToContacts();
+        Contacts contactsPage = loginTest.goToContacts();
+        contactsPage.ContactsOrderOpen();
+        logger.info("Открылась страница с контактами");
 
-        Contacts CreateNewContacts = new Contacts(driver);
-        CreateNewContacts.ContactsOrderOpen();
-        CreateNewContacts.returnToMainContent();
+        OpenContactsPage openContacts = new OpenContactsPage(driver1);
+        openContacts.OpenContacts();
+        generatedName = openContacts.NameContactsValue;
+        logger.info("Контакт создан: " + generatedName);
+        Assert.assertNotNull(generatedName, "Контакт не был создан");
+    }
 
-        OpenContactsPage OpenContacts = new OpenContactsPage(driver);
-        OpenContacts.OpenContacts();
+    @Test(priority = 2)
+    public void fillClientFormAndAuthorize() {
+        logger.info("Заполнение карточки клиента и авторизация");
+        driver1.get(ConfigManager.getProperty("URLClients"));
 
-        String generatedName = OpenContacts.NameContactsValue;
-
-        CreateNewContacts.returnToMainContent();
-
-        String URLClients = ConfigManager.getProperty("URLClients");
-        driver.get(URLClients);
-
-        AllClients clientsOpenFull = new AllClients(driver, generatedName);
+        AllClients clientsOpenFull = new AllClients(driver1, generatedName);
         clientsOpenFull.ClientsOpen();
-        CreateNewContacts.returnToMainContent();
+        logger.info("Карточка клиента открыта");
 
-        ClientsPage OpenClients = new ClientsPage(driver);
-        OpenClients.fillingClientsForm();
+        ClientsPage clientPage = new ClientsPage(driver1);
+        clientPage.fillingClientsForm();
+        logger.info("Карточка клиента заполнена");
 
-        AllClients OpenClientsWindow = new AllClients(driver, generatedName);
-        OpenClientsWindow.Window();
+        clientsOpenFull.Window();
+    }
 
-        System.out.println("Открытие второго браузера...");
-        WebDriver driver2 = new ChromeDriver();
+    @Test(priority = 3)
+    public void approveClientInSecondWindow() {
+        logger.info("Открытие второго браузера для подтверждения клиента");
+        driver2 = new ChromeDriver();
         driver2.manage().window().maximize();
-        driver2.get(BaseURL);
-
-        String secondWindowHandle = driver2.getWindowHandle();
+        driver2.get(ConfigManager.getProperty("BaseURL"));
+        secondWindowHandle = driver2.getWindowHandle();
 
         QLoginTest loginTest2 = new QLoginTest(driver2);
-        loginTest2.inputLogin(inputLogin2);
-        loginTest2.inputPassword(inputPassword2);
+        loginTest2.inputLogin(ConfigManager.getProperty("inputLogin2"));
+        loginTest2.inputPassword(ConfigManager.getProperty("inputPassword2"));
         loginTest2.clickLoginButton();
+        logger.info("Вход выполнен от 2 юзера");
 
-        // Создание экземпляра AutorisedClientsg
         AutorisedClients autorisedClients = new AutorisedClients(driver2, generatedName);
-        System.out.println("Дескриптор окна driver2 в тесте: " + driver2.getWindowHandle());
-        // Авторизация по URL из конфига
         autorisedClients.Autorised();
+        logger.info("Переход в т.Запросы утверждения, утверждение нового клиента");
+    }
 
-        driver.switchTo().window(mainWindowHandle);
-        System.out.println("Переключились обратно в первое окно");
+    @Test(priority = 4)
+    public void setAndApproveCreditLimit() {
+        logger.info("Настройка и согласование кредитного лимита");
+        driver1.switchTo().window(mainWindowHandle);
 
-        AllClients OpenClientCD = new AllClients(driver, generatedName);
-        OpenClientCD.creditLimit();
-        CreateNewContacts.returnToMainContent();
+        AllClients clientCD = new AllClients(driver1, generatedName);
+        clientCD.creditLimit();
+        logger.info("Переход в карточку клиента, установка Кредитного Лимита");
 
-        ClientsPage OpenCD = new ClientsPage(driver);
+        ClientsPage OpenCD = new ClientsPage(driver1);
         OpenCD.OpenCD();
 
-        AllClients BackToAllClients = new AllClients(driver, generatedName);
+        AllClients BackToAllClients = new AllClients(driver1, generatedName);
         BackToAllClients.Window();
 
-        // Переключение обратно на второе окно
+        logger.info("Выход из карточки клиента");
+
+    }
+
+    @Test(priority = 5)
+    public void setApproverCd() {
+
+        logger.info("Подтверждение КД");
+
         driver2.switchTo().window(secondWindowHandle);
-        System.out.println("Переключились обратно во второе окно");
-
-        // Обновление страницы
         driver2.navigate().refresh();
-        System.out.println("Страница во втором окне обновлена");
-
-        // Продолжение работы во втором окне
         AutorisedClients continueInSecondWindow = new AutorisedClients(driver2, generatedName);
         continueInSecondWindow.Autorised();
+        logger.info("Подтверждение КД успешно выполнено");
 
         driver2.quit();
+    }
 
-        driver.switchTo().window(mainWindowHandle);
-        System.out.println("Переключились обратно в первое окно");
+    @Test(priority = 6)
+    public void OpenWindow() {
 
-        loginTest.goToZayavkaPage();
+        driver1.switchTo().window(mainWindowHandle);
+        logger.info("Проверка нового кд");
 
-        ZayavkaPage zayavkaPage = new ZayavkaPage(driver);
+    }
+
+    @Test(priority = 7)
+    public void GoZayavkaPage() {
+        driver1.get(ConfigManager.getProperty("URLPagesOrder"));
+        ZayavkaPage zayavkaPage = new ZayavkaPage(driver1);
         zayavkaPage.CreateNewZayavkaCZ();
         zayavkaPage.NewOrderCreate();
+        logger.info("sssssssss");
 
-        OrderPage orderPage = new OrderPage(driver);
+    }
+
+    @Test(priority = 8)
+    public void fillOrderFormClients() {
+        OrderPage orderPage = new OrderPage(driver1);
         orderPage.fillOrderFormClients();
+        logger.info("sssssssss");
 
-        OrderPage PageOrder = new OrderPage(driver);
+    }
+
+    @Test(priority = 9)
+    public void PerevozkaInFrame() {
+        OrderPage PageOrder = new OrderPage(driver1);
         PageOrder.PerevozkaInFrame();
 
+    }
+
+    @Test(priority = 10)
+    public void OpenOrLoadingLocation() {
+        PageTransp OpenDate = new PageTransp(driver1);
+        OpenDate.OpenOrLoadingLocation();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 11)
+    public void obrabotkaVypustit() {
+
+        OrderPage vageOpenTransp = new OrderPage(driver1);
+        vageOpenTransp.obrabotkaVypustit();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 12)
+    public void vehiclePlan() {
+
+        OrderPage testOpenTransp = new OrderPage(driver1);
+        testOpenTransp.vehiclePlan();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 13)
+    public void PlanOpen() {
+        OrderPage opentranspOp = new OrderPage(driver1);
+        opentranspOp.PlanOpen();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 14)
+    public void VehiclePlanOpen() {
+
+        VehiclePlanning OpenVehicle = new VehiclePlanning(driver1);
+        OpenVehicle.VehiclePlanOpen();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 15)
+    public void backRoute() {
+
+        VehicleRoute backRoute = new VehicleRoute(driver1);
+        backRoute.clickSomeButtonInFrame();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 16)
+    public void OpenService() {
+
+        ZayavkaByPage OpenService = new ZayavkaByPage(driver1);
+        OpenService.clickSomeButtonInService();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 17)
+    public void OpenServices() {
+
+        OpenInvoice Service = new OpenInvoice(driver1);
+        Service.OpenServices();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 18)
+    public void readyInInvoicing() {
+
+        OrderPage ReadyInInvoicing = new OrderPage(driver1);
+        ReadyInInvoicing.readyInInvoicing();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 19)
+    public void obrabotkaSchet() {
+
+        OrderPage Schet = new OrderPage(driver1);
+        Schet.obrabotkaSchet();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 20)
+    public void SchetRuchnoy() {
+
+        ReadyInvoic SchetNRuchnoy = new ReadyInvoic(driver1);
+        SchetNRuchnoy.SchetRuchnoy();
+        logger.info("sssssssss");
+
+    }
+
+    @Test(priority = 21)
+    public void fullSchet() {
+
+        Invoice FullInvoice = new Invoice(driver1);
+        FullInvoice.fullSchet();
+        logger.info("sssssssss");
+
+    }
+
+    @AfterMethod
+    public void takeScreenshotOnFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            takeScreenshot(result.getName());
+        }
+    }
+
+    private void takeScreenshot(String testName) {
+        File srcFile = ((TakesScreenshot) driver1).getScreenshotAs(OutputType.FILE);
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String screenshotName = System.getProperty("user.dir") + "/screenshots/" + testName + "_" + timestamp + ".png";
+
+        try {
+            File screenshotDir = new File(System.getProperty("user.dir") + "/screenshots");
+            if (!screenshotDir.exists()) {
+                boolean created = screenshotDir.mkdirs();
+                if (created) {
+                    logger.info("Папка для скриншотов успешно создана");
+                } else {
+                    logger.error("Не удалось создать папку для скриншотов");
+                }
+            }
+
+            FileUtils.copyFile(srcFile, new File(screenshotName));
+            logger.info("Тест-ран не пройден " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            logger.info("Скриншот сохранен: " + screenshotName);
+        } catch (IOException e) {
+            logger.error("Ошибка при сохранении скриншота: " + e.getMessage());
+        }
     }
 
 }

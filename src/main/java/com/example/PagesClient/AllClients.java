@@ -105,6 +105,7 @@ public class AllClients {
 
             System.out.println("Окно не найдено");
         }
+
         returnToMainContent();
     }
 
