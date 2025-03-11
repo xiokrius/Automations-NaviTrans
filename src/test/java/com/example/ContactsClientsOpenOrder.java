@@ -48,6 +48,9 @@ public class ContactsClientsOpenOrder {
     private String generatedName;
 
     private static final Logger logger = LogManager.getLogger(ContactsClientsOpenOrder.class);
+    private static final String BASE_URL = ConfigManager.getProperty("BaseURL");
+    private static final String LOGIN = ConfigManager.getProperty("inputLogin");
+    private static final String PASSUSER1 = ConfigManager.getProperty("inputPassword");
 
     @BeforeClass
     public void setup() {
@@ -55,7 +58,7 @@ public class ContactsClientsOpenOrder {
         driver1 = new ChromeDriver();
         driver1.manage().window().maximize();
         logger.info("Перешли в окно ввода логина пароля");
-        driver1.get(ConfigManager.getProperty("BaseURL"));
+        driver1.get(BASE_URL);
         mainWindowHandle = driver1.getWindowHandle();
         logger.info("Вход выполнен успешно");
     }

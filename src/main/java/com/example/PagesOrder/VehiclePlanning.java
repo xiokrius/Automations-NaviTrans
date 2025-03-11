@@ -58,8 +58,8 @@ public class VehiclePlanning {
                         System.out.println("Всплывающее окно обнаружено.");
 
                         // Выполняем действия внутри окна, ТУТ НЕ ХВАТАЕТ ЯВНОГО ОЖИДАНИЯ
-                        WebElement popupConfirmButton = popupWindow.findElement(By.xpath(
-                                        "/html/body/div[1]/div[5]/form/main/div/div[4]/button[1]"));
+                        WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                        "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
                         popupConfirmButton.click();
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
 
