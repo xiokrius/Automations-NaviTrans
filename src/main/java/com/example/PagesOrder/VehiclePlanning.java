@@ -57,10 +57,11 @@ public class VehiclePlanning {
                                         "/html/body/div[1]/div[5]/form")));
                         System.out.println("Всплывающее окно обнаружено.");
 
-                        // Выполняем действия внутри окна, ТУТ НЕ ХВАТАЕТ ЯВНОГО ОЖИДАНИЯ
                         WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                        "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
-                        popupConfirmButton.click();
+                                        "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[starts-with(@id, 'b45') and span[text()='ОК']]")));
+
+                        js.executeScript("arguments[0].click();", popupConfirmButton);
+
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
 
                         // Проверка элемента "Внимание! Просрочено плановое ТО"

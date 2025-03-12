@@ -150,6 +150,8 @@ public class ZayavkaPage {
 
                 frameSwitcher.returnToMainContent();
 
+                String s = "fdsfsd";
+
         }
 
 }
