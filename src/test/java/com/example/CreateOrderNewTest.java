@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.commons.io.FileUtils;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-
+import io.qameta.allure.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -27,6 +27,10 @@ import com.example.ConfigManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+@Epic("Клиенты и заказы")
+@Feature("Создание 2 заказов")
+
+
 public class CreateOrderNewTest {
     private WebDriver driver;
     private QLoginTest loginTest;
@@ -41,6 +45,11 @@ public class CreateOrderNewTest {
         logger.info("Браузер запущен и открыт URL");
     }
 
+    @Story("Создание и запонление заявки")
+    @Description("Создаёт заказ")
+    @Severity(SeverityLevel.CRITICAL)
+
+    @Step("Вход в систему с логином и паролем")
     @Test(priority = 1)
     public void login() {
         String login = ConfigManager.getProperty("inputLogin");
@@ -51,12 +60,14 @@ public class CreateOrderNewTest {
         logger.info("Успешный вход в систему");
     }
 
+    @Step("Открытие заявок")
     @Test(priority = 2, dependsOnMethods = "login")
     public void openZayavkaPage() {
         loginTest.goToZayavkaPage();
         logger.info("Открыта страница заявок");
     }
 
+    @Step("Создана новая заявка")
     @Test(priority = 3, dependsOnMethods = "openZayavkaPage")
     public void createNewZayavka() {
         ZayavkaPage zayavkaPage = new ZayavkaPage(driver);
@@ -65,6 +76,7 @@ public class CreateOrderNewTest {
         logger.info("Создана новая заявка");
     }
 
+    @Step("Заполнена форма заказа")
     @Test(priority = 4, dependsOnMethods = "createNewZayavka")
     public void fillOrderForm() {
         OrderPage orderPage = new OrderPage(driver);
@@ -144,9 +156,17 @@ public class CreateOrderNewTest {
 
     private void takeScreenshot(String testName) {
         File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        byte[] screenshot = null;
+        try {
+            screenshot = FileUtils.readFileToByteArray(srcFile);
+            saveScreenshot(screenshot); // Это сохранит скриншот в отчет Allure
+        } catch (IOException e) {
+            logger.error("Ошибка при чтении файла скриншота: " + e.getMessage());
+        }
+    
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String screenshotName = "screenshots/" + testName + "_" + timestamp + ".png";
-
+    
         try {
             new File("screenshots").mkdirs(); // Создаст папку, если её нет
             FileUtils.copyFile(srcFile, new File(screenshotName));
@@ -154,6 +174,11 @@ public class CreateOrderNewTest {
         } catch (IOException e) {
             logger.error("Ошибка при сохранении скриншота: " + e.getMessage());
         }
+    }
+    
+    @Attachment(value = "Screenshot on failure", type = "image/png")
+    public byte[] saveScreenshot(byte[] screenshot) {
+        return screenshot;
     }
 
     // @AfterClass
