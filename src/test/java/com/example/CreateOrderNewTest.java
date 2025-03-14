@@ -30,7 +30,6 @@ import org.openqa.selenium.TakesScreenshot;
 @Epic("Клиенты и заказы")
 @Feature("Создание 2 заказов")
 
-
 public class CreateOrderNewTest {
     private WebDriver driver;
     private QLoginTest loginTest;
@@ -84,6 +83,7 @@ public class CreateOrderNewTest {
         logger.info("Заполнена форма заказа");
     }
 
+    @Step("Обработан заказ: переход в перевозки")
     @Test(priority = 5, dependsOnMethods = "fillOrderForm")
     public void processOrder() {
         OrderPage orderPage = new OrderPage(driver);
@@ -91,6 +91,7 @@ public class CreateOrderNewTest {
         logger.info("Обработан заказ: переход в перевозки");
     }
 
+    @Step("Установлены плановые даты перевозки")
     @Test(priority = 6, dependsOnMethods = "processOrder")
     public void setPlannedDates() {
         PageTransp pageTransp = new PageTransp(driver);
@@ -98,6 +99,7 @@ public class CreateOrderNewTest {
         logger.info("Установлены плановые даты перевозки");
     }
 
+    @Step("Установлены плановые даты перевозки")
     @Test(priority = 7, dependsOnMethods = "setPlannedDates")
     public void orderFull() {
         OrderPage orderPage = new OrderPage(driver);
@@ -107,6 +109,7 @@ public class CreateOrderNewTest {
         logger.info("Установлены плановые даты перевозки");
     }
 
+    @Step("Запланирован тягач и прицеп")
     @Test(priority = 8, dependsOnMethods = "orderFull")
     public void vehiclePlanning() {
         VehiclePlanning vehiclePlanning = new VehiclePlanning(driver);
@@ -114,6 +117,7 @@ public class CreateOrderNewTest {
         logger.info("Запланирован тягач и прицеп");
     }
 
+    @Step("Открыт раздел сервисов")
     @Test(priority = 9, dependsOnMethods = "vehiclePlanning")
     public void goToVehile() {
         VehicleRoute vehicleRoute = new VehicleRoute(driver);
@@ -121,6 +125,7 @@ public class CreateOrderNewTest {
         logger.info("Открыт раздел сервисов");
     }
 
+    @Step("Открыт раздел сервисов")
     @Test(priority = 10, dependsOnMethods = "goToVehile")
     public void goToServices() {
         ZayavkaByPage servicePage = new ZayavkaByPage(driver);
@@ -128,6 +133,7 @@ public class CreateOrderNewTest {
         logger.info("Открыт раздел сервисов");
     }
 
+    @Step("Обработаны сервисы")
     @Test(priority = 11, dependsOnMethods = "goToServices")
     public void processServices() {
         OpenInvoice openInvoice = new OpenInvoice(driver);
@@ -135,6 +141,7 @@ public class CreateOrderNewTest {
         logger.info("Обработаны сервисы");
     }
 
+    @Step("Заказ завершен, сформирован счет")
     @Test(priority = 12, dependsOnMethods = "processServices")
     public void finalizeInvoice() {
         OrderPage orderPage = new OrderPage(driver);
@@ -163,10 +170,10 @@ public class CreateOrderNewTest {
         } catch (IOException e) {
             logger.error("Ошибка при чтении файла скриншота: " + e.getMessage());
         }
-    
+
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String screenshotName = "screenshots/" + testName + "_" + timestamp + ".png";
-    
+
         try {
             new File("screenshots").mkdirs(); // Создаст папку, если её нет
             FileUtils.copyFile(srcFile, new File(screenshotName));
@@ -175,17 +182,17 @@ public class CreateOrderNewTest {
             logger.error("Ошибка при сохранении скриншота: " + e.getMessage());
         }
     }
-    
+
     @Attachment(value = "Screenshot on failure", type = "image/png")
     public byte[] saveScreenshot(byte[] screenshot) {
         return screenshot;
     }
 
-    // @AfterClass
-    // public void teardown() {
-    // if (driver != null) {
-    // driver.quit();
-    // logger.info("Браузер закрыт");
-    // }
-    // }
+    @AfterClass
+    public void teardown() {
+        if (driver != null) {
+            driver.quit();
+            logger.info("Браузер закрыт");
+        }
+    }
 }

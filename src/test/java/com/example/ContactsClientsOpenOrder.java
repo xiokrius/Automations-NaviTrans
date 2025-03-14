@@ -21,7 +21,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterClass;
 
-
 import com.example.PagesClient.AllClients;
 import com.example.PagesClient.AutorisedClients;
 import com.example.PagesClient.ClientsPage;

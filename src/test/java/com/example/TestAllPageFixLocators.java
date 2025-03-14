@@ -15,7 +15,7 @@ public class TestAllPageFixLocators {
 
         // Создание новой заявки
         Praktika CreateNewOrder = new Praktika(driver);
-        CreateNewOrder.Contentim();
+        // CreateNewOrder.switchToIframe();
 
     }
 }

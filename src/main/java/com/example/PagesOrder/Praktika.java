@@ -17,18 +17,20 @@ public class Praktika {
 
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
     }
 
-    public void Contentim() {
+    public void SwitchToIframe() {
 
-        driver.get("https://www.rbc.ru/");
+        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("/fdsafasd")));
 
-        WebElement lol = wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath(
-                        "//span[@class='indicators__td indicators__name'] and (contains[@text='USD ']")));
-        System.out.println("Элемент найден");
-        lol.click();
-        System.out.println("Клик выполнен");
+        driver.switchTo().frame(iframe);
+
     }
 
+    public void Autorized() {
+
+        SwitchToIframe();
+
+    }
 }

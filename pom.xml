@@ -37,13 +37,6 @@
             <version>4.29.0</version>
         </dependency>
 
-        <!-- Удаляем JUnit, если используем TestNG -->
-        <!-- <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency> -->
 
         <!-- MS SQL JDBC -->
         <dependency>
@@ -123,9 +116,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.2</version>
                 <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+                <groups>e2e-flow</groups>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
@@ -147,14 +138,40 @@
 
             <!-- Allure Maven Plugin -->
             <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>${allure.maven.version}</version>
-                <configuration>
-                    <reportVersion>${allure.version}</reportVersion>
-                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-maven</artifactId>
+    <version>2.12.0</version>
+    <configuration>
+        <reportVersion>2.27.0</reportVersion>
+        <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+        <!-- Включаем историю -->
+        <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
+        <historyPath>${project.build.directory}/allure-report/history</historyPath>
                 </configuration>
             </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+                <execution>
+                    <id>copy-history</id>
+                    <phase>pre-site</phase>
+                    <configuration>
+                        <target>
+                            <copy todir="${project.build.directory}/allure-results/history">
+                                <fileset dir="${project.build.directory}/allure-report/history"/>
+                            </copy>
+                        </target>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+
         </plugins>
     </build>
 </project>
