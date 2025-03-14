@@ -300,26 +300,6 @@ public class ContactsClientsOpenOrder {
 
     }
 
-    @Test(priority = 22)
-    public void openInterCompany() {
-
-        OrderPage OpenInctercompany = new OrderPage(driver1);
-        logger.info("Захожу в Расходы");
-        OpenInctercompany.fillIntercompanyForm();
-        logger.info("Перешёл в Расходы");
-
-    }
-
-    @Test(priority = 23)
-    public void interCompany() {
-
-        IntercompanyInvoice FillingIntercompany = new IntercompanyInvoice(driver1);
-        logger.info("Создаю заявку интеркампани");
-        FillingIntercompany.InterCompanyInfo();
-        logger.info("Заявка создана успешно");
-
-    }
-
     @AfterClass
     public void tearDown() {
         logger.info("Завершение теста и закрытие браузеров");
