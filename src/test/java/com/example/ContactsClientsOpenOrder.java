@@ -39,6 +39,15 @@ import com.example.PagesOrder.VehicleRoute;
 import com.example.PagesOrder.ZayavkaByPage;
 import com.example.PagesOrder.ZayavkaPage;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
+@Epic("Управление клиентами")
+@Feature("Создание клиента, контакта и заявки на нового клиента")
 public class ContactsClientsOpenOrder {
 
     private WebDriver driver1;
@@ -64,6 +73,8 @@ public class ContactsClientsOpenOrder {
     }
 
     @Test(priority = 1)
+    @Story("Создание нового контакта")
+    @Severity(SeverityLevel.BLOCKER)
     public void createContactAndClient() {
         logger.info("Создание нового контакта и клиента");
         QLoginTest loginTest = new QLoginTest(driver1);
@@ -314,6 +325,11 @@ public class ContactsClientsOpenOrder {
         if (result.getStatus() == ITestResult.FAILURE) {
             takeScreenshot(result.getName());
         }
+    }
+
+    @Attachment(value = "Скриншот на ошибке", type = "image/png")
+    public byte[] takeScreenshot(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     private void takeScreenshot(String testName) {

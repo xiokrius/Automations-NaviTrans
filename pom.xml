@@ -11,7 +11,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <aspectj.version>1.9.20.1</aspectj.version>
+        <aspectj.version>1.9.21</aspectj.version>
         <allure.version>2.27.0</allure.version>
         <!-- Добавляем версию для Allure Maven Plugin -->
         <allure.maven.version>2.12.0</allure.maven.version>
@@ -95,9 +95,8 @@
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-selenide</artifactId>
+            <artifactId>allure-java-commons</artifactId>
             <version>${allure.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- Commons IO -->
@@ -116,7 +115,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.2</version>
                 <configuration>
-                <groups>e2e-flow</groups>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
@@ -143,34 +141,34 @@
     <version>2.12.0</version>
     <configuration>
         <reportVersion>2.27.0</reportVersion>
-        <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
         <!-- Включаем историю -->
         <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
         <historyPath>${project.build.directory}/allure-report/history</historyPath>
                 </configuration>
             </plugin>
 
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <version>3.1.0</version>
-            <executions>
-                <execution>
-                    <id>copy-history</id>
-                    <phase>pre-site</phase>
-                    <configuration>
-                        <target>
-                            <copy todir="${project.build.directory}/allure-results/history">
-                                <fileset dir="${project.build.directory}/allure-report/history"/>
-                            </copy>
-                        </target>
-                    </configuration>
-                    <goals>
-                        <goal>run</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-history</id>
+                        <phase>prepare-package</phase> 
+                        <configuration>
+                            <target>
+                                <!-- Копируем историю из предыдущего отчёта в allure-results -->
+                                <copy todir="${project.build.directory}/allure-results/history">
+                                    <fileset dir="${project.build.directory}/allure-report/history"/>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
     </build>
