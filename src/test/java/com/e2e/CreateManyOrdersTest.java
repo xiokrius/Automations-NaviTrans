@@ -1,4 +1,4 @@
-package com.example;
+package com.e2e;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.example.ConfigManager;
 import com.example.PagesOrder.FrameSwitcher;
 import com.example.PagesOrder.Invoice;
 import com.example.PagesOrder.OpenInvoice;
@@ -135,10 +137,10 @@ public class CreateManyOrdersTest {
         }
     }
 
-    // @AfterClass
-    // public void tearDown() {
-    // if (driver != null) {
-    // driver.quit();
-    // }
-    // }
+    @AfterClass
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 }

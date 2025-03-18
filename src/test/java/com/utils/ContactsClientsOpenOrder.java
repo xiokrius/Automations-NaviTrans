@@ -1,4 +1,4 @@
-package com.example;
+package com.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +21,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterClass;
 
+import com.example.ConfigManager;
 import com.example.PagesClient.AllClients;
 import com.example.PagesClient.AutorisedClients;
 import com.example.PagesClient.ClientsPage;

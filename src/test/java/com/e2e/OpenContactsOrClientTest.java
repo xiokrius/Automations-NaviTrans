@@ -1,4 +1,4 @@
-package com.example;
+package com.e2e;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -9,6 +9,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import io.qameta.allure.*;
+import org.openqa.selenium.*;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import com.example.ConfigManager;
 import com.example.PagesClient.AllClients;
 import com.example.PagesClient.AutorisedClients;
 import com.example.PagesClient.ClientsPage;
@@ -27,6 +34,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Epic("Управление клиентами и контактами")
+@Feature("Создание и утверждение клиентов")
 public class OpenContactsOrClientTest {
 
     private WebDriver driver1;
@@ -38,6 +47,7 @@ public class OpenContactsOrClientTest {
     private static final Logger logger = LogManager.getLogger(OpenContactsOrClientTest.class);
 
     @BeforeClass
+    @Step("Инициализация драйвера и открытие браузера")
     public void setup() {
         logger.info("Инициализация драйвера и открытие браузера");
         driver1 = new ChromeDriver();
@@ -48,6 +58,8 @@ public class OpenContactsOrClientTest {
     }
 
     @Test(priority = 1)
+    @Story("Создание контакта и клиента")
+    @Description("Тест проверяет создание нового контакта и клиента")
     public void createContactAndClient() {
         logger.info("Создание нового контакта и клиента");
         QLoginTest loginTest = new QLoginTest(driver1);
@@ -69,6 +81,8 @@ public class OpenContactsOrClientTest {
     }
 
     @Test(priority = 2)
+    @Story("Заполнение карточки клиента")
+    @Description("Тест проверяет заполнение карточки клиента и авторизацию")
     public void fillClientFormAndAuthorize() {
         logger.info("Заполнение карточки клиента и авторизация");
         driver1.get(ConfigManager.getProperty("URLClients"));
@@ -85,6 +99,8 @@ public class OpenContactsOrClientTest {
     }
 
     @Test(priority = 3)
+    @Story("Подтверждение клиента")
+    @Description("Тест проверяет подтверждение клиента")
     public void approveClientInSecondWindow() {
         logger.info("Открытие второго браузера для подтверждения клиента");
         driver2 = new ChromeDriver();
@@ -104,6 +120,8 @@ public class OpenContactsOrClientTest {
     }
 
     @Test(priority = 4)
+    @Story("Установка кредитного лимита")
+    @Description("Тест проверяет установку и согласование кредитного лимита")
     public void setAndApproveCreditLimit() {
         logger.info("Настройка и согласование кредитного лимита");
         driver1.switchTo().window(mainWindowHandle);
@@ -123,6 +141,8 @@ public class OpenContactsOrClientTest {
     }
 
     @Test(priority = 5)
+    @Story("Подтверждение КД")
+    @Description("Тест проверяет подтверждение КД")
     public void setApproverCd() {
 
         logger.info("Подтверждение КД");
@@ -137,6 +157,8 @@ public class OpenContactsOrClientTest {
     }
 
     @Test(priority = 6)
+    @Story("Проверка нового КД")
+    @Description("Тест проверяет новый КД в основном браузере")
     public void OpenWindow() {
 
         driver1.switchTo().window(mainWindowHandle);
@@ -145,6 +167,7 @@ public class OpenContactsOrClientTest {
     }
 
     @AfterMethod
+    @Step("Создание скриншота при неудаче")
     public void takeScreenshotOnFailure(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             takeScreenshot(result.getName());
@@ -175,12 +198,13 @@ public class OpenContactsOrClientTest {
         }
     }
 
-    // @AfterClass
-    // public void tearDown() {
-    // logger.info("Завершение теста и закрытие браузеров");
-    // if (driver1 != null)
-    // driver1.quit();
-    // if (driver2 != null)
-    // driver2.quit();
-    // }
+    @AfterClass
+    @Step("Завершение теста и закрытие браузеров")
+    public void tearDown() {
+        logger.info("Завершение теста и закрытие браузеров");
+        if (driver1 != null)
+            driver1.quit();
+        if (driver2 != null)
+            driver2.quit();
+    }
 }

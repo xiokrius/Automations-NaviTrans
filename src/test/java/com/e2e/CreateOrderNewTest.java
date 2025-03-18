@@ -1,4 +1,4 @@
-package com.example;
+package com.e2e;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -188,11 +188,11 @@ public class CreateOrderNewTest {
         return screenshot;
     }
 
-    @AfterClass
-    public void teardown() {
-        if (driver != null) {
-            driver.quit();
-            logger.info("Браузер закрыт");
-        }
-    }
+    // @AfterClass
+    // public void teardown() {
+    // if (driver != null) {
+    // driver.quit();
+    // logger.info("Браузер закрыт");
+    // }
+    // }
 }
