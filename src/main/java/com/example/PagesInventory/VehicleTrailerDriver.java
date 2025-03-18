@@ -2,6 +2,8 @@ package com.example.PagesInventory;
 
 import java.time.Duration;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +19,7 @@ public class VehicleTrailerDriver {
     WebDriver driver;
     WebDriverWait wait;
     FrameSwitcher frameSwitcher;
+    private static final Logger logger = LogManager.getLogger(VehicleTrailerDriver.class);
 
     public VehicleTrailerDriver(WebDriver driver) {
 
@@ -39,9 +42,14 @@ public class VehicleTrailerDriver {
 
     public void PageTrailerDriver() {
 
-        frameSwitcher.returnToMainContent();
+        logger.info("Поиск iframe...");
+        WebElement iframe = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.className("designer-client-frame")));
+        logger.info("Переключение на iframe...");
+        driver.switchTo().frame(iframe);
+        logger.info("Переключение на iframe выполнено.");
 
-        checkTranslation(By.xpath("//a[text()='Изменить ТС']"), "Изменить ТС");
+        checkTranslation(By.xpath("//a[text()='Тип ТС']"), "Тип ТС");
         checkTranslation(By.xpath("//a[text()=' Код ТС']"), " Код ТС");
         checkTranslation(By.xpath("//a[text()=' Гос. номер ТС']"), " Гос. номер ТС");
         checkTranslation(By.xpath("//a[text()=' Дата начала']"), " Дата начала");
