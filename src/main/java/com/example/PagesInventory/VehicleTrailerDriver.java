@@ -19,6 +19,7 @@ public class VehicleTrailerDriver {
     WebDriver driver;
     WebDriverWait wait;
     FrameSwitcher frameSwitcher;
+
     private static final Logger logger = LogManager.getLogger(VehicleTrailerDriver.class);
 
     public VehicleTrailerDriver(WebDriver driver) {
@@ -34,9 +35,9 @@ public class VehicleTrailerDriver {
         String actualText = element.getText();
 
         if (actualText.equals(expectedText)) {
-            System.out.println("Текст корректен: " + actualText);
+            logger.info("Текст корректен: " + actualText);
         } else {
-            System.out.println("Текст некорректен. Ожидалось: " + expectedText + ", но получено: " + actualText);
+            logger.error("Текст некорректен. Ожидалось: " + expectedText + ", но получено: " + actualText);
         }
     }
 
