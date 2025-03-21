@@ -57,3 +57,4 @@ QLoginTest*
 config.properties*
 config.properties.contacts*
 lib/commons-io-2.18.0/docs/
+allure-results/

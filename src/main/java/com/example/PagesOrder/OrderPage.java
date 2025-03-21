@@ -130,7 +130,8 @@ public class OrderPage {
                                 .until(ExpectedConditions
                                                 .elementToBeClickable(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Обработка.");
-                obrabotkaButton.click();
+
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", obrabotkaButton);
 
                 // НАШЛИ КНОПКУ Готово к инвойсированию
                 WebElement readyInInvoic = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(

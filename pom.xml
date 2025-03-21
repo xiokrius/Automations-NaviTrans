@@ -4,22 +4,32 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-<repositories>
-    <repository>
-        <id>central</id>
-        <url>https://repo.maven.apache.org/maven2</url>
-    </repository>
-</repositories>
-
     <groupId>com.example</groupId>
     <artifactId>PagesClient</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <aspectj.version>1.9.21</aspectj.version>
+        <allure.version>2.27.0</allure.version>
+        <!-- Добавляем версию для Allure Maven Plugin -->
+        <allure.maven.version>2.12.0</allure.maven.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <!-- Обновляем URL репозитория Allure -->
+        <repository>
+            <id>allure-repo</id>
+            <url>https://repo.qameta.io/artifactory/public</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <!-- Selenium -->
@@ -29,20 +39,12 @@
             <version>4.29.0</version>
         </dependency>
 
-        <!-- JUnit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-
 
         <!-- MS SQL JDBC -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <version>11.2.1.jre8</version> 
+            <version>11.2.1.jre8</version>
         </dependency>
 
         <!-- TestNG -->
@@ -60,39 +62,183 @@
             <version>1.78</version>
         </dependency>
 
+        <!-- Log4j 2 dependencies -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.24.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.24.3</version>
+        </dependency>
 
- <!-- Log4j 2 dependencies -->
-    <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>2.24.3</version> 
-    </dependency>
-    <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>2.24.3</version> 
-    </dependency>
+        <!-- Удаляем конфликтующие SLF4J-биндинги -->
+        <!-- <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>2.1.0-alpha1</version>
+        </dependency> -->
 
-    <!-- SLF4J Log4j2 binding -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-log4j12</artifactId>
- <version>2.1.0-alpha1</version>
-</dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.24.3</version>
+        </dependency>
 
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-slf4j-impl</artifactId>
-    <version>2.24.3</version> <!-- или последняя стабильная версия -->
-</dependency>
+        <!-- Allure dependencies -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
 
-    <!-- Commons IO -->
-    <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>2.18.0</version>
-    </dependency>
+        <!-- Commons IO -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.18.0</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven Surefire Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.2</version>
+            <configuration>
+                <!-- Включаем только тесты из папки com.example -->
+                <includes>
+                    <include>**/example/*.java</include>
+                </includes>
+                <!-- Исключаем вспомогательные классы из папки com.utils -->
+                <excludes>
+                    <exclude>**/utils/*.java</exclude>
+                </excludes>
+                <!-- Настройки для AspectJ и Allure -->
+                <argLine>
+                    -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                </argLine>
+                <systemProperties>
+                    <property>
+                        <name>allure.results.directory</name>
+                        <value>${project.build.directory}/allure-results</value>
+                    </property>
+                </systemProperties>
+            </configuration>
+            <dependencies>
+                <!-- Зависимость для AspectJ -->
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
+                    <version>${aspectj.version}</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+
+            <!-- Allure Maven Plugin -->
+            <plugin>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-maven</artifactId>
+    <version>2.12.0</version>
+    <configuration>
+                   <allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.27.0/allure-commandline-2.27.0.zip</allureDownloadUrl>
+            <allureHome>${project.basedir}/.allure/allure-2.27.0</allureHome>
+        <reportVersion>2.27.0</reportVersion>
+        <!-- Включаем историю -->
+        <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
+        <historyPath>${project.build.directory}/allure-report/history</historyPath>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-history</id>
+                        <phase>prepare-package</phase> 
+                        <configuration>
+                            <target>
+                                <!-- Копируем историю из предыдущего отчёта в allure-results -->
+                                <copy todir="${project.build.directory}/allure-results/history">
+                                    <fileset dir="${project.build.directory}/allure-report/history"/>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <profiles>
+        <profile>
+            <id>unit-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/unit/*Test.java</include> <!-- Только модульные тесты -->
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>integration-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/integration/*Test.java</include> <!-- Только интеграционные тесты -->
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>e2e-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/e2e/*Test.java</include> <!-- Только end-to-end тесты -->
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 
 </project>
