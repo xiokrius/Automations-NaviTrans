@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.e2e.OpenContactsOrClientTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 66.28 s -- in com.e2e.OpenContactsOrClientTest

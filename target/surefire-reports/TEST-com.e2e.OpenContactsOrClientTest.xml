@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.e2e.OpenContactsOrClientTest" time="66.28" tests="6" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="23"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1251"/>
+    <property name="java.class.path" value="C:\Project1\TEST1\target\test-classes;C:\Project1\TEST1\target\classes;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-java\4.29.0\selenium-java-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-api\4.29.0\selenium-api-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-chrome-driver\4.29.0\selenium-chrome-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\com\google\auto\service\auto-service-annotations\1.1.1\auto-service-annotations-1.1.1.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-chromium-driver\4.29.0\selenium-chromium-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-json\4.29.0\selenium-json-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-manager\4.29.0\selenium-manager-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v131\4.29.0\selenium-devtools-v131-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v132\4.29.0\selenium-devtools-v132-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v133\4.29.0\selenium-devtools-v133-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v85\4.29.0\selenium-devtools-v85-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-edge-driver\4.29.0\selenium-edge-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-firefox-driver\4.29.0\selenium-firefox-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-http\4.29.0\selenium-http-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-ie-driver\4.29.0\selenium-ie-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-remote-driver\4.29.0\selenium-remote-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\com\google\guava\guava\33.4.0-jre\guava-33.4.0-jre.jar;C:\Users\a.galchenya\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\a.galchenya\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\a.galchenya\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\a.galchenya\.m2\repository\org\checkerframework\checker-qual\3.43.0\checker-qual-3.43.0.jar;C:\Users\a.galchenya\.m2\repository\com\google\errorprone\error_prone_annotations\2.36.0\error_prone_annotations-2.36.0.jar;C:\Users\a.galchenya\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\semconv\opentelemetry-semconv\1.28.0-alpha\opentelemetry-semconv-1.28.0-alpha.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-api\1.46.0\opentelemetry-api-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-context\1.46.0\opentelemetry-context-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-exporter-logging\1.46.0\opentelemetry-exporter-logging-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-common\1.46.0\opentelemetry-sdk-common-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure-spi\1.46.0\opentelemetry-sdk-extension-autoconfigure-spi-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure\1.46.0\opentelemetry-sdk-extension-autoconfigure-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-api-incubator\1.46.0-alpha\opentelemetry-api-incubator-1.46.0-alpha.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-trace\1.46.0\opentelemetry-sdk-trace-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk\1.46.0\opentelemetry-sdk-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-metrics\1.46.0\opentelemetry-sdk-metrics-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-logs\1.46.0\opentelemetry-sdk-logs-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-os\4.29.0\selenium-os-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\apache\commons\commons-exec\1.4.0\commons-exec-1.4.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-safari-driver\4.29.0\selenium-safari-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-support\4.29.0\selenium-support-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\com\microsoft\sqlserver\mssql-jdbc\11.2.1.jre8\mssql-jdbc-11.2.1.jre8.jar;C:\Users\a.galchenya\.m2\repository\org\testng\testng\7.9.0\testng-7.9.0.jar;C:\Users\a.galchenya\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\a.galchenya\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\a.galchenya\.m2\repository\com\beust\jcommander\1.78\jcommander-1.78.jar;C:\Users\a.galchenya\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\a.galchenya\.m2\repository\org\apache\logging\log4j\log4j-core\2.24.3\log4j-core-2.24.3.jar;C:\Users\a.galchenya\.m2\repository\org\apache\logging\log4j\log4j-slf4j-impl\2.24.3\log4j-slf4j-impl-2.24.3.jar;C:\Users\a.galchenya\.m2\repository\io\qameta\allure\allure-testng\2.27.0\allure-testng-2.27.0.jar;C:\Users\a.galchenya\.m2\repository\io\qameta\allure\allure-test-filter\2.27.0\allure-test-filter-2.27.0.jar;C:\Users\a.galchenya\.m2\repository\io\qameta\allure\allure-java-commons\2.27.0\allure-java-commons-2.27.0.jar;C:\Users\a.galchenya\.m2\repository\io\qameta\allure\allure-model\2.27.0\allure-model-2.27.0.jar;C:\Users\a.galchenya\.m2\repository\commons-io\commons-io\2.18.0\commons-io-2.18.0.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Moscow"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="23"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="RU"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin"/>
+    <property name="sun.java.command" value="C:\Users\a.galchenya\AppData\Local\Temp\surefire4774462524697777924\surefirebooter-20250320145428508_3.jar C:\Users\a.galchenya\AppData\Local\Temp\surefire4774462524697777924 2025-03-20T14-54-28_346-jvmRun1 surefire-20250320145428508_1tmp surefire_0-20250320145428508_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="test" value="com.e2e.OpenContactsOrClientTest"/>
+    <property name="surefire.test.class.path" value="C:\Project1\TEST1\target\test-classes;C:\Project1\TEST1\target\classes;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-java\4.29.0\selenium-java-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-api\4.29.0\selenium-api-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-chrome-driver\4.29.0\selenium-chrome-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\com\google\auto\service\auto-service-annotations\1.1.1\auto-service-annotations-1.1.1.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-chromium-driver\4.29.0\selenium-chromium-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-json\4.29.0\selenium-json-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-manager\4.29.0\selenium-manager-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v131\4.29.0\selenium-devtools-v131-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v132\4.29.0\selenium-devtools-v132-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v133\4.29.0\selenium-devtools-v133-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v85\4.29.0\selenium-devtools-v85-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-edge-driver\4.29.0\selenium-edge-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-firefox-driver\4.29.0\selenium-firefox-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-http\4.29.0\selenium-http-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-ie-driver\4.29.0\selenium-ie-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-remote-driver\4.29.0\selenium-remote-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\com\google\guava\guava\33.4.0-jre\guava-33.4.0-jre.jar;C:\Users\a.galchenya\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\a.galchenya\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\a.galchenya\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\a.galchenya\.m2\repository\org\checkerframework\checker-qual\3.43.0\checker-qual-3.43.0.jar;C:\Users\a.galchenya\.m2\repository\com\google\errorprone\error_prone_annotations\2.36.0\error_prone_annotations-2.36.0.jar;C:\Users\a.galchenya\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\semconv\opentelemetry-semconv\1.28.0-alpha\opentelemetry-semconv-1.28.0-alpha.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-api\1.46.0\opentelemetry-api-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-context\1.46.0\opentelemetry-context-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-exporter-logging\1.46.0\opentelemetry-exporter-logging-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-common\1.46.0\opentelemetry-sdk-common-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure-spi\1.46.0\opentelemetry-sdk-extension-autoconfigure-spi-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure\1.46.0\opentelemetry-sdk-extension-autoconfigure-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-api-incubator\1.46.0-alpha\opentelemetry-api-incubator-1.46.0-alpha.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-trace\1.46.0\opentelemetry-sdk-trace-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk\1.46.0\opentelemetry-sdk-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-metrics\1.46.0\opentelemetry-sdk-metrics-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\io\opentelemetry\opentelemetry-sdk-logs\1.46.0\opentelemetry-sdk-logs-1.46.0.jar;C:\Users\a.galchenya\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-os\4.29.0\selenium-os-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\apache\commons\commons-exec\1.4.0\commons-exec-1.4.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-safari-driver\4.29.0\selenium-safari-driver-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\org\seleniumhq\selenium\selenium-support\4.29.0\selenium-support-4.29.0.jar;C:\Users\a.galchenya\.m2\repository\com\microsoft\sqlserver\mssql-jdbc\11.2.1.jre8\mssql-jdbc-11.2.1.jre8.jar;C:\Users\a.galchenya\.m2\repository\org\testng\testng\7.9.0\testng-7.9.0.jar;C:\Users\a.galchenya\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\a.galchenya\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\a.galchenya\.m2\repository\com\beust\jcommander\1.78\jcommander-1.78.jar;C:\Users\a.galchenya\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\a.galchenya\.m2\repository\org\apache\logging\log4j\log4j-core\2.24.3\log4j-core-2.24.3.jar;C:\Users\a.galchenya\.m2\repository\org\apache\logging\log4j\log4j-slf4j-impl\2.24.3\log4j-slf4j-impl-2.24.3.jar;C:\Users\a.galchenya\.m2\repository\io\qameta\allure\allure-testng\2.27.0\allure-testng-2.27.0.jar;C:\Users\a.galchenya\.m2\repository\io\qameta\allure\allure-test-filter\2.27.0\allure-test-filter-2.27.0.jar;C:\Users\a.galchenya\.m2\repository\io\qameta\allure\allure-java-commons\2.27.0\allure-java-commons-2.27.0.jar;C:\Users\a.galchenya\.m2\repository\io\qameta\allure\allure-model\2.27.0\allure-model-2.27.0.jar;C:\Users\a.galchenya\.m2\repository\commons-io\commons-io\2.18.0\commons-io-2.18.0.jar;"/>
+    <property name="allure.results.directory" value="C:\Project1\TEST1\target/allure-results"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\a.galchenya"/>
+    <property name="user.language" value="ru"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-10-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-23"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Project1\TEST1"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\a.galchenya\AppData\Local\Temp\surefire4774462524697777924\surefirebooter-20250320145428508_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="23.0.1+11-39"/>
+    <property name="user.name" value="A.Galchenya"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\a.galchenya\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\A8712~1.GAL\AppData\Local\Temp\"/>
+    <property name="java.version" value="23.0.1"/>
+    <property name="user.dir" value="C:\Project1\TEST1"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1251"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-23\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Users\a.galchenya\AppData\Roaming\Code\User\globalStorage\pleiades.java-extension-pack-jdk\gradle\latest\bin;C:\Users\a.galchenya\AppData\Roaming\Code\User\globalStorage\pleiades.java-extension-pack-jdk\maven\latest\bin;C:\Program Files\Java\jdk-23\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\a.galchenya\AppData\Local\Microsoft\WindowsApps;C:\Users\a.galchenya\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\a.galchenya\AppData\Local\Programs\Git\cmd;C:\Users\a.galchenya\OneDrive - Trans Solutions s.r.o\Рабочий стол\maven 1.0\apache-maven-3.9.9\bin;C:\Project1\TEST1\.allure\allure-2.27.0\bin;;c:\Users\a.galchenya\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="23.0.1+11-39"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="67.0"/>
+  </properties>
+  <testcase name="createContactAndClient" classname="com.e2e.OpenContactsOrClientTest" time="13.286">
+    <system-out><![CDATA[2025-03-20T11:54:31.041943Z main INFO Starting configuration XmlConfiguration[location=C:\Project1\TEST1\target\classes\log4j2.xml, lastModified=2025-02-25T13:07:51.582Z]...
+2025-03-20T11:54:31.046945600Z main INFO Start watching for changes to C:\Project1\TEST1\target\classes\log4j2.xml every 0 seconds
+2025-03-20T11:54:31.046945600Z main INFO Configuration XmlConfiguration[location=C:\Project1\TEST1\target\classes\log4j2.xml, lastModified=2025-02-25T13:07:51.582Z] started.
+2025-03-20T11:54:31.051946300Z main INFO Stopping configuration org.apache.logging.log4j.core.config.DefaultConfiguration@352c308...
+2025-03-20T11:54:31.051946300Z main INFO Configuration org.apache.logging.log4j.core.config.DefaultConfiguration@352c308 stopped.
+14:54:32 [main] INFO  com.e2e.OpenContactsOrClientTest - Инициализация драйвера и открытие браузера
+14:54:37 [main] INFO  com.e2e.OpenContactsOrClientTest - Перешли в окно ввода логина пароля
+14:54:37 [main] INFO  com.e2e.OpenContactsOrClientTest - Создание нового контакта и клиента
+14:54:40 [main] INFO  com.e2e.OpenContactsOrClientTest - Вход выполнен
+Начинаем Contacts/ContactsOrderOpen
+Перешли в фрейм.
+Клик по кнопке создания контакта выполнен.
+ласт вышел с фрейма, проверка
+ласт вышел с фрейма, проверка
+14:54:44 [main] INFO  com.e2e.OpenContactsOrClientTest - Открылась страница с контактами
+Генерированное имя клиента: ILyztWXSCI
+Перешли в фрейм.
+Начала OpenContactsPage/OpenContacts
+Нашли поле Название контакта
+Заполнили наименование клиента: ILyztWXSCI
+Нашли поле Название контакта
+Нашли поле Дополнительно
+Нашли поле Дополнительно
+Ищем запись: '000001'
+Нашли запись: 000001
+Кликнули по записи: 000001
+Нажата кнопка 'Нет'.
+ласт вышел с фрейма, проверка
+14:54:50 [main] INFO  com.e2e.OpenContactsOrClientTest - Контакт создан: ILyztWXSCI
+]]></system-out>
+    <system-err><![CDATA[мар. 20, 2025 2:54:35 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 134, returning the closest version; found: 133; Please update to a Selenium version that supports CDP version 134
+]]></system-err>
+  </testcase>
+  <testcase name="fillClientFormAndAuthorize" classname="com.e2e.OpenContactsOrClientTest" time="12.267">
+    <system-out><![CDATA[14:54:50 [main] INFO  com.e2e.OpenContactsOrClientTest - Заполнение карточки клиента и авторизация
+Начинаем AllClients/ClientsOpen
+Перешли в фрейм.
+Текст найденного элемента: 
+Поиск
+Отображается ли элемент: true
+Активен ли элемент: true
+Клик по кнопке фильтр для поиска клиента выполнен.
+Карточка найдена
+Клик выполнен
+ласт вышел с фрейма, проверка
+14:54:53 [main] INFO  com.e2e.OpenContactsOrClientTest - Карточка клиента открыта
+Сгенерированный ИНН: 797566601
+Начинаем ClientsPage/fillingClientsForm
+Значение поля: CUST-02172
+Ввели значение поля Тип клиента
+Выбрали значение в select: 1
+Заполнили значение: CZ_TS
+Заполнили значение: Ceska Lipa
+Заполнили значение: 797566601
+Всплывающее окно обнаружено
+Кнопка ОК идентифицирована
+Нажата кнопка ОК
+Раскрытие списка
+Список раскрыт
+Заполнили значение: CUST-02172
+Почта найдена
+скролл выполнен
+Платежи найдены
+Выбрали значение в select: 1
+Нашёл код условий платежа
+кликнул по код условий платежа
+нашёл окно
+нашёл элемент
+Выбрали значение в select: 0
+ласт вышел с фрейма, проверка
+14:55:01 [main] INFO  com.e2e.OpenContactsOrClientTest - Карточка клиента заполнена
+Перешли в фрейм.
+Окно найдено.
+Видимость кнопки: true
+Нажата кнопка ОК.
+ласт вышел с фрейма, проверка
+]]></system-out>
+  </testcase>
+  <testcase name="approveClientInSecondWindow" classname="com.e2e.OpenContactsOrClientTest" time="8.929">
+    <system-out><![CDATA[14:55:02 [main] INFO  com.e2e.OpenContactsOrClientTest - Открытие второго браузера для подтверждения клиента
+14:55:08 [main] INFO  com.e2e.OpenContactsOrClientTest - Вход выполнен от 2 юзера
+Начали авторизацию во втором браузере
+Переход по URL: http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=654&filter=%27Approval%20Entry%27.Status%20IS%20%271%27&dc=0&bookmark=12%3bxgEAAACH4y4%3d
+Текущий URL после перехода: http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=654&filter=%27Approval%20Entry%27.Status%20IS%20%271%27&dc=0&bookmark=12%3bxgEAAACH4y4%3d
+Дескриптор окна в AutorisedClients: 0E65DC2E587842A754C1D494EFD148B7
+Текущий URL драйвера в AutorisedClients: http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=654&filter=%27Approval%20Entry%27.Status%20IS%20%271%27&dc=0&bookmark=12%3bxgEAAACH4y4%3d
+Дескриптор окна в AutorisedClients: 0E65DC2E587842A754C1D494EFD148B7
+Начали Поиск имени
+Начали Поиск имени 2
+CUST-02172
+Дескриптор окна в AutorisedClients: 0E65DC2E587842A754C1D494EFD148B7
+Клик по элементу с текстом клиента: ILyztWXSCI
+Клик по кнопке выполнен.
+ласт вышел с фрейма, проверка
+14:55:11 [main] INFO  com.e2e.OpenContactsOrClientTest - Переход в т.Запросы утверждения, утверждение нового клиента
+]]></system-out>
+    <system-err><![CDATA[мар. 20, 2025 2:55:03 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 134, returning the closest version; found: 133; Please update to a Selenium version that supports CDP version 134
+]]></system-err>
+  </testcase>
+  <testcase name="setAndApproveCreditLimit" classname="com.e2e.OpenContactsOrClientTest" time="12.338">
+    <system-out><![CDATA[14:55:11 [main] INFO  com.e2e.OpenContactsOrClientTest - Настройка и согласование кредитного лимита
+Начинаем AllClients/ClientsOpen
+Перешли в фрейм.
+Карточка найдена
+Клик выполнен
+ласт вышел с фрейма, проверка
+14:55:11 [main] INFO  com.e2e.OpenContactsOrClientTest - Переход в карточку клиента, установка Кредитного Лимита
+Сгенерированный ИНН: 580032333
+Начинаем ClientsPage/fillingClientsForm
+Заполнили значение: 100000
+ласт вышел с фрейма, проверка
+Перешли в фрейм.
+Окно не найдено
+ласт вышел с фрейма, проверка
+14:55:23 [main] INFO  com.e2e.OpenContactsOrClientTest - Выход из карточки клиента
+]]></system-out>
+  </testcase>
+  <testcase name="setApproverCd" classname="com.e2e.OpenContactsOrClientTest" time="11.492">
+    <system-out><![CDATA[14:55:24 [main] INFO  com.e2e.OpenContactsOrClientTest - Подтверждение КД
+Начали авторизацию во втором браузере
+Переход по URL: http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=654&filter=%27Approval%20Entry%27.Status%20IS%20%271%27&dc=0&bookmark=12%3bxgEAAACH4y4%3d
+Текущий URL после перехода: http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=654&filter=%27Approval%20Entry%27.Status%20IS%20%271%27&dc=0&bookmark=12%3bxgEAAACH4y4%3d
+Дескриптор окна в AutorisedClients: 0E65DC2E587842A754C1D494EFD148B7
+Текущий URL драйвера в AutorisedClients: http://192.168.1.13:8080/BC210-TEST/?company=Trans_Solutions_CZ&page=654&filter=%27Approval%20Entry%27.Status%20IS%20%271%27&dc=0&bookmark=12%3bxgEAAACHPi8%3d
+Дескриптор окна в AutorisedClients: 0E65DC2E587842A754C1D494EFD148B7
+Начали Поиск имени
+Начали Поиск имени 2
+CUST-02172
+Дескриптор окна в AutorisedClients: 0E65DC2E587842A754C1D494EFD148B7
+Ошибка при клике по имени клиента: Expected condition failed: waiting for visibility of element located by By.xpath: //span[contains(@title, 'CUST-02172')] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.29.0', revision: '5fc1ec94cb'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 134.0.6998.89, chrome: {chromedriverVersion: 134.0.6998.90 (219ee74681fc..., userDataDir: C:\Users\A8712~1.GAL\AppDat...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51733}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51733/devtoo..., se:cdpVersion: 134.0.6998.89, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6f94cf4257505f301a65c0d9b927af90
+Клик по кнопке выполнен.
+ласт вышел с фрейма, проверка
+14:55:35 [main] INFO  com.e2e.OpenContactsOrClientTest - Подтверждение КД успешно выполнено
+]]></system-out>
+  </testcase>
+  <testcase name="OpenWindow" classname="com.e2e.OpenContactsOrClientTest" time="0.011">
+    <system-out><![CDATA[14:55:35 [main] INFO  com.e2e.OpenContactsOrClientTest - Проверка нового кд
+]]></system-out>
+  </testcase>
+</testsuite>
