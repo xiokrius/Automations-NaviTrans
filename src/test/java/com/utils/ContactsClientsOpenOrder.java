@@ -33,7 +33,6 @@ import com.example.PagesOrder.Invoice;
 import com.example.PagesOrder.OpenInvoice;
 import com.example.PagesOrder.OrderPage;
 import com.example.PagesOrder.PageTransp;
-import com.example.PagesOrder.QLoginTest;
 import com.example.PagesOrder.ReadyInvoic;
 import com.example.PagesOrder.VehiclePlanning;
 import com.example.PagesOrder.VehicleRoute;
