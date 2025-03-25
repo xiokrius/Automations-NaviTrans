@@ -23,6 +23,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.example.ConfigManager;
+import com.example.Environment.SettingUser;
 import com.example.Environment.Settings;
 import com.example.PagesInventory.TransportEquipment;
 import com.example.PagesInventory.VehicleTrailerDriver;
@@ -70,14 +71,17 @@ public class SettingUpTheEnvironment {
         logger.info("Переход в оборудования ТС");
         UpPass.goToSettings();
 
+        SettingUser UpSettingsUser = new SettingUser(driver);
+        UpSettingsUser.SettingsOfUser();
+
     }
 
-    @AfterClass
-    public void tearDown() {
-        logger.info("Завершение теста и закрытие браузеров");
-        if (driver != null)
-            driver.quit();
-    }
+    // @AfterClass
+    // public void tearDown() {
+    // logger.info("Завершение теста и закрытие браузеров");
+    // if (driver != null)
+    // driver.quit();
+    // }
 
     @AfterMethod
     public void takeScreenshotOnFailure(ITestResult result) {
