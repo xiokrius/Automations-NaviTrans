@@ -198,13 +198,13 @@ public class OpenContactsOrClientTest {
         }
     }
 
-    @AfterClass
-    @Step("Завершение теста и закрытие браузеров")
-    public void tearDown() {
-        logger.info("Завершение теста и закрытие браузеров");
-        if (driver1 != null)
-            driver1.quit();
-        if (driver2 != null)
-            driver2.quit();
-    }
+    // @AfterClass
+    // @Step("Завершение теста и закрытие браузеров")
+    // public void tearDown() {
+    // logger.info("Завершение теста и закрытие браузеров");
+    // if (driver1 != null)
+    // driver1.quit();
+    // if (driver2 != null)
+    // driver2.quit();
+    // }
 }
