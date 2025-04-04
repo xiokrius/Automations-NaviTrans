@@ -13,9 +13,9 @@ public class TestAllPageFixLocators {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        // Создание новой заявки
-        Praktika CreateNewOrder = new Praktika(driver);
-        // CreateNewOrder.switchToIframe();
+        // // Создание новой заявки
+        // Praktika CreateNewOrder = new Praktika(driver);
+        // // CreateNewOrder.switchToIframe();
 
     }
 }

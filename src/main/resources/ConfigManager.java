@@ -1,28 +1,42 @@
-package main.resources;
-
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public class ConfigManager {
-    private static Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     static {
-        loadProperties("src/main/resources/config.properties");
-        loadProperties("src/main/resources/config.properties.contacts");
+        loadProperties("config.properties");
+        loadProperties("config.properties.contacts");
     }
 
     private static void loadProperties(String filePath) {
-        try (FileInputStream fis = new FileInputStream(filePath)) {
-            properties.load(fis);
+        try (InputStreamReader reader = new InputStreamReader(
+                new FileInputStream(filePath), StandardCharsets.UTF_8)) {
+            properties.load(reader);
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Не удалось загрузить файл: " + filePath);
+            throw new RuntimeException("Failed to load properties file: " + filePath, e);
         }
     }
 
     public static String getProperty(String key) {
-        return properties.getProperty(key);
+        String value = properties.getProperty(key);
+        if (value == null) {
+            throw new IllegalArgumentException("Property '" + key + "' not found");
+        }
+        // Декодируем ISO-8859-1 → UTF-8 если нужно
+        return decodeIfNeeded(value.trim());
     }
 
+    private static String decodeIfNeeded(String value) {
+        try {
+            // Проверяем, содержит ли строка "кракозябры"
+            if (value.matches(".*[Ð-ð].*")) {
+                return new String(value.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+            }
+            return value;
+        } catch (Exception e) {
+            return value;
+        }
+    }
 }

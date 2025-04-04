@@ -36,7 +36,7 @@ public class Settings {
 
         }
 
-        private void setInputValue(WebElement element, String value) {
+        public void setInputValue(WebElement element, String value) {
                 js.executeScript(
                                 "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
                                 element, value);

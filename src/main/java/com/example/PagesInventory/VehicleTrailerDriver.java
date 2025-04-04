@@ -32,12 +32,13 @@ public class VehicleTrailerDriver {
     @Step("Проверка перевода для элемента: {expectedText}")
     public void checkTranslation(By locator, String expectedText) {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-        String actualText = element.getText();
+        String actualText = element.getText().trim();
+        String expectedTextNormalized = expectedText.trim();
 
-        if (actualText.equals(expectedText)) {
+        if (actualText.equals(expectedTextNormalized)) {
             logger.info("Текст корректен: " + actualText);
         } else {
-            logger.error("Текст некорректен. Ожидалось: " + expectedText + ", но получено: " + actualText);
+            logger.error("Текст некорректен. Ожидалось: " + expectedTextNormalized + ", но получено: " + actualText);
         }
     }
 
@@ -50,7 +51,7 @@ public class VehicleTrailerDriver {
         driver.switchTo().frame(iframe);
         logger.info("Переключение на iframe выполнено.");
 
-        checkTranslation(By.xpath("//a[text()='Тип ТС']"), "Тип ТС");
+        checkTranslation(By.xpath("//a[contains(@title, 'Сортировка по Тип ТС') and text()='Тип ТС']"), "Тип ТС");
         checkTranslation(By.xpath("//a[text()=' Код ТС']"), " Код ТС");
         checkTranslation(By.xpath("//a[text()=' Гос. номер ТС']"), " Гос. номер ТС");
         checkTranslation(By.xpath("//a[text()=' Дата начала']"), " Дата начала");

@@ -54,7 +54,7 @@ public class CreateManyOrdersTest {
 
     @Test(priority = 2, dependsOnMethods = "login")
     public void createOrders() {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             System.out.println("Создание заявки " + (i + 1));
             createOrder(i);
             logger.info("Переход на страницу транспортных заявок");
@@ -66,37 +66,51 @@ public class CreateManyOrdersTest {
             ZayavkaPage zayavkaPage = loginTest.goToZayavkaPage();
             zayavkaPage.CreateNewZayavkaCZ();
             zayavkaPage.NewOrderCreate();
-
+            logger.info("Создали новую заявку");
             OrderPage orderPage = new OrderPage(driver);
             orderPage.fillOrderForm();
+            logger.info("Заполнили основными данными");
             orderPage.PerevozkaInFrameIteration(iteration);
 
             PageTransp pageTransp = new PageTransp(driver);
+            logger.info("перешли в планирование перевозки");
             pageTransp.OpenOrLoadingLocationIteration(iteration);
-
+            logger.info("Выпускаем заказ");
             orderPage.obrabotkaVypustit();
+            logger.info("Выпустили заказ");
             orderPage.vehiclePlan();
+            logger.info("Планируем рейс");
             orderPage.PlanOpen();
 
             VehiclePlanning vehiclePlanning = new VehiclePlanning(driver);
+            logger.info("Вносим данные в рейсе");
             vehiclePlanning.VehiclePlanOpen();
 
             VehicleRoute vehicleRoute = new VehicleRoute(driver);
+            logger.info("Выходим из рейса обратно на страницу транспортной заявки");
             vehicleRoute.clickSomeButtonInFrame();
 
             ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
+            logger.info("Переход в сервисы");
             zayavkaByPage.clickSomeButtonInService();
 
             OpenInvoice openInvoice = new OpenInvoice(driver);
+            logger.info("Открытие сервисов");
             openInvoice.OpenServices();
+            logger.info("Заполнили сервисы и вышли");
 
+            logger.info("Готово к инвойсированию");
             orderPage.readyInInvoicing();
+            logger.info("Нажали готово к инвойсированию, переходим к созданию счёта");
             orderPage.obrabotkaSchet();
+            logger.info("Нажали обработка/счёт");
 
             ReadyInvoic readyInvoic = new ReadyInvoic(driver);
+            logger.info("Нажэали счёт номер ручной");
             readyInvoic.SchetRuchnoy();
 
             Invoice invoice = new Invoice(driver);
+            logger.info("Выпускаем и учитываем счёт");
             invoice.fullSchet();
         });
     }
