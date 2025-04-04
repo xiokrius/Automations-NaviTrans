@@ -74,13 +74,6 @@
             <version>2.24.3</version>
         </dependency>
 
-        <!-- Удаляем конфликтующие SLF4J-биндинги -->
-        <!-- <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>2.1.0-alpha1</version>
-        </dependency> -->
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
@@ -161,28 +154,42 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>copy-history</id>
-                        <phase>prepare-package</phase> 
-                        <configuration>
-                            <target>
-                                <!-- Копируем историю из предыдущего отчёта в allure-results -->
-                                <copy todir="${project.build.directory}/allure-results/history">
-                                    <fileset dir="${project.build.directory}/allure-report/history"/>
-                                </copy>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-antrun-plugin</artifactId>
+    <version>3.1.0</version>
+    <executions>
+        <execution>
+            <id>copy-history</id>
+            <phase>prepare-package</phase>
+            <configuration>
+                <target>
+                    <!-- 1. Создаем целевую директорию, если её нет -->
+                    <mkdir dir="${project.build.directory}/allure-results/history"/>
+                    
+                    <!-- 2. Проверяем существование исходной директории -->
+                    <available 
+                        property="history.exists" 
+                        file="${project.build.directory}/allure-report/history"
+                        type="dir"/>
+                        
+                    <!-- 3. Копируем только если директория существует -->
+                    <copy todir="${project.build.directory}/allure-results/history" failonerror="false">
+                        <fileset 
+                            dir="${project.build.directory}/allure-report/history"
+                            erroronmissingdir="false"/>
+                    </copy>
+                    
+                    <!-- Логирование для отладки -->
+                    <echo message="[INFO] Allure history copied: ${project.build.directory}/allure-report/history → ${project.build.directory}/allure-results/history"/>
+                </target>
+            </configuration>
+            <goals>
+                <goal>run</goal>
+            </goals>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 

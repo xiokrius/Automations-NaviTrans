@@ -2,6 +2,8 @@ package com.example.PagesClient;
 
 import java.time.Duration;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,6 +21,7 @@ public class AutorisedClients {
     private WebDriverWait wait;
     private JavascriptExecutor js;
     public final String nameContactsValue;
+    private static final Logger logger = LogManager.getLogger(AutorisedClients.class);
 
     public AutorisedClients(WebDriver driver, String nameContactsValue) {
 
@@ -33,26 +36,26 @@ public class AutorisedClients {
     // работало)))))
     private void clickButtonByClientName(String clientName) {
 
-        System.out.println("Текущий URL драйвера в AutorisedClients: " + driver.getCurrentUrl());
-        System.out.println("Дескриптор окна в AutorisedClients: " + driver.getWindowHandle());
+        logger.info("Текущий URL драйвера в AutorisedClients: " + driver.getCurrentUrl());
+        logger.info("Дескриптор окна в AutorisedClients: " + driver.getWindowHandle());
 
         String clientValue = TestData.clientValue;
 
-        System.out.println("Начали Поиск имени");
+        logger.info("Начали Поиск имени");
         String xpath = "//span[contains(@title, '" + clientValue + "')]";
 
         // Ожидаем элемент и проверяем его видимость
-        System.out.println("Начали Поиск имени 2");
-        System.out.println(clientValue);
-        System.out.println("Дескриптор окна в AutorisedClients: " + driver.getWindowHandle());
+        logger.info("Начали Поиск имени 2");
+        logger.info(clientValue);
+        logger.info("Дескриптор окна в AutorisedClients: " + driver.getWindowHandle());
         WebElement ClientName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 
         // Проверка на видимость элемента и клик по нему
         if (ClientName.isDisplayed()) {
             js.executeScript("arguments[0].click();", ClientName);
-            System.out.println("Клик по элементу с текстом клиента: " + clientName);
+            logger.info("Клик по элементу с текстом клиента: " + clientName);
         } else {
-            System.out.println("Элемент не видим для клика.");
+            logger.info("Элемент не видим для клика.");
         }
     }
 
@@ -64,33 +67,33 @@ public class AutorisedClients {
 
     public void returnToMainContent() {
         driver.switchTo().defaultContent();
-        System.out.println("ласт вышел с фрейма, проверка");
+        logger.info("ласт вышел с фрейма, проверка");
     }
 
     public void Autorised() {
 
-        System.out.println("Начали авторизацию во втором браузере");
+        logger.info("Начали авторизацию во втором браузере");
 
         String AutorisedURL = ConfigManager.getProperty("AutorisedURL");
         if (AutorisedURL == null || AutorisedURL.isEmpty()) {
-            System.out.println("Ошибка: URL не найден в конфиге.");
+            logger.info("Ошибка: URL не найден в конфиге.");
             return;
         }
 
-        System.out.println("Переход по URL: " + AutorisedURL);
+        logger.info("Переход по URL: " + AutorisedURL);
         driver.get(AutorisedURL);
 
         // Логируем текущий URL для проверки
-        System.out.println("Текущий URL после перехода: " + driver.getCurrentUrl());
+        logger.info("Текущий URL после перехода: " + driver.getCurrentUrl());
 
-        System.out.println("Дескриптор окна в AutorisedClients: " + driver.getWindowHandle());
+        logger.info("Дескриптор окна в AutorisedClients: " + driver.getWindowHandle());
 
         switchToIframe();
 
         try {
             clickButtonByClientName(nameContactsValue);
         } catch (Exception e) {
-            System.out.println("Ошибка при клике по имени клиента: " + e.getMessage());
+            logger.info("Ошибка при клике по имени клиента: " + e.getMessage());
         }
 
         try {
@@ -101,12 +104,12 @@ public class AutorisedClients {
 
             if (clickOpenClientsPage.isDisplayed() && clickOpenClientsPage.isEnabled()) {
                 js.executeScript("arguments[0].click();", clickOpenClientsPage);
-                System.out.println("Клик по кнопке выполнен.");
+                logger.info("Клик по кнопке выполнен.");
             } else {
-                System.out.println("Элемент не доступен для клика.");
+                logger.info("Элемент не доступен для клика.");
             }
         } catch (Exception e) {
-            System.out.println("Элемент не найден или не стал кликабельным: " + e.getMessage());
+            logger.info("Элемент не найден или не стал кликабельным: " + e.getMessage());
         }
 
         returnToMainContent();

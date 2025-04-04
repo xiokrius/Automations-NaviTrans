@@ -119,7 +119,7 @@ public class OrderPage {
 
                 System.out.println("Начинаем OrderPage/readyInInvoicing");
 
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
                 frameSwitcher.switchToIframe();
 
