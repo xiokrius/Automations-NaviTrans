@@ -46,7 +46,7 @@ public class ChoosingATemplateForANewVendor {
             logger.info("тут нашли окно");
 
             WebElement TypeVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//a[contains(@title, 'Выбрать запись" + normalizedVendor + "')]")));
+                    By.xpath("//a[contains(text(), '" + normalizedVendor + "')]")));
 
             logger.info("нашли кнопку");
 
@@ -55,6 +55,7 @@ public class ChoosingATemplateForANewVendor {
             logger.info("нашли кнопки тип поставщика");
             TypeVendor.click();
             logger.info("клик");
+
             WebElement SpanOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                     "//button//span[text()='ОК']")));
             logger.info("тут нашли ок");
@@ -71,6 +72,12 @@ public class ChoosingATemplateForANewVendor {
                 WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(
                         By.xpath("//button[contains(@class, '1632124310')]/span[text()='Да']")));
                 logger.info("клик да");
+
+                popupConfirmButton.click();
+                popupConfirmButton.click();
+                popupConfirmButton.click();
+                popupConfirmButton.click();
+                popupConfirmButton.click();
                 popupConfirmButton.click();
 
             } catch (Exception o) {
@@ -82,9 +89,6 @@ public class ChoosingATemplateForANewVendor {
             logger.info("Элемент не найден: " + e.getMessage());
             // Дополнительная диагностика
             logger.info("Искомый текст: '" + vendor + "'");
-            logger.info("Список элементов на странице:");
-            driver.findElements(By.xpath("//span[@role='textbox']"))
-                    .forEach(el -> logger.info(el.getAttribute("title")));
 
         }
 

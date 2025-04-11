@@ -1,4 +1,4 @@
-package com.e2e;
+package com.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

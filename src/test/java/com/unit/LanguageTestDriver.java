@@ -57,7 +57,7 @@ public class LanguageTestDriver {
     @Test(priority = 1)
     @Story("Проверка переводов в оборудования ТС")
     @Severity(SeverityLevel.BLOCKER)
-    public void createContactAndClient() {
+    public void CheckTranslation() {
         logger.info("Создание нового контакта и клиента");
         QLoginTest loginTest = new QLoginTest(driver);
         logger.info("Авторизация по логину и паролю");
@@ -77,12 +77,12 @@ public class LanguageTestDriver {
 
     }
 
-    @AfterClass
-    public void tearDown() {
-        logger.info("Завершение теста и закрытие браузеров");
-        if (driver != null)
-            driver.quit();
-    }
+    // @AfterClass
+    // public void tearDown() {
+    // logger.info("Завершение теста и закрытие браузеров");
+    // if (driver != null)
+    // driver.quit();
+    // }
 
     @AfterMethod
     public void takeScreenshotOnFailure(ITestResult result) {
