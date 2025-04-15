@@ -38,7 +38,7 @@ public class CreateManyOrdersTest {
     public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("http://192.168.1.13:8080/BC210-TEST/SignIn?ReturnUrl=%2FBC210-TEST%2F");
+        driver.get(ConfigManager.getProperty("URLAutorisedNavi"));
         loginTest = new QLoginTest(driver);
     }
 
@@ -54,7 +54,7 @@ public class CreateManyOrdersTest {
 
     @Test(priority = 2, dependsOnMethods = "login")
     public void createOrders() {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 2; i++) {
             System.out.println("Создание заявки " + (i + 1));
             createOrder(i);
             logger.info("Переход на страницу транспортных заявок");
@@ -63,8 +63,11 @@ public class CreateManyOrdersTest {
 
     private void createOrder(int iteration) {
         performAction(() -> {
-            ZayavkaPage zayavkaPage = loginTest.goToZayavkaPage();
+            ZayavkaPage zayavkaPage = new ZayavkaPage(driver);
+            logger.info("zayavkaPage goToZayavkaPage");
+            driver.get(ConfigManager.getProperty("URLOrder"));
             zayavkaPage.CreateNewZayavkaCZ();
+
             zayavkaPage.NewOrderCreate();
             logger.info("Создали новую заявку");
             OrderPage orderPage = new OrderPage(driver);
@@ -90,28 +93,28 @@ public class CreateManyOrdersTest {
             logger.info("Выходим из рейса обратно на страницу транспортной заявки");
             vehicleRoute.clickSomeButtonInFrame();
 
-            ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
-            logger.info("Переход в сервисы");
-            zayavkaByPage.clickSomeButtonInService();
+            // ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
+            // logger.info("Переход в сервисы");
+            // zayavkaByPage.clickSomeButtonInService();
 
-            OpenInvoice openInvoice = new OpenInvoice(driver);
-            logger.info("Открытие сервисов");
-            openInvoice.OpenServices();
-            logger.info("Заполнили сервисы и вышли");
+            // OpenInvoice openInvoice = new OpenInvoice(driver);
+            // logger.info("Открытие сервисов");
+            // openInvoice.OpenServices();
+            // logger.info("Заполнили сервисы и вышли");
 
-            logger.info("Готово к инвойсированию");
-            orderPage.readyInInvoicing();
-            logger.info("Нажали готово к инвойсированию, переходим к созданию счёта");
-            orderPage.obrabotkaSchet();
-            logger.info("Нажали обработка/счёт");
+            // logger.info("Готово к инвойсированию");
+            // orderPage.readyInInvoicing();
+            // logger.info("Нажали готово к инвойсированию, переходим к созданию счёта");
+            // orderPage.obrabotkaSchet();
+            // logger.info("Нажали обработка/счёт");
 
-            ReadyInvoic readyInvoic = new ReadyInvoic(driver);
-            logger.info("Нажэали счёт номер ручной");
-            readyInvoic.SchetRuchnoy();
+            // ReadyInvoic readyInvoic = new ReadyInvoic(driver);
+            // logger.info("Нажэали счёт номер ручной");
+            // readyInvoic.SchetRuchnoy();
 
-            Invoice invoice = new Invoice(driver);
-            logger.info("Выпускаем и учитываем счёт");
-            invoice.fullSchet();
+            // Invoice invoice = new Invoice(driver);
+            // logger.info("Выпускаем и учитываем счёт");
+            // invoice.fullSchet();
         });
     }
 

@@ -1,6 +1,7 @@
 package com.example.PagesClient;
 
 import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,6 +40,7 @@ public class Contacts {
         // Кликаем по первой кнопке
         CreateContacts.click();
         System.out.println("Клик по кнопке создания контакта выполнен.");
+
 
         returnToMainContent();
 

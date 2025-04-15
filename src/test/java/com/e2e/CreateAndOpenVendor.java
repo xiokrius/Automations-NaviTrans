@@ -82,19 +82,19 @@ public class CreateAndOpenVendor {
         logger.info("Открыт страница поставщиков");
     }
 
-    @Step("блаблабла")
-    @Test(priority = 3, dependsOnMethods = "openZayavkaPage")
+    @Step("Выбор опций поставщика")
+    @Test(priority = 3, dependsOnMethods = "SupplierSelection")
     public void createNewZayavka() {
         ChoosingATemplateForANewVendor goChoosVendor = new ChoosingATemplateForANewVendor(driver);
         goChoosVendor.choosingATemplate();
         logger.info("Создана новая заявка");
     }
 
-    @Step("Заполнена форма заказа")
-    @Test(priority = 4, dependsOnMethods = "createNewZayavka")
-    public void fillOrderForm() {
+    @Step("Заполнение карточки поставщика")
+    @Test(priority = 4, dependsOnMethods = "Filling out The Supplier")
+    public void CompliedOfVendor() {
         CardOfVendor VendorList = new CardOfVendor(driver);
-        VendorList.completionOfCardVendor();
+        VendorList.completionOfNameCardVendor();
         logger.info("Заполнена форма поставщика");
     }
 

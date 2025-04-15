@@ -48,20 +48,12 @@ public class ChoosingATemplateForANewVendor {
             WebElement TypeVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//a[contains(text(), '" + normalizedVendor + "')]")));
 
-            logger.info("нашли кнопку");
-
-            new Actions(driver).moveToElement(TypeVendor).click().perform();
-
             logger.info("нашли кнопки тип поставщика");
+
             TypeVendor.click();
+
             logger.info("клик");
 
-            WebElement SpanOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                    "//button//span[text()='ОК']")));
-            logger.info("тут нашли ок");
-
-            SpanOk.click();
-            logger.info("ок клик");
             try {
 
                 WebElement SpanOkVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
@@ -73,11 +65,6 @@ public class ChoosingATemplateForANewVendor {
                         By.xpath("//button[contains(@class, '1632124310')]/span[text()='Да']")));
                 logger.info("клик да");
 
-                popupConfirmButton.click();
-                popupConfirmButton.click();
-                popupConfirmButton.click();
-                popupConfirmButton.click();
-                popupConfirmButton.click();
                 popupConfirmButton.click();
 
             } catch (Exception o) {

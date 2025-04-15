@@ -40,7 +40,7 @@ public class CreateOrderNewTest {
     public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("http://192.168.1.13:8080/BC210-TEST/SignIn?ReturnUrl=%2FBC210-TEST%2F");
+        driver.get(ConfigManager.getProperty("URLAutorisedNavi"));
         loginTest = new QLoginTest(driver);
         logger.info("Браузер запущен и открыт URL");
     }

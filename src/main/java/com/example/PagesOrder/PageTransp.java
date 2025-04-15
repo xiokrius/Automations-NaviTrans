@@ -229,6 +229,7 @@ public class PageTransp {
                 BackPage.click();
 
                 frameSwitcher.returnToMainContent();
+
                 System.out.println("Вышли из iframe.");
 
         }

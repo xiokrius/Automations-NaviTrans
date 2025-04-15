@@ -3,15 +3,11 @@ package com.utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.example.PagesOrder.Invoice;
-import com.example.PagesOrder.OpenInvoice;
 import com.example.PagesOrder.OrderPage;
 import com.example.PagesOrder.PageTransp;
 import com.example.PagesOrder.QLoginTest;
-import com.example.PagesOrder.ReadyInvoic;
 import com.example.PagesOrder.VehiclePlanning;
 import com.example.PagesOrder.VehicleRoute;
-import com.example.PagesOrder.ZayavkaByPage;
 import com.example.PagesOrder.ZayavkaPage;
 import com.example.ConfigManager;
 
@@ -23,7 +19,7 @@ public class CreateManyOrders {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         // driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://192.168.1.13:8080/BC210-TEST/SignIn?ReturnUrl=%2FBC210-TEST%2F");
+        driver.get(ConfigManager.getProperty("URLAutorisedNavi"));
 
         String login = ConfigManager.getProperty("inputLogin");
         String password = ConfigManager.getProperty("inputPassword");
@@ -82,24 +78,24 @@ public class CreateManyOrders {
             backRoute.clickSomeButtonInFrame();
 
             // Сам переход в сервисы
-            ZayavkaByPage OpenService = new ZayavkaByPage(driver);
-            OpenService.clickSomeButtonInService();
+            // ZayavkaByPage OpenService = new ZayavkaByPage(driver);
+            // OpenService.clickSomeButtonInService();
 
-            // Действия в сервисах
-            OpenInvoice Service = new OpenInvoice(driver);
-            Service.OpenServices();
+            // // Действия в сервисах
+            // OpenInvoice Service = new OpenInvoice(driver);
+            // Service.OpenServices();
 
-            OrderPage ReadyInInvoicing = new OrderPage(driver);
-            ReadyInInvoicing.readyInInvoicing();
+            // OrderPage ReadyInInvoicing = new OrderPage(driver);
+            // ReadyInInvoicing.readyInInvoicing();
 
-            OrderPage Schet = new OrderPage(driver);
-            Schet.obrabotkaSchet();
+            // OrderPage Schet = new OrderPage(driver);
+            // Schet.obrabotkaSchet();
 
-            ReadyInvoic SchetNRuchnoy = new ReadyInvoic(driver);
-            SchetNRuchnoy.SchetRuchnoy();
+            // ReadyInvoic SchetNRuchnoy = new ReadyInvoic(driver);
+            // SchetNRuchnoy.SchetRuchnoy();
 
-            Invoice FullInvoice = new Invoice(driver);
-            FullInvoice.fullSchet();
+            // Invoice FullInvoice = new Invoice(driver);
+            // FullInvoice.fullSchet();
 
         }
     }

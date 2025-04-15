@@ -2,6 +2,8 @@ package com.example.PagesVendor;
 
 import java.time.Duration;
 
+import javax.swing.plaf.basic.BasicSliderUI.ScrollListener;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.example.ConfigManager;
 import com.example.PagesClient.OpenContactsPage.RandomUtils;
@@ -21,6 +25,7 @@ public class CardOfVendor {
     private JavascriptExecutor js;
     private FrameSwitcher frameSwitcher;
     public final String NameVendorsValue;
+    private static final Logger logger = LogManager.getLogger(CardOfVendor.class);
 
     public CardOfVendor(WebDriver driver) {
 
@@ -31,19 +36,33 @@ public class CardOfVendor {
         this.frameSwitcher = new FrameSwitcher(driver);
     }
 
-    public void completionOfCardVendor() {
+    public void completionOfNameCardVendor() {
 
         frameSwitcher.switchToIframe();
-
-        WebElement NameVendor = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                "//input[@title='required']")));
+        WebElement NameVendor = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//input[@required='required' and @type='text']")));
 
         js.executeScript("arguments[0].value = arguments[1];", NameVendor, NameVendorsValue);
-        System.out.println("Заполнили наименование поставщика: " + NameVendorsValue);
+        logger.info("Заполнили наименование поставщика: " + NameVendorsValue);
+
+        NameVendor.click();
 
         frameSwitcher.returnToMainContent();
 
-        // Jaromer это город
+    }
+
+    public void completionOfListOfPaymentsCardVendor() {
+
+        frameSwitcher.switchToIframe();
+
+        WebElement PaymentList = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//span[@text()='Платежи']")));
+
+        frameSwitcher.scrollToElement(PaymentList);
+
+        PaymentList.click();
+
+        frameSwitcher.returnToMainContent();
 
     }
 

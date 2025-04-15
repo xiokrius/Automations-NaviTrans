@@ -13,16 +13,12 @@ public class ZayavkaByPage {
 
         private WebDriver driver;
         private WebDriverWait wait;
+        private FrameSwitcher frameSwitcher;
 
         public ZayavkaByPage(WebDriver driver) {
                 this.driver = driver;
                 this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Инициализация WebDriverWait
-        }
-
-        private void switchToIframe() {
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
+                this.frameSwitcher = new FrameSwitcher(driver);
         }
 
         // ФУНКЦИЯ ДЛЯ КОПИРОВАНИЯ ЗАКАЗА
@@ -31,9 +27,8 @@ public class ZayavkaByPage {
                 System.out.println("Начинаем ZayavkaByPage/clickSomeButtonInFrame.");
 
                 // Переключаемся в нужный фрейм
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-                switchToIframe();
+                frameSwitcher.switchToIframe();
 
                 // Ожидаем кнопку Обработка
                 WebElement buttonInFrame = wait
@@ -56,6 +51,8 @@ public class ZayavkaByPage {
                 WebElement buttonInFrame3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "//button//span[text()='ОК']")));
                 buttonInFrame3.click();
+
+                frameSwitcher.returnToMainContent();
         }
 
         // ПЕРЕХОЖУ В СЕРВИСЫ
@@ -64,9 +61,8 @@ public class ZayavkaByPage {
                 System.out.println("Начинаем ZayavkaByPage/lickSomeButtonInService.");
 
                 // Переключаемся в нужный фрейм
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-                switchToIframe();
+                frameSwitcher.switchToIframe();
 
                 System.out.println("Перешли в фрейм.");
 
@@ -84,11 +80,7 @@ public class ZayavkaByPage {
                 buttonInService.click();
                 System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
 
-                returnToMainContent();
+                frameSwitcher.returnToMainContent();
         }
 
-        public void returnToMainContent() {
-                driver.switchTo().defaultContent();
-                System.out.println("ласт вышел с фрейма, проверка");
-        }
 }

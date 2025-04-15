@@ -36,3 +36,5 @@ Fork this repository.
 Create a feature branch.
 Make your changes.
 Submit a pull request.
+
+Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает, где вы живете.(с) Martin Golding

@@ -22,11 +22,13 @@ public class OrderPage {
         private final WebDriver driver;
         private final WebDriverWait wait;
         private FrameSwitcher frameSwitcher;
+        private JavascriptExecutor js;
 
         public OrderPage(WebDriver driver) {
                 this.driver = driver;
                 this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
                 this.frameSwitcher = new FrameSwitcher(driver);
+                this.js = (JavascriptExecutor) driver;
 
         }
 
@@ -65,6 +67,7 @@ public class OrderPage {
                 System.out.println("Начинаем OrderPage/obrabotkaVypustit");
 
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
                 frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
@@ -101,14 +104,14 @@ public class OrderPage {
 
                 System.out.println("Нашли первую кнопку Обработка.");
 
-                obrabotkaButton.click();
+                js.executeScript("arguments[0].click();", obrabotkaButton);
 
                 // Кнопка Планирования для перехода в планирование рейса
                 WebElement PlanButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "//button[@aria-label='Plan']")));
                 System.out.println("Нашли Вторую кнопку План.");
 
-                PlanButton.click();
+                js.executeScript("arguments[0].click();", PlanButton);
 
                 frameSwitcher.returnToMainContent();
 
