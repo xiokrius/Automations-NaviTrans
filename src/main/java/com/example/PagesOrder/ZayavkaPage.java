@@ -23,7 +23,7 @@ public class ZayavkaPage {
 
         public ZayavkaPage(WebDriver driver) {
                 this.driver = driver;
-                this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
                 this.frameSwitcher = new FrameSwitcher(driver);
         }
 
@@ -31,8 +31,6 @@ public class ZayavkaPage {
 
                 System.out.println("clickzayavkaBy");
 
-                // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 frameSwitcher.switchToIframe(); // Переключаемся в фрейм
 
                 // Шаг 2: КНОПКА ЗАЯВКИ на пейдже страницы заявок
@@ -51,14 +49,10 @@ public class ZayavkaPage {
 
         }
 
-        // Делаю на коленке, нужно быстро протестить ФХ, тут более 1000 заказов в день
-        // выходит, нет времени нормально писать, потом переделать!
         public void CopiedOrders() {
 
                 System.out.println("CopiedOrders");
 
-                // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 frameSwitcher.switchToIframe(); // Переключаемся в фрейм
 
                 // Шаг 2: КНОПКА ЗАЯВКИ на пейдже страницы заявок
@@ -95,10 +89,7 @@ public class ZayavkaPage {
 
                 System.out.println("ZayavkaPage/CreateNewZayavkaCZ");
 
-                // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-                frameSwitcher.switchToIframe();// Переключаемся в фрейм
+                frameSwitcher.switchToIframe();
 
                 // Шаг 2: КНОПКА НОВЫЙ(для создания заказа)
                 WebElement Noviy = wait.until(ExpectedConditions.elementToBeClickable(
@@ -119,8 +110,6 @@ public class ZayavkaPage {
 
                 System.out.println("Начинаем ZayavkaPage/NewOrderCreate");
 
-                // Шаг 1: Ожидаем загрузки фрейма и переключаемся на него
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 frameSwitcher.switchToIframe(); // Переключаемся в фрейм;
 
                 // Поле TSGroupCode ПЕРЕДЕЛАТЬ, НУЖНО УКАЗЫВАТЬ ПО ПУТИ, Т.К. ARIA МЕНЯЕТСЯ

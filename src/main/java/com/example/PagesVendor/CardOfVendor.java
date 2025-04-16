@@ -2,13 +2,10 @@ package com.example.PagesVendor;
 
 import java.time.Duration;
 
-import javax.swing.plaf.basic.BasicSliderUI.ScrollListener;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.apache.logging.log4j.LogManager;
@@ -25,6 +22,8 @@ public class CardOfVendor {
     private JavascriptExecutor js;
     private FrameSwitcher frameSwitcher;
     public final String NameVendorsValue;
+    private static final String CodePaymentVendorValue = ConfigManager.getProperty("CodePaymentVendorValue");
+    private static final String CityVendorValue = ConfigManager.getProperty("CityVendorValue");
     private static final Logger logger = LogManager.getLogger(CardOfVendor.class);
 
     public CardOfVendor(WebDriver driver) {
@@ -55,15 +54,34 @@ public class CardOfVendor {
 
         frameSwitcher.switchToIframe();
 
-        WebElement PaymentList = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//span[@text()='Платежи']")));
+        WebElement PaymentList = driver.findElement(
+                By.xpath("//span[text()='Платежи']"));
 
         frameSwitcher.scrollToElement(PaymentList);
 
-        PaymentList.click();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(PaymentList))
+                .click();
 
         frameSwitcher.returnToMainContent();
 
+    }
+
+    public void fillingInThePaymentCode() {
+
+        WebElement CodePaymentVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//a[contains(@title, 'элемента Код условий платежа')]/following-sibling::input")));
+        logger.info("Нашли Код условия платежа");
+        js.executeScript("arguments[0].value=arguments[1];", CodePaymentVendor, CodePaymentVendorValue);
+
+    }
+
+    public void fillingCityInVendor() {
+
+        WebElement CityVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//a[xontains(@title, 'для элемента Горо')]/following-siblinf::input")));
+
+        js.executeScript("arguments[0].value=arguments[1];", CityVendor, CityVendorValue);
     }
 
 }

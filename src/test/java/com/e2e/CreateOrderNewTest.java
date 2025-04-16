@@ -63,7 +63,8 @@ public class CreateOrderNewTest {
     @Step("Открытие заявок")
     @Test(priority = 2, dependsOnMethods = "login")
     public void openZayavkaPage() {
-        loginTest.goToZayavkaPage();
+        driver.navigate().refresh();
+        driver.get(ConfigManager.getProperty("URLOrder"));
         logger.info("Открыта страница заявок");
     }
 

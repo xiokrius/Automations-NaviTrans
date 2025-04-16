@@ -17,7 +17,7 @@ public class AllClients {
 
     public AllClients(WebDriver driver, String nameContactsValue) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         this.nameContactsValue = nameContactsValue;
 
     }
@@ -38,8 +38,6 @@ public class AllClients {
 
         System.out.println("Начинаем AllClients/ClientsOpen");
 
-        // Переключаемся в нужный фрейм
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         switchToIframe();
         System.out.println("Перешли в фрейм.");
 
@@ -79,7 +77,6 @@ public class AllClients {
 
     public void Window() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         switchToIframe();
         System.out.println("Перешли в фрейм.");
 
@@ -114,7 +111,6 @@ public class AllClients {
         System.out.println("Начинаем AllClients/ClientsOpen");
 
         // Переключаемся в нужный фрейм
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         switchToIframe();
         System.out.println("Перешли в фрейм.");
 

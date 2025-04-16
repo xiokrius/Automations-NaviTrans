@@ -30,7 +30,7 @@ Run the Tests:
 You can execute the tests using TestNG from your IDE (e.g., IntelliJ IDEA or Eclipse) or directly from the command line.
 
 Contribution
-Contributions are welcome! If you’d like to contribute:
+
 
 Fork this repository.
 Create a feature branch.

@@ -3,11 +3,13 @@ package com.utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.example.PagesOrder.OpenInvoice;
 import com.example.PagesOrder.OrderPage;
 import com.example.PagesOrder.PageTransp;
 import com.example.PagesOrder.QLoginTest;
 import com.example.PagesOrder.VehiclePlanning;
 import com.example.PagesOrder.VehicleRoute;
+import com.example.PagesOrder.ZayavkaByPage;
 import com.example.PagesOrder.ZayavkaPage;
 import com.example.ConfigManager;
 
@@ -33,9 +35,12 @@ public class CreateManyOrders {
         for (int i = 0; i < 25; i++) {
             System.out.println("Создание заявки " + (i + 1));
 
+            // для рефреша всех урлов и перенаправления Navi, без него в итерации не тот урл
+            // подкидывает navi
+            driver.navigate().refresh();
             // Переход на страницу заявок
             System.out.println("Переход на страницу заявок...");
-            ZayavkaPage zayavkaPage = loginTest.goToZayavkaPage();
+            driver.get(ConfigManager.getProperty("URLOrder"));
 
             // Создание новой заявки
             ZayavkaPage CreateNewOrder = new ZayavkaPage(driver);
@@ -78,15 +83,15 @@ public class CreateManyOrders {
             backRoute.clickSomeButtonInFrame();
 
             // Сам переход в сервисы
-            // ZayavkaByPage OpenService = new ZayavkaByPage(driver);
-            // OpenService.clickSomeButtonInService();
+            ZayavkaByPage OpenService = new ZayavkaByPage(driver);
+            OpenService.clickSomeButtonInService();
 
-            // // Действия в сервисах
-            // OpenInvoice Service = new OpenInvoice(driver);
-            // Service.OpenServices();
+            // Действия в сервисах
+            OpenInvoice Service = new OpenInvoice(driver);
+            Service.OpenServices();
 
-            // OrderPage ReadyInInvoicing = new OrderPage(driver);
-            // ReadyInInvoicing.readyInInvoicing();
+            OrderPage ReadyInInvoicing = new OrderPage(driver);
+            ReadyInInvoicing.readyInInvoicing();
 
             // OrderPage Schet = new OrderPage(driver);
             // Schet.obrabotkaSchet();

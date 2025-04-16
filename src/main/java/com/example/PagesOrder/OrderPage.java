@@ -26,7 +26,7 @@ public class OrderPage {
 
         public OrderPage(WebDriver driver) {
                 this.driver = driver;
-                this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+                this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
                 this.frameSwitcher = new FrameSwitcher(driver);
                 this.js = (JavascriptExecutor) driver;
 
@@ -66,8 +66,6 @@ public class OrderPage {
 
                 System.out.println("Начинаем OrderPage/obrabotkaVypustit");
 
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
                 frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
@@ -94,7 +92,6 @@ public class OrderPage {
 
                 System.out.println("Начинаем OrderPage/vehiclePlan");
 
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
@@ -121,8 +118,6 @@ public class OrderPage {
         public void readyInInvoicing() {
 
                 System.out.println("Начинаем OrderPage/readyInInvoicing");
-
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
                 frameSwitcher.switchToIframe();
 
@@ -173,7 +168,6 @@ public class OrderPage {
 
                 System.out.println("Начинаем OrderPage/obrabotkaSchet");
 
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
@@ -200,11 +194,7 @@ public class OrderPage {
         public void PlanOpen() {
                 System.out.println("Начинаем OrderPage/PlanOpen");
 
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
                 frameSwitcher.switchToIframe();
-
-                System.out.println("Перешли в фрейм.");
 
                 WebElement OpenDrive = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "//button//span[text()='ОК']")));
@@ -218,9 +208,8 @@ public class OrderPage {
 
                 System.out.println("Начинаем OrderPage/PerevozkaInFrame IT (Итерация: " + iteration + ")");
 
-                // Переключаемся в нужный фрейм
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 frameSwitcher.switchToIframe();
+
                 System.out.println("Перешли в фрейм.");
 
                 if (iteration == 0) {
@@ -260,8 +249,6 @@ public class OrderPage {
 
                 System.out.println("Начинаем OrderPage/PerevozkaInFrame");
 
-                // Переключаемся в нужный фрейм
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
@@ -297,8 +284,6 @@ public class OrderPage {
 
                 System.out.println("Начинаем OrderPage/OpenTranspVehicle");
 
-                // Переключаемся в нужный фрейм
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 frameSwitcher.switchToIframe();
                 System.out.println("Перешли в фрейм.");
 
@@ -308,6 +293,7 @@ public class OrderPage {
 
                 // Кликаем по первой кнопке
                 buttonInFrame.click();
+
                 System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
 
                 // Перевозки/Управление(кнопка)
@@ -332,6 +318,7 @@ public class OrderPage {
         // ИНИЦИАЛИЗИРУЮ ОБРАБОТКУ ДЛЯ ПЕРЕХОДА В РАСХОДЫ И СОЗДАНИЯ ИНТЕРКОМПАНИ
 
         public void fillIntercompanyForm() {
+
                 frameSwitcher.switchToIframe();
 
                 System.out.println("Начинаем OrderPage/fillIntercompanyForm");

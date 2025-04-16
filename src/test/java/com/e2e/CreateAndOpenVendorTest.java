@@ -45,10 +45,10 @@ import io.qameta.allure.Story;
 @Epic("Создание поставщика")
 @Feature("Создание поставщика и внесение данных по поставщику")
 
-public class CreateAndOpenVendor {
+public class CreateAndOpenVendorTest {
     private WebDriver driver;
     private QLoginTest loginTest;
-    private static final Logger logger = LogManager.getLogger(CreateAndOpenVendor.class);
+    private static final Logger logger = LogManager.getLogger(CreateAndOpenVendorTest.class);
 
     @BeforeClass
     public void setup() {
@@ -83,7 +83,7 @@ public class CreateAndOpenVendor {
     }
 
     @Step("Выбор опций поставщика")
-    @Test(priority = 3, dependsOnMethods = "SupplierSelection")
+    @Test(priority = 3, dependsOnMethods = "openZayavkaPage")
     public void createNewZayavka() {
         ChoosingATemplateForANewVendor goChoosVendor = new ChoosingATemplateForANewVendor(driver);
         goChoosVendor.choosingATemplate();
@@ -91,11 +91,16 @@ public class CreateAndOpenVendor {
     }
 
     @Step("Заполнение карточки поставщика")
-    @Test(priority = 4, dependsOnMethods = "Filling out The Supplier")
+    @Test(priority = 4, dependsOnMethods = "createNewZayavka")
     public void CompliedOfVendor() {
         CardOfVendor VendorList = new CardOfVendor(driver);
         VendorList.completionOfNameCardVendor();
-        logger.info("Заполнена форма поставщика");
+        logger.info("Заполнен нейм поставщика");
+        VendorList.completionOfListOfPaymentsCardVendor();
+
+        VendorList.fillingInThePaymentCode();
+
+        VendorList.fillingCityInVendor();
     }
 
     @AfterMethod

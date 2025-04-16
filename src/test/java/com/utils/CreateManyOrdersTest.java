@@ -63,9 +63,15 @@ public class CreateManyOrdersTest {
 
     private void createOrder(int iteration) {
         performAction(() -> {
-            ZayavkaPage zayavkaPage = new ZayavkaPage(driver);
-            logger.info("zayavkaPage goToZayavkaPage");
+
+            // для рефреша всех урлов и перенаправления Navi, без него в итерации не тот урл
+            // подкидывает navi
+            driver.navigate().refresh();
+
             driver.get(ConfigManager.getProperty("URLOrder"));
+
+            ZayavkaPage zayavkaPage = new ZayavkaPage(driver);
+            logger.info("Переход на страницу заявок/создание новой заявки");
             zayavkaPage.CreateNewZayavkaCZ();
 
             zayavkaPage.NewOrderCreate();
@@ -93,28 +99,28 @@ public class CreateManyOrdersTest {
             logger.info("Выходим из рейса обратно на страницу транспортной заявки");
             vehicleRoute.clickSomeButtonInFrame();
 
-            // ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
-            // logger.info("Переход в сервисы");
-            // zayavkaByPage.clickSomeButtonInService();
+            ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
+            logger.info("Переход в сервисы");
+            zayavkaByPage.clickSomeButtonInService();
 
-            // OpenInvoice openInvoice = new OpenInvoice(driver);
-            // logger.info("Открытие сервисов");
-            // openInvoice.OpenServices();
-            // logger.info("Заполнили сервисы и вышли");
+            OpenInvoice openInvoice = new OpenInvoice(driver);
+            logger.info("Открытие сервисов");
+            openInvoice.OpenServices();
+            logger.info("Заполнили сервисы и вышли");
 
-            // logger.info("Готово к инвойсированию");
-            // orderPage.readyInInvoicing();
-            // logger.info("Нажали готово к инвойсированию, переходим к созданию счёта");
-            // orderPage.obrabotkaSchet();
-            // logger.info("Нажали обработка/счёт");
+            logger.info("Готово к инвойсированию");
+            orderPage.readyInInvoicing();
+            logger.info("Нажали готово к инвойсированию, переходим к созданию счёта");
+            orderPage.obrabotkaSchet();
+            logger.info("Нажали обработка/счёт");
 
-            // ReadyInvoic readyInvoic = new ReadyInvoic(driver);
-            // logger.info("Нажэали счёт номер ручной");
-            // readyInvoic.SchetRuchnoy();
+            ReadyInvoic readyInvoic = new ReadyInvoic(driver);
+            logger.info("Нажэали счёт номер ручной");
+            readyInvoic.SchetRuchnoy();
 
-            // Invoice invoice = new Invoice(driver);
-            // logger.info("Выпускаем и учитываем счёт");
-            // invoice.fullSchet();
+            Invoice invoice = new Invoice(driver);
+            logger.info("Выпускаем и учитываем счёт");
+            invoice.fullSchet();
         });
     }
 

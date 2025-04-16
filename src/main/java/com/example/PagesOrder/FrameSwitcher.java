@@ -34,6 +34,6 @@ public class FrameSwitcher {
     }
 
     public void scrollToElement(WebElement element) {
-        js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
 }
