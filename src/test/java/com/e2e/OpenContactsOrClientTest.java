@@ -128,10 +128,18 @@ public class OpenContactsOrClientTest {
 
         AllClients clientCD = new AllClients(driver1, generatedName);
         clientCD.creditLimit();
-        logger.info("Переход в карточку клиента, установка Кредитного Лимита");
+        logger.info("Переход в карточку клиента");
 
         ClientsPage OpenCD = new ClientsPage(driver1);
+        logger.info("ожидание прогрузки страницы клиента");
+        OpenCD.waitingForTheClientPageToLoad();
+        logger.info("обновление страницы для валидации новых данных");
+        driver1.navigate().refresh();
+        logger.info("ожидание прогрузки страницы клиента");
+        OpenCD.editCardOfClients();
+        logger.info("Клик для редактирования карточки клиента");
         OpenCD.OpenCD();
+        logger.info("Внесение КД");
 
         AllClients BackToAllClients = new AllClients(driver1, generatedName);
         BackToAllClients.Window();

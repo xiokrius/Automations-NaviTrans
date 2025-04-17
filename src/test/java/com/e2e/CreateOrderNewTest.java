@@ -24,7 +24,9 @@ import com.example.PagesOrder.VehicleRoute;
 import com.example.PagesOrder.ZayavkaByPage;
 import com.example.PagesOrder.ZayavkaPage;
 import com.utils.CreateManyOrdersTest;
+import com.utils.RetryAnalyzer;
 import com.example.ConfigManager;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -106,13 +108,20 @@ public class CreateOrderNewTest {
     public void orderFull() {
         OrderPage orderPage = new OrderPage(driver);
         orderPage.obrabotkaVypustit();
-        orderPage.vehiclePlan();
-        orderPage.PlanOpen();
         logger.info("Установлены плановые даты перевозки");
     }
 
+    @Step("Планироание и создание рейса")
+    @Test(retryAnalyzer = com.utils.RetryAnalyzer.class, priority = 8, dependsOnMethods = "orderFull")
+    public void testVehiclePlan() {
+        OrderPage orderPage = new OrderPage(driver);
+        orderPage.vehiclePlan();
+        orderPage.PlanOpen();
+        logger.info("планирование и создание рейса");
+    }
+
     @Step("Запланирован тягач и прицеп")
-    @Test(priority = 8, dependsOnMethods = "orderFull")
+    @Test(priority = 9, dependsOnMethods = "testVehiclePlan")
     public void vehiclePlanning() {
         VehiclePlanning vehiclePlanning = new VehiclePlanning(driver);
         vehiclePlanning.VehiclePlanOpen();
@@ -120,7 +129,7 @@ public class CreateOrderNewTest {
     }
 
     @Step("Открыт раздел сервисов")
-    @Test(priority = 9, dependsOnMethods = "vehiclePlanning")
+    @Test(priority = 10, dependsOnMethods = "vehiclePlanning")
     public void goToVehile() {
         VehicleRoute vehicleRoute = new VehicleRoute(driver);
         vehicleRoute.clickSomeButtonInFrame();
@@ -128,7 +137,7 @@ public class CreateOrderNewTest {
     }
 
     @Step("Открыт раздел сервисов")
-    @Test(priority = 10, dependsOnMethods = "goToVehile")
+    @Test(priority = 11, dependsOnMethods = "goToVehile")
     public void goToServices() {
         ZayavkaByPage servicePage = new ZayavkaByPage(driver);
         servicePage.clickSomeButtonInService();
@@ -136,7 +145,7 @@ public class CreateOrderNewTest {
     }
 
     @Step("Обработаны сервисы")
-    @Test(priority = 11, dependsOnMethods = "goToServices")
+    @Test(priority = 12, dependsOnMethods = "goToServices")
     public void processServices() {
         OpenInvoice openInvoice = new OpenInvoice(driver);
         openInvoice.OpenServices();
@@ -144,7 +153,7 @@ public class CreateOrderNewTest {
     }
 
     @Step("Заказ завершен, сформирован счет")
-    @Test(priority = 12, dependsOnMethods = "processServices")
+    @Test(priority = 13, dependsOnMethods = "processServices")
     public void finalizeInvoice() {
         OrderPage orderPage = new OrderPage(driver);
         orderPage.readyInInvoicing();

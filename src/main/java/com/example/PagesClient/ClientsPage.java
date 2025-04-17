@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.ConfigManager;
 import com.example.PagesClient.ClientsPage.TestData;
+import com.example.PagesOrder.FrameSwitcher;
 
 public class ClientsPage {
 
@@ -21,6 +22,7 @@ public class ClientsPage {
         private JavascriptExecutor js;
         private WebDriverWait wait;
         private String RegNumberValue;
+        private FrameSwitcher frameSwitcher;
 
         private String typeCarrierValue = ConfigManager.getProperty("typeClientValue");
         private String CityValue = ConfigManager.getProperty("CityValue");
@@ -34,8 +36,8 @@ public class ClientsPage {
 
                 this.driver = driver;
                 this.js = (JavascriptExecutor) driver;
-                this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
+                this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+                this.frameSwitcher = new FrameSwitcher(driver);
                 this.RegNumberValue = generateRandomINN(9);
                 System.out.println("Сгенерированный ИНН: " + this.RegNumberValue);
         }
@@ -141,9 +143,12 @@ public class ClientsPage {
 
                 try {
 
-                        WebElement AutorisedWindow = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                        WebDriverWait quickWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
+                        quickWait.until(ExpectedConditions.presenceOfElementLocated(
                                         By.xpath("//div[@title='Почтовые индексы' and contains(text(), 'Почтовые индексы')]")));
                         System.out.println("Всплывающее окно обнаружено");
+
                         WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                         "//button[contains(@class, '1876861216 thm-bgcolor')]//span[text()='ОК']")));
                         System.out.println("Кнопка ОК идентифицирована");
@@ -252,6 +257,30 @@ public class ClientsPage {
                 ButtonBack.click();
 
                 returnToMainContent();
+
+        }
+
+        public void waitingForTheClientPageToLoad() {
+
+                frameSwitcher.switchToIframe();
+
+                WebElement CardOfClient = wait.until(ExpectedConditions
+                                .visibilityOfElementLocated(By.xpath("//span[text()='Карточка клиента']")));
+
+                frameSwitcher.returnToMainContent();
+
+        }
+
+        public void editCardOfClients() {
+
+                frameSwitcher.switchToIframe();
+
+                WebElement EditCardOfClientsButton = wait.until(ExpectedConditions
+                                .elementToBeClickable(By.xpath("//i[@data-icon-name='Edit']")));
+
+                EditCardOfClientsButton.click();
+
+                frameSwitcher.returnToMainContent();
 
         }
 
