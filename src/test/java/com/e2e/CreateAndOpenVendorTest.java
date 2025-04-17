@@ -101,6 +101,9 @@ public class CreateAndOpenVendorTest {
         VendorList.fillingInThePaymentCode();
 
         VendorList.fillingCityInVendor();
+
+        VendorList.buttonInBack();
+
     }
 
     @AfterMethod

@@ -36,6 +36,8 @@ import java.util.Date;
 
 @Epic("Управление клиентами и контактами")
 @Feature("Создание и утверждение клиентов")
+@Severity(SeverityLevel.CRITICAL)
+
 public class OpenContactsOrClientTest {
 
     private WebDriver driver1;
@@ -57,6 +59,7 @@ public class OpenContactsOrClientTest {
         logger.info("Перешли в окно ввода логина пароля");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Test(priority = 1)
     @Story("Создание контакта и клиента")
     @Description("Тест проверяет создание нового контакта и клиента")
@@ -80,6 +83,7 @@ public class OpenContactsOrClientTest {
         Assert.assertNotNull(generatedName, "Контакт не был создан");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Test(priority = 2)
     @Story("Заполнение карточки клиента")
     @Description("Тест проверяет заполнение карточки клиента и авторизацию")
@@ -98,6 +102,7 @@ public class OpenContactsOrClientTest {
         clientsOpenFull.Window();
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Test(priority = 3)
     @Story("Подтверждение клиента")
     @Description("Тест проверяет подтверждение клиента")
@@ -119,6 +124,7 @@ public class OpenContactsOrClientTest {
         logger.info("Переход в т.Запросы утверждения, утверждение нового клиента");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Test(priority = 4)
     @Story("Установка кредитного лимита")
     @Description("Тест проверяет установку и согласование кредитного лимита")
@@ -148,6 +154,7 @@ public class OpenContactsOrClientTest {
 
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Test(priority = 5)
     @Story("Подтверждение КД")
     @Description("Тест проверяет подтверждение КД")
@@ -164,6 +171,7 @@ public class OpenContactsOrClientTest {
         driver2.quit();
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Test(priority = 6)
     @Story("Проверка нового КД")
     @Description("Тест проверяет новый КД в основном браузере")

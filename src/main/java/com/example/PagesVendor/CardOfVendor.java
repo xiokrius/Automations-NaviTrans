@@ -69,19 +69,64 @@ public class CardOfVendor {
 
     public void fillingInThePaymentCode() {
 
-        WebElement CodePaymentVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "//a[contains(@title, 'элемента Код условий платежа')]/following-sibling::input")));
+        frameSwitcher.switchToIframe();
+
+        WebElement CodePaymentVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+                "a[aria-label*='Код условий платежа'] + input")));
         logger.info("Нашли Код условия платежа");
         js.executeScript("arguments[0].value=arguments[1];", CodePaymentVendor, CodePaymentVendorValue);
+
+        CodePaymentVendor.click();
+
+        frameSwitcher.returnToMainContent();
 
     }
 
     public void fillingCityInVendor() {
 
-        WebElement CityVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "//a[xontains(@title, 'для элемента Горо')]/following-siblinf::input")));
+        frameSwitcher.switchToIframe();
+
+        WebElement CityVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+                "a[aria-label*='для элемента Город'] + input")));
 
         js.executeScript("arguments[0].value=arguments[1];", CityVendor, CityVendorValue);
+
+        CityVendor.click();
+
+        frameSwitcher.returnToMainContent();
+    }
+
+    public void buttonInBack() {
+
+        frameSwitcher.switchToIframe();
+
+        WebElement ButtonInBack = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(@data-is-focusable, 'true') and contains(@title, 'Назад')]")));
+
+        ButtonInBack.click();
+
+        try {
+
+            WebDriverWait quickWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
+            quickWait.until(ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//div[@title='Почтовые индексы' and contains(text(), 'Почтовые индексы')]")));
+            System.out.println("Всплывающее окно обнаружено");
+
+            WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                    "//button[contains(@class, '1876861216 thm-bgcolor')]//span[text()='ОК']")));
+            System.out.println("Кнопка ОК идентифицирована");
+            ButtonInOk.click();
+            System.out.println("Нажата кнопка ОК");
+        } catch (Exception e) {
+
+            System.out.println("Окно не обнаружено");
+        }
+
+        ButtonInBack.click();
+
+        frameSwitcher.returnToMainContent();
+
     }
 
 }
