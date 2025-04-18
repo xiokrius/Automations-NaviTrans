@@ -40,6 +40,8 @@ public class CreateOrderNewTest {
 
     @BeforeClass
     public void setup() {
+
+        logger.info("Начало теста \"На создание и заполнение заявки, планирования рейса, учёта счёта\" ");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(ConfigManager.getProperty("URLAutorisedNavi"));
@@ -104,7 +106,7 @@ public class CreateOrderNewTest {
     }
 
     @Step("Установлены плановые даты перевозки")
-    @Test(priority = 7, dependsOnMethods = "setPlannedDates")
+    @Test(retryAnalyzer = com.utils.RetryAnalyzer.class, priority = 7, dependsOnMethods = "setPlannedDates")
     public void orderFull() {
         OrderPage orderPage = new OrderPage(driver);
         orderPage.obrabotkaVypustit();
@@ -133,7 +135,7 @@ public class CreateOrderNewTest {
     public void goToVehile() {
         VehicleRoute vehicleRoute = new VehicleRoute(driver);
         vehicleRoute.clickSomeButtonInFrame();
-        logger.info("Открыт раздел сервисов");
+        logger.info("Открыта страница рейсов");
     }
 
     @Step("Открыт раздел сервисов")
@@ -163,6 +165,24 @@ public class CreateOrderNewTest {
         Invoice invoice = new Invoice(driver);
         invoice.fullSchet();
         logger.info("Заказ завершен, сформирован счет");
+        logger.info("Конец теста \"На создание и заполнение заявки, планирования рейса, учёта счёта\" ");
+    }
+
+    @Step("Считываю номер учтённого счёта")
+    @Test(priority = 14, dependsOnMethods = "finalizeInvoice")
+    public void goToServices2() {
+        ZayavkaByPage servicePage = new ZayavkaByPage(driver);
+        servicePage.clickSomeButtonInService();
+        logger.info("Переход в сервисы");
+    }
+
+    @Step("Считываю номер учтённого счёта")
+    @Test(priority = 15, dependsOnMethods = "finalizeInvoice")
+    public void readyNoCheck() {
+        OpenInvoice openInvoice = new OpenInvoice(driver);
+        String invoiceNumber = openInvoice.extractInvoiceNumber();
+        logger.info("Номер считан: " + invoiceNumber);
+        logger.info("номер считан");
     }
 
     @AfterMethod
@@ -199,11 +219,11 @@ public class CreateOrderNewTest {
         return screenshot;
     }
 
-    @AfterClass
-    public void teardown() {
-        if (driver != null) {
-            driver.quit();
-            logger.info("Браузер закрыт");
-        }
-    }
+    // @AfterClass
+    // public void teardown() {
+    // if (driver != null) {
+    // driver.quit();
+    // logger.info("Браузер закрыт");
+    // }
+    // }
 }

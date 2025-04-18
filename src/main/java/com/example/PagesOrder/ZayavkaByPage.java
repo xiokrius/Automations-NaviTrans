@@ -68,7 +68,7 @@ public class ZayavkaByPage {
 
                 // Ожидаем появления первой кнопки
                 WebElement buttonInObrabotka = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "//*[@aria-label=' Обработка']")));
+                                "//button[@aria-label=' Обработка']")));
                 System.out.println("Нашли Кнопку Обработка.");
                 //
                 buttonInObrabotka.click();

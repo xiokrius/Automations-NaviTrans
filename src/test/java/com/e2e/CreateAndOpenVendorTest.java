@@ -18,17 +18,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.Date;
 import com.example.ConfigManager;
-import com.example.PagesOrder.FrameSwitcher;
-import com.example.PagesOrder.Invoice;
-import com.example.PagesOrder.OpenInvoice;
-import com.example.PagesOrder.OrderPage;
-import com.example.PagesOrder.PageTransp;
 import com.example.PagesOrder.QLoginTest;
-import com.example.PagesOrder.ReadyInvoic;
-import com.example.PagesOrder.VehiclePlanning;
-import com.example.PagesOrder.VehicleRoute;
-import com.example.PagesOrder.ZayavkaByPage;
-import com.example.PagesOrder.ZayavkaPage;
 import com.example.PagesVendor.CardOfVendor;
 import com.example.PagesVendor.ChoosingATemplateForANewVendor;
 import com.example.PagesVendor.ListOfVendor;
@@ -52,6 +42,8 @@ public class CreateAndOpenVendorTest {
 
     @BeforeClass
     public void setup() {
+
+        logger.info("Начало теста \"На создание, заполнение и подтверждение поставщика\" ");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("http://192.168.1.13:8080/BC210-TEST/SignIn?ReturnUrl=%2FBC210-TEST%2F");
@@ -103,6 +95,8 @@ public class CreateAndOpenVendorTest {
         VendorList.fillingCityInVendor();
 
         VendorList.buttonInBack();
+
+        logger.info("Конец теста \"На создание поставщика\" ");
 
     }
 

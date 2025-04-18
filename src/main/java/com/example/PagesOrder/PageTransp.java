@@ -230,6 +230,8 @@ public class PageTransp {
 
                 frameSwitcher.returnToMainContent();
 
+                frameSwitcher.returnToMainContent();
+
                 System.out.println("Вышли из iframe.");
 
         }

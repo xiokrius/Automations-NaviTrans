@@ -67,21 +67,24 @@ public class OrderPage {
                 System.out.println("Начинаем OrderPage/obrabotkaVypustit");
 
                 frameSwitcher.switchToIframe();
+
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
                 WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//*[@aria-label=' Обработка' and @data-is-focusable='true']")));
+                                By.xpath("//button[@aria-label=' Обработка' and @data-is-focusable='true']")));
 
                 System.out.println("Нашли первую кнопку Обработка.");
-                obrabotkaButton.click();
+
+                js.executeScript("arguments[0].click();", obrabotkaButton);
 
                 // НАШЛИ КНОПКУ ВЫПУСТИТЬ
                 WebElement VypustitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                 "//button[@title='Выпустить (Ctrl+F9)']")));
                 System.out.println("Нашли Вторую кнопку, Выпустить .");
                 // Выпустить (Ctrl+F9) "//button[@title='Выпустить (Ctrl+F9)']"
-                VypustitButton.click();
+
+                js.executeScript("arguments[0].click();", VypustitButton);
 
                 frameSwitcher.returnToMainContent();
 
@@ -97,7 +100,7 @@ public class OrderPage {
 
                 // Кнопка Обработки
                 WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//*[@aria-label=' Обработка' and @data-is-focusable='true']")));
+                                By.xpath("//button[@aria-label=' Обработка' and @data-is-focusable='true']")));
 
                 System.out.println("Нашли первую кнопку Обработка.");
 

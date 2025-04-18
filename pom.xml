@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
     <artifactId>PagesClient</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    
+
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -47,12 +46,13 @@
             <version>11.2.1.jre8</version>
         </dependency>
 
+
         <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.9.0</version>
-            <scope>test</scope>
+            <!-- <scope>test</scope> -->
         </dependency>
 
         <!-- JCommander -->
@@ -105,117 +105,155 @@
     <build>
         <plugins>
             <!-- Maven Surefire Plugin -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.2.2</version>
-            <configuration>
-                <!-- Включаем только тесты из папки com.example -->
-                <includes>
-                    <include>**/example/*.java</include>
-                </includes>
-                <!-- Исключаем вспомогательные классы из папки com.utils -->
-                <excludes>
-                    <exclude>**/utils/*.java</exclude>
-                </excludes>
-                <!-- Настройки для AspectJ и Allure -->
-                <argLine>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <!-- Включаем только тесты из папки com.example -->
+                    <includes>
+                        <include>**/example/*.java</include>
+                    </includes>
+                    <!-- Исключаем вспомогательные классы из папки com.utils -->
+                    <excludes>
+                        <exclude>**/utils/*.java</exclude>
+                    </excludes>
+                    <!-- Настройки для AspectJ и Allure -->
+                    <argLine>
                     -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                </argLine>
-                <systemProperties>
-                    <property>
-                        <name>allure.results.directory</name>
-                        <value>${project.build.directory}/allure-results</value>
-                    </property>
-                </systemProperties>
-            </configuration>
-            <dependencies>
-                <!-- Зависимость для AspectJ -->
-                <dependency>
-                    <groupId>org.aspectj</groupId>
-                    <artifactId>aspectjweaver</artifactId>
-                    <version>${aspectj.version}</version>
-                </dependency>
-            </dependencies>
-        </plugin>
+                    </argLine>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${project.build.directory}/allure-results</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+                <dependencies>
+                    <!-- Зависимость для AspectJ -->
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
 
-        <!--  Для димы на время отпуска, что бы мог запускать тесты-->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.4.2</version>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <mainClass>com.example.runner.TestRunner</mainClass> <!-- замени на свой класс -->
-                    </manifest>
-                </archive>
-                <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>make-assembly</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+            <!--  Для димы на время отпуска, что бы мог запускать тесты-->
+            <!-- Сначала создаём обычный JAR с main-классами -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                    <!-- Дополнительно создаём JAR с тестами -->
+                    <execution>
+                        <id>test-jar</id>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
+            <!-- Затем объединяем всё в fat-jar -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.e2e.runner.TestNGRunner</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/test/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--  Для димы на время отпуска, что бы мог запускать тесты-->
             <!-- Allure Maven Plugin -->
             <plugin>
-    <groupId>io.qameta.allure</groupId>
-    <artifactId>allure-maven</artifactId>
-    <version>2.12.0</version>
-    <configuration>
-                   <allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.27.0/allure-commandline-2.27.0.zip</allureDownloadUrl>
-            <allureHome>${project.basedir}/.allure/allure-2.27.0</allureHome>
-        <reportVersion>2.27.0</reportVersion>
-        <!-- Включаем историю -->
-        <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
-        <historyPath>${project.build.directory}/allure-report/history</historyPath>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.12.0</version>
+                <configuration>
+                    <allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.27.0/allure-commandline-2.27.0.zip</allureDownloadUrl>
+                    <allureHome>${project.basedir}/.allure/allure-2.27.0</allureHome>
+                    <reportVersion>2.27.0</reportVersion>
+                    <!-- Включаем историю -->
+                    <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
+                    <historyPath>${project.build.directory}/allure-report/history</historyPath>
                 </configuration>
             </plugin>
 
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-antrun-plugin</artifactId>
-    <version>3.1.0</version>
-    <executions>
-        <execution>
-            <id>copy-history</id>
-            <phase>prepare-package</phase>
-            <configuration>
-                <target>
-                    <!-- 1. Создаем целевую директорию, если её нет -->
-                    <mkdir dir="${project.build.directory}/allure-results/history"/>
-                    
-                    <!-- 2. Проверяем существование исходной директории -->
-                    <available 
-                        property="history.exists" 
-                        file="${project.build.directory}/allure-report/history"
-                        type="dir"/>
-                        
-                    <!-- 3. Копируем только если директория существует -->
-                    <copy todir="${project.build.directory}/allure-results/history" failonerror="false">
-                        <fileset 
-                            dir="${project.build.directory}/allure-report/history"
-                            erroronmissingdir="false"/>
-                    </copy>
-                    
-                    <!-- Логирование для отладки -->
-                    <echo message="[INFO] Allure history copied: ${project.build.directory}/allure-report/history → ${project.build.directory}/allure-results/history"/>
-                </target>
-            </configuration>
-            <goals>
-                <goal>run</goal>
-            </goals>
-                </execution>
-            </executions>
-        </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-history</id>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <target>
+                                <!-- 1. Создаем целевую директорию, если её нет -->
+                                <mkdir dir="${project.build.directory}/allure-results/history"/>
+
+                                <!-- 2. Проверяем существование исходной директории -->
+                                <available property="history.exists" file="${project.build.directory}/allure-report/history" type="dir"/>
+
+                                <!-- 3. Копируем только если директория существует -->
+                                <copy todir="${project.build.directory}/allure-results/history" failonerror="false">
+                                    <fileset dir="${project.build.directory}/allure-report/history" erroronmissingdir="false"/>
+                                </copy>
+
+                                <!-- Логирование для отладки -->
+                                <echo message="[INFO] Allure history copied: ${project.build.directory}/allure-report/history → ${project.build.directory}/allure-results/history"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -230,7 +268,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <includes>
-                                <include>**/unit/*Test.java</include> <!-- Только модульные тесты -->
+                                <include>**/unit/*Test.java</include>                                <!-- Только модульные тесты -->
                             </includes>
                         </configuration>
                     </plugin>
@@ -247,7 +285,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <includes>
-                                <include>**/integration/*Test.java</include> <!-- Только интеграционные тесты -->
+                                <include>**/integration/*Test.java</include>                                <!-- Только интеграционные тесты -->
                             </includes>
                         </configuration>
                     </plugin>
@@ -264,7 +302,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <includes>
-                                <include>**/e2e/*Test.java</include> <!-- Только end-to-end тесты -->
+                                <include>**/e2e/*Test.java</include>                                <!-- Только end-to-end тесты -->
                             </includes>
                         </configuration>
                     </plugin>

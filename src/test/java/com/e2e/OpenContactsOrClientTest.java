@@ -51,7 +51,8 @@ public class OpenContactsOrClientTest {
     @BeforeClass
     @Step("Инициализация драйвера и открытие браузера")
     public void setup() {
-        logger.info("Инициализация драйвера и открытие браузера");
+        logger.info(
+                "Начало теста \"На создание и заполнение карточки контакта, создание из неё карточки клиента, заполнение карточки клиента, отправка на Утверждение, отправка на КД, согласование\" ");
         driver1 = new ChromeDriver();
         driver1.manage().window().maximize();
         driver1.get(ConfigManager.getProperty("BaseURL"));
@@ -179,6 +180,8 @@ public class OpenContactsOrClientTest {
 
         driver1.switchTo().window(mainWindowHandle);
         logger.info("Проверка нового кд");
+        logger.info(
+                "Конец теста \"На создание и заполнение карточки контакта, создание из неё карточки клиента, заполнение карточки клиента, отправка на Утверждение, отправка на КД, согласование\" ");
 
     }
 

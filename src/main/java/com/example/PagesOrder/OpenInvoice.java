@@ -2,6 +2,8 @@ package com.example.PagesOrder;
 
 import java.time.Duration;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,17 +17,21 @@ import com.example.ConfigManager;
 
 public class OpenInvoice {
 
+        private static final Logger logger = LogManager.getLogger(OpenInvoice.class);
+
         private String InputServiceCodeValue = ConfigManager.getProperty("InputServiceCodeValue");
         private String PriceValueValue = ConfigManager.getProperty("PriceValueValue");
 
         private WebDriver driver;
         private FrameSwitcher frameSwitcher;
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        private WebDriverWait wait;
 
         public OpenInvoice(WebDriver driver) {
                 this.driver = driver;
                 this.js = (JavascriptExecutor) driver;
                 this.frameSwitcher = new FrameSwitcher(driver);
+                this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         }
 
         private void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
@@ -112,6 +118,32 @@ public class OpenInvoice {
                 backButton.click();
 
                 frameSwitcher.returnToMainContent();
+        }
+
+        public String extractInvoiceNumber() {
+
+                System.out.println("Начинаем OpenInvoice/OpenServices");
+
+                frameSwitcher.switchToIframe();
+
+                System.out.println("Перешли в фрейм.");
+
+                // Ожидаем появления инпут-поля с динамическим ID
+                WebElement inputDocumentNo = wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//td[@controlname='Document No.']//input[@role='combobox' and @type='text']")));
+                System.out.println("Считали поле");
+
+                String invoiceNumber = inputDocumentNo.getAttribute("value");
+                System.out.println("Номер счёта: " + invoiceNumber);
+                logger.info("считали номер " + invoiceNumber);
+
+                if (invoiceNumber == null || invoiceNumber.isEmpty()) {
+                        throw new RuntimeException("Не удалось извлечь номер счёта!");
+                }
+
+                frameSwitcher.returnToMainContent();
+
+                return invoiceNumber;
         }
 
 }
