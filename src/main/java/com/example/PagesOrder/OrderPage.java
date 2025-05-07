@@ -71,12 +71,12 @@ public class OrderPage {
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
-                WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(
+                WebElement ProcessingButton = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//button[@aria-label=' Обработка' and @data-is-focusable='true']")));
 
                 System.out.println("Нашли первую кнопку Обработка.");
 
-                js.executeScript("arguments[0].click();", obrabotkaButton);
+                js.executeScript("arguments[0].click();", ProcessingButton);
 
                 // НАШЛИ КНОПКУ ВЫПУСТИТЬ
                 WebElement VypustitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -99,7 +99,7 @@ public class OrderPage {
 
                 try {
                         // 2. Улучшенное ожидание и клик для первой кнопки
-                        WebElement obrabotkaButton = wait.until(driver -> {
+                        WebElement ProcessingButton = wait.until(driver -> {
                                 WebElement btn = driver.findElement(By.xpath(
                                                 "//button[@aria-label=' Обработка' and @data-is-focusable='true']"));
                                 return (btn.isDisplayed() && btn.isEnabled()) ? btn : null;
@@ -107,8 +107,8 @@ public class OrderPage {
 
                         System.out.println("Нашли первую кнопку Обработка.");
                         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
-                                        obrabotkaButton);
-                        obrabotkaButton.click();
+                                        ProcessingButton);
+                        ProcessingButton.click();
 
                         // 3. Явное ожидание между действиями
                         wait.until(ExpectedConditions.invisibilityOfElementLocated(
@@ -125,8 +125,6 @@ public class OrderPage {
                         planButton.click();
                         System.out.println("Нажали вторую кнопку План.");
 
-                        // 5. Ожидание завершения действия
-                        wait.until(ExpectedConditions.urlContains("plan")); // Или другой маркер
                 } finally {
                         frameSwitcher.returnToMainContent();
                 }
@@ -142,12 +140,12 @@ public class OrderPage {
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
-                WebElement obrabotkaButton = wait
+                WebElement ProcessingButton = wait
                                 .until(ExpectedConditions
                                                 .elementToBeClickable(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Обработка.");
 
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", obrabotkaButton);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ProcessingButton);
 
                 // НАШЛИ КНОПКУ Готово к инвойсированию
                 WebElement readyInInvoic = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
@@ -197,11 +195,11 @@ public class OrderPage {
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ ОБРАБОТКА
-                WebElement obrabotkaButton = wait
+                WebElement ProcessingButton = wait
                                 .until(ExpectedConditions
                                                 .elementToBeClickable(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Обработка.");
-                obrabotkaButton.click();
+                ProcessingButton.click();
 
                 // НАШЛИ КНОПКУ Счёт
                 WebElement schet = wait.until(ExpectedConditions
@@ -348,11 +346,11 @@ public class OrderPage {
 
                 System.out.println("Начинаем OrderPage/fillIntercompanyForm");
 
-                WebElement obrabotkaButton = wait
+                WebElement ProcessingButton = wait
                                 .until(ExpectedConditions
                                                 .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
 
-                obrabotkaButton.click();
+                ProcessingButton.click();
 
                 System.out.println("Нашли Обработка");
 

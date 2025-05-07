@@ -219,11 +219,11 @@ public class CreateOrderNewTest {
         return screenshot;
     }
 
-    // @AfterClass
-    // public void teardown() {
-    // if (driver != null) {
-    // driver.quit();
-    // logger.info("Браузер закрыт");
-    // }
-    // }
+    @AfterClass
+    public void teardown() {
+        if (driver != null) {
+            driver.quit();
+            logger.info("Браузер закрыт");
+        }
+    }
 }

@@ -72,6 +72,8 @@ public class OpenContactsOrClientTest {
         loginTest.clickLoginButton();
         logger.info("Вход выполнен");
 
+        // Переход на страницу Контактов
+
         Contacts contactsPage = loginTest.goToContacts();
         contactsPage.ContactsOrderOpen();
         contactsPage.returnToMainContent();

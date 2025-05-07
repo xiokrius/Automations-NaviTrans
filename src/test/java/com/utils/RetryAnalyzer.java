@@ -12,16 +12,20 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 
     @Override
     public boolean retry(ITestResult result) {
+        // Добавьте логирование статуса
+        logger.debug("Checking retry for test: {}, Status: {}, Throwable: {}",
+                result.getName(),
+                result.getStatus(),
+                result.getThrowable());
 
-        if (!result.isSuccess() && count < MAX_RETRY) {
+        if (result.getThrowable() != null && count < MAX_RETRY) {
             count++;
-            logger.warn("Повторная попытка #{} для теста {} из-за ошибки: {}",
+            logger.warn("Retry #{} for test {} due to: {}",
                     count,
                     result.getName(),
                     result.getThrowable().getMessage());
             return true;
         }
-        logger.error("Тест {} провален после {} попыток", result.getName(), MAX_RETRY);
         return false;
     }
 }
