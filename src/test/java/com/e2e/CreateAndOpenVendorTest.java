@@ -53,7 +53,7 @@ public class CreateAndOpenVendorTest {
 
     @Story("Создание и запонление поставщика")
     @Description("Создаёт поставщика")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
 
     @Step("Вход в систему с логином и паролем")
     @Test(priority = 1)
@@ -66,25 +66,27 @@ public class CreateAndOpenVendorTest {
         logger.info("Успешный вход в систему");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Переход на страницу поставщиков и создание нового")
     @Test(priority = 2, dependsOnMethods = "login")
-    public void openZayavkaPage() {
+    public void openingOfTheSupplierCountry() {
         ListOfVendor goVendor = new ListOfVendor(driver);
         goVendor.SwitchToVendorsList();
         logger.info("Открыт страница поставщиков");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Выбор опций поставщика")
-    @Test(priority = 3, dependsOnMethods = "openZayavkaPage")
-    public void createNewZayavka() {
+    @Test(priority = 3, dependsOnMethods = "openingOfTheSupplierCountry")
+    public void creatingNewSupplier() {
         ChoosingATemplateForANewVendor goChoosVendor = new ChoosingATemplateForANewVendor(driver);
         goChoosVendor.choosingATemplate();
         logger.info("Создана новая заявка");
     }
 
     @Step("Заполнение карточки поставщика")
-    @Test(priority = 4, dependsOnMethods = "createNewZayavka")
-    public void CompliedOfVendor() {
+    @Test(priority = 4, dependsOnMethods = "creatingNewSupplier")
+    public void fillingInANewSupplier() {
         CardOfVendor VendorList = new CardOfVendor(driver);
         VendorList.completionOfNameCardVendor();
         logger.info("Заполнен нейм поставщика");

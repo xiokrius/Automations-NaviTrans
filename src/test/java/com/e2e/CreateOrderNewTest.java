@@ -2,6 +2,7 @@ package com.e2e;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.checkerframework.checker.units.qual.A;
 import org.apache.commons.io.FileUtils;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -31,7 +32,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 @Epic("Клиенты и заказы")
-@Feature("Создание 2 заказов")
+@Feature("Создание заказf")
 
 public class CreateOrderNewTest {
     private WebDriver driver;
@@ -64,31 +65,35 @@ public class CreateOrderNewTest {
         logger.info("Успешный вход в систему");
     }
 
+    @Severity(SeverityLevel.NORMAL)
     @Step("Открытие заявок")
     @Test(priority = 2, dependsOnMethods = "login")
-    public void openZayavkaPage() {
+    public void openingTheApplicationPage() {
         driver.navigate().refresh();
         driver.get(ConfigManager.getProperty("URLOrder"));
         logger.info("Открыта страница заявок");
     }
 
+    @Severity(SeverityLevel.NORMAL)
     @Step("Создана новая заявка")
-    @Test(priority = 3, dependsOnMethods = "openZayavkaPage")
-    public void createNewZayavka() {
+    @Test(priority = 3, dependsOnMethods = "openingTheApplicationPage")
+    public void creatingANewOrder() {
         ZayavkaPage zayavkaPage = new ZayavkaPage(driver);
         zayavkaPage.CreateNewZayavkaCZ();
         zayavkaPage.NewOrderCreate();
         logger.info("Создана новая заявка");
     }
 
+    @Severity(SeverityLevel.BLOCKER)
     @Step("Заполнена форма заказа")
-    @Test(priority = 4, dependsOnMethods = "createNewZayavka")
+    @Test(priority = 4, dependsOnMethods = "creatingANewOrder")
     public void fillOrderForm() {
         OrderPage orderPage = new OrderPage(driver);
         orderPage.fillOrderForm();
         logger.info("Заполнена форма заказа");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Обработан заказ: переход в перевозки")
     @Test(priority = 5, dependsOnMethods = "fillOrderForm")
     public void processOrder() {
@@ -97,6 +102,7 @@ public class CreateOrderNewTest {
         logger.info("Обработан заказ: переход в перевозки");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Установлены плановые даты перевозки")
     @Test(priority = 6, dependsOnMethods = "processOrder")
     public void setPlannedDates() {
@@ -105,6 +111,7 @@ public class CreateOrderNewTest {
         logger.info("Установлены плановые даты перевозки");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Установлены плановые даты перевозки")
     @Test(retryAnalyzer = com.utils.RetryAnalyzer.class, priority = 7, dependsOnMethods = "setPlannedDates")
     public void orderFull() {
@@ -113,6 +120,7 @@ public class CreateOrderNewTest {
         logger.info("Установлены плановые даты перевозки");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Планироание и создание рейса")
     @Test(retryAnalyzer = com.utils.RetryAnalyzer.class, priority = 8, dependsOnMethods = "orderFull")
     public void testVehiclePlan() {
@@ -122,6 +130,7 @@ public class CreateOrderNewTest {
         logger.info("планирование и создание рейса");
     }
 
+    @Severity(SeverityLevel.MINOR)
     @Step("Запланирован тягач и прицеп")
     @Test(priority = 9, dependsOnMethods = "testVehiclePlan")
     public void vehiclePlanning() {
@@ -130,6 +139,7 @@ public class CreateOrderNewTest {
         logger.info("Запланирован тягач и прицеп");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Открыт раздел сервисов")
     @Test(priority = 10, dependsOnMethods = "vehiclePlanning")
     public void goToVehile() {
@@ -138,6 +148,7 @@ public class CreateOrderNewTest {
         logger.info("Открыта страница рейсов");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Открыт раздел сервисов")
     @Test(priority = 11, dependsOnMethods = "goToVehile")
     public void goToServices() {
@@ -146,6 +157,7 @@ public class CreateOrderNewTest {
         logger.info("Открыт раздел сервисов");
     }
 
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Обработаны сервисы")
     @Test(priority = 12, dependsOnMethods = "goToServices")
     public void processServices() {
@@ -154,6 +166,7 @@ public class CreateOrderNewTest {
         logger.info("Обработаны сервисы");
     }
 
+    @Severity(SeverityLevel.NORMAL)
     @Step("Заказ завершен, сформирован счет")
     @Test(priority = 13, dependsOnMethods = "processServices")
     public void finalizeInvoice() {

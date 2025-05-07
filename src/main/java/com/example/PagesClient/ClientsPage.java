@@ -143,7 +143,7 @@ public class ClientsPage {
 
                 try {
 
-                        WebDriverWait quickWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+                        WebDriverWait quickWait = new WebDriverWait(driver, Duration.ofSeconds(2));
 
                         quickWait.until(ExpectedConditions.presenceOfElementLocated(
                                         By.xpath("//div[@title='Почтовые индексы' and contains(text(), 'Почтовые индексы')]")));

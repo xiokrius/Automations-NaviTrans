@@ -384,6 +384,7 @@ public class OrderPage {
 
                 WebElement customersCode = driver.findElement(
                                 By.xpath("//a[contains(@title, 'элемента Код Заказчика')]/following-sibling::input"));
+
                 //
                 WebElement carrier = driver.findElement(
                                 By.xpath("//a[text()='Перевозчик']/following::select[1]"));

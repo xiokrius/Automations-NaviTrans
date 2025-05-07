@@ -60,7 +60,7 @@ public class OpenContactsOrClientTest {
         logger.info("Перешли в окно ввода логина пароля");
     }
 
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Test(priority = 1)
     @Story("Создание контакта и клиента")
     @Description("Тест проверяет создание нового контакта и клиента")
@@ -86,7 +86,7 @@ public class OpenContactsOrClientTest {
         Assert.assertNotNull(generatedName, "Контакт не был создан");
     }
 
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Test(priority = 2)
     @Story("Заполнение карточки клиента")
     @Description("Тест проверяет заполнение карточки клиента и авторизацию")
@@ -105,7 +105,7 @@ public class OpenContactsOrClientTest {
         clientsOpenFull.Window();
     }
 
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Test(priority = 3)
     @Story("Подтверждение клиента")
     @Description("Тест проверяет подтверждение клиента")
@@ -127,7 +127,7 @@ public class OpenContactsOrClientTest {
         logger.info("Переход в т.Запросы утверждения, утверждение нового клиента");
     }
 
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Test(priority = 4)
     @Story("Установка кредитного лимита")
     @Description("Тест проверяет установку и согласование кредитного лимита")

@@ -65,6 +65,11 @@ public class VehicleRoute {
                                 By.xpath(
                                                 "//td[contains(@controlname, 'FTS_Actual Starting Date')]//descendant::input[contains(@id, 'ee')]")));
                 System.out.println("1.");
+
+                WebElement orderNumberSpan = driver.findElement(By.xpath(
+                                "//a[text()='№ Заказа']/following-sibling::div//span"));
+                String orderNumber = orderNumberSpan.getAttribute("title");
+                System.out.println("Номер заказа: " + orderNumber);
                 WebElement ActualStartingTime = wait.until(ExpectedConditions.presenceOfElementLocated(
                                 By.xpath(
                                                 "//td[contains(@controlname, 'FTS_Actual Start Time')]//descendant::input[contains(@id, 'ee')]")));

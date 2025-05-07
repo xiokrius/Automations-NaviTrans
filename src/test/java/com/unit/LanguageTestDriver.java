@@ -12,14 +12,10 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.annotations.AfterClass;
 
 import com.example.ConfigManager;
 import com.example.PagesInventory.TransportEquipment;
@@ -41,8 +37,6 @@ public class LanguageTestDriver {
 
     private static final Logger logger = LogManager.getLogger(LanguageTestDriver.class);
     private static final String BASE_URL = ConfigManager.getProperty("BaseURL");
-    private static final String LOGIN = ConfigManager.getProperty("inputLogin");
-    private static final String PASSUSER1 = ConfigManager.getProperty("inputPassword");
 
     @BeforeClass
     public void setup() {
@@ -56,7 +50,7 @@ public class LanguageTestDriver {
 
     @Test(priority = 1)
     @Story("Проверка переводов в оборудования ТС")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.CRITICAL)
     public void CheckTranslation() {
         logger.info("Создание нового контакта и клиента");
         QLoginTest loginTest = new QLoginTest(driver);
