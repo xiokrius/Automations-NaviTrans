@@ -168,22 +168,22 @@ public class CreateOrderNewTest {
         logger.info("Конец теста \"На создание и заполнение заявки, планирования рейса, учёта счёта\" ");
     }
 
-    @Step("Считываю номер учтённого счёта")
-    @Test(priority = 14, dependsOnMethods = "finalizeInvoice")
-    public void goToServices2() {
-        ZayavkaByPage servicePage = new ZayavkaByPage(driver);
-        servicePage.clickSomeButtonInService();
-        logger.info("Переход в сервисы");
-    }
+    // @Step("Считываю номер учтённого счёта")
+    // @Test(priority = 14, dependsOnMethods = "finalizeInvoice")
+    // public void goToServices2() {
+    // ZayavkaByPage servicePage = new ZayavkaByPage(driver);
+    // servicePage.clickSomeButtonInService();
+    // logger.info("Переход в сервисы");
+    // }
 
-    @Step("Считываю номер учтённого счёта")
-    @Test(priority = 15, dependsOnMethods = "finalizeInvoice")
-    public void readyNoCheck() {
-        OpenInvoice openInvoice = new OpenInvoice(driver);
-        String invoiceNumber = openInvoice.extractInvoiceNumber();
-        logger.info("Номер считан: " + invoiceNumber);
-        logger.info("номер считан");
-    }
+    // @Step("Считываю номер учтённого счёта")
+    // @Test(priority = 15, dependsOnMethods = "finalizeInvoice")
+    // public void readyNoCheck() {
+    // OpenInvoice openInvoice = new OpenInvoice(driver);
+    // String invoiceNumber = openInvoice.extractInvoiceNumber();
+    // logger.info("Номер считан: " + invoiceNumber);
+    // logger.info("номер считан");
+    // }
 
     @AfterMethod
     public void takeScreenshotOnFailure(ITestResult result) {

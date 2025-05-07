@@ -76,7 +76,7 @@ public class OpenInvoice {
                                 "//td[@controlname='Unit price']//input[@role='textbox' and @type='text']"));
 
                 WebElement scrollContainer = driver.findElement(
-                                By.xpath("(//div[contains(@class, 'ms-nav-scrollable scroll-source thm-bgcolor-1241058378')])[4]"));
+                                By.xpath("(//div[contains(@class, 'ms-nav-scrollable scroll-source thm-bgcolor-1241058378')])[3]"));
 
                 // Скроллинг к элементу
                 scrollToElementHorizontally(scrollContainer, price);
@@ -130,7 +130,8 @@ public class OpenInvoice {
 
                 // Ожидаем появления инпут-поля с динамическим ID
                 WebElement inputDocumentNo = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.xpath("//td[@controlname='Document No.']//input[@role='combobox' and @type='text']")));
+                                By.xpath(
+                                                "//td[@controlname='Document No.']//input[@role='combobox' and @type='text']")));
                 System.out.println("Считали поле");
 
                 String invoiceNumber = inputDocumentNo.getAttribute("value");

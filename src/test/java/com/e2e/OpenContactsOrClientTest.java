@@ -116,7 +116,7 @@ public class OpenContactsOrClientTest {
 
         QLoginTest loginTest2 = new QLoginTest(driver2);
         loginTest2.inputLogin(ConfigManager.getProperty("inputLogin2"));
-        loginTest2.inputPassword(ConfigManager.getProperty("inputPassword2"));
+        loginTest2.inputPassword(ConfigManager.getProperty("inputPassword"));
         loginTest2.clickLoginButton();
         logger.info("Вход выполнен от 2 юзера");
 

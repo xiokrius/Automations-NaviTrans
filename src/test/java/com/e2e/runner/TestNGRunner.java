@@ -7,7 +7,6 @@ public class TestNGRunner {
     public static void main(String[] args) {
         TestNG testNG = new TestNG();
 
-        // Указываем классы тестов (можно заменить на загрузку из testng.xml)
         testNG.setTestClasses(new Class[] {
                 com.e2e.CreateAndOpenVendorTest.class,
                 com.e2e.CreateOrderNewTest.class,

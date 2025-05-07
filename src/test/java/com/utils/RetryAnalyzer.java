@@ -12,7 +12,8 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 
     @Override
     public boolean retry(ITestResult result) {
-        if (count < MAX_RETRY) {
+
+        if (!result.isSuccess() && count < MAX_RETRY) {
             count++;
             logger.warn("Повторная попытка #{} для теста {} из-за ошибки: {}",
                     count,

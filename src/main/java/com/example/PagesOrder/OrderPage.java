@@ -96,25 +96,40 @@ public class OrderPage {
                 System.out.println("Начинаем OrderPage/vehiclePlan");
 
                 frameSwitcher.switchToIframe();
-                System.out.println("Перешли в фрейм.");
 
-                // Кнопка Обработки
-                WebElement obrabotkaButton = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//button[@aria-label=' Обработка' and @data-is-focusable='true']")));
+                try {
+                        // 2. Улучшенное ожидание и клик для первой кнопки
+                        WebElement obrabotkaButton = wait.until(driver -> {
+                                WebElement btn = driver.findElement(By.xpath(
+                                                "//button[@aria-label=' Обработка' and @data-is-focusable='true']"));
+                                return (btn.isDisplayed() && btn.isEnabled()) ? btn : null;
+                        });
 
-                System.out.println("Нашли первую кнопку Обработка.");
+                        System.out.println("Нашли первую кнопку Обработка.");
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
+                                        obrabotkaButton);
+                        obrabotkaButton.click();
 
-                js.executeScript("arguments[0].click();", obrabotkaButton);
+                        // 3. Явное ожидание между действиями
+                        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                                        By.xpath("//div[contains(@class,'processing-indicator')]")));
 
-                // Кнопка Планирования для перехода в планирование рейса
-                WebElement PlanButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "//button[@aria-label='Plan']")));
-                System.out.println("Нашли Вторую кнопку План.");
+                        // 4. Улучшенный клик для второй кнопки
+                        WebElement planButton = wait.until(driver -> {
+                                WebElement btn = driver.findElement(By.xpath("//button[@aria-label='Plan']"));
+                                return (btn.isDisplayed() && btn.isEnabled()) ? btn : null;
+                        });
 
-                js.executeScript("arguments[0].click();", PlanButton);
+                        System.out.println("Нашли вторую кнопку План.");
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", planButton);
+                        planButton.click();
+                        System.out.println("Нажали вторую кнопку План.");
 
-                frameSwitcher.returnToMainContent();
-
+                        // 5. Ожидание завершения действия
+                        wait.until(ExpectedConditions.urlContains("plan")); // Или другой маркер
+                } finally {
+                        frameSwitcher.returnToMainContent();
+                }
         }
 
         // Нажатие Готов к инвойсированию
@@ -141,25 +156,32 @@ public class OrderPage {
 
                 readyInInvoic.click();
                 try {
-                        WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(2));
+
+                        WebElement popupWindow = shortWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                                         "//p[contains(@title, 'Бухгалтеру будет отправлено уведомление.')]")));
                         System.out.println("Всплывающее окно обнаружено.");
 
-                        WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                        "(//div[@class='dialog-action-bar'])[2]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
+                        WebElement popupConfirmButton = shortWait
+                                        .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                                        "(//div[@class='dialog-action-bar'])[2]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
 
                         JavascriptExecutor js = (JavascriptExecutor) driver;
                         js.executeScript("arguments[0].click();", popupConfirmButton);
 
                         Thread.sleep(500);
 
+                } catch (Exception e) {
+                        System.out.println("Ошибка: " + e.getMessage());
+                }
+
+                try {
                         WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
                                         "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
 
                         js.executeScript("arguments[0].click();", ButtonInOk);
-
-                } catch (Exception e) {
-                        System.out.println("Ошибка: " + e.getMessage());
+                } catch (Exception i) {
+                        System.out.println("окно 2 не найдено" + i.getMessage());
                 }
 
                 frameSwitcher.returnToMainContent();
@@ -177,13 +199,13 @@ public class OrderPage {
                 // НАШЛИ КНОПКУ ОБРАБОТКА
                 WebElement obrabotkaButton = wait
                                 .until(ExpectedConditions
-                                                .visibilityOfElementLocated(By.xpath("//*[@aria-label=' Обработка']")));
+                                                .elementToBeClickable(By.xpath("//*[@aria-label=' Обработка']")));
                 System.out.println("Нашли первую кнопку Обработка.");
                 obrabotkaButton.click();
 
                 // НАШЛИ КНОПКУ Счёт
                 WebElement schet = wait.until(ExpectedConditions
-                                .visibilityOfElementLocated(By.xpath("//button[@title='Счет (Shift+Ctrl+F11)']")));
+                                .elementToBeClickable(By.xpath("//button[@title='Счет (Shift+Ctrl+F11)']")));
 
                 System.out.println("Нашли Вторую кнопку, Cчёт");
 

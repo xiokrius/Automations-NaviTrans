@@ -58,7 +58,7 @@ public class VehiclePlanning {
                         System.out.println("Всплывающее окно обнаружено.");
 
                         WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                        "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[starts-with(@id, 'b45') and span[text()='ОК']]")));
+                                        "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[starts-with(@id, 'b43') and span[text()='ОК']]")));
 
                         js.executeScript("arguments[0].click();", popupConfirmButton);
 
