@@ -1,6 +1,8 @@
 package com.example.PagesOrder;
 
+import java.io.FileOutputStream;
 import java.time.Duration;
+import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -29,6 +31,7 @@ public class VehicleRoute {
                 this.driver = driver;
                 this.js = (JavascriptExecutor) driver;
                 this.frameSwitcher = new FrameSwitcher(driver);
+
         }
 
         private void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
@@ -69,6 +72,7 @@ public class VehicleRoute {
                 WebElement orderNumberSpan = driver.findElement(By.xpath(
                                 "//a[text()='№ Заказа']/following-sibling::div//span"));
                 String orderNumber = orderNumberSpan.getAttribute("title");
+
                 System.out.println("Номер заказа: " + orderNumber);
                 WebElement ActualStartingTime = wait.until(ExpectedConditions.presenceOfElementLocated(
                                 By.xpath(
@@ -142,6 +146,14 @@ public class VehicleRoute {
                 }
 
                 frameSwitcher.returnToMainContent();
+
+                Properties orderProps = new Properties();
+                try (FileOutputStream out = new FileOutputStream("src/main/resources/order.properties")) {
+                        orderProps.setProperty("order.number", orderNumber);
+                        orderProps.store(out, "Номер заказа");
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
         }
 
 }

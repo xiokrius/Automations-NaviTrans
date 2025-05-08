@@ -8,8 +8,10 @@ public class ConfigManager {
     private static Properties properties = new Properties();
 
     static {
-        loadProperties("config.properties"); // Загружаем config.properties
-        loadProperties("config.properties.contacts"); // Загружаем config.properties.contacts
+        loadProperties("config.properties");
+        loadProperties("config.properties.contacts");
+        loadProperties("config.properties.order");
+        loadProperties("order.properties");
     }
 
     private static void loadProperties(String fileName) {

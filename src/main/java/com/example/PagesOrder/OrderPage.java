@@ -61,7 +61,7 @@ public class OrderPage {
                 System.out.println("Переключились в iframe c более длительным ожиданием");
         }
 
-        // ФУНКЦИЯ ДЛЯ ВЫПУСКА ЗАКАЗА ПОСЛЕ ТОГО КАК ВБИЛ ПЛАНОВЫЕ ДАТЫ ПО ПЕРЕВОЗКЕ!
+        // Метод ДЛЯ ВЫПУСКА ЗАКАЗА ПОСЛЕ ТОГО КАК ВБИЛ ПЛАНОВЫЕ ДАТЫ ПО ПЕРЕВОЗКЕ!
         public void obrabotkaVypustit() {
 
                 System.out.println("Начинаем OrderPage/obrabotkaVypustit");

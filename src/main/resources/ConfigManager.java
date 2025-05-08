@@ -8,6 +8,8 @@ public class ConfigManager {
     static {
         loadProperties("config.properties");
         loadProperties("config.properties.contacts");
+        loadProperties("config.properties.order");
+        loadProperties("order.properties");
     }
 
     private static void loadProperties(String filePath) {
