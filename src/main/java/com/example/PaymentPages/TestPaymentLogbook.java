@@ -193,6 +193,22 @@ public class TestPaymentLogbook {
 
             buttonIsOk.click();
 
+            try {
+
+                WebElement windowsAutorised2 = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//p[text()='Строки журнала успешно учтены.']")));
+
+                WebElement ButtonInOk2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//button[contains(@class, '1632124310')]//span[text()='ОК']")));
+
+                ButtonInOk2.click();
+
+            } catch (Exception i) {
+
+                System.out.println("Второе окно \"Строки журнала успешно учтены.\" не появилось ");
+
+            }
+
         } catch (Exception e) {
 
             System.out.println("Окно не найдено");

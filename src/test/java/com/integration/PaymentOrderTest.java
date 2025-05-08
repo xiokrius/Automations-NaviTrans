@@ -117,7 +117,7 @@ public class PaymentOrderTest {
         byte[] screenshot = null;
         try {
             screenshot = FileUtils.readFileToByteArray(srcFile);
-            saveScreenshot(screenshot); // Это сохранит скриншот в отчет Allure
+            saveScreenshot(screenshot);
         } catch (IOException e) {
             logger.error("Ошибка при чтении файла скриншота: " + e.getMessage());
         }
