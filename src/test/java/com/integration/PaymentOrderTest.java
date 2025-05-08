@@ -99,6 +99,10 @@ public class PaymentOrderTest {
         paymentTest.fillBalAccountNo();
 
         paymentTest.fillAmount();
+
+        paymentTest.openUchetPechat();
+
+        paymentTest.openOpalaScheta();
     }
 
     @AfterMethod

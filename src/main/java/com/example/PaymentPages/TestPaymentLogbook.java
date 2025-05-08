@@ -162,7 +162,42 @@ public class TestPaymentLogbook {
 
         frameSwitcher.setInputValue(Amount, negativeAmount);
 
-        frameSwitcher.returnToMainContent();
+    }
+
+    public void openUchetPechat() {
+
+        WebElement UchetPechatButton = wait.until(ExpectedConditions.elementToBeClickable((By.xpath(
+                "//button[@aria-label='Учет/печать']"))));
+
+        UchetPechatButton.click();
+
+    }
+
+    public void openOpalaScheta() {
+
+        WebElement OplataSchetaButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                "//button[@aria-label='Учет']")));
+
+        OplataSchetaButton.click();
+
+        try {
+            // WebElement WindowsAutorised =
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+            // "//p[@title='Учесть строки журнала?']")));
+
+            WebElement windowsAutorised = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//p[text()='Учесть строки журнала?']")));
+
+            WebElement buttonIsOk = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[contains(@class, '1632124310')]//span[text()='Да']")));
+
+            buttonIsOk.click();
+
+        } catch (Exception e) {
+
+            System.out.println("Окно не найдено");
+        }
+
     }
 
 }
