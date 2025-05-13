@@ -1,4 +1,4 @@
-package com.integration;
+package com.e2e;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class PaymentOrderTest {
     private JavascriptExecutor js;
     private WebDriverWait wait;
     private QLoginTest loginTest;
-    private static final Logger logger = LogManager.getLogger(CreateManyOrdersTest.class);
+    private static final Logger logger = LogManager.getLogger(PaymentOrderTest.class);
 
     @BeforeClass
     public void setup() {
@@ -139,12 +139,12 @@ public class PaymentOrderTest {
         return screenshot;
     }
 
-    // @AfterClass
-    // public void teardown() {
-    // if (driver != null) {
-    // driver.quit();
-    // logger.info("Браузер закрыт");
-    // }
-    // }
+    @AfterClass
+    public void teardown() {
+        if (driver != null) {
+            driver.quit();
+            logger.info("Браузер закрыт");
+        }
+    }
 
 }

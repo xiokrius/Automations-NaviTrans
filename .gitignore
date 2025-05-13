@@ -10,6 +10,7 @@
 
 # Compiled class files
 *.class
+q.txt
 
 # Log files
 *.log
