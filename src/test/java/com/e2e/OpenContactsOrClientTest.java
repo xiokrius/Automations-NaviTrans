@@ -74,9 +74,8 @@ public class OpenContactsOrClientTest {
 
         // Переход на страницу Контактов
 
-        Contacts contactsPage = loginTest.goToContacts();
+        Contacts contactsPage = new Contacts(driver1);
         contactsPage.ContactsOrderOpen();
-        contactsPage.returnToMainContent();
         logger.info("Открылась страница с контактами");
 
         OpenContactsPage openContacts = new OpenContactsPage(driver1);

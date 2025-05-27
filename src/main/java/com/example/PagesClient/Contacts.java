@@ -3,10 +3,13 @@ package com.example.PagesClient;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.example.ConfigManager;
 
 public class Contacts {
 
@@ -29,6 +32,11 @@ public class Contacts {
 
         System.out.println("Начинаем Contacts/ContactsOrderOpen");
 
+        driver.get(ConfigManager.getProperty("URLContacts"));
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(d -> ((JavascriptExecutor) d).executeScript("return document.readyState").equals("complete"));
+
         // Переключаемся в нужный фрейм
         switchToIframe();
         System.out.println("Перешли в фрейм.");
@@ -40,7 +48,6 @@ public class Contacts {
         // Кликаем по первой кнопке
         CreateContacts.click();
         System.out.println("Клик по кнопке создания контакта выполнен.");
-
 
         returnToMainContent();
 

@@ -1,5 +1,7 @@
 package com.example.PagesOrder;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -91,5 +93,17 @@ public class FrameSwitcher {
             System.out.println("ес1");
         }
 
+    }
+
+    public static void checkLink(String url) {
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            connection.setRequestMethod("HEAD");
+            connection.connect();
+            int responseCode = connection.getResponseCode();
+            System.out.println(url + " → " + responseCode);
+        } catch (Exception e) {
+            System.out.println(url + " → Ошибка: " + e.getMessage());
+        }
     }
 }

@@ -112,8 +112,26 @@ public class CreateOrderNewTest {
     }
 
     @Severity(SeverityLevel.CRITICAL)
+    @Step("Открыт раздел сервисов")
+    @Test(priority = 7, dependsOnMethods = "setPlannedDates")
+    public void goToServices() {
+        ZayavkaByPage servicePage = new ZayavkaByPage(driver);
+        servicePage.clickSomeButtonInService();
+        logger.info("Открыт раздел сервисов");
+    }
+
+    @Severity(SeverityLevel.CRITICAL)
+    @Step("Обработаны сервисы")
+    @Test(priority = 8, dependsOnMethods = "goToServices")
+    public void processServices() {
+        OpenInvoice openInvoice = new OpenInvoice(driver);
+        openInvoice.OpenServices();
+        logger.info("Обработаны сервисы");
+    }
+
+    @Severity(SeverityLevel.CRITICAL)
     @Step("Установлены плановые даты перевозки")
-    @Test(retryAnalyzer = com.utils.RetryAnalyzer.class, priority = 7, dependsOnMethods = "setPlannedDates")
+    @Test(retryAnalyzer = com.utils.RetryAnalyzer.class, priority = 9, dependsOnMethods = "processServices")
     public void orderFull() {
         OrderPage orderPage = new OrderPage(driver);
         orderPage.obrabotkaVypustit();
@@ -122,7 +140,7 @@ public class CreateOrderNewTest {
 
     @Severity(SeverityLevel.CRITICAL)
     @Step("Планироание и создание рейса")
-    @Test(retryAnalyzer = com.utils.RetryAnalyzer.class, priority = 8, dependsOnMethods = "orderFull")
+    @Test(retryAnalyzer = com.utils.RetryAnalyzer.class, priority = 10, dependsOnMethods = "orderFull")
     public void testVehiclePlan() {
         OrderPage orderPage = new OrderPage(driver);
         orderPage.vehiclePlan();
@@ -132,7 +150,7 @@ public class CreateOrderNewTest {
 
     @Severity(SeverityLevel.MINOR)
     @Step("Запланирован тягач и прицеп")
-    @Test(priority = 9, dependsOnMethods = "testVehiclePlan")
+    @Test(priority = 11, dependsOnMethods = "testVehiclePlan")
     public void vehiclePlanning() {
         VehiclePlanning vehiclePlanning = new VehiclePlanning(driver);
         vehiclePlanning.VehiclePlanOpen();
@@ -140,35 +158,17 @@ public class CreateOrderNewTest {
     }
 
     @Severity(SeverityLevel.CRITICAL)
-    @Step("Открыт раздел сервисов")
-    @Test(priority = 10, dependsOnMethods = "vehiclePlanning")
+    @Step("Открыта страница перевозок")
+    @Test(priority = 12, dependsOnMethods = "vehiclePlanning")
     public void goToVehile() {
         VehicleRoute vehicleRoute = new VehicleRoute(driver);
         vehicleRoute.clickSomeButtonInFrame();
-        logger.info("Открыта страница рейсов");
-    }
-
-    @Severity(SeverityLevel.CRITICAL)
-    @Step("Открыт раздел сервисов")
-    @Test(priority = 11, dependsOnMethods = "goToVehile")
-    public void goToServices() {
-        ZayavkaByPage servicePage = new ZayavkaByPage(driver);
-        servicePage.clickSomeButtonInService();
-        logger.info("Открыт раздел сервисов");
-    }
-
-    @Severity(SeverityLevel.CRITICAL)
-    @Step("Обработаны сервисы")
-    @Test(priority = 12, dependsOnMethods = "goToServices")
-    public void processServices() {
-        OpenInvoice openInvoice = new OpenInvoice(driver);
-        openInvoice.OpenServices();
-        logger.info("Обработаны сервисы");
+        logger.info("Рейс заполнен");
     }
 
     @Severity(SeverityLevel.NORMAL)
     @Step("Заказ завершен, сформирован счет")
-    @Test(priority = 13, dependsOnMethods = "processServices")
+    @Test(priority = 13, dependsOnMethods = "goToVehile")
     public void finalizeInvoice() {
         OrderPage orderPage = new OrderPage(driver);
         orderPage.readyInInvoicing();

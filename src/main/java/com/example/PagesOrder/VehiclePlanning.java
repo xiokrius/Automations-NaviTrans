@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -49,32 +50,46 @@ public class VehiclePlanning {
                                 "//a[contains(@title, 'значение для элемента Водитель')]/following-sibling::input")));
 
                 startingVehicle.click();
-
+                System.out.println("1");
                 driverInput.click();
-
+                System.out.println("2");
                 try {
-                        WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                                        "/html/body/div[1]/div[5]/form")));
+                        WebElement popupWindow = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                                        "//div[@title='Правка - Планирование проверок - 1']")));
                         System.out.println("Всплывающее окно обнаружено.");
+                        System.out.println("3");
 
                         WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                        "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[starts-with(@id, 'b43') and span[text()='ОК']]")));
+                                        "(//button[contains(@class, 'highlight-btn') and ./span[text()='ОК']])[2]")));
+                        System.out.println("4");
 
+                        System.out.println("Отладка");
                         js.executeScript("arguments[0].click();", popupConfirmButton);
-
+                        System.out.println("5");
                         System.out.println("Нажата кнопка 'Подтвердить' во всплывающем окне.");
+                        System.out.println("sssssssss");
 
                         // Проверка элемента "Внимание! Просрочено плановое ТО"
                         try {
                                 WebElement attentionMessage = wait
-                                                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                                                                 "//p[contains(@title, 'Внимание! Просрочено плановое ТО')]")));
                                 System.out.println("Обнаружено сообщение: " + attentionMessage.getText());
 
+                                System.out.println("6");
+
                                 // Нажатие кнопки "ОК"
-                                WebElement buttonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                                "//div[contains(@class, 'ms-nav-actionbar-container') and contains(@class, 'has-actions')]//button[contains(@class, '1632124310')]//span[text()='ОК']")));
+                                WebElement buttonInOk = wait.until(ExpectedConditions.elementToBeClickable(
+                                                By.xpath("//button[contains(@class, '1632124310') and .//span[text()='ОК']]")));
+
+                                // WebElement buttonInOk =
+                                // wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                // "//button[contains(@class, '1632124310')]//span[text()='ОК'][2]")));
+                                System.out.println("7");
+                                js.executeScript("arguments[0].click();", buttonInOk);
+                                System.out.println("Нажал JS");
                                 buttonInOk.click();
+                                System.out.println("8");
                                 System.out.println("Нажата кнопка 'ОК'.");
                         } catch (Exception innerException) {
                                 System.out.println("Ошибка при поиске элемента 'Внимание': "
@@ -86,11 +101,12 @@ public class VehiclePlanning {
                 // Нажимаем кнопку "ОК"
                 WebElement vehicleOkButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                                 "//button[contains(@id, 'b4')]/span[text()='ОК']")));
+                System.out.println("9");
                 vehicleOkButton.click();
+                System.out.println("10");
                 System.out.println("Нажата кнопка 'ОК'.");
 
                 frameSwitcher.returnToMainContent();
-
         }
 
         public void VehiclePlanOpenCopiedOrder() {
