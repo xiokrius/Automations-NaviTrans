@@ -89,9 +89,9 @@ public class TestPaymentLogbook {
                                 By.xpath("//td[@controlname='Account Type']//select")));
                 System.out.println("Нашли поле Тип счёта");
 
-                frameSwitcher.fillSelectWithJS(AccountType, AccountTypeValue);
-
                 AccountType.click();
+
+                frameSwitcher.fillSelectWithJS(AccountType, AccountTypeValue);
 
         }
 

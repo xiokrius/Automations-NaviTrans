@@ -287,14 +287,14 @@ public class OrderPage {
                 WebElement buttonInPerevozkiUpravlenie = wait
                                 .until(ExpectedConditions
                                                 .elementToBeClickable(By.xpath(
-                                                                "//div[contains(@data-control-id, 'b3')]//button[@type='button' and .//span[contains(@aria-label, 'Управление')]]")));
+                                                                "//div[contains(@data-control-id, 'b4')]//button[@type='button' and .//span[contains(@aria-label, 'Управление')]]")));
                 buttonInPerevozkiUpravlenie.click();
                 System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
 
                 // Перевозки/Управление/Создать
                 WebElement buttonInPereozkiUpravlenieSozdat = wait
                                 .until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                                "//div[contains(@data-control-id, 'b3')]//button[@type='button' and .//span[contains(@aria-label, 'Создать')]]")));
+                                                "//div[contains(@data-control-id, 'b4')]//button[@type='button' and .//span[contains(@aria-label, 'Создать')]]")));
 
                 buttonInPereozkiUpravlenieSozdat.click();
                 System.out.println("Клик по второй кнопке 3 внутри фрейма выполнен.");

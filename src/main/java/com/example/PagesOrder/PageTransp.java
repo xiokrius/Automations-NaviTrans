@@ -162,10 +162,6 @@ public class PageTransp {
                 WebElement NumberOfShipment = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//td[contains(@controlname, 'Quantity')]/input[contains(@id, 'ee')]")));
 
-                System.out.println("1");
-                // aria-labelledby="column_header_b3tj"
-                // id = b3szee
-
                 // Вес груза input поле
                 WebElement TheWholeCargo = wait.until(ExpectedConditions.elementToBeClickable(
                                 By.xpath("//td[contains(@controlname, 'Order Weight')]//descendant::input[contains(@id, 'ee')]")));

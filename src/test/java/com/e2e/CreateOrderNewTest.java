@@ -2,7 +2,6 @@ package com.e2e;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.checkerframework.checker.units.qual.A;
 import org.apache.commons.io.FileUtils;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -25,7 +24,6 @@ import com.example.PagesOrder.VehicleRoute;
 import com.example.PagesOrder.ZayavkaByPage;
 import com.example.PagesOrder.ZayavkaPage;
 import com.utils.CreateManyOrdersTest;
-import com.utils.RetryAnalyzer;
 import com.example.ConfigManager;
 
 import org.openqa.selenium.OutputType;

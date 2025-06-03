@@ -14,7 +14,6 @@
         <maven.compiler.target>17</maven.compiler.target>
         <aspectj.version>1.9.21</aspectj.version>
         <allure.version>2.27.0</allure.version>
-        <!-- Добавляем версию для Allure Maven Plugin -->
         <allure.maven.version>2.12.0</allure.maven.version>
     </properties>
 
@@ -37,6 +36,12 @@
             <artifactId>selenium-java</artifactId>
             <version>4.29.0</version>
         </dependency>
+
+        <dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.7.0</version>
+    </dependency>       
 
 
         <!-- MS SQL JDBC -->

@@ -15,24 +15,36 @@ import org.openqa.selenium.WebDriver;
 public class Praktika {
 
     private WebDriver driver;
-    private static WebDriverWait wait;
+    private WebDriverWait wait;
+    public static String poisk;
 
     public Praktika(WebDriver driver) {
+
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
     }
 
     public static void main(String[] args) {
 
         WebDriver driver = new ChromeDriver();
+
         driver.manage().window().maximize();
 
-        driver.get("https://demoqa.com/tabs");
+        driver.get("fdsfsa");
 
-        WebElement elements = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                "//span[text()='Elements']")));
+        List<WebElement> list = driver.findElements(By.xpath("//button"));
 
-        elements.click();
+        for (WebElement element : list) {
+
+            String olo = element.getText();
+            String takChtoBi = element.getAttribute(olo);
+
+            if (poisk.equalsIgnoreCase(olo)) {
+                System.out.println(takChtoBi);
+
+            }
+        }
 
     }
 
