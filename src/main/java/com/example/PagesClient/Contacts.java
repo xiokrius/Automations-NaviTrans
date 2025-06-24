@@ -10,52 +10,43 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.ConfigManager;
+import com.example.Environment.BasePage;
 
-public class Contacts {
+public class Contacts extends BasePage {
 
-    private final WebDriver driver;
-    private final WebDriverWait wait;
 
     public Contacts(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        super(driver);
     }
 
-    // Метод для переключения в iframe
-    private void switchToIframe() {
-        WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.className("designer-client-frame")));
-        driver.switchTo().frame(iframe);
-    }
+
 
     public void ContactsOrderOpen() {
 
         System.out.println("Начинаем Contacts/ContactsOrderOpen");
 
-        driver.get(ConfigManager.getProperty("URLContacts"));
+        openUrl(ConfigManager.getProperty("URLContacts"));
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                 .until(d -> ((JavascriptExecutor) d).executeScript("return document.readyState").equals("complete"));
 
         // Переключаемся в нужный фрейм
         switchToIframe();
         System.out.println("Перешли в фрейм.");
 
+        WebElement CreateContacts = waitAndGetVisibleElement(By.xpath(
+            "//button[@title='Создать новую операцию.']"));
         // Клик для создания контакта
-        WebElement CreateContacts = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//button[@title='Создать новую операцию.']")));
+
 
         // Кликаем по первой кнопке
         CreateContacts.click();
+        
         System.out.println("Клик по кнопке создания контакта выполнен.");
 
         returnToMainContent();
 
-    }
-
-    public void returnToMainContent() {
-        driver.switchTo().defaultContent();
-        System.out.println("ласт вышел с фрейма, проверка");
     }
 
 }

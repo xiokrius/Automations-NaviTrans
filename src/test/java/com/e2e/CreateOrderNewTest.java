@@ -23,19 +23,18 @@ import com.example.PagesOrder.VehiclePlanning;
 import com.example.PagesOrder.VehicleRoute;
 import com.example.PagesOrder.ZayavkaByPage;
 import com.example.PagesOrder.ZayavkaPage;
-import com.utils.CreateManyOrdersTest;
 import com.example.ConfigManager;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 @Epic("Клиенты и заказы")
-@Feature("Создание заказf")
+@Feature("Создание заказ")
 
 public class CreateOrderNewTest {
     private WebDriver driver;
     private QLoginTest loginTest;
-    private static final Logger logger = LogManager.getLogger(CreateManyOrdersTest.class);
+    private static final Logger logger = LogManager.getLogger(CreateOrderNewTest.class);
 
     @BeforeClass
     public void setup() {

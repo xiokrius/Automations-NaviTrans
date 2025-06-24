@@ -13,16 +13,15 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.ConfigManager;
+import com.example.Environment.BasePage;
 import com.example.PagesClient.ClientsPage.TestData;
-import com.example.PagesOrder.FrameSwitcher;
 
-public class ClientsPage {
+public class ClientsPage extends BasePage{
 
         private WebDriver driver;
         private JavascriptExecutor js;
         private WebDriverWait wait;
         private String RegNumberValue;
-        private FrameSwitcher frameSwitcher;
 
         private String typeCarrierValue = ConfigManager.getProperty("typeClientValue");
         private String CityValue = ConfigManager.getProperty("CityValue");
@@ -34,10 +33,7 @@ public class ClientsPage {
 
         public ClientsPage(WebDriver driver) {
 
-                this.driver = driver;
-                this.js = (JavascriptExecutor) driver;
-                this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-                this.frameSwitcher = new FrameSwitcher(driver);
+                super(driver);
                 this.RegNumberValue = generateRandomINN(9);
                 System.out.println("Сгенерированный ИНН: " + this.RegNumberValue);
         }
@@ -56,29 +52,6 @@ public class ClientsPage {
                 js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
         }
 
-        private void selectDropdownByValue(WebElement selectElement, String value) {
-                Select select = new Select(selectElement);
-                select.selectByValue(value);
-                System.out.println("Выбрали значение в select: " + value);
-        }
-
-        private void setInputValue(WebElement element, String value) {
-                js.executeScript(
-                                "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
-                                element, value);
-                System.out.println("Заполнили значение: " + value);
-        }
-
-        private void switchToIframe() {
-                WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-                                By.className("designer-client-frame")));
-                driver.switchTo().frame(iframe);
-        }
-
-        public void returnToMainContent() {
-                driver.switchTo().defaultContent();
-                System.out.println("ласт вышел с фрейма, проверка");
-        }
 
         public void fillingClientsForm() {
 
@@ -262,25 +235,25 @@ public class ClientsPage {
 
         public void waitingForTheClientPageToLoad() {
 
-                frameSwitcher.switchToIframe();
+                switchToIframe();
 
                 WebElement CardOfClient = wait.until(ExpectedConditions
                                 .visibilityOfElementLocated(By.xpath("//span[text()='Карточка клиента']")));
 
-                frameSwitcher.returnToMainContent();
+                returnToMainContent();
 
         }
 
         public void editCardOfClients() {
 
-                frameSwitcher.switchToIframe();
+                switchToIframe();
 
                 WebElement EditCardOfClientsButton = wait.until(ExpectedConditions
                                 .elementToBeClickable(By.xpath("//i[@data-icon-name='Edit']")));
 
                 EditCardOfClientsButton.click();
 
-                frameSwitcher.returnToMainContent();
+                returnToMainContent();
 
         }
 

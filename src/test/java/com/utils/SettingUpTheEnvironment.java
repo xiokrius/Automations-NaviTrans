@@ -3,7 +3,6 @@ package com.utils;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
@@ -12,12 +11,9 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -25,9 +21,7 @@ import org.testng.annotations.Test;
 import com.example.ConfigManager;
 import com.example.Environment.SettingUser;
 import com.example.Environment.Settings;
-import com.example.PagesInventory.TransportEquipment;
-import com.example.PagesInventory.VehicleTrailerDriver;
-import com.example.PagesOrder.FrameSwitcher;
+
 import com.example.PagesOrder.QLoginTest;
 import com.unit.LanguageTestDriver;
 

@@ -30,10 +30,10 @@ import org.openqa.selenium.TakesScreenshot;
 @Epic("Клиенты и заказы")
 @Feature("Создание 2 заказов")
 
-public class CreateOrderNewTest {
+class UtilsCreateOrderNewTest {
     private WebDriver driver;
     private QLoginTest loginTest;
-    private static final Logger logger = LogManager.getLogger(CreateOrderNewTest.class);
+    private static final Logger logger = LogManager.getLogger(UtilsCreateOrderNewTest.class);
 
     @BeforeClass
     public void setup() {

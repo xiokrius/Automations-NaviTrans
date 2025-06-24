@@ -12,15 +12,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.example.ConfigManager;
+import com.example.Environment.BasePage;
 import com.example.PagesClient.OpenContactsPage.RandomUtils;
-import com.example.PagesOrder.FrameSwitcher;
 
-public class CardOfVendor {
+public class CardOfVendor extends BasePage {
 
     private WebDriver driver;
     private WebDriverWait wait;
     private JavascriptExecutor js;
-    private FrameSwitcher frameSwitcher;
     public final String NameVendorsValue;
     private static final String CodePaymentVendorValue = ConfigManager.getProperty("CodePaymentVendorValue");
     private static final String CityVendorValue = ConfigManager.getProperty("CityVendorValue");
@@ -28,48 +27,48 @@ public class CardOfVendor {
 
     public CardOfVendor(WebDriver driver) {
 
+
+        super(driver);
         this.NameVendorsValue = RandomUtils.generateRandomString(10); // Длина 10 символов
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.js = (JavascriptExecutor) driver;
-        this.frameSwitcher = new FrameSwitcher(driver);
+
     }
 
     public void completionOfNameCardVendor() {
 
-        frameSwitcher.switchToIframe();
+        switchToIframe();
         WebElement NameVendor = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//input[@required='required' and @type='text']")));
 
-        js.executeScript("arguments[0].value = arguments[1];", NameVendor, NameVendorsValue);
+                
+        setInputValue(NameVendor, NameVendorsValue);
         logger.info("Заполнили наименование поставщика: " + NameVendorsValue);
 
         NameVendor.click();
 
-        frameSwitcher.returnToMainContent();
+        returnToMainContent();
 
     }
 
     public void completionOfListOfPaymentsCardVendor() {
 
-        frameSwitcher.switchToIframe();
+        switchToIframe();
 
         WebElement PaymentList = driver.findElement(
                 By.xpath("//span[text()='Платежи']"));
 
-        frameSwitcher.scrollToElement(PaymentList);
+        scrollToElement(PaymentList);
 
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(PaymentList))
                 .click();
 
-        frameSwitcher.returnToMainContent();
+        returnToMainContent();
 
     }
 
     public void fillingInThePaymentCode() {
 
-        frameSwitcher.switchToIframe();
+        switchToIframe();
 
         WebElement CodePaymentVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "a[aria-label*='Код условий платежа'] + input")));
@@ -78,13 +77,13 @@ public class CardOfVendor {
 
         CodePaymentVendor.click();
 
-        frameSwitcher.returnToMainContent();
+        returnToMainContent();
 
     }
 
     public void fillingCityInVendor() {
 
-        frameSwitcher.switchToIframe();
+        switchToIframe();
 
         WebElement CityVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
                 "a[aria-label*='для элемента Город'] + input")));
@@ -93,12 +92,12 @@ public class CardOfVendor {
 
         CityVendor.click();
 
-        frameSwitcher.returnToMainContent();
+        returnToMainContent();
     }
 
     public void buttonInBack() {
 
-        frameSwitcher.switchToIframe();
+        switchToIframe();
 
         WebElement ButtonInBack = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//button[contains(@data-is-focusable, 'true') and contains(@title, 'Назад')]")));
@@ -125,7 +124,7 @@ public class CardOfVendor {
 
         ButtonInBack.click();
 
-        frameSwitcher.returnToMainContent();
+        returnToMainContent();
 
     }
 

@@ -1,33 +1,22 @@
 package com.example.PagesVendor;
 
 import com.example.ConfigManager;
-import com.example.PagesOrder.FrameSwitcher;
+import com.example.Environment.BasePage;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-import java.util.concurrent.ExecutionException;
+public class ChoosingATemplateForANewVendor extends BasePage {
 
-public class ChoosingATemplateForANewVendor {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private FrameSwitcher frameSwitcher;
     private String ValueVendor = ConfigManager.getProperty("SelectedVendor");
     private static final Logger logger = LogManager.getLogger(ChoosingATemplateForANewVendor.class);
 
     public ChoosingATemplateForANewVendor(WebDriver driver) {
 
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.frameSwitcher = new FrameSwitcher(driver);
+        super(driver);
 
     }
 
@@ -35,18 +24,18 @@ public class ChoosingATemplateForANewVendor {
     // помощью работает
     public void choosingATemplate() {
 
-        frameSwitcher.switchToIframe();
+        switchToIframe();
 
         String vendor = ValueVendor.trim();
         String normalizedVendor = vendor.replace("'", "\\'");
         logger.info("Decoded vendor value: " + normalizedVendor);
         try {
-            WebElement Choosing = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                    "//div[@title='Выбор шаблона для нового поставщика']")));
+            WebElement Choosing = waitAndGetVisibleElement(By.xpath(
+                    "//div[@title='Выбор шаблона для нового поставщика']"));
             logger.info("тут нашли окно");
 
-            WebElement TypeVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//a[contains(text(), '" + normalizedVendor + "')]")));
+            WebElement TypeVendor = waitAndGetVisibleElement(
+                    By.xpath("//a[contains(text(), '" + normalizedVendor + "')]"));
 
             logger.info("нашли кнопки тип поставщика");
 
@@ -56,13 +45,13 @@ public class ChoosingATemplateForANewVendor {
 
             try {
 
-                WebElement SpanOkVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                        "//p[@title='Блок адрес тоже?']")));
+                WebElement SpanOkVendor = waitAndGetVisibleElement(By.xpath(
+                        "//p[@title='Блок адрес тоже?']"));
 
                 logger.info("нашли ласт окно");
 
-                WebElement popupConfirmButton = wait.until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//button[contains(@class, '1632124310')]/span[text()='Да']")));
+                WebElement popupConfirmButton = waitAndGetClickableElement(
+                        By.xpath("//button[contains(@class, '1632124310')]/span[text()='Да']"));
                 logger.info("клик да");
 
                 popupConfirmButton.click();
@@ -79,6 +68,6 @@ public class ChoosingATemplateForANewVendor {
 
         }
 
-        frameSwitcher.returnToMainContent();
+        returnToMainContent();
     }
 }

@@ -187,7 +187,6 @@ public class OpenContactsOrClientTest {
     }
 
     @AfterMethod
-    @Step("Создание скриншота при неудаче")
     public void takeScreenshotOnFailure(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             takeScreenshot(result.getName());
@@ -196,26 +195,29 @@ public class OpenContactsOrClientTest {
 
     private void takeScreenshot(String testName) {
         File srcFile = ((TakesScreenshot) driver1).getScreenshotAs(OutputType.FILE);
+        byte[] screenshot = null;
+        try {
+            screenshot = FileUtils.readFileToByteArray(srcFile);
+            saveScreenshot(screenshot); // Это сохранит скриншот в отчет Allure
+        } catch (IOException e) {
+            logger.error("Ошибка при чтении файла скриншота: " + e.getMessage());
+        }
+
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String screenshotName = System.getProperty("user.dir") + "/screenshots/" + testName + "_" + timestamp + ".png";
+        String screenshotName = "screenshots/" + testName + "_" + timestamp + ".png";
 
         try {
-            File screenshotDir = new File(System.getProperty("user.dir") + "/screenshots");
-            if (!screenshotDir.exists()) {
-                boolean created = screenshotDir.mkdirs();
-                if (created) {
-                    logger.info("Папка для скриншотов успешно создана");
-                } else {
-                    logger.error("Не удалось создать папку для скриншотов");
-                }
-            }
-
+            new File("screenshots").mkdirs(); // Создаст папку, если её нет
             FileUtils.copyFile(srcFile, new File(screenshotName));
-            logger.info("Тест-ран не пройден " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-            logger.info("Скриншот сохранен: " + screenshotName);
+            logger.error("Скриншот сохранен: " + screenshotName);
         } catch (IOException e) {
             logger.error("Ошибка при сохранении скриншота: " + e.getMessage());
         }
+    }
+
+    @Attachment(value = "Screenshot on failure", type = "image/png")
+    public byte[] saveScreenshot(byte[] screenshot) {
+        return screenshot;
     }
 
     @AfterClass

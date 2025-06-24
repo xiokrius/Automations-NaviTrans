@@ -10,28 +10,27 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.example.PagesOrder.FrameSwitcher;
+import com.example.Environment.BasePage;
 
 import io.qameta.allure.Step;
 
-public class VehicleTrailerDriver {
+public class VehicleTrailerDriver extends BasePage {
 
-    WebDriver driver;
-    WebDriverWait wait;
-    FrameSwitcher frameSwitcher;
+
 
     private static final Logger logger = LogManager.getLogger(VehicleTrailerDriver.class);
 
     public VehicleTrailerDriver(WebDriver driver) {
 
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.frameSwitcher = new FrameSwitcher(driver);
+        super(driver); 
+
     }
 
     @Step("Проверка перевода для элемента: {expectedText}")
     public void checkTranslation(By locator, String expectedText) {
-        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+        // WebElement element = waitAndGetElement(locator);
+        WebElement element = getWait().until(ExpectedConditions.presenceOfElementLocated(locator));
         String actualText = element.getText().trim();
         String expectedTextNormalized = expectedText.trim();
 
@@ -44,11 +43,9 @@ public class VehicleTrailerDriver {
 
     public void PageTrailerDriver() {
 
-        logger.info("Поиск iframe...");
-        WebElement iframe = wait.until(
-                ExpectedConditions.presenceOfElementLocated(By.className("designer-client-frame")));
-        logger.info("Переключение на iframe...");
-        driver.switchTo().frame(iframe);
+
+        switchToIframe();
+
         logger.info("Переключение на iframe выполнено.");
 
         checkTranslation(By.xpath("(//a[contains(@id, 'column_header_b') and text()='Тип ТС'])[2]"), "Тип ТС");
@@ -59,7 +56,7 @@ public class VehicleTrailerDriver {
         checkTranslation(By.xpath("(//a[contains(@id, 'column_header_b') and text()='Водитель получивший ТМЦ'])[2]"),
                 "Водитель получивший ТМЦ");
 
-        frameSwitcher.returnToMainContent();
+        returnToMainContent();
     }
 
 }

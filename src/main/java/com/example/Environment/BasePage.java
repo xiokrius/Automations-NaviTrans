@@ -1,8 +1,9 @@
-package com.example.PagesOrder;
+package com.example.Environment;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.Duration;
+import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,49 +13,79 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FrameSwitcher {
+public abstract class BasePage {
 
     private WebDriver driver;
     private WebDriverWait wait;
     private JavascriptExecutor js;
 
-    public FrameSwitcher(WebDriver driver) {
+    public BasePage(WebDriver driver) {
+
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Инициализация WebDriverWait
         this.js = (JavascriptExecutor) driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
     }
 
-    public void switchToIframe() {
+    // Для доступа к драйверу
+
+    protected WebDriver getDriver() {
+        return this.driver;
+    }
+
+    protected WebDriverWait getWait() {
+        return this.wait;
+    }
+
+    protected JavascriptExecutor getJS() {
+        return this.js;
+    }
+
+    // Для перехода по урлу
+
+    protected void openUrl(String url) {
+        driver.get(url);
+        System.out.println("Открыт URL: " + url);
+    }
+
+    protected void switchToIframe() {
         WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.className("designer-client-frame")));
         driver.switchTo().frame(iframe);
         System.out.println("Перешли в фрейм.");
     }
 
-    public void returnToMainContent() {
+    protected void returnToMainContent() {
         driver.switchTo().defaultContent();
         System.out.println("Возвращаемся в основной контент страницы.");
     }
 
-    public void scrollToElement(WebElement element) {
+    protected void scrollToElement(WebElement element) {
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+        System.out.println("скроллим до : " + element);
+    }
+
+    protected void clickJSToElement(WebElement element) {
+
+        js.executeScript("arguments[0].click();", element);
+        System.out.println("клик выполнен." + element);
     }
 
     // Метод для заполнения значения через JavaScript
-    public void fillSelectWithJS(WebElement element, String value) {
+    protected void fillSelectWithJS(WebElement element, String value) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].value = arguments[1];", element, value);
         System.out.println("Заполнили поле: " + value);
     }
 
     // Метод для выбора значения в select
-    public void selectDropdownByValue(WebElement selectElement, String value) {
+    protected void selectDropdownByValue(WebElement selectElement, String value) {
         Select select = new Select(selectElement);
         select.selectByValue(value);
         System.out.println("Выбрали значение в select: " + value);
     }
 
-    public void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
+    protected void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
         js.executeScript(
                 "const container = arguments[0];" +
                         "const target = arguments[1];" +
@@ -66,15 +97,18 @@ public class FrameSwitcher {
                         +
                         "container.scrollLeft += scrollAmount;",
                 scrollContainer, targetElement);
+
+        System.out.println("нашли скроллер " + scrollContainer + "сделал" + targetElement);
     }
 
-    public void setInputValue(WebElement element, String value) {
+    protected void setInputValue(WebElement element, String value) {
         js.executeScript(
                 "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
                 element, value);
+        System.out.println("Внес в поле " + element + "значение" + value);
     }
 
-    public void fillAndActivateSelect(WebElement select, String value) {
+    protected void fillAndActivateSelect(WebElement select, String value) {
         // 1. Заполняем через JS
         fillSelectWithJS(select, value);
 
@@ -95,7 +129,7 @@ public class FrameSwitcher {
 
     }
 
-    public static void checkLink(String url) {
+    protected void checkLink(String url) {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("HEAD");
@@ -106,4 +140,41 @@ public class FrameSwitcher {
             System.out.println(url + " → Ошибка: " + e.getMessage());
         }
     }
+
+    protected WebElement waitAndGetPresentElement(By locator) {
+        try {
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+            System.out.println("Нашли элемент: " + locator);
+            return element;
+        } catch (Exception e) {
+            System.out.println("Элемент не найден: " + locator);
+            throw new RuntimeException("Не удалось найти элемент " + locator + " за указанное время", e);
+        }
+    }
+
+    protected WebElement waitAndGetClickableElement(By locator) {
+        try {
+            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+            System.out.println("Нашли элемент: " + locator);
+            return element;
+        } catch (Exception e) {
+            System.out.println("Элемент не найден: " + locator);
+            throw new RuntimeException("Не удалось найти элемент " + locator + " за указанное время", e);
+        }
+    }
+
+    protected WebElement waitAndGetVisibleElement(By locator) {
+        try {
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return element;
+        } catch (Exception e) {
+            System.out.println("Элемент не найден: " + locator);
+            throw new RuntimeException("Не удалось найти элемент " + locator + " за указанное время", e);
+        }
+    }
+
+    protected WebElement driverGetFindElement(By locator) {
+        return driver.findElement((locator));
+    }
+
 }

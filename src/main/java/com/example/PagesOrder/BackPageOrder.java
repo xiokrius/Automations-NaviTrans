@@ -9,14 +9,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BackPageOrder {
+import com.example.Environment.BasePage;
 
-    private final WebDriver driver;
-    private FrameSwitcher frameSwitcher;
+public class BackPageOrder extends BasePage{
+
+
 
     public BackPageOrder(WebDriver driver) {
-        this.driver = driver;
-        this.frameSwitcher = new FrameSwitcher(driver);
+        super(driver);
     }
 
     public void BackPage() {
@@ -24,8 +24,8 @@ public class BackPageOrder {
         System.out.println("Начинаем BackPageOrder/BackPage");
 
         // Переключаемся в нужный фрейм
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        frameSwitcher.switchToIframe();
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        switchToIframe();
         System.out.println("Перешли в фрейм.");
 
         WebElement BackPage = wait.until(ExpectedConditions.elementToBeClickable(
@@ -37,12 +37,12 @@ public class BackPageOrder {
         System.out.println("Кнопка доступна для клика: " + BackPage.isEnabled());
 
         // Кликаем по первой кнопке
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", BackPage);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", BackPage);
         System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
 
         System.out.println("Клик по второй кнопке внутри фрейма выполнен.");
 
-        frameSwitcher.returnToMainContent();
+        returnToMainContent();
     }
 
 }

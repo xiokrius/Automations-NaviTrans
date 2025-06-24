@@ -12,24 +12,27 @@ import org.openqa.selenium.WebDriverException;
 public class RetryAnalyzer implements IRetryAnalyzer {
     private static final Logger logger = LogManager.getLogger(RetryAnalyzer.class);
     private int count = 0;
-    private static final int MAX_RETRY = 1;
+    private static final int MAX_RETRY = 3;
 
     @Override
     public boolean retry(ITestResult result) {
-        // Не перезапускать, если тест уже успешен
+        // Если тест успешен - не перезапускаем
         if (result.isSuccess()) {
             return false;
         }
 
-        // Перезапускать только для определённых исключений
         Throwable throwable = result.getThrowable();
         if (throwable == null || count >= MAX_RETRY) {
             return false;
         }
 
-        // Фильтр по типам исключений, которые стоит перезапускать
-        if (throwable instanceof WebDriverException ||
-                throwable instanceof TimeoutException) {
+        // Проверяем тип исключения
+        boolean isRetryableException = throwable instanceof WebDriverException ||
+                throwable instanceof TimeoutException ||
+                throwable.getCause() instanceof WebDriverException ||
+                throwable.getCause() instanceof TimeoutException;
+
+        if (isRetryableException) {
             count++;
             logger.warn("Retry #{} for test {} due to: {}",
                     count, result.getName(), throwable.getMessage());

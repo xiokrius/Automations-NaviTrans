@@ -12,8 +12,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.ConfigManager;
+import com.example.Environment.BasePage;
 
-public class VehicleRoute {
+
+public class VehicleRoute extends BasePage{
 
         private String ActualStartingDateValue = ConfigManager.getProperty("ActualStartingDateValue");
         private String ActualStartingTimeValue = ConfigManager.getProperty("ActualStartingTimeValue");
@@ -23,53 +25,29 @@ public class VehicleRoute {
         private String StartingKmValue = ConfigManager.getProperty("StartingKmValue");
         private String EndingKmValue = ConfigManager.getProperty("EndingKmValue");
 
-        private WebDriver driver;
-        private FrameSwitcher frameSwitcher;
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+
 
         public VehicleRoute(WebDriver driver) {
-                this.driver = driver;
-                this.js = (JavascriptExecutor) driver;
-                this.frameSwitcher = new FrameSwitcher(driver);
 
+                super(driver);
         }
 
-        private void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
-                js.executeScript(
-                                "const container = arguments[0];" +
-                                                "const target = arguments[1];" +
-                                                "const containerWidth = container.offsetWidth;" +
-                                                "const targetLeft = target.getBoundingClientRect().left;" +
-                                                "const containerLeft = container.getBoundingClientRect().left;" +
-                                                "const targetOffset = targetLeft - containerLeft;" +
-                                                "const scrollAmount = targetOffset - containerWidth / 2 + target.offsetWidth / 2;"
-                                                +
-                                                "container.scrollLeft += scrollAmount;",
-                                scrollContainer, targetElement);
-        }
-
-        private void setInputValue(WebElement element, String value) {
-                js.executeScript(
-                                "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
-                                element, value);
-                System.out.println("Заполнили значение: " + value);
-        }
 
         public void clickSomeButtonInFrame() {
 
                 System.out.println("Начинаем VehicleRoute/clickSomeButtonInFrame.");
 
                 // Переключаемся в нужный фрейм
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
-                frameSwitcher.switchToIframe();
+                switchToIframe();
 
                 WebElement ActualStartingDate = wait.until(ExpectedConditions.presenceOfElementLocated(
                                 By.xpath(
                                                 "//td[contains(@controlname, 'FTS_Actual Starting Date')]//descendant::input[contains(@id, 'ee')]")));
                 System.out.println("1.");
 
-                WebElement orderNumberSpan = driver.findElement(By.xpath(
+                WebElement orderNumberSpan = getDriver().findElement(By.xpath(
                                 "//a[text()='№ Заказа']/following-sibling::div//span"));
                 String orderNumber = orderNumberSpan.getAttribute("title");
 
@@ -86,7 +64,7 @@ public class VehicleRoute {
                                 By.xpath(
                                                 "//td[contains(@controlname, 'FTS_Actual End Time')]//descendant::input[contains(@id, 'ee')]")));
 
-                WebElement scrollContainer = driver.findElement(
+                WebElement scrollContainer = getDriver().findElement(
                                 By.xpath("(//div[contains(@class, 'freeze-pane-scrollbar')])[7]"));
 
                 scrollToElementHorizontally(scrollContainer, ActualEndingTime);
@@ -104,13 +82,13 @@ public class VehicleRoute {
                 ActualEndingDate.click();
                 ActualEndingTime.click();
 
-                WebElement SupplyKm = driver.findElement(
+                WebElement SupplyKm = getDriver().findElement(
                                 By.xpath("//td[contains(@controlname, 'Supply Km')]//descendant::input[contains(@id, 'ee')]"));
 
-                WebElement StartingKm = driver.findElement(
+                WebElement StartingKm = getDriver().findElement(
                                 By.xpath("//td[contains(@controlname, 'Starting Km')]//descendant::input[contains(@id, 'ee')]"));
 
-                WebElement EndingKm = driver.findElement(
+                WebElement EndingKm = getDriver().findElement(
                                 By.xpath("//td[contains(@controlname, 'Ending Km')]//descendant::input[contains(@id, 'ee')]"));
 
                 scrollToElementHorizontally(scrollContainer, SupplyKm);
@@ -138,14 +116,14 @@ public class VehicleRoute {
                         System.out.println("Кнопка доступна для клика: " + BackPage.isEnabled());
 
                         // Кликаем по первой кнопке
-                        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", BackPage);
+                        clickJSToElement(BackPage);
                         System.out.println("Клик по первой кнопке внутри фрейма выполнен.");
 
                 } catch (Exception e) {
                         System.out.println("Ошибка: " + e.getMessage());
                 }
 
-                frameSwitcher.returnToMainContent();
+                returnToMainContent();
 
                 Properties orderProps = new Properties();
                 try (FileOutputStream out = new FileOutputStream("src/main/resources/order.properties")) {

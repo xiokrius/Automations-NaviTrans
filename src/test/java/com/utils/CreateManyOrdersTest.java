@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.example.ConfigManager;
-import com.example.PagesOrder.FrameSwitcher;
 import com.example.PagesOrder.Invoice;
 import com.example.PagesOrder.OpenInvoice;
 import com.example.PagesOrder.OrderPage;
@@ -54,7 +53,7 @@ public class CreateManyOrdersTest {
 
     @Test(priority = 2, dependsOnMethods = "login")
     public void createOrders() {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 30; i++) {
             System.out.println("Создание заявки " + (i + 1));
             createOrder(i);
             logger.info("Переход на страницу транспортных заявок");
@@ -84,49 +83,53 @@ public class CreateManyOrdersTest {
             PageTransp pageTransp = new PageTransp(driver);
             logger.info("перешли в планирование перевозки");
             pageTransp.OpenOrLoadingLocationIteration(iteration);
+
+            ZayavkaByPage servicePage = new ZayavkaByPage(driver);
+            servicePage.clickSomeButtonInService();
+            logger.info("Открыт раздел сервисов");
+
+            OpenInvoice openInvoice = new OpenInvoice(driver);
+            openInvoice.OpenServices();
+            logger.info("Обработаны сервисы");
+
             logger.info("Выпускаем заказ");
             orderPage.obrabotkaVypustit();
             logger.info("Выпустили заказ");
-            orderPage.vehiclePlan();
-            logger.info("Планируем рейс");
-            orderPage.PlanOpen();
+            // orderPage.vehiclePlan();
+            // logger.info("Планируем рейс");
+            // orderPage.PlanOpen();
 
-            VehiclePlanning vehiclePlanning = new VehiclePlanning(driver);
-            logger.info("Вносим данные в рейсе");
-            vehiclePlanning.VehiclePlanOpen();
+            // VehiclePlanning vehiclePlanning = new VehiclePlanning(driver);
+            // logger.info("Вносим данные в рейсе");
+            // vehiclePlanning.VehiclePlanOpen();
 
-            VehicleRoute vehicleRoute = new VehicleRoute(driver);
-            logger.info("Выходим из рейса обратно на страницу транспортной заявки");
-            vehicleRoute.clickSomeButtonInFrame();
+            // VehicleRoute vehicleRoute = new VehicleRoute(driver);
+            // logger.info("Выходим из рейса обратно на страницу транспортной заявки");
+            // vehicleRoute.clickSomeButtonInFrame();
 
-            ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
-            logger.info("Переход в сервисы");
-            zayavkaByPage.clickSomeButtonInService();
+            // ZayavkaByPage zayavkaByPage = new ZayavkaByPage(driver);
+            // logger.info("Переход в сервисы");
+            // zayavkaByPage.clickSomeButtonInService();
 
-            OpenInvoice openInvoice = new OpenInvoice(driver);
-            logger.info("Открытие сервисов");
-            openInvoice.OpenServices();
-            logger.info("Заполнили сервисы и вышли");
+            // logger.info("Готово к инвойсированию");
+            // orderPage.readyInInvoicing();
+            // logger.info("Нажали готово к инвойсированию, переходим к созданию счёта");
+            // orderPage.obrabotkaSchet();
+            // logger.info("Нажали обработка/счёт");
 
-            logger.info("Готово к инвойсированию");
-            orderPage.readyInInvoicing();
-            logger.info("Нажали готово к инвойсированию, переходим к созданию счёта");
-            orderPage.obrabotkaSchet();
-            logger.info("Нажали обработка/счёт");
+            // ReadyInvoic readyInvoic = new ReadyInvoic(driver);
+            // logger.info("Нажэали счёт номер ручной");
+            // readyInvoic.SchetRuchnoy();
 
-            ReadyInvoic readyInvoic = new ReadyInvoic(driver);
-            logger.info("Нажэали счёт номер ручной");
-            readyInvoic.SchetRuchnoy();
-
-            Invoice invoice = new Invoice(driver);
-            logger.info("Выпускаем и учитываем счёт");
-            invoice.fullSchet();
+            // Invoice invoice = new Invoice(driver);
+            // logger.info("Выпускаем и учитываем счёт");
+            // invoice.fullSchet();
         });
     }
 
     private void performAction(Runnable action) {
         action.run();
-        new FrameSwitcher(driver).returnToMainContent();
+
     }
 
     @AfterMethod

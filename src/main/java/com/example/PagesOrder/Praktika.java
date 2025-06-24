@@ -1,53 +1,86 @@
 package com.example.PagesOrder;
 
+import java.io.ObjectInputFilter.Config;
 import java.time.Duration;
 import java.util.List;
-import java.util.Scanner;
+
+
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.devtools.idealized.Javascript;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.example.ConfigManager;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class Praktika {
 
-    private WebDriver driver;
+    private WebDriver driver; 
     private WebDriverWait wait;
-    public static String poisk;
+    private JavascriptExecutor js;
 
     public Praktika(WebDriver driver) {
-
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.driver = driver; 
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
+        this.js = (JavascriptExecutor) driver;
 
     }
 
     public static void main(String[] args) {
-
-        WebDriver driver = new ChromeDriver();
+        
+        WebDriver driver = new ChromeDriver(); 
 
         driver.manage().window().maximize();
 
-        driver.get("fdsfsa");
+        driver.get(ConfigManager.getProperty("fsdaf")); 
 
-        List<WebElement> list = driver.findElements(By.xpath("//button"));
+        List <WebElement> lol = driver.findElements(By.id("fdsa"));  
 
-        for (WebElement element : list) {
+        for(WebElement lo: lol) { 
+            String text = lo.getText(); 
+            lo.click(); 
+            
+            WebElement updateElement = driver.findElement(By.id("fdsa"));
 
-            String olo = element.getText();
-            String takChtoBi = element.getAttribute(olo);
+            String text2 = updateElement.getText(); 
 
-            if (poisk.equalsIgnoreCase(olo)) {
-                System.out.println(takChtoBi);
+            int pop = Integer.parseInt(text2); 
+            
+            int pop2 = Integer.parseInt(text);
+            
+            int pop3 = pop2 - pop;
 
-            }
+            int i; 
+            int p; 
+            
+            assertEquals(300, pop3); 
+
+                
+
+            
+
+
         }
-
     }
 
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public WebDriverWait getWait() {
+        return wait;
+    }
+
+    private static void assertEquals(int i, int pop3) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assertEquals'");
+    }
+    
 }
 
 // public static void main(String[] args) {
