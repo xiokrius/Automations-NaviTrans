@@ -11,9 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.Environment.BasePage;
 
-public class BackPageOrder extends BasePage{
-
-
+public class BackPageOrder extends BasePage {
 
     public BackPageOrder(WebDriver driver) {
         super(driver);
@@ -23,7 +21,6 @@ public class BackPageOrder extends BasePage{
 
         System.out.println("Начинаем BackPageOrder/BackPage");
 
-        // Переключаемся в нужный фрейм
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         switchToIframe();
         System.out.println("Перешли в фрейм.");

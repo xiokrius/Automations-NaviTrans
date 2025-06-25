@@ -85,7 +85,7 @@ public class TestPaymentLogbook extends BasePage {
 
                 AccountType.click();
 
-                fillSelectWithJS(AccountType, AccountTypeValue);
+                fillAndActivateSelect(AccountType, AccountTypeValue);
 
                 AccountType.click();
 

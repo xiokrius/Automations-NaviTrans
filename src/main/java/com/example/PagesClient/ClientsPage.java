@@ -1,26 +1,17 @@
 package com.example.PagesClient;
 
-import java.time.Duration;
 import java.util.Random;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.ConfigManager;
 import com.example.Environment.BasePage;
-import com.example.PagesClient.ClientsPage.TestData;
 
-public class ClientsPage extends BasePage{
+public class ClientsPage extends BasePage {
 
-        private WebDriver driver;
-        private JavascriptExecutor js;
-        private WebDriverWait wait;
         private String RegNumberValue;
 
         private String typeCarrierValue = ConfigManager.getProperty("typeClientValue");
@@ -48,11 +39,6 @@ public class ClientsPage extends BasePage{
                 return inn.toString();
         }
 
-        public void scrollToElement(WebElement element) {
-                js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
-        }
-
-
         public void fillingClientsForm() {
 
                 System.out.println("Начинаем ClientsPage/fillingClientsForm");
@@ -61,43 +47,43 @@ public class ClientsPage extends BasePage{
                 switchToIframe();
 
                 // копирую номер клиента для того что бы потом продублировать в плательщика
-                WebElement inputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                                "//a[contains(@title, 'обновить значение для Код')]/following-sibling::input")));
+                WebElement inputField = waitAndGetVisibleElement(By.xpath(
+                                "//a[contains(@title, 'обновить значение для Код')]/following-sibling::input"));
                 String value = inputField.getAttribute("value");
                 System.out.println("Значение поля: " + value);
 
                 TestData.clientValue = value;
 
                 // Вводим "Тип клиента"
-                WebElement typeClient = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                                By.xpath("//a[text()='Тип клиента']/following::select[1]")));
+                WebElement typeClient = waitAndGetVisibleElement(
+                                By.xpath("//a[text()='Тип клиента']/following::select[1]"));
                 System.out.println("Ввели значение поля Тип клиента");
 
                 selectDropdownByValue(typeClient, typeCarrierValue);
 
                 // Вводим "по подразделению"
 
-                WebElement NVTBusinessUnit = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//a[contains(@title, 'элемента По подразделению')]/following-sibling::input")));
+                WebElement NVTBusinessUnit = waitAndGetClickableElement(
+                                By.xpath("//a[contains(@title, 'элемента По подразделению')]/following-sibling::input"));
 
                 setInputValue(NVTBusinessUnit, NVTBusinessUnitValue);
 
-                WebElement SpanCountry = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                                By.xpath("//span[text()='Адрес и контакты']")));
+                WebElement SpanCountry = waitAndGetVisibleElement(
+                                By.xpath("//span[text()='Адрес и контакты']"));
                 scrollToElement(SpanCountry);
 
                 SpanCountry.click();
 
-                WebElement Score = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                                By.xpath("//span[text()='Счет'][@class='caption-text']")));
+                WebElement Score = waitAndGetVisibleElement(
+                                By.xpath("//span[text()='Счет'][@class='caption-text']"));
 
                 scrollToElement(Score);
 
                 Score.click();
 
-                WebElement City = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                WebElement City = waitAndGetVisibleElement(
                                 By.xpath(
-                                                "//a[contains(@title, 'для элемента Город')]/following-sibling::input")));
+                                                "//a[contains(@title, 'для элемента Город')]/following-sibling::input"));
 
                 City.click();
 
@@ -105,25 +91,23 @@ public class ClientsPage extends BasePage{
 
                 // На будущее, если нужен будет СНГ регистр. номер.
                 // WebElement RegNumber =
-                // wait.until(ExpectedConditions.visibilityOfElementLocated(
+                // waitAndGetVisibleElement(
                 // By.xpath("//div[@controlname='FTS Registration No']//input")));
 
-                WebElement VATRegistrationNo = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                WebElement VATRegistrationNo = waitAndGetVisibleElement(
                                 By.xpath(
-                                                "//div[@controlname='VAT Registration No.']//input")));
+                                                "//div[@controlname='VAT Registration No.']//input"));
 
                 setInputValue(VATRegistrationNo, RegNumberValue);
 
                 try {
 
-                        WebDriverWait quickWait = new WebDriverWait(driver, Duration.ofSeconds(2));
-
-                        quickWait.until(ExpectedConditions.presenceOfElementLocated(
+                        createWait(2).until(ExpectedConditions.presenceOfElementLocated(
                                         By.xpath("//div[@title='Почтовые индексы' and contains(text(), 'Почтовые индексы')]")));
                         System.out.println("Всплывающее окно обнаружено");
 
-                        WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                        "//button[contains(@class, '1876861216 thm-bgcolor')]//span[text()='ОК']")));
+                        WebElement ButtonInOk = waitAndGetClickableElement(By.xpath(
+                                        "//button[contains(@class, '1876861216 thm-bgcolor')]//span[text()='ОК']"));
                         System.out.println("Кнопка ОК идентифицирована");
                         ButtonInOk.click();
                         System.out.println("Нажата кнопка ОК");
@@ -133,40 +117,40 @@ public class ClientsPage extends BasePage{
                 }
 
                 System.out.println("Раскрытие списка");
-                WebElement BolchePoley = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "//button[@aria-label='Счет, Показать больше']")));
+                WebElement BolchePoley = waitAndGetClickableElement(By.xpath(
+                                "//button[@aria-label='Счет, Показать больше']"));
 
                 BolchePoley.click();
                 System.out.println("Список раскрыт");
 
-                WebElement BilltoCustomerNo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "//a[contains(@title, 'для элемента Плательщик')]/following-sibling::input")));
+                WebElement BilltoCustomerNo = waitAndGetClickableElement(By.xpath(
+                                "//a[contains(@title, 'для элемента Плательщик')]/following-sibling::input"));
 
                 setInputValue(BilltoCustomerNo, value);
 
-                WebElement Pochta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                                "//span[text()='Почтовый адрес']")));
+                WebElement Pochta = waitAndGetVisibleElement(By.xpath(
+                                "//span[text()='Почтовый адрес']"));
 
                 System.out.println("Почта найдена");
 
                 scrollToElement(Pochta);
                 System.out.println("скролл выполнен");
 
-                WebElement Plateji = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                                "//img[contains(@alt, 'обязательных полей')]/following-sibling::span[text()='Платежи']")));
+                WebElement Plateji = waitAndGetVisibleElement(By.xpath(
+                                "//img[contains(@alt, 'обязательных полей')]/following-sibling::span[text()='Платежи']"));
 
                 System.out.println("Платежи найдены");
 
                 Plateji.click();
 
-                WebElement FTSPaymenttype = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                WebElement FTSPaymenttype = waitAndGetVisibleElement(
                                 By.xpath(
-                                                "//div[@controlname='FTS Payment type']//select")));
+                                                "//div[@controlname='FTS Payment type']//select"));
 
                 selectDropdownByValue(FTSPaymenttype, typeCarrierValue);
 
-                WebElement PaymentTermsCodetrsl = wait.until(ExpectedConditions.elementToBeClickable(
-                                By.xpath("//a[@aria-label='Просмотреть или обновить значение для Код условий платежа']")));
+                WebElement PaymentTermsCodetrsl = waitAndGetClickableElement(
+                                By.xpath("//a[@aria-label='Просмотреть или обновить значение для Код условий платежа']"));
 
                 System.out.println("Нашёл код условий платежа");
 
@@ -175,13 +159,12 @@ public class ClientsPage extends BasePage{
                 System.out.println("кликнул по код условий платежа");
 
                 try {
-                        WebElement WindowPaymentTermsCode = wait
-                                        .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                                                        "//div[@title='Условия платежа']")));
+                        WebElement WindowPaymentTermsCode = waitAndGetVisibleElement(By.xpath(
+                                        "//div[@title='Условия платежа']"));
 
                         System.out.println("нашёл окно");
-                        WebElement ElementPaymentTermsCode = wait.until(
-                                        ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='AFT L 10Д']")));
+                        WebElement ElementPaymentTermsCode = waitAndGetClickableElement(
+                                        By.xpath("//a[text()='AFT L 10Д']"));
 
                         System.out.println("нашёл элемент");
 
@@ -192,15 +175,15 @@ public class ClientsPage extends BasePage{
                         System.out.println("Не нашёл окно");
                 }
 
-                WebElement BlockCustomer = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                                "//div[@controlname='Blocked']//select")));
+                WebElement BlockCustomer = waitAndGetVisibleElement(By.xpath(
+                                "//div[@controlname='Blocked']//select"));
 
                 scrollToElement(BlockCustomer);
 
                 selectDropdownByValue(BlockCustomer, BlockCustomerValue);
 
-                WebElement ButtonBack = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "//button[@title='Назад']")));
+                WebElement ButtonBack = waitAndGetClickableElement(By.xpath(
+                                "//button[@title='Назад']"));
 
                 ButtonBack.click();
 
@@ -219,13 +202,13 @@ public class ClientsPage extends BasePage{
                 // Переключаемся в Фрейм
                 switchToIframe();
 
-                WebElement CDElement = wait.until(ExpectedConditions
-                                .elementToBeClickable(By.xpath("//div[@controlname='Credit Limit (LCY)']//input")));
+                WebElement CDElement = waitAndGetClickableElement(
+                                By.xpath("//div[@controlname='Credit Limit (LCY)']//input"));
 
                 setInputValue(CDElement, CDElementValue);
 
-                WebElement ButtonBack = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                                "//button[@title='Назад']")));
+                WebElement ButtonBack = waitAndGetClickableElement(By.xpath(
+                                "//button[@title='Назад']"));
 
                 ButtonBack.click();
 
@@ -237,8 +220,7 @@ public class ClientsPage extends BasePage{
 
                 switchToIframe();
 
-                WebElement CardOfClient = wait.until(ExpectedConditions
-                                .visibilityOfElementLocated(By.xpath("//span[text()='Карточка клиента']")));
+                WebElement CardOfClient = waitAndGetVisibleElement(By.xpath("//span[text()='Карточка клиента']"));
 
                 returnToMainContent();
 
@@ -248,8 +230,8 @@ public class ClientsPage extends BasePage{
 
                 switchToIframe();
 
-                WebElement EditCardOfClientsButton = wait.until(ExpectedConditions
-                                .elementToBeClickable(By.xpath("//i[@data-icon-name='Edit']")));
+                WebElement EditCardOfClientsButton = waitAndGetClickableElement(
+                                By.xpath("//i[@data-icon-name='Edit']"));
 
                 EditCardOfClientsButton.click();
 

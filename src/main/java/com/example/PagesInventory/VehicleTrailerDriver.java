@@ -1,14 +1,11 @@
 package com.example.PagesInventory;
 
-import java.time.Duration;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.Environment.BasePage;
 
@@ -16,13 +13,11 @@ import io.qameta.allure.Step;
 
 public class VehicleTrailerDriver extends BasePage {
 
-
-
     private static final Logger logger = LogManager.getLogger(VehicleTrailerDriver.class);
 
     public VehicleTrailerDriver(WebDriver driver) {
 
-        super(driver); 
+        super(driver);
 
     }
 
@@ -42,7 +37,6 @@ public class VehicleTrailerDriver extends BasePage {
     }
 
     public void PageTrailerDriver() {
-
 
         switchToIframe();
 

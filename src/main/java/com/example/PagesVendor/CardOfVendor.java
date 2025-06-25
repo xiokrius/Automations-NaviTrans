@@ -3,7 +3,6 @@ package com.example.PagesVendor;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,16 +16,12 @@ import com.example.PagesClient.OpenContactsPage.RandomUtils;
 
 public class CardOfVendor extends BasePage {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private JavascriptExecutor js;
     public final String NameVendorsValue;
     private static final String CodePaymentVendorValue = ConfigManager.getProperty("CodePaymentVendorValue");
     private static final String CityVendorValue = ConfigManager.getProperty("CityVendorValue");
     private static final Logger logger = LogManager.getLogger(CardOfVendor.class);
 
     public CardOfVendor(WebDriver driver) {
-
 
         super(driver);
         this.NameVendorsValue = RandomUtils.generateRandomString(10); // Длина 10 символов
@@ -36,10 +31,10 @@ public class CardOfVendor extends BasePage {
     public void completionOfNameCardVendor() {
 
         switchToIframe();
-        WebElement NameVendor = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//input[@required='required' and @type='text']")));
 
-                
+        WebElement NameVendor = waitAndGetClickableElement(
+                By.xpath("//input[@required='required' and @type='text']"));
+
         setInputValue(NameVendor, NameVendorsValue);
         logger.info("Заполнили наименование поставщика: " + NameVendorsValue);
 
@@ -53,12 +48,12 @@ public class CardOfVendor extends BasePage {
 
         switchToIframe();
 
-        WebElement PaymentList = driver.findElement(
+        WebElement PaymentList = getDriver().findElement(
                 By.xpath("//span[text()='Платежи']"));
 
         scrollToElement(PaymentList);
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(PaymentList))
                 .click();
 
@@ -70,10 +65,11 @@ public class CardOfVendor extends BasePage {
 
         switchToIframe();
 
-        WebElement CodePaymentVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
-                "a[aria-label*='Код условий платежа'] + input")));
+        WebElement CodePaymentVendor = waitAndGetVisibleElement(By.cssSelector(
+                "a[aria-label*='Код условий платежа'] + input"));
         logger.info("Нашли Код условия платежа");
-        js.executeScript("arguments[0].value=arguments[1];", CodePaymentVendor, CodePaymentVendorValue);
+
+        setInputValue(CodePaymentVendor, CodePaymentVendorValue);
 
         CodePaymentVendor.click();
 
@@ -85,10 +81,10 @@ public class CardOfVendor extends BasePage {
 
         switchToIframe();
 
-        WebElement CityVendor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
-                "a[aria-label*='для элемента Город'] + input")));
+        WebElement CityVendor = waitAndGetVisibleElement(By.cssSelector(
+                "a[aria-label*='для элемента Город'] + input"));
 
-        js.executeScript("arguments[0].value=arguments[1];", CityVendor, CityVendorValue);
+        setInputValue(CityVendor, CityVendorValue);
 
         CityVendor.click();
 
@@ -99,21 +95,19 @@ public class CardOfVendor extends BasePage {
 
         switchToIframe();
 
-        WebElement ButtonInBack = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//button[contains(@data-is-focusable, 'true') and contains(@title, 'Назад')]")));
+        WebElement ButtonInBack = waitAndGetClickableElement(
+                By.xpath("//button[contains(@data-is-focusable, 'true') and contains(@title, 'Назад')]"));
 
         ButtonInBack.click();
 
         try {
 
-            WebDriverWait quickWait = new WebDriverWait(driver, Duration.ofSeconds(3));
-
-            quickWait.until(ExpectedConditions.presenceOfElementLocated(
+            createWait(3).until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath("//div[@title='Почтовые индексы' and contains(text(), 'Почтовые индексы')]")));
             System.out.println("Всплывающее окно обнаружено");
 
-            WebElement ButtonInOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                    "//button[contains(@class, '1876861216 thm-bgcolor')]//span[text()='ОК']")));
+            WebElement ButtonInOk = waitAndGetClickableElement(By.xpath(
+                    "//button[contains(@class, '1876861216 thm-bgcolor')]//span[text()='ОК']"));
             System.out.println("Кнопка ОК идентифицирована");
             ButtonInOk.click();
             System.out.println("Нажата кнопка ОК");

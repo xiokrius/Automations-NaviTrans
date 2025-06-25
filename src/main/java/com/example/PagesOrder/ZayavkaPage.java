@@ -16,7 +16,6 @@ import org.openqa.selenium.JavascriptExecutor;
 
 public class ZayavkaPage extends BasePage {
 
-
         private String TSGroupCodeValue = ConfigManager.getProperty("TSGroupCodeValue");
         private String ButtonNewZayavkaValue = ConfigManager.getProperty("ButtonNewZayavkaValue");
 
@@ -33,8 +32,8 @@ public class ZayavkaPage extends BasePage {
 
                 // Шаг 2: КНОПКА ЗАЯВКИ на пейдже страницы заявок
                 WebElement button = waitAndGetClickableElement(
-                By.xpath(
-                        "/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[6]/td[3]/a"));
+                                By.xpath(
+                                                "/html/body/div[1]/div[2]/form/div/div[2]/main/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[6]/td[3]/a"));
 
                 try {
                         button.click();
@@ -100,6 +99,7 @@ public class ZayavkaPage extends BasePage {
                 WebElement button = waitAndGetClickableElement(
                                 By.xpath("//button[@aria-label='Создать' and contains(@class, 'ms-Button')]"));
                 button.click();
+
                 returnToMainContent();
 
         }
@@ -117,8 +117,7 @@ public class ZayavkaPage extends BasePage {
                 WebElement ButtonInOk = waitAndGetClickableElement(
                                 By.xpath("//button[contains(@id, 'b1')]/span[text()='ОК']"));
 
-
-                setInputValue(TSGroupCode, TSGroupCodeValue);                
+                setInputValue(TSGroupCode, TSGroupCodeValue);
                 System.out.println("Заполнил ТС групп Код: " + TSGroupCodeValue);
 
                 System.out.println("Клик для инициализации.");
@@ -127,7 +126,6 @@ public class ZayavkaPage extends BasePage {
                 WebElement ButtonNewZayavka = waitAndGetClickableElement(
                                 By.xpath("//a[contains(@title, 'элемента Отдел')]/following-sibling::input"));
 
-               
                 setInputValue(ButtonNewZayavka, ButtonNewZayavkaValue);
                 System.out.println("Заполнили отдел: " + ButtonNewZayavkaValue);
 

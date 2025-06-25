@@ -75,7 +75,7 @@ public class OrderPage extends BasePage {
                         ProcessingButton.click();
 
                         // 3. Явное ожидание между действиями
-                        getWait().until(ExpectedConditions.invisibilityOfElementLocated(
+                        createWait(20).until(ExpectedConditions.invisibilityOfElementLocated(
                                         By.xpath("//div[contains(@class,'processing-indicator')]")));
 
                         // 4. Улучшенный клик для второй кнопки
@@ -325,8 +325,9 @@ public class OrderPage extends BasePage {
 
                 // Нахождение элементов, явная прогрузка первого элемента
 
-                WebElement transportRequirement = waitAndGetVisibleElement(By.xpath(
-                                "//a[contains(@title, 'элемента Требования к транспорту')]/following-sibling::input"));
+                WebElement transportRequirement = createWait(50)
+                                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                                                "//a[contains(@title, 'элемента Требования к транспорту')]/following-sibling::input")));
 
                 System.out.println("Нашли ид");
 

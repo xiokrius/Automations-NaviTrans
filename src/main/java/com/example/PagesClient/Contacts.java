@@ -14,13 +14,10 @@ import com.example.Environment.BasePage;
 
 public class Contacts extends BasePage {
 
-
     public Contacts(WebDriver driver) {
 
         super(driver);
     }
-
-
 
     public void ContactsOrderOpen() {
 
@@ -31,18 +28,20 @@ public class Contacts extends BasePage {
         new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                 .until(d -> ((JavascriptExecutor) d).executeScript("return document.readyState").equals("complete"));
 
+        System.out.println("URLContacts: " + ConfigManager.getProperty("URLContacts"));
+
         // Переключаемся в нужный фрейм
-        switchToIframe();
+        createWait(4).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.className("designer-client-frame")));
+
         System.out.println("Перешли в фрейм.");
 
         WebElement CreateContacts = waitAndGetVisibleElement(By.xpath(
-            "//button[@title='Создать новую операцию.']"));
+                "//button[@title='Создать новую операцию.']"));
         // Клик для создания контакта
-
 
         // Кликаем по первой кнопке
         CreateContacts.click();
-        
+
         System.out.println("Клик по кнопке создания контакта выполнен.");
 
         returnToMainContent();

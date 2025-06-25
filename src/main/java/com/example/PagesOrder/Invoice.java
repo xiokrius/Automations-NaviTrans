@@ -10,11 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.Environment.BasePage;
 
-
-
-public class Invoice extends BasePage{
-
-
+public class Invoice extends BasePage {
 
         public Invoice(WebDriver driver) {
                 super(driver);
@@ -24,15 +20,13 @@ public class Invoice extends BasePage{
 
                 System.out.println("Начинаем Invoice/fullSchet");
 
-                WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(30));
-
                 switchToIframe();
 
                 System.out.println("Перешли в фрейм.");
 
                 // НАШЛИ КНОПКУ Учёт(для первой итерации нужно тут прикрутить ожидание)
-                WebElement uchetButton = waitAndGetClickableElement(
-                                By.xpath("//button[@aria-label='Учет']"));
+                WebElement uchetButton = createWait(50).until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//button[@aria-label='Учет']")));
                 System.out.println("Нашли первую кнопку Учёт.");
                 uchetButton.click();
 
@@ -59,7 +53,7 @@ public class Invoice extends BasePage{
                         Thread.sleep(500);
 
                         // Ожидаем исчезновения старой кнопки
-                        wait.until(ExpectedConditions.stalenessOf(popupConfirmButton));
+                        createWait(20).until(ExpectedConditions.stalenessOf(popupConfirmButton));
 
                         // Ожидаем исчезновения старой кнопки и появления новой
                         WebElement UchetSchetButton = waitAndGetClickableElement(
@@ -67,7 +61,7 @@ public class Invoice extends BasePage{
                         UchetSchetButton.click();
                         System.out.println("Нажата кнопка 'Учет'.");
 
-                        wait.until(ExpectedConditions.stalenessOf(UchetSchetButton));
+                        createWait(20).until(ExpectedConditions.stalenessOf(UchetSchetButton));
 
                         // Даем странице немного времени для обновления перед следующим действием
                         Thread.sleep(500);

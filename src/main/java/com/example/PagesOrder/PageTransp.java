@@ -44,9 +44,9 @@ public class PageTransp extends BasePage {
                 switchToIframe();
 
                 // id и прочее не статично, пришлось по DOM идти
-                WebElement OpenLoadingLocation = waitAndGetClickableElement(
+                WebElement OpenLoadingLocation = createWait(50).until(ExpectedConditions.elementToBeClickable(
                                 By.xpath(
-                                                "//a[contains(@aria-label, 'Код адреса погрузки') and @role='button']/following-sibling::input[contains(@id, 'ee') and @role='combobox']"));
+                                                "//a[contains(@aria-label, 'Код адреса погрузки') and @role='button']/following-sibling::input[contains(@id, 'ee') and @role='combobox']")));
                 System.out.println("Нашли поле ввода Код адреса погрузки v111");
 
                 // id и прочее не статично, пришлось по DOM идти

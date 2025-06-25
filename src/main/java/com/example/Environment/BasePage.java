@@ -46,6 +46,8 @@ public abstract class BasePage {
     protected void openUrl(String url) {
         driver.get(url);
         System.out.println("Открыт URL: " + url);
+        System.out.println("Текущий URL в браузере: " + driver.getCurrentUrl());
+
     }
 
     protected void switchToIframe() {
@@ -53,6 +55,7 @@ public abstract class BasePage {
                 By.className("designer-client-frame")));
         driver.switchTo().frame(iframe);
         System.out.println("Перешли в фрейм.");
+
     }
 
     protected void returnToMainContent() {
@@ -175,6 +178,10 @@ public abstract class BasePage {
 
     protected WebElement driverGetFindElement(By locator) {
         return driver.findElement((locator));
+    }
+
+    protected WebDriverWait createWait(int seconds) {
+        return new WebDriverWait(driver, Duration.ofSeconds(seconds));
     }
 
 }

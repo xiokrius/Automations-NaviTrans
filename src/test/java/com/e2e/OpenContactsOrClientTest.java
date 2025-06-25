@@ -86,7 +86,7 @@ public class OpenContactsOrClientTest {
     }
 
     @Severity(SeverityLevel.BLOCKER)
-    @Test(priority = 2)
+    @Test(priority = 2, dependsOnMethods = "createContactAndClient")
     @Story("Заполнение карточки клиента")
     @Description("Тест проверяет заполнение карточки клиента и авторизацию")
     public void fillClientFormAndAuthorize() {
