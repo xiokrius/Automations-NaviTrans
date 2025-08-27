@@ -95,13 +95,13 @@ public class CreateManyOrdersTest {
             logger.info("Выпускаем заказ");
             orderPage.obrabotkaVypustit();
             logger.info("Выпустили заказ");
-            // orderPage.vehiclePlan();
-            // logger.info("Планируем рейс");
-            // orderPage.PlanOpen();
+            orderPage.vehiclePlan();
+            logger.info("Планируем рейс");
+            orderPage.PlanOpen();
 
-            // VehiclePlanning vehiclePlanning = new VehiclePlanning(driver);
-            // logger.info("Вносим данные в рейсе");
-            // vehiclePlanning.VehiclePlanOpen();
+            VehiclePlanning vehiclePlanning = new VehiclePlanning(driver);
+            logger.info("Вносим данные в рейсе");
+            vehiclePlanning.VehiclePlanOpen();
 
             // VehicleRoute vehicleRoute = new VehicleRoute(driver);
             // logger.info("Выходим из рейса обратно на страницу транспортной заявки");

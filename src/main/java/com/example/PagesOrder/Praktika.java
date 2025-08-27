@@ -4,11 +4,11 @@ import java.io.ObjectInputFilter.Config;
 import java.time.Duration;
 import java.util.List;
 
-
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.idealized.Javascript;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.example.ConfigManager;
@@ -20,67 +20,44 @@ import org.openqa.selenium.WebDriver;
 
 public class Praktika {
 
-    private WebDriver driver; 
+    private WebDriver driver;
     private WebDriverWait wait;
-    private JavascriptExecutor js;
 
     public Praktika(WebDriver driver) {
-        this.driver = driver; 
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
-        this.js = (JavascriptExecutor) driver;
 
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public static void main(String[] args) {
-        
-        WebDriver driver = new ChromeDriver(); 
 
-        driver.manage().window().maximize();
+        WebDriver driver = new ChromeDriver();
 
-        driver.get(ConfigManager.getProperty("fsdaf")); 
+        driver.get("fds");
 
-        List <WebElement> lol = driver.findElements(By.id("fdsa"));  
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        for(WebElement lo: lol) { 
-            String text = lo.getText(); 
-            lo.click(); 
-            
-            WebElement updateElement = driver.findElement(By.id("fdsa"));
+        List<WebElement> allElements = driver.findElements(By.className("fsadf"));
 
-            String text2 = updateElement.getText(); 
+        for (WebElement element : allElements) {
 
-            int pop = Integer.parseInt(text2); 
-            
-            int pop2 = Integer.parseInt(text);
-            
-            int pop3 = pop2 - pop;
+            String oldText = element.getText();
 
-            int i; 
-            int p; 
-            
-            assertEquals(300, pop3); 
+            int num1 = Integer.parseInt(oldText);
 
-                
+            element.click();
 
-            
+            WebElement newElement = wait.until(ExpectedConditions.visibilityOf(element));
 
+            String newText = newElement.getText();
+
+            int num2 = Integer.parseInt(newText);
+
+            assert ((num1 - num2) == 300);
 
         }
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public WebDriverWait getWait() {
-        return wait;
-    }
-
-    private static void assertEquals(int i, int pop3) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assertEquals'");
-    }
-    
 }
 
 // public static void main(String[] args) {

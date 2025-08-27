@@ -57,4 +57,9 @@ public class ReadyInvoic extends BasePage {
 
     }
 
+    // Генерирует случайное число от 0 до 100 включительно
+    public static int getRandomNumber0to100() {
+        return (int) (Math.random() * 101);
+    }
+
 }
