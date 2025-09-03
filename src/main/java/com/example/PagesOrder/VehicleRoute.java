@@ -14,8 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.example.ConfigManager;
 import com.example.Environment.BasePage;
 
-
-public class VehicleRoute extends BasePage{
+public class VehicleRoute extends BasePage {
 
         private String ActualStartingDateValue = ConfigManager.getProperty("ActualStartingDateValue");
         private String ActualStartingTimeValue = ConfigManager.getProperty("ActualStartingTimeValue");
@@ -25,13 +24,10 @@ public class VehicleRoute extends BasePage{
         private String StartingKmValue = ConfigManager.getProperty("StartingKmValue");
         private String EndingKmValue = ConfigManager.getProperty("EndingKmValue");
 
-
-
         public VehicleRoute(WebDriver driver) {
 
                 super(driver);
         }
-
 
         public void clickSomeButtonInFrame() {
 
@@ -47,9 +43,10 @@ public class VehicleRoute extends BasePage{
                                                 "//td[contains(@controlname, 'FTS_Actual Starting Date')]//descendant::input[contains(@id, 'ee')]")));
                 System.out.println("1.");
 
-                WebElement orderNumberSpan = getDriver().findElement(By.xpath(
-                                "//a[text()='№ Заказа']/following-sibling::div//span"));
-                String orderNumber = orderNumberSpan.getAttribute("title");
+                WebElement orderNumberSpan = getDriver()
+                                .findElement(By.xpath("//a[text()='№ Заказа']/following-sibling::div//a"));
+
+                String orderNumber = orderNumberSpan.getText();
 
                 System.out.println("Номер заказа: " + orderNumber);
                 WebElement ActualStartingTime = wait.until(ExpectedConditions.presenceOfElementLocated(
