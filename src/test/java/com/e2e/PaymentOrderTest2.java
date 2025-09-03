@@ -93,7 +93,7 @@ public class PaymentOrderTest2 {
 
         PaymentCalendar headerTest = new PaymentCalendar(driver);
 
-        headerTest.searchPayment();
+        headerTest.searchPayment2();
 
         headerTest.makingOrderPayment();
 
