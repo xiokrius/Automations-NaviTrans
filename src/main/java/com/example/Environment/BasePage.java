@@ -111,6 +111,16 @@ public abstract class BasePage {
         System.out.println("Внес в поле " + element + "значение" + value);
     }
 
+    protected void setInputJS(WebElement element, String value) {
+        js.executeScript(
+                "arguments[0].value = arguments[1];" +
+                        "arguments[0].dispatchEvent(new Event('keydown', {bubbles:true}));" +
+                        "arguments[0].dispatchEvent(new Event('input', {bubbles:true}));" +
+                        "arguments[0].dispatchEvent(new Event('keyup', {bubbles:true}));" +
+                        "arguments[0].dispatchEvent(new Event('change', {bubbles:true}));",
+                element, value);
+    }
+
     protected void fillAndActivateSelect(WebElement select, String value) {
         // 1. Заполняем через JS
         fillSelectWithJS(select, value);
@@ -182,6 +192,12 @@ public abstract class BasePage {
 
     protected WebDriverWait createWait(int seconds) {
         return new WebDriverWait(driver, Duration.ofSeconds(seconds));
+    }
+
+    public void inIframe(Runnable action) {
+        switchToIframe();
+        action.run();
+        returnToMainContent();
     }
 
 }

@@ -21,7 +21,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -96,6 +96,16 @@ public class PaymentOrderTest2 {
         headerTest.searchPayment2();
 
         headerTest.makingOrderPayment();
+
+        headerTest.clickAndWorksFilterList();
+
+        headerTest.deleteFilter();
+
+        headerTest.getPaymentText();
+
+        String actual = headerTest.getPaymentText();
+
+        Assert.assertEquals(actual, "Платёж", "Платёж не найден");
 
     }
 }
