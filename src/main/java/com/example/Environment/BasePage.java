@@ -34,7 +34,10 @@ public abstract class BasePage {
     }
 
     protected WebDriverWait getWait() {
-        return this.wait;
+        if (wait == null) {
+            wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        }
+        return wait;
     }
 
     protected JavascriptExecutor getJS() {

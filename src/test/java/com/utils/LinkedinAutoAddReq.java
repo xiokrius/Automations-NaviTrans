@@ -7,6 +7,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 import java.time.Duration;
 import org.testng.annotations.Test;
+
+import com.example.LinkedPages.AddContacts;
+import com.example.LinkedPages.login;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
 import java.util.List;
@@ -30,97 +34,23 @@ public class LinkedinAutoAddReq {
         driver.get(url);
     }
 
-    @Test
-    public void test() {
-        // Loop through pages until no next page is available
-        while (true) {
-            // Find all target buttons on the page
-            List<WebElement> elements = driver.findElements(
-                    By.className("artdeco-button artdeco-button--2 artdeco-button--secondary ember-view"));
-
-            if (elements.isEmpty()) {
-                // Try to paginate if nothing is found
-                if (!goToNextPage()) {
-                    break;
-                }
-                continue;
-            }
-
-            for (WebElement element : elements) {
-                try {
-
-                    wait.until(driver1 -> element.isDisplayed() || element.isEnabled());
-
-                    if (element.isDisplayed()) {
-                        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-                    } else {
-
-                        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
-                        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-                        // ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);");
-                    }
-                } catch (Exception ignore) {
-
-                    try {
-                        js.executeScript("window.scrollBy(0, 300);");
-                        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-                    } catch (Exception ignoredAgain) {
-                        // Skip this element if still failing
-                    }
-                }
-            }
-
-            // After processing current list, go to next page if possible
-            if (!goToNextPage()) {
-                break;
-            }
-        }
+    @Test(priority = 1)
+    public void login() {
+        login ligAp = new com.example.LinkedPages.login(driver);
+        ligAp.loginInput();
+        ligAp.passWordInput();
+        ligAp.okButton();
     }
 
-    private boolean goToNextPage() {
-        try {
-            // LinkedIn pagination next button selector may differ; adjust if needed
-            // Attempt common aria-label based selector
-            List<WebElement> nextButtons = driver.findElements(By.cssSelector("button[aria-label='Next']"));
-            WebElement next = nextButtons.stream().filter(WebElement::isDisplayed).findFirst().orElse(null);
-            if (next != null && next.isEnabled()) {
-                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", next);
-                wait.until(ExpectedConditions.elementToBeClickable(next)).click();
-                // Wait for results to refresh
-                wait.until(
-                        d -> ((JavascriptExecutor) d).executeScript("return document.readyState").equals("complete"));
-                // small extra wait for ajax
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ignored) {
-                }
-                return true;
-            }
-        } catch (Exception e) {
-            // Fallback: try a CSS selector for the pagination list next link
-            try {
-                WebElement altNext = driver.findElement(By.cssSelector("li.artdeco-pagination__button--next button"));
-                if (altNext.isDisplayed() && altNext.isEnabled()) {
-                    js.executeScript("arguments[0].scrollIntoView({block: 'center'});", altNext);
-                    wait.until(ExpectedConditions.elementToBeClickable(altNext)).click();
-                    wait.until(d -> ((JavascriptExecutor) d).executeScript("return document.readyState")
-                            .equals("complete"));
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ignored) {
-                    }
-                    return true;
-                }
-            } catch (Exception ignore) {
-                // No next button found
-            }
-        }
-        return false;
+    @Test(priority = 2)
+    public void addContact() {
+        AddContacts addCont = new AddContacts(driver);
+        addCont.locatortest2();
+        // addCont.loca();
     }
-
-    @AfterClass
-    public void teardown() {
-        driver.quit();
-    }
+    // @AfterClass
+    // public void teardown() {
+    // driver.quit();
+    // }
 
 }
