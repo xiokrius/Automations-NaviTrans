@@ -91,6 +91,14 @@ public abstract class BasePage {
         System.out.println("Выбрали значение в select: " + value);
     }
 
+    protected void microWait(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     protected void scrollToElementHorizontally(WebElement scrollContainer, WebElement targetElement) {
         js.executeScript(
                 "const container = arguments[0];" +

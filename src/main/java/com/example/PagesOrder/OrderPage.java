@@ -61,6 +61,15 @@ public class OrderPage extends BasePage {
 
                 switchToIframe();
 
+                WebElement SaveSettingsPage = waitAndGetClickableElement(
+                                By.xpath("//button[@title='Открыть страницу в режиме только для чтения.']"));
+
+                SaveSettingsPage.click();
+
+                microWait(300);
+
+                SaveSettingsPage.click();
+
                 try {
                         // 2. Улучшенное ожидание и клик для первой кнопки
                         WebElement ProcessingButton = getWait().until(driver -> {

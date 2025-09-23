@@ -3,6 +3,7 @@ package com.example.PagesOrder;
 import java.io.ObjectInputFilter.Config;
 import java.time.Duration;
 import java.util.List;
+import java.util.Scanner;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,44 +21,23 @@ import org.openqa.selenium.WebDriver;
 
 public class Praktika {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-
-    public Praktika(WebDriver driver) {
-
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
-
     public static void main(String[] args) {
+        String[] inputValues = readInput();
+        String message = inputValues[0];
+        int score = Integer.parseInt(inputValues[1]);
+        int vernScore = score * 2;
+        String result = message + " " + vernScore;
 
-        WebDriver driver = new ChromeDriver();
 
-        driver.get("fds");
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        List<WebElement> allElements = driver.findElements(By.className("fsadf"));
-
-        for (WebElement element : allElements) {
-
-            String oldText = element.getText();
-
-            int num1 = Integer.parseInt(oldText);
-
-            element.click();
-
-            WebElement newElement = wait.until(ExpectedConditions.visibilityOf(element));
-
-            String newText = newElement.getText();
-
-            int num2 = Integer.parseInt(newText);
-
-            assert ((num1 - num2) == 300);
-
-        }
+        System.out.println(result);
     }
 
+    public static String[] readInput() {
+        Scanner scanner = new Scanner(System.in);
+        String inputLine = scanner.nextLine();
+        // scanner.close();  // лучше не закрывать System.in
+        return inputLine.split(" ");
+    }
 }
 
 // public static void main(String[] args) {

@@ -201,6 +201,8 @@ public class PageTransp extends BasePage {
                 TheWholeCargo.click();
                 CargoVolume.click();
 
+                createWait(15).until(ExpectedConditions.elementToBeClickable(BackPage));
+
                 BackPage.click();
 
                 returnToMainContent();
