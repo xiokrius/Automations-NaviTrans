@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.commons.io.FileUtils;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.*;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.example.PagesOrder.Invoice;
 import com.example.PagesOrder.OpenInvoice;
@@ -39,8 +42,19 @@ public class CreateOrderNewTest {
     @BeforeClass
     public void setup() {
 
+        ChromeOptions options = new ChromeOptions();
+
+        if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+            // для Linux (Docker, CI/CD)
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+        }
+
+        WebDriverManager.chromedriver().setup();
+
         logger.info("Начало теста \"На создание и заполнение заявки, планирования рейса, учёта счёта\" ");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(ConfigManager.getProperty("URLAutorisedNavi"));
         loginTest = new QLoginTest(driver);
@@ -178,22 +192,22 @@ public class CreateOrderNewTest {
         logger.info("Конец теста \"На создание и заполнение заявки, планирования рейса, учёта счёта\" ");
     }
 
-    // @Step("Считываю номер учтённого счёта")
-    // @Test(priority = 14, dependsOnMethods = "finalizeInvoice")
-    // public void goToServices2() {
-    // ZayavkaByPage servicePage = new ZayavkaByPage(driver);
-    // servicePage.clickSomeButtonInService();
-    // logger.info("Переход в сервисы");
-    // }
+    @Step("Считываю номер учтённого счёта")
+    @Test(priority = 14, dependsOnMethods = "finalizeInvoice")
+    public void goToServices2() {
+        ZayavkaByPage servicePage = new ZayavkaByPage(driver);
+        servicePage.clickSomeButtonInService();
+        logger.info("Переход в сервисы");
+    }
 
-    // @Step("Считываю номер учтённого счёта")
-    // @Test(priority = 15, dependsOnMethods = "finalizeInvoice")
-    // public void readyNoCheck() {
-    // OpenInvoice openInvoice = new OpenInvoice(driver);
-    // String invoiceNumber = openInvoice.extractInvoiceNumber();
-    // logger.info("Номер считан: " + invoiceNumber);
-    // logger.info("номер считан");
-    // }
+    @Step("Считываю номер учтённого счёта")
+    @Test(priority = 15, dependsOnMethods = "finalizeInvoice")
+    public void readyNoCheck() {
+        OpenInvoice openInvoice = new OpenInvoice(driver);
+        String invoiceNumber = openInvoice.extractInvoiceNumber();
+        logger.info("Номер считан: " + invoiceNumber);
+        logger.info("номер считан");
+    }
 
     @AfterMethod
     public void takeScreenshotOnFailure(ITestResult result) {

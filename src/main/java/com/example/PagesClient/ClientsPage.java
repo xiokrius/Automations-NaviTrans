@@ -20,6 +20,8 @@ public class ClientsPage extends BasePage {
         private String BlockCustomerValue = ConfigManager.getProperty("BlockCustomerValue");
         private String CDElementValue = ConfigManager.getProperty("CDElementValue");
         private String NVTBusinessUnitValue = ConfigManager.getProperty("NVTBusinessUnitValue");
+        private String AttractedByWhom = ConfigManager.getProperty("AttractedByWhom");
+        private String emailValue = ConfigManager.getProperty("emailValue");
         // CDElement
 
         public ClientsPage(WebDriver driver) {
@@ -54,6 +56,12 @@ public class ClientsPage extends BasePage {
 
                 TestData.clientValue = value;
 
+                // new field кем привлечён
+                WebElement AttractedByWhomInput = waitAndGetClickableElement(By.xpath(
+                                "//a[contains(@title, 'Кем привлечён')]/following-sibling::input"));
+
+                setInputJS(AttractedByWhomInput, AttractedByWhom);
+
                 // Вводим "Тип клиента"
                 WebElement typeClient = waitAndGetVisibleElement(
                                 By.xpath("//a[text()='Тип клиента']/following::select[1]"));
@@ -73,6 +81,13 @@ public class ClientsPage extends BasePage {
                 scrollToElement(SpanCountry);
 
                 SpanCountry.click();
+
+                WebElement emailInput = waitAndGetVisibleElement(By.xpath(
+                                "//input[@type='email']"));
+
+                setInputJS(emailInput, emailValue);
+
+                scrollToElement(emailInput);
 
                 WebElement Score = waitAndGetVisibleElement(
                                 By.xpath("//span[text()='Счет'][@class='caption-text']"));

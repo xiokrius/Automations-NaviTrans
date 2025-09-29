@@ -60,6 +60,8 @@
             <!-- <scope>test</scope> -->
         </dependency>
 
+        
+
         <!-- JCommander -->
         <dependency>
             <groupId>com.beust</groupId>
@@ -127,6 +129,10 @@
                     <argLine>
                     -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+
+                    <listeners>
+                    <listener class-name="com.utils.RetryListener"/>
+                    </listeners>
                     <systemProperties>
                         <property>
                             <name>allure.results.directory</name>
@@ -245,7 +251,10 @@
                 </plugins>
             </build>
         </profile>
+
+
     </profiles>
 
+  
 
 </project>

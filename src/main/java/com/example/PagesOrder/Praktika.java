@@ -28,7 +28,6 @@ public class Praktika {
         int vernScore = score * 2;
         String result = message + " " + vernScore;
 
-
         System.out.println(result);
     }
 
